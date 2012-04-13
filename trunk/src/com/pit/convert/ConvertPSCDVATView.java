@@ -478,7 +478,7 @@ public class ConvertPSCDVATView extends FrameView {
         //Gọi hàm thực hiện chuyển đổi
         try {
             //Random file name
-            randomFileName(loadNgayChotDL(cboCQT.getSelectedItem().toString()));
+            randomFileName(loadNgayChotDL(cboCQT.getSelectedItem().toString()), cboCQT.getSelectedItem().toString());
             String f_name[] = new String[3];
             f_name[0] = name_no;
             f_name[1] = name_ps;
@@ -562,17 +562,12 @@ public class ConvertPSCDVATView extends FrameView {
     public void ActionConvertPSCD() throws IOException, ExceptionInInitializerError, JCoException, ParserConfigurationException, SQLException {
 
         try {
-            //Random file name
-            randomFileName(loadNgayChotDL(cboCQT.getSelectedItem().toString()));
-            String f_name[] = new String[3];
-            f_name[0] = name_no;
-            f_name[1] = name_ps;
-            f_name[2] = name_tk;
             lblDisplay.setText("PLEASE WAIT .... CONVERTING.");
             //Read file and load data
             int thread_vat = 0;
             //thực hiện convert toàn bộ các chi cục
             String cct_cv = "";
+            String cct = "";
             if (lstCCT_CV.getModel().getSize() > 0) {
                 for (int i = 0; i < lstCCT_CV.getModel().getSize(); i++) {
                     cct_cv += "'" + lstCCT_CV.getModel().getElementAt(i) + "',";
@@ -653,9 +648,17 @@ public class ConvertPSCDVATView extends FrameView {
                             //Thời gian bắt đầu thực hiện chuyển đổi dữ liệu
                             s_convert = System.currentTimeMillis();
 
-                            //Gọi hàm thực hiện chuyển đổi
-                            LoadData.readDataPSCD(type_cv, thread_vat, f_name, cct_cv, "");
-
+                            //Gọi hàm thực hiện chuyển đổi, load từng cqt trong List                            
+                            for (int l = 0; l < lstCCT_CV.getModel().getSize(); l++) {
+                                //Random file name
+                                cct = lstCCT_CV.getModel().getElementAt(l).toString();                                
+                                randomFileName(loadNgayChotDL(cct), cct);
+                                String f_name[] = new String[3];
+                                f_name[0] = name_no;
+                                f_name[1] = name_ps;
+                                f_name[2] = name_tk;
+                                LoadData.readDataPSCD(type_cv, thread_vat, f_name, cct, "");
+                            }
                             //Thời gian kết thúc chuyển đổi dữ liệu
                             f_convert = System.currentTimeMillis();
                             //Thời gian hòan thành
@@ -678,10 +681,19 @@ public class ConvertPSCDVATView extends FrameView {
                         //Thời gian bắt đầu thực hiện chuyển đổi dữ liệu
                         s_convert = System.currentTimeMillis();
 
-                        thread_vat = Integer.parseInt(txtThread.getText());
-                        //Gọi hàm thực hiện chuyển đổi
-                        LoadData.readDataPSCD(type_cv, thread_vat, f_name, cct_cv, "");
-
+                        thread_vat = Integer.parseInt(txtThread.getText());                        
+                        //Gọi hàm thực hiện chuyển đổi, load từng cqt trong List
+                            for (int l = 0; l < lstCCT_CV.getModel().getSize(); l++) {
+                                //Random file name
+                                cct = lstCCT_CV.getModel().getElementAt(l).toString();
+                                System.out.println("cqt cv: "+ cct);
+                                randomFileName(loadNgayChotDL(cct), cct);
+                                String f_name[] = new String[3];
+                                f_name[0] = name_no;
+                                f_name[1] = name_ps;
+                                f_name[2] = name_tk;
+                                LoadData.readDataPSCD(type_cv, thread_vat, f_name, cct, "");
+                            }                    
                         //Lấy lại thay đổi khi chuyển đổi hoàn thành
                         loadCQTConvertPSCD(cct_cv, type_cv);
 
@@ -735,7 +747,7 @@ public class ConvertPSCDVATView extends FrameView {
     }
 
     @Action
-    public void randomFileName(String ngay_chot) {
+    public void randomFileName(String ngay_chot, String cqt) {
         Random generator = new Random();
         int r_num = generator.nextInt(0123);
         //clear
@@ -744,15 +756,15 @@ public class ConvertPSCDVATView extends FrameView {
         name_tk = "";
         //random file name NO
         if (chkNO.isSelected()) {
-            name_no = "NOQLT" + ngay_chot + "_" + getTaxCode(cboCQT.getSelectedItem().toString()) + "_" + r_num + ".CSV";
+            name_no = "NOQLT" + ngay_chot + "_" + cqt + "_" + r_num + ".CSV";
         }
         //random file name PS
         if (chkPS.isSelected()) {
-            name_ps = "PSQLT" + ngay_chot + "_" + getTaxCode(cboCQT.getSelectedItem().toString()) + "_" + r_num + ".CSV";
+            name_ps = "PSQLT" + ngay_chot + "_" + cqt + "_" + r_num + ".CSV";
         }
         //random file name TK
         if (chkTK.isSelected()) {
-            name_tk = "TKQCT" + ngay_chot + "_" + getTaxCode(cboCQT.getSelectedItem().toString()) + "_" + r_num + ".CSV";
+            name_tk = "TKQCT" + ngay_chot + "_" + cqt + "_" + r_num + ".CSV";
         }
     }
 
@@ -1235,7 +1247,7 @@ public class ConvertPSCDVATView extends FrameView {
         lblDisplay.setForeground(resourceMap.getColor("lblDisplay.foreground")); // NOI18N
         lblDisplay.setName("lblDisplay"); // NOI18N
 
-        btnClose.setAction(actionMap.get("ActionCheckPSCD")); // NOI18N
+        btnClose.setAction(actionMap.get("quit")); // NOI18N
         btnClose.setText(resourceMap.getString("btnClose.text")); // NOI18N
         btnClose.setName("btnClose"); // NOI18N
 
