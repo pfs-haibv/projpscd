@@ -191,7 +191,7 @@ public class LoadData {
 
             //Xử lý Nợ
             if (type_cv.equals(Constants.NO)) {
-                sql = "select * from tb_no where short_name in (" + tax + ") and status is null";
+                sql = "select * from tb_no where short_name = '" + tax + "' and status is null";
                 rset = stmt.executeQuery(sql);
                 while (rset.next()) {
                     DataPSCD pscd = new DataPSCD();
@@ -221,7 +221,7 @@ public class LoadData {
             }
             //Xử lý phát sinh
             if (type_cv.equals(Constants.PS)) {
-                sql = "select * from tb_ps where short_name in (" + tax + ") and status is null";
+                sql = "select * from tb_ps where short_name = '" + tax + "' and status is null";
                 rset = stmt.executeQuery(sql);
                 while (rset.next()) {
                     DataPSCD pscd = new DataPSCD();
@@ -254,7 +254,7 @@ public class LoadData {
             if (type_cv.equals(Constants.TK)) {
                 //Lấy dữ liệu để convert
                 if (chk_pscd.isEmpty()) {
-                    sql = "select * from tb_tk where short_name in (" + tax + ") and status is null";
+                    sql = "select * from tb_tk where short_name = '" + tax + "' and status is null";
                 } else {//lấy dữ liệu thực hiện check
                     sql = "select rowid rid, a.* from tb_tk a where short_name in (" + tax + ")";
                 }
