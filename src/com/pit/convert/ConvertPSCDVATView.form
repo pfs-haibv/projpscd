@@ -184,7 +184,7 @@
                 <Component class="javax.swing.JButton" name="btnClose">
                   <Properties>
                     <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
-                      <action class="com.pit.convert.ConvertPSCDVATView" id="ActionCheckPSCD" methodName="ActionCheckPSCD"/>
+                      <action class="org.jdesktop.application.Application" id="quit" methodName="quit"/>
                     </Property>
                     <Property name="text" type="java.lang.String" resourceKey="btnClose.text"/>
                     <Property name="name" type="java.lang.String" value="btnClose" noResource="true"/>
