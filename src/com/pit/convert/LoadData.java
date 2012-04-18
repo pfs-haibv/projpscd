@@ -1,9 +1,5 @@
 package com.pit.convert;
 
-/**
- *
- * @author HAIBV
- */
 import com.pit.conn.ConnectDB;
 import com.sap.conn.jco.JCoException;
 import java.io.IOException;
@@ -21,7 +17,6 @@ import com.sap.conn.jco.JCoRuntimeException;
 
 public class LoadData {
     //Mảng chứa toàn bộ dữ liệu PSCD, TK
-
     private static DataCVPSCD data_cv;
     //Mảng chứa dữ liệu người phụ thuộc
     private static DataCVNPT data_npt;
@@ -33,7 +28,7 @@ public class LoadData {
     private static ArrayList<DataNPT> arrNPT = new ArrayList<DataNPT>();  
 
     /**
-     * @param thực hiện đọc từng loại dữ liệu (NO, PS, TK)
+     * Thực hiện đọc từng loại dữ liệu (NO, PS, TK)
      * @param source_file
      * @throws ParserConfigurationException
      * @throws SAXException
@@ -54,11 +49,8 @@ public class LoadData {
                     try {
                         // Xóa dữ liệu cũ ở bảng tb_unsplit_data_error
                         ConnectDB.delUnSplitErrCode(tax, "TB_NO");
-//                    System.out.println("Đã xóa dữ liệu Nợ trong bảng TB_UNSPLIT_DATA_ERROR");
                         // Xóa dữ liệu cũ ở bảng tb_data_error
                         ConnectDB.delDataErrCode(tax, "TB_NO");
-//                    System.out.println("Đã xóa dữ liệu Nợ trong bảng TB_DATA_ERROR");
-                        // Check PSCD
                         // Check PSCD bằng thủ tục Oracle
                         ConnectDB.callOraclePrcChk("prc_ktra_du_lieu_no", tax);
                         // Check PSCD bằng hàm SAP
@@ -86,11 +78,9 @@ public class LoadData {
                 } else {
                     try {
                         // Xóa dữ liệu cũ ở bảng tb_unsplit_data_error
-                        ConnectDB.delUnSplitErrCode(tax, "TB_PS");
-//                    System.out.println("Đã xóa dữ liệu Phát sinh trong bảng TB_UNSPLIT_DATA_ERROR");                            
+                        ConnectDB.delUnSplitErrCode(tax, "TB_PS");                       
                         // Xóa dữ liệu cũ ở bảng tb_data_error
                         ConnectDB.delDataErrCode(tax, "TB_PS");
-//                    System.out.println("Đã xóa dữ liệu Phát sinh trong bảng TB_DATA_ERROR");
                         // Check PSCD
                         // Check PSCD bằng thủ tục Oracle
                         ConnectDB.callOraclePrcChk("prc_ktra_du_lieu_ps", tax);
@@ -121,11 +111,8 @@ public class LoadData {
                     try {
                         // Xóa dữ liệu cũ ở bảng tb_unsplit_data_error
                         ConnectDB.delUnSplitErrCode(tax, "TB_TK");
-//                    System.out.println("Đã xóa dữ liệu Tờ khai trong bảng TB_UNSPLIT_DATA_ERROR");  
                         // Xóa dữ liệu cũ ở bảng tb_data_error
                         ConnectDB.delDataErrCode(tax, "TB_TK");
-//                    System.out.println("Đã xóa dữ liệu Tờ khai trong bảng TB_DATA_ERROR");  
-                        // Check TK
                         // Check TK bằng thủ tục Oracle
                         ConnectDB.callOraclePrcChk("prc_ktra_du_lieu_tk", tax);
                         // Check TK bằng hàm SAP
@@ -156,7 +143,7 @@ public class LoadData {
     }
 
     /**
-     * @desc lấy dữ liệu người phụ thuộc theo chi cục thuế
+     * Lấy dữ liệu người phụ thuộc theo chi cục thuế
      * @param tax
      * @throws ParserConfigurationException
      * @throws IOException
@@ -180,6 +167,12 @@ public class LoadData {
         }
 
     }
+    /**
+     * Lấy dữ liệu NPT
+     * @param tax
+     * @throws SQLException
+     * @throws UnsupportedEncodingException 
+     */
 
     static void getDataORA(String tax) throws SQLException, UnsupportedEncodingException {
         // Clear 
@@ -233,7 +226,7 @@ public class LoadData {
     }
 
     /**
-     * @desc đọc và lấy từng loại dữ liệu và gán vào mảng 
+     * Đọc và lấy từng loại dữ liệu và gán vào mảng 
      * @param type_cv
      * @param tax
      * @throws SQLException 
