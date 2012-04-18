@@ -30,32 +30,7 @@ public class LoadData {
     //Mảng chứa từng phần tử Tờ khai
     private static ArrayList<DataTK> arrTK = new ArrayList<DataTK>();
     //Mảng chứa phần tử người phụ thuộc
-    private static ArrayList<DataNPT> arrNPT = new ArrayList<DataNPT>();
-    
-/**
-     * @desc Trường hợp lỗi sai log phải get lại :(
-     * @throws ParserConfigurationException
-     * @throws IOException
-     * @throws ExceptionInInitializerError
-     * @throws JCoException
-     * @throws SQLException 
-     */
-    
-    static void getLogPSCDbyFileName() throws ParserConfigurationException, IOException, ExceptionInInitializerError, JCoException, SQLException {
-        try {
-            String f_name[] = {
-"PSQLT20120131_70143_40.CSV"
-            };
-            
-            for (int i =0; i < f_name.length; i ++){
-            ConvertPSCD.sqlDatabase(f_name[i], "");
-            }
-        }
-        catch(JCoException je){
-            je.printStackTrace();
-        }
-        
-    }
+    private static ArrayList<DataNPT> arrNPT = new ArrayList<DataNPT>();  
 
     /**
      * @param thực hiện đọc từng loại dữ liệu (NO, PS, TK)
