@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.pit.conn;
 
 import com.pit.convert.ConvertPSCDVATApp;
@@ -10,15 +6,15 @@ import java.sql.*;
 import com.pit.utility.Utility;
 
 /**
- *
+ * Thực hiện các truy vấn đến CSDL Oracle
  * @author Administrator
  */
 public class ConnectDB {
 
     /**
-     * @des get connection oracle database
+     * Get connection oracle database
      * @param sql
-     * @return
+     * @return connection to database
      * @throws SQLException 
      */
     public static Connection getConnORA() throws SQLException, IOException {
@@ -43,7 +39,7 @@ public class ConnectDB {
     }
 
     /**
-     * @desc thực hiện các câu lệnh sql database
+     * Thực hiện các câu lệnh sql database
      * @param sql
      * @throws SQLException 
      */
@@ -65,7 +61,7 @@ public class ConnectDB {
     }
 
     /**
-     * @desc insert cqt convert to database
+     * Insert cqt convert to database
      * @param sql
      * @throws SQLException 
      */
@@ -88,7 +84,7 @@ public class ConnectDB {
     }
 
     /**
-     * @desc delete data of file excel
+     * Delete data of file excel
      * @param sql
      * @throws SQLException 
      */
@@ -125,7 +121,12 @@ public class ConnectDB {
 //            conn.close();
         }
     }
-
+    
+    /**
+     * Delete data file excel 
+     * @param file_imp
+     * @throws SQLException 
+     */
     public static void delExlData(String file_imp) throws SQLException {
 
         String[] arr_file = file_imp.split(",");
@@ -160,7 +161,7 @@ public class ConnectDB {
     }
 
     /**
-     * 
+     * Thực hiện lấy thông tin để ghi log sau khi convert
      * @param sql
      * @throws SQLException 
      * @return short_name, id, tin
@@ -188,7 +189,7 @@ public class ConnectDB {
     }
 
     /**
-     * 
+     * Thực hiện lấy thông tin CQT
      * @param sql
      * @throws SQLException 
      * @return short_name, ma_cqt
@@ -216,12 +217,12 @@ public class ConnectDB {
     }
 
     /**
-     * 
+     * Lấy thông tin số lượng dữ liệu đã chuyển đổi
      * @param sql
      * @throws SQLException 
      * @return number convert
      */
-    public static int[] getNumCV(String short_name) throws SQLException {
+    public static int[] getNumCV (String short_name) throws SQLException {
         int cqt_cv[] = new int[3];
         Connection conn = null;
         Statement stmt = null;
@@ -247,8 +248,8 @@ public class ConnectDB {
         return cqt_cv;
     }
 
-    /*
-     * @desc insert error code into database
+    /**
+     * Insert error code into database
      * @param sql
      * @throws SQLException
      */
@@ -272,7 +273,7 @@ public class ConnectDB {
     }
 
     /**
-     * @desc xóa dữ liệu trong bảng tb_unsplit_data_error khi thực hiện kiểm tra lại
+     * Xóa dữ liệu trong bảng tb_unsplit_data_error khi thực hiện kiểm tra lại
      * @param short_name
      * @param table_name
      * @throws SQLException 
@@ -297,7 +298,7 @@ public class ConnectDB {
     }
 
     /**
-     * @desc xóa dữ liệu cũ trong bảng tb_data_error khi thực hiện kiểm tra lại
+     * Xóa dữ liệu cũ trong bảng tb_data_error khi thực hiện kiểm tra lại
      * @param short_name
      * @param table_name
      * @throws SQLException 
@@ -322,7 +323,7 @@ public class ConnectDB {
     }
 
     /**
-     * @desc gọi tới thủ tục kiểm tra dữ liệu Oracle
+     * Gọi tới thủ tục kiểm tra dữ liệu Oracle
      * @param prcName
      * @param short_name
      * @throws SQLException 
@@ -348,7 +349,7 @@ public class ConnectDB {
     }
 
     /**
-     * @desc Insert log
+     * Insert log when check data PSCD
      * @param short_name
      * @param pck
      * @throws SQLException 
@@ -373,7 +374,7 @@ public class ConnectDB {
     }
 
     /**
-     * 
+     * Gọi thủ tục kiểm tra dữ liệu
      * @param fncName
      * @param tax
      * @param tb_name
@@ -398,7 +399,12 @@ public class ConnectDB {
             stmt.close();
         }
     }
-
+    /**
+     * Lấy thông tin kỳ chốt (ky_no_den)
+     * @param short_name
+     * @return
+     * @throws SQLException 
+     */
     public static String loadNgayChotDL(String short_name) throws SQLException {
         //Ngày chốt
         String ngay_chot = "";
