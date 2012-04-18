@@ -296,9 +296,9 @@ public class ConvertPSCDVATView extends FrameView {
         try {
             conn = ConvertPSCDVATApp.connORA;
             stmt = conn.createStatement();
-            rset = stmt.executeQuery("SELECT a.short_name, to_char(a.ky_no_den, 'YYYYMMDD') as ky_no_den FROM tb_lst_taxo a where a.short_name = '" + short_name + "'");
+            rset = stmt.executeQuery("SELECT a.short_name, a.tax_code cqt, to_char(a.ky_no_den, 'YYYYMMDD') as ky_no_den FROM tb_lst_taxo a where a.short_name = '" + short_name + "'");
             while (rset.next()) {
-                ngay_chot = rset.getString("ky_no_den");
+                ngay_chot = rset.getString("ky_no_den") +"_"+rset.getString("cqt");
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -483,7 +483,7 @@ public class ConvertPSCDVATView extends FrameView {
             f_name[0] = name_no;
             f_name[1] = name_ps;
             f_name[2] = name_tk;
-            lblDisplay.setText("PLEASE WAIT .... CONVERTING.");
+            lblDisplay.setText("PLEASE WAIT .... CHECKING.");
             //Read file and load data
             int thread_vat = 0;
             //thực hiện convert toàn bộ các chi cục
@@ -518,7 +518,12 @@ public class ConvertPSCDVATView extends FrameView {
             s_convert = System.currentTimeMillis();
             thread_vat = Integer.parseInt(txtThread.getText());
             //Gọi hàm thực hiện chuyển đổi
-            LoadData.readDataPSCD(type_cv, thread_vat, f_name, cct_cv, "X");
+            String cct = "";
+            for (int l = 0; l < lstCCT_CV.getModel().getSize(); l++) {
+                //Random file name
+                cct = lstCCT_CV.getModel().getElementAt(l).toString();
+                LoadData.readDataPSCD(type_cv, thread_vat, f_name, cct, "X");
+            }
 
             //Thời gian kết thúc chuyển đổi dữ liệu
             f_convert = System.currentTimeMillis();
@@ -535,6 +540,7 @@ public class ConvertPSCDVATView extends FrameView {
 
         } catch (IOException ex) {
             ex.printStackTrace();
+        } catch (SQLException se) {
         } catch (JCoException jx) {
             JOptionPane.showMessageDialog(btnConvert,
                     jx.getMessage(),
@@ -549,7 +555,24 @@ public class ConvertPSCDVATView extends FrameView {
 
 
     }
+    /**
+     * @desc get lại log do sai id
+     * @throws IOException
+     * @throws ExceptionInInitializerError
+     * @throws JCoException
+     * @throws ParserConfigurationException
+     * @throws SQLException 
+     */
 
+    @Action
+    public void tryGetLogPSCD() throws IOException, ExceptionInInitializerError, JCoException, ParserConfigurationException, SQLException {
+
+       
+            LoadData.getLogPSCDbyFileName();
+            System.out.println("done");
+     
+    }
+    
     /**
      * @desc Chuyển đổi dữ liệu qlt, qct, vat
      * @throws IOException
@@ -651,7 +674,7 @@ public class ConvertPSCDVATView extends FrameView {
                             //Gọi hàm thực hiện chuyển đổi, load từng cqt trong List                            
                             for (int l = 0; l < lstCCT_CV.getModel().getSize(); l++) {
                                 //Random file name
-                                cct = lstCCT_CV.getModel().getElementAt(l).toString();                                
+                                cct = lstCCT_CV.getModel().getElementAt(l).toString();
                                 randomFileName(loadNgayChotDL(cct), cct);
                                 String f_name[] = new String[3];
                                 f_name[0] = name_no;
@@ -681,19 +704,19 @@ public class ConvertPSCDVATView extends FrameView {
                         //Thời gian bắt đầu thực hiện chuyển đổi dữ liệu
                         s_convert = System.currentTimeMillis();
 
-                        thread_vat = Integer.parseInt(txtThread.getText());                        
+                        thread_vat = Integer.parseInt(txtThread.getText());
                         //Gọi hàm thực hiện chuyển đổi, load từng cqt trong List
-                            for (int l = 0; l < lstCCT_CV.getModel().getSize(); l++) {
-                                //Random file name
-                                cct = lstCCT_CV.getModel().getElementAt(l).toString();
-                                System.out.println("cqt cv: "+ cct);
-                                randomFileName(loadNgayChotDL(cct), cct);
-                                String f_name[] = new String[3];
-                                f_name[0] = name_no;
-                                f_name[1] = name_ps;
-                                f_name[2] = name_tk;
-                                LoadData.readDataPSCD(type_cv, thread_vat, f_name, cct, "");
-                            }                    
+                        for (int l = 0; l < lstCCT_CV.getModel().getSize(); l++) {
+                            //Random file name
+                            cct = lstCCT_CV.getModel().getElementAt(l).toString();
+                            System.out.println("cqt cv: " + cct);
+                            randomFileName(loadNgayChotDL(cct), cct);
+                            String f_name[] = new String[3];
+                            f_name[0] = name_no;
+                            f_name[1] = name_ps;
+                            f_name[2] = name_tk;
+                            LoadData.readDataPSCD(type_cv, thread_vat, f_name, cct, "");
+                        }
                         //Lấy lại thay đổi khi chuyển đổi hoàn thành
                         loadCQTConvertPSCD(cct_cv, type_cv);
 
@@ -756,15 +779,15 @@ public class ConvertPSCDVATView extends FrameView {
         name_tk = "";
         //random file name NO
         if (chkNO.isSelected()) {
-            name_no = "NOQLT" + ngay_chot + "_" + cqt + "_" + r_num + ".CSV";
+            name_no = "NOQLT" + ngay_chot + "_" + r_num + ".CSV";
         }
         //random file name PS
         if (chkPS.isSelected()) {
-            name_ps = "PSQLT" + ngay_chot + "_" + cqt + "_" + r_num + ".CSV";
+            name_ps = "PSQLT" + ngay_chot + "_" + r_num + ".CSV";
         }
         //random file name TK
         if (chkTK.isSelected()) {
-            name_tk = "TKQCT" + ngay_chot + "_" + cqt + "_" + r_num + ".CSV";
+            name_tk = "TKQCT" + ngay_chot + "_" + r_num + ".CSV";
         }
     }
 
@@ -1165,6 +1188,7 @@ public class ConvertPSCDVATView extends FrameView {
         jLabel5 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         btnCVNPT = new javax.swing.JButton();
+        chkPSCD = new javax.swing.JButton();
         btnImpExl = new javax.swing.JPanel();
         btnImport = new javax.swing.JButton();
         btnClose1 = new javax.swing.JButton();
@@ -1249,6 +1273,8 @@ public class ConvertPSCDVATView extends FrameView {
 
         btnClose.setAction(actionMap.get("quit")); // NOI18N
         btnClose.setText(resourceMap.getString("btnClose.text")); // NOI18N
+        btnClose.setMaximumSize(new java.awt.Dimension(89, 23));
+        btnClose.setMinimumSize(new java.awt.Dimension(89, 23));
         btnClose.setName("btnClose"); // NOI18N
 
         pnlTypeCV.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("pnlTypeCV.border.title"))); // NOI18N
@@ -1330,7 +1356,15 @@ public class ConvertPSCDVATView extends FrameView {
 
         btnCVNPT.setAction(actionMap.get("ActionConvertNPT")); // NOI18N
         btnCVNPT.setText(resourceMap.getString("btnCVNPT.text")); // NOI18N
+        btnCVNPT.setMaximumSize(new java.awt.Dimension(89, 23));
+        btnCVNPT.setMinimumSize(new java.awt.Dimension(89, 23));
         btnCVNPT.setName("btnCVNPT"); // NOI18N
+
+        chkPSCD.setAction(actionMap.get("ActionCheckPSCD")); // NOI18N
+        chkPSCD.setText(resourceMap.getString("chkPSCD.text")); // NOI18N
+        chkPSCD.setMaximumSize(new java.awt.Dimension(89, 23));
+        chkPSCD.setMinimumSize(new java.awt.Dimension(89, 23));
+        chkPSCD.setName("chkPSCD"); // NOI18N
 
         javax.swing.GroupLayout pnlPSCDLayout = new javax.swing.GroupLayout(pnlPSCD);
         pnlPSCD.setLayout(pnlPSCDLayout);
@@ -1338,7 +1372,7 @@ public class ConvertPSCDVATView extends FrameView {
             pnlPSCDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPSCDLayout.createSequentialGroup()
                 .addGap(124, 124, 124)
-                .addGroup(pnlPSCDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlPSCDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 592, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlPSCDLayout.createSequentialGroup()
                         .addGroup(pnlPSCDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1360,16 +1394,18 @@ public class ConvertPSCDVATView extends FrameView {
                                 .addComponent(cboCQT, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(pnlPSCDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlPSCDLayout.createSequentialGroup()
-                                .addGap(53, 53, 53)
-                                .addComponent(btnConvert, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnCVNPT, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlPSCDLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(pnlTypeCV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(64, Short.MAX_VALUE))
+                                .addComponent(pnlTypeCV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnlPSCDLayout.createSequentialGroup()
+                                .addGap(36, 36, 36)
+                                .addComponent(chkPSCD, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnConvert)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnCVNPT, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(64, 64, 64))
         );
         pnlPSCDLayout.setVerticalGroup(
             pnlPSCDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1379,10 +1415,11 @@ public class ConvertPSCDVATView extends FrameView {
                     .addGroup(pnlPSCDLayout.createSequentialGroup()
                         .addComponent(pnlTypeCV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(pnlPSCDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(pnlPSCDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCVNPT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnConvert)
-                            .addComponent(btnClose)
-                            .addComponent(btnCVNPT)))
+                            .addComponent(chkPSCD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pnlPSCDLayout.createSequentialGroup()
                         .addGroup(pnlPSCDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cboCQT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1402,9 +1439,9 @@ public class ConvertPSCDVATView extends FrameView {
                                 .addComponent(btnAdd)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnRemove)))))
-                .addGap(21, 21, 21)
+                .addGap(46, 46, 46)
                 .addComponent(lblDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         tabPSCD.addTab(resourceMap.getString("pnlConvertPSCD.TabConstraints.tabTitle"), pnlPSCD); // NOI18N
@@ -1877,6 +1914,7 @@ public class ConvertPSCDVATView extends FrameView {
     private javax.swing.JCheckBox chkConfig;
     private javax.swing.JCheckBox chkNO;
     private javax.swing.JCheckBox chkPS;
+    private javax.swing.JButton chkPSCD;
     private javax.swing.JCheckBox chkTB_NO;
     private javax.swing.JCheckBox chkTB_PS;
     private javax.swing.JCheckBox chkTB_PT;
