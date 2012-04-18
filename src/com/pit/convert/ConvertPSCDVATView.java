@@ -297,7 +297,7 @@ public class ConvertPSCDVATView extends FrameView {
     /**
      * Lấy ngày chốt dữ liệu
      * @param short_name
-     * @return
+     * @return ngay_chot
      * @throws SQLException
      */
     public String loadNgayChotDL(String short_name) throws SQLException {
@@ -338,7 +338,7 @@ public class ConvertPSCDVATView extends FrameView {
      * Hiển thị thông tin cqt và loại dữ liệu convert
      *
      * @param cqt_convert
-     * @return
+     * @return message
      */
     public String MessCQTConvert(ArrayList<String> cqt_convert) {
 
@@ -949,9 +949,9 @@ public class ConvertPSCDVATView extends FrameView {
     }
 
     /**
-     * import data from excel to oracle
-     *
-     * @param table tb_no, tb_ps, tb_tk
+     * Import data from excel to oracle
+     * @throws IOException
+     * @throws SQLException 
      */
     @Action
     public void impExceltOra() throws IOException, SQLException {
@@ -1164,7 +1164,7 @@ public class ConvertPSCDVATView extends FrameView {
     }
 
     /**
-     * @desc display file convert success
+     * Display file convert success
      *
      * @param file
      */
