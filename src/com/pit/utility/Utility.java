@@ -4,9 +4,6 @@
  */
 package com.pit.utility;
 
-import UnicodeConverter.Converter;
-import UnicodeConverter.Tcvn3Converter;
-import com.pit.conn.ConnectDB;
 import com.pit.system.Constants;
 import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
@@ -19,7 +16,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -177,7 +173,7 @@ public class Utility {
                 file.createNewFile();
                 //write use buffering
                 Writer output = new BufferedWriter(new FileWriter(file));
-                output.write("jdbc:oracle:thin:@10.15.117.98:1522/DPPIT,TKTQ,TKTQ");
+                output.write("jdbc:oracle:thin:@10.64.9.199:1522/DPPIT,TKTQ,TKTQ");
                 output.close();
             }
 
@@ -513,10 +509,10 @@ public class Utility {
     }
     
     /**
-     * @desc kiểm tra trường số tiền có âm không
+     * kiểm tra trường số tiền có âm không
      * @param field
      * @param money
-     * @return 
+     * @return mô tả số tiền
      */
     public static String checkAm(String field,String money){
         
@@ -531,10 +527,6 @@ public class Utility {
         
         return desc;
         
-    }
-    
-    public static void main(String[] args) {
-        Utility a = new Utility();
     }
     
 }
