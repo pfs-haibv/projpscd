@@ -4,6 +4,7 @@ package com.pit.convert;
  *
  * @author HAIBV
  */
+import com.pit.conn.ConnectDB;
 import com.sap.conn.jco.JCoException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -30,6 +31,31 @@ public class LoadData {
     private static ArrayList<DataTK> arrTK = new ArrayList<DataTK>();
     //Mảng chứa phần tử người phụ thuộc
     private static ArrayList<DataNPT> arrNPT = new ArrayList<DataNPT>();
+    
+/**
+     * @desc Trường hợp lỗi sai log phải get lại :(
+     * @throws ParserConfigurationException
+     * @throws IOException
+     * @throws ExceptionInInitializerError
+     * @throws JCoException
+     * @throws SQLException 
+     */
+    
+    static void getLogPSCDbyFileName() throws ParserConfigurationException, IOException, ExceptionInInitializerError, JCoException, SQLException {
+        try {
+            String f_name[] = {
+"PSQLT20120131_70143_40.CSV"
+            };
+            
+            for (int i =0; i < f_name.length; i ++){
+            ConvertPSCD.sqlDatabase(f_name[i], "");
+            }
+        }
+        catch(JCoException je){
+            je.printStackTrace();
+        }
+        
+    }
 
     /**
      * @param thực hiện đọc từng loại dữ liệu (NO, PS, TK)
@@ -50,11 +76,29 @@ public class LoadData {
                     //Write log file
                     ConvertPSCD.sqlDatabase(f_name[0], tax);
                 } else {
-                    //Check PSCD                
-                    ConvertPSCD.runConvert(type_cv[0], Constants.NUMBER_OF_PROCESS_PSCD, tax, "X");
+                    try {
+                        // Xóa dữ liệu cũ ở bảng tb_unsplit_data_error
+                        ConnectDB.delUnSplitErrCode(tax, "TB_NO");
+//                    System.out.println("Đã xóa dữ liệu Nợ trong bảng TB_UNSPLIT_DATA_ERROR");
+                        // Xóa dữ liệu cũ ở bảng tb_data_error
+                        ConnectDB.delDataErrCode(tax, "TB_NO");
+//                    System.out.println("Đã xóa dữ liệu Nợ trong bảng TB_DATA_ERROR");
+                        // Check PSCD
+                        // Check PSCD bằng thủ tục Oracle
+                        ConnectDB.callOraclePrcChk("prc_ktra_du_lieu_no", tax);
+                        // Check PSCD bằng hàm SAP
+                        ConvertPSCD.runConvert(type_cv[0], thread_vat, tax, "X");
+                        // Tách mã lỗi từ bảng tb_unsplit_data_error vào bảng tb_data_error
+                        ConnectDB.callOraclePrcInsSplitErr("prc_insert_splitted_err", tax, "TB_NO");
+                        ConnectDB.callOraclePrc_Ins_Log_Vs(tax, "PRC_KTRA_NO", "Y", "");
+                    } catch (JCoException je) {
+                        ConnectDB.callOraclePrc_Ins_Log_Vs(tax, "PRC_KTRA_NO", "N", je.getMessage());
+                    } catch (SQLException se) {
+                        ConnectDB.callOraclePrc_Ins_Log_Vs(tax, "PRC_KTRA_NO", "N", se.getMessage());
+                    }
                 }
-
             }
+
             //Xử lý Phát sinh
             if (type_cv[1].equals(Constants.PS)) {
                 //Load dữ liệu 
@@ -65,10 +109,30 @@ public class LoadData {
                     //Write log file
                     ConvertPSCD.sqlDatabase(f_name[1], tax);
                 } else {
-                    ConvertPSCD.runConvert(type_cv[1], Constants.NUMBER_OF_PROCESS_PSCD, tax, "X");
+                    try {
+                        // Xóa dữ liệu cũ ở bảng tb_unsplit_data_error
+                        ConnectDB.delUnSplitErrCode(tax, "TB_PS");
+//                    System.out.println("Đã xóa dữ liệu Phát sinh trong bảng TB_UNSPLIT_DATA_ERROR");                            
+                        // Xóa dữ liệu cũ ở bảng tb_data_error
+                        ConnectDB.delDataErrCode(tax, "TB_PS");
+//                    System.out.println("Đã xóa dữ liệu Phát sinh trong bảng TB_DATA_ERROR");
+                        // Check PSCD
+                        // Check PSCD bằng thủ tục Oracle
+                        ConnectDB.callOraclePrcChk("prc_ktra_du_lieu_ps", tax);
+                        // Check PSCD bằng hàm SAP
+                        ConvertPSCD.runConvert(type_cv[1], thread_vat, tax, "X");
+                        // Tách mã lỗi từ bảng tb_unsplit_data_error vào bảng tb_data_error
+                        ConnectDB.callOraclePrcInsSplitErr("prc_insert_splitted_err", tax, "TB_PS");
+                        ConnectDB.callOraclePrc_Ins_Log_Vs(tax, "PRC_KTRA_PS", "Y", "");
+                    } catch (JCoException je) {
+                        ConnectDB.callOraclePrc_Ins_Log_Vs(tax, "PRC_KTRA_PS", "N", je.getMessage());
+                    } catch (SQLException se) {
+                        ConnectDB.callOraclePrc_Ins_Log_Vs(tax, "PRC_KTRA_PS", "N", se.getMessage());
+                    }
                 }
-
             }
+
+
             //Xử lý Tờ khai
             if (type_cv[2].equals(Constants.TK)) {
                 //Load dữ liệu
@@ -79,15 +143,37 @@ public class LoadData {
                     //Write log file
                     ConvertPSCD.sqlDatabase(f_name[2], tax);
                 } else {
-                    ConvertPSCD.runConvert(type_cv[2], thread_vat, tax, "X");
-                }
+                    try {
+                        // Xóa dữ liệu cũ ở bảng tb_unsplit_data_error
+                        ConnectDB.delUnSplitErrCode(tax, "TB_TK");
+//                    System.out.println("Đã xóa dữ liệu Tờ khai trong bảng TB_UNSPLIT_DATA_ERROR");  
+                        // Xóa dữ liệu cũ ở bảng tb_data_error
+                        ConnectDB.delDataErrCode(tax, "TB_TK");
+//                    System.out.println("Đã xóa dữ liệu Tờ khai trong bảng TB_DATA_ERROR");  
+                        // Check TK
+                        // Check TK bằng thủ tục Oracle
+                        ConnectDB.callOraclePrcChk("prc_ktra_du_lieu_tk", tax);
+                        // Check TK bằng hàm SAP
+                        ConvertPSCD.runConvert(type_cv[2], thread_vat, tax, "X");
+                        // Tách mã lỗi từ bảng tb_unsplit_data_error vào bảng tb_data_error
+                        ConnectDB.callOraclePrcInsSplitErr("prc_insert_splitted_err", tax, "TB_TK");
 
+                        ConnectDB.callOraclePrc_Ins_Log_Vs(tax, "PRC_KTRA_TK", "Y", "");
+                    } catch (JCoException je) {
+                        ConnectDB.callOraclePrc_Ins_Log_Vs(tax, "PRC_KTRA_TK", "N", je.getMessage());
+                    } catch (SQLException se) {
+                        ConnectDB.callOraclePrc_Ins_Log_Vs(tax, "PRC_KTRA_TK", "N", se.getMessage());
+                    }
+                }
             }
+
 
         } catch (ExceptionInInitializerError ExInt) {
             throw new RuntimeException("Lỗi xẩy ra đối với cơ quan thuế: " + tax + ", trong file : " + f_name[0] + f_name[1] + f_name[2], ExInt);
         } catch (JCoException je) {
             throw new JCoException(thread_vat, tax, je.getMessage());
+        } catch (SQLException se) {
+            throw new SQLException(se.getMessage());
         } catch (JCoRuntimeException jr) {
             throw new JCoRuntimeException(1, "", jr.getMessage());
         }
@@ -118,7 +204,7 @@ public class LoadData {
             throw new JCoRuntimeException(1, "", jr.getMessage());
         }
 
-    } 
+    }
 
     static void getDataORA(String tax) throws SQLException, UnsupportedEncodingException {
         // Clear 
@@ -191,7 +277,12 @@ public class LoadData {
 
             //Xử lý Nợ
             if (type_cv.equals(Constants.NO)) {
-                sql = "select * from tb_no where short_name = '" + tax + "' and status is null";
+                // Lấy dữ liệu để convert
+                if (chk_pscd.isEmpty()) {
+                    sql = "select rowid rid, a.* from tb_no a where short_name = '" + tax + "' and status is null";
+                } else { // Lấy dữ liệu để thực hiện check
+                    sql = "select rowid rid, a.* from tb_no a where short_name = '" + tax + "'";
+                }
                 rset = stmt.executeQuery(sql);
                 while (rset.next()) {
                     DataPSCD pscd = new DataPSCD();
@@ -212,6 +303,7 @@ public class LoadData {
                     pscd.setRETURN_CODE(rset.getString("DKT_MA")); //Return code
                     pscd.setAMOUNT(rset.getString("NO_CUOI_KY")); //Amount      
                     pscd.setID(rset.getString("ID")); //ID    
+                    pscd.setRID(rset.getString("RID"));
                     arrPSCD.add(pscd);
 
                     data_cv = new DataCVPSCD(arrPSCD, arrTK);
@@ -221,7 +313,12 @@ public class LoadData {
             }
             //Xử lý phát sinh
             if (type_cv.equals(Constants.PS)) {
-                sql = "select * from tb_ps where short_name = '" + tax + "' and status is null";
+                // Lấy dữ liệu để convert
+                if (chk_pscd.isEmpty()) {
+                    sql = "select rowid rid, a.* from tb_ps a where short_name = '" + tax + "' and status is null";
+                } else { // Lấy dữ liệu để thực hiện check
+                    sql = "select rowid rid, a.* from tb_ps a where a.short_name = '" + tax + "'";
+                }
                 rset = stmt.executeQuery(sql);
                 while (rset.next()) {
                     DataPSCD pscd = new DataPSCD();
@@ -242,6 +339,7 @@ public class LoadData {
                     pscd.setRETURN_CODE(rset.getString("MA_TKHAI")); //Return code
                     pscd.setAMOUNT(rset.getString("SO_TIEN")); //Amount     
                     pscd.setID(rset.getString("ID")); //ID
+                    pscd.setRID(rset.getString("RID"));
                     arrPSCD.add(pscd);
 
                     data_cv = new DataCVPSCD(arrPSCD, arrTK);
@@ -254,9 +352,9 @@ public class LoadData {
             if (type_cv.equals(Constants.TK)) {
                 //Lấy dữ liệu để convert
                 if (chk_pscd.isEmpty()) {
-                    sql = "select * from tb_tk where short_name = '" + tax + "' and status is null";
+                    sql = "select rowid rid, a.* from tb_tk a where short_name = '" + tax + "' and status is null";
                 } else {//lấy dữ liệu thực hiện check
-                    sql = "select rowid rid, a.* from tb_tk a where short_name in (" + tax + ")";
+                    sql = "select rowid rid, a.* from tb_tk a where short_name = '" + tax + "'";
                 }
 
                 rset = stmt.executeQuery(sql);
