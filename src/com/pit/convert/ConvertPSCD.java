@@ -38,8 +38,6 @@ import java.util.logging.Logger;
 
 import com.pit.system.Constants;
 import com.pit.conn.ConnectDB;
-import com.pit.datatype.DataNPT;
-import com.pit.utility.Utility;
 import java.sql.SQLException;
 import java.util.Date;
 
@@ -50,10 +48,10 @@ public class ConvertPSCD {
 
     static {
         Properties connectProperties = new Properties();
-          /* Connection type: Custom Application server */
-//        connectProperties.setProperty(DestinationDataProvider.JCO_ASHOST, "10.15.119.21");
-//        connectProperties.setProperty(DestinationDataProvider.JCO_SYSNR, "31");
-//        connectProperties.setProperty(DestinationDataProvider.JCO_CLIENT, "340");
+        /* Connection type: Custom Application server */
+//        connectProperties.setProperty(DestinationDataProvider.JCO_ASHOST, "10.64.8.93");
+//        connectProperties.setProperty(DestinationDataProvider.JCO_SYSNR, "00");
+//        connectProperties.setProperty(DestinationDataProvider.JCO_CLIENT, "500");
 //        connectProperties.setProperty(DestinationDataProvider.JCO_USER, "dc_dev02");
 //        connectProperties.setProperty(DestinationDataProvider.JCO_PASSWD, "1234567");
 //        connectProperties.setProperty(DestinationDataProvider.JCO_LANG, "en");       
@@ -62,19 +60,18 @@ public class ConvertPSCD {
 //        connectProperties.setProperty(DestinationDataProvider.JCO_PEAK_LIMIT, "50");
 //        createDataFile(DESTINATION_NAME2, "jcoDestination", connectProperties);
         /* Connection type: Group/Server Selection */
-        connectProperties.setProperty(DestinationDataProvider.JCO_TYPE, "B");
-        connectProperties.setProperty(DestinationDataProvider.JCO_CLIENT, "500"); 
+        connectProperties.setProperty(DestinationDataProvider.JCO_CLIENT, "500");
         connectProperties.setProperty(DestinationDataProvider.JCO_MSHOST, "10.64.85.12");
         connectProperties.setProperty(DestinationDataProvider.JCO_R3NAME, "PE1");
-        connectProperties.setProperty(DestinationDataProvider.JCO_GROUP, "PE1-GROUP");         
-        connectProperties.setProperty(DestinationDataProvider.JCO_USER, "convert_dkt1");
+        connectProperties.setProperty(DestinationDataProvider.JCO_GROUP, "PE1-GROUP");
+        connectProperties.setProperty(DestinationDataProvider.JCO_USER, "dc_dev02");
         connectProperties.setProperty(DestinationDataProvider.JCO_PASSWD, "1234567");
-        connectProperties.setProperty(DestinationDataProvider.JCO_LANG, "en"); 
+        connectProperties.setProperty(DestinationDataProvider.JCO_LANG, "en");
         createDataFile(DESTINATION_NAME1, "jcoDestination", connectProperties);
         connectProperties.setProperty(DestinationDataProvider.JCO_POOL_CAPACITY, "70");
         connectProperties.setProperty(DestinationDataProvider.JCO_PEAK_LIMIT, "50");
         createDataFile(DESTINATION_NAME2, "jcoDestination", connectProperties);
-        
+
     }
     private static BlockingQueue<MultiStepJob> queue = new LinkedBlockingQueue<MultiStepJob>();
     private static JCoFunctionTemplate convertDKTTemplate, convertNPT, chkPSCD;
@@ -221,7 +218,9 @@ public class ConvertPSCD {
              *                          01. XỬ LÝ NỢ                                   *
              **------------------------------------------------------------------------*/
             if (type_.equals(Constants.NO) && chk_pscd.isEmpty()) {
-
+                /**--------------------------------------------------------------------*
+                 *                      A. THỰC HIỆN CONVERT                           * 
+                 **--------------------------------------------------------------------*/
                 try {
 
                     JCoContext.begin(destination);
@@ -274,10 +273,11 @@ public class ConvertPSCD {
                         } catch (SQLException ex) {
                             ex.printStackTrace();
                         }
+                        String convFont = Tcvn3Converter.convertU(JcoStrE_RETURN.getValue("MESSAGE").toString()).replaceAll("'", "");
 
-                        String SQL = "insert into tb_log_pscd (file_name, tin, msg_no,ID,SHORT_NAME,TYPE_DATA,IMP_DATE)"
+                        String SQL = "insert into tb_log_pscd (file_name, tin, msg_no,msg_des,ID,SHORT_NAME,TYPE_DATA,IMP_DATE)"
                                 + "values ('" + ConvertPSCDVATView.name_no + "','" + tin + "',"
-                                + "'" + JcoStrE_RETURN.getValue("NUMBER") + "','" + id + "','" + sort_name + "','NO','" + imp_date + "')";
+                                + "'" + JcoStrE_RETURN.getValue("NUMBER") + "','" + convFont.replaceAll("Oõ", "Õ") + "','" + id + "','" + sort_name + "','NO','" + imp_date + "')";
                         try {
                             //write log
                             ConnectDB.sqlDatabase(SQL);
@@ -314,13 +314,77 @@ public class ConvertPSCD {
                     executedCalls++;
                 }
 
+            } else if (type_.equals(Constants.NO) && !chk_pscd.isEmpty()) {
+                /**--------------------------------------------------------------------*
+                 *                      B. THỰC HIỆN KIỂM TRA                          * 
+                 **--------------------------------------------------------------------*/
+                try {
+
+                    JCoContext.begin(destination);
+                    //Structure Import I_DATA
+                    JCoStructure JcoStrI_DATA = fnConvert.getImportParameterList().getStructure("I_SOURCE");
+
+                    JcoStrI_DATA.setValue("ROW_NUM", nnt.arrPSCD.get(0).getID());                       //ROW_NUM thay bằng ID vì ROW_NUM có thể trung nhau
+                    JcoStrI_DATA.setValue("DOC_TYPE", nnt.arrPSCD.get(0).getDOC_TYPE());                //DOC_TYPE
+                    JcoStrI_DATA.setValue("TAX_OFFICE_CODE", nnt.arrPSCD.get(0).getTAX_OFFICE_CODE());  //TAX_OFFICE_CODE
+                    JcoStrI_DATA.setValue("TIN", nnt.arrPSCD.get(0).getTIN());                          //TIN
+                    JcoStrI_DATA.setValue("PROFIT_CENTER", nnt.arrPSCD.get(0).getPROFIT_CENTER());      //PROFIT_CENTER
+                    JcoStrI_DATA.setValue("BUSINESS_AREA", nnt.arrPSCD.get(0).getBUSINESS_AREA());      //BUSINESS_AREA
+                    JcoStrI_DATA.setValue("SEGMENT", nnt.arrPSCD.get(0).getSEGMENT());                  //SEGMENT
+                    JcoStrI_DATA.setValue("PAY_GROUP", nnt.arrPSCD.get(0).getPAY_GROUP());              //PAY_GROUP
+                    JcoStrI_DATA.setValue("POSTING_DATE", nnt.arrPSCD.get(0).getPOSTING_DATE());        //POSTING_DATE
+                    JcoStrI_DATA.setValue("START_PERIOD", nnt.arrPSCD.get(0).getSTART_PERIOD());        //START_PERIOD
+                    JcoStrI_DATA.setValue("END_PERIOD", nnt.arrPSCD.get(0).getEND_PERIOD());            //END_PERIOD
+                    JcoStrI_DATA.setValue("DUE_DATE", nnt.arrPSCD.get(0).getDUE_DATE());                //DUE_DATE
+                    JcoStrI_DATA.setValue("RETURN_CODE", nnt.arrPSCD.get(0).getRETURN_CODE());          //RETURN_CODE
+                    JcoStrI_DATA.setValue("AMOUNT", nnt.arrPSCD.get(0).getAMOUNT());                    //AMOUNT
+                    //**-----------------------------------------------------------------------*
+                    //**Get value parameter and execute                                        *
+                    //**-----------------------------------------------------------------------*                    
+                    // Structure I_SOURCE
+                    fnConvert.getImportParameterList().setValue("I_SOURCE", JcoStrI_DATA);
+
+                    fnConvert.execute(destination);
+
+
+                    if (!fnConvert.getExportParameterList().getString("E_ERROR_CODE").isEmpty()) {
+                        try {
+                            // System.out.println("E_ERROR_CODE: " + fnChkPSCD.getExportParameterList().getString("E_ERROR_CODE"));
+                            ConnectDB.insUnSplitErrCode(short_name,
+                                    nnt.arrPSCD.get(0).getRID(),
+                                    "TB_NO",
+                                    fnConvert.getExportParameterList().getString("E_ERROR_CODE"));
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+
+                    executedCalls++;
+                    JCoContext.end(destination);
+                } catch (JCoException je) {
+                    try {
+                        throw new JCoException(1, "", je.getMessage());
+                    } catch (JCoException ex) {
+                        ex.printStackTrace();
+                    }
+                } catch (JCoRuntimeException jr) {
+                    throw new JCoRuntimeException(1, "", jr.getMessage());
+                } catch (RuntimeException re) {
+                    re.printStackTrace();
+                } finally {
+                    executedCalls++;
+                }
+
             }
+
 
             /**------------------------------------------------------------------------*
              *                          02. XỬ LÝ PHÁT SINH                            *
              **------------------------------------------------------------------------*/
             if (type_.equals(Constants.PS) && chk_pscd.isEmpty()) {
-
+                /**--------------------------------------------------------------------*
+                 *                      A. THỰC HIỆN CONVERT                           * 
+                 **--------------------------------------------------------------------*/
                 try {
                     JCoContext.begin(destination);
                     //Structure I_DATA
@@ -370,10 +434,11 @@ public class ConvertPSCD {
                         } catch (SQLException ex) {
                             ex.printStackTrace();
                         }
+                        String convFont = Tcvn3Converter.convertU(JcoStrE_RETURN.getValue("MESSAGE").toString()).replaceAll("'", "");
 
-                        String SQL = "insert into tb_log_pscd (file_name, tin, msg_des,ID,SHORT_NAME,TYPE_DATA,IMP_DATE)"
+                        String SQL = "insert into tb_log_pscd (file_name, tin, msg_no, msg_des,ID,SHORT_NAME,TYPE_DATA,IMP_DATE)"
                                 + "values ('" + ConvertPSCDVATView.name_ps + "','" + tin + "',"
-                                + "'" + JcoStrE_RETURN.getValue("NUMBER") + "','" + id + "','" + sort_name + "','PS','" + imp_date + "')";
+                                + "'" + JcoStrE_RETURN.getValue("NUMBER") + "','" + convFont.replaceAll("Oõ", "Õ") + "','" + id + "','" + sort_name + "','PS','" + imp_date + "')";
                         try {
                             //write log
                             ConnectDB.sqlDatabase(SQL);
@@ -412,13 +477,71 @@ public class ConvertPSCD {
                     executedCalls++;
                 }
 
+            } else if (type_.equals(Constants.PS) && !chk_pscd.isEmpty()) {
+                /**--------------------------------------------------------------------*
+                 *                      B. THỰC HIỆN KIỂM TRA                          * 
+                 **--------------------------------------------------------------------*/
+                try {
+                    JCoContext.begin(destination);
+                    //Structure I_SOURCE
+                    JCoStructure JcoStrI_DATA = fnConvert.getImportParameterList().getStructure("I_SOURCE");
+                    //JCoStructure JcoStrE_RETURN = null;
+                    JcoStrI_DATA.setValue("ROW_NUM", nnt.arrPSCD.get(0).getID());                       //ROW_NUM thay bằng ID vì ROW_NUM có thể trung nhau
+                    JcoStrI_DATA.setValue("DOC_TYPE", nnt.arrPSCD.get(0).getDOC_TYPE());                //DOC_TYPE
+                    JcoStrI_DATA.setValue("TAX_OFFICE_CODE", nnt.arrPSCD.get(0).getTAX_OFFICE_CODE());  //TAX_OFFICE_CODE
+                    JcoStrI_DATA.setValue("TIN", nnt.arrPSCD.get(0).getTIN());                          //TIN
+                    JcoStrI_DATA.setValue("PROFIT_CENTER", nnt.arrPSCD.get(0).getPROFIT_CENTER());      //PROFIT_CENTER
+                    JcoStrI_DATA.setValue("BUSINESS_AREA", nnt.arrPSCD.get(0).getBUSINESS_AREA());      //BUSINESS_AREA
+                    JcoStrI_DATA.setValue("SEGMENT", nnt.arrPSCD.get(0).getSEGMENT());                  //SEGMENT
+                    JcoStrI_DATA.setValue("PAY_GROUP", nnt.arrPSCD.get(0).getPAY_GROUP());              //PAY_GROUP
+                    JcoStrI_DATA.setValue("POSTING_DATE", nnt.arrPSCD.get(0).getPOSTING_DATE());        //POSTING_DATE
+                    JcoStrI_DATA.setValue("START_PERIOD", nnt.arrPSCD.get(0).getSTART_PERIOD());        //START_PERIOD
+                    JcoStrI_DATA.setValue("END_PERIOD", nnt.arrPSCD.get(0).getEND_PERIOD());            //END_PERIOD
+                    JcoStrI_DATA.setValue("DUE_DATE", nnt.arrPSCD.get(0).getDUE_DATE());                //DUE_DATE
+                    JcoStrI_DATA.setValue("RETURN_CODE", nnt.arrPSCD.get(0).getRETURN_CODE());          //RETURN_CODE
+                    JcoStrI_DATA.setValue("AMOUNT", nnt.arrPSCD.get(0).getAMOUNT());                    //AMOUNT
+                    //**-----------------------------------------------------------------------*
+                    //**Get value parameter and execute                                        *
+                    //**-----------------------------------------------------------------------*                    
+                    // Structure I_SOURCE
+                    fnConvert.getImportParameterList().setValue("I_SOURCE", JcoStrI_DATA);
+
+                    fnConvert.execute(destination);
+
+                    if (!fnConvert.getExportParameterList().getString("E_ERROR_CODE").isEmpty()) {
+                        try {
+                            ConnectDB.insUnSplitErrCode(short_name,
+                                    nnt.arrPSCD.get(0).getRID(),
+                                    "TB_PS",
+                                    fnConvert.getExportParameterList().getString("E_ERROR_CODE"));
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+
+                    executedCalls++;
+                    JCoContext.end(destination);
+
+                } catch (JCoException je) {
+                    ex = je;
+                    ex.printStackTrace();
+                } catch (RuntimeException re) {
+                    ex = re;
+                    ex.printStackTrace();
+                } finally {
+                    executedCalls++;
+                }
             }
+
+
 
             /**------------------------------------------------------------------------*
              *                          03. XỬ LÝ TỜ KHAI                              *
              **------------------------------------------------------------------------*/
             if (type_.equals(Constants.TK) && chk_pscd.isEmpty()) {
-
+                /**--------------------------------------------------------------------*
+                 *                      A. THỰC HIỆN CONVERT                           * 
+                 **--------------------------------------------------------------------*/
                 try {
 
                     JCoContext.begin(destination);
@@ -494,9 +617,11 @@ public class ConvertPSCD {
                             ex.printStackTrace();
                         }
 
-                        String SQL = "insert into tb_log_pscd (file_name, tin, msg_des,ID,SHORT_NAME,TYPE_DATA,IMP_DATE)"
+                        String convFont = Tcvn3Converter.convertU(JcoStrE_RETURN.getValue("MESSAGE").toString()).replaceAll("'", "");
+                        
+                        String SQL = "insert into tb_log_pscd (file_name, tin, msg_no, msg_des,ID,SHORT_NAME,TYPE_DATA,IMP_DATE)"
                                 + "values ('" + ConvertPSCDVATView.name_tk + "','" + tin + "',"
-                                + "'" + JcoStrE_RETURN.getValue("NUMBER") + "','" + id + "','" + sort_name + "','TK','" + imp_date + "')";
+                                + "'" + JcoStrE_RETURN.getValue("NUMBER") + "','" + convFont.replaceAll("Oõ", "Õ") + "','" + id + "','" + sort_name + "','TK','" + imp_date + "')";
                         try {
                             //write log
                             ConnectDB.sqlDatabase(SQL);
@@ -536,13 +661,10 @@ public class ConvertPSCD {
                 } finally {
                     executedCalls++;
                 }
-            }
-            
-            /**------------------------------------------------------------------------*
-             *                          CHECK DATA TỜ KHAI                             *
-             **------------------------------------------------------------------------*/
-            if (type_.equals(Constants.TK) && !chk_pscd.isEmpty()) {
-
+            } else if (type_.equals(Constants.TK) && !chk_pscd.isEmpty()) {
+                /**--------------------------------------------------------------------*
+                 *                      B. THỰC HIỆN KIỂM TRA                          * 
+                 **--------------------------------------------------------------------*/
                 try {
 
                     JCoContext.begin(destination);
@@ -588,25 +710,24 @@ public class ConvertPSCD {
                     //**-----------------------------------------------------------------------*
                     //**Get value parameter and execute                                        *
                     //**-----------------------------------------------------------------------*
-                    fnConvert.getImportParameterList().setValue("I_FILE", ConvertPSCDVATView.name_tk);
 
-                    fnConvert.getImportParameterList().setValue("I_DATA", JcoStrI_DATA);
-                    fnConvert.execute(destination);                                     
-                    
                     fnConvert.getImportParameterList().setValue("I_FILE", "TKQLT20100101_50901_1252.CSV");
 
                     fnConvert.getImportParameterList().setValue("I_DATA", JcoStrI_DATA);
                     fnConvert.execute(destination);
 
-                    if(!fnConvert.getExportParameterList().getString("E_ERROR_CODE").isEmpty()) {
+                    if (!fnConvert.getExportParameterList().getString("E_ERROR_CODE").isEmpty()) {
                         try {
                             // System.out.println("E_ERROR_CODE: " + fnChkPSCD.getExportParameterList().getString("E_ERROR_CODE"));
-                            ConnectDB.insErrCode("'HCM_BTA'", nnt.arrTK.get(0).getRID(), fnConvert.getExportParameterList().getString("E_ERROR_CODE"));
+                            ConnectDB.insUnSplitErrCode(short_name,
+                                    nnt.arrTK.get(0).getRID(),
+                                    "TB_TK",
+                                    fnConvert.getExportParameterList().getString("E_ERROR_CODE"));
                         } catch (SQLException ex) {
                             ex.printStackTrace();
                         }
-                }
-                    
+                    }
+
                     executedCalls++;
                     JCoContext.end(destination);
 
@@ -624,7 +745,7 @@ public class ConvertPSCD {
                     executedCalls++;
                 }
             }
-            
+
 
         }
 
@@ -662,7 +783,7 @@ public class ConvertPSCD {
                     tblInGT_APPENDIX.setValue("PERIOD_KEY", arrNPT.get(i).arrdtNPT.get(r).getPERIOD_KEY());
                     tblInGT_APPENDIX.setValue("FBTYP", arrNPT.get(i).arrdtNPT.get(r).getFBTYP());
                     tblInGT_APPENDIX.setValue("APPEN_ID", arrNPT.get(i).arrdtNPT.get(r).getAPPEN_ID());
-                    tblInGT_APPENDIX.setValue("TAXPAYER_ID", arrNPT.get(i).arrdtNPT.get(r).getTAXPAYER_ID());                    
+                    tblInGT_APPENDIX.setValue("TAXPAYER_ID", arrNPT.get(i).arrdtNPT.get(r).getTAXPAYER_ID());
                     tblInGT_APPENDIX.setValue("TAXPAYER_NAME", Tcvn3Converter.convert(arrNPT.get(i).arrdtNPT.get(r).getTAXPAYER_NAME()));
                     tblInGT_APPENDIX.setValue("BIRTHDAY", arrNPT.get(i).arrdtNPT.get(r).getBIRTHDAY());
                     tblInGT_APPENDIX.setValue("IDENTIFY_NUM", arrNPT.get(i).arrdtNPT.get(r).getIDENTIFY_NUM());
@@ -704,7 +825,7 @@ public class ConvertPSCD {
             e.printStackTrace();
         }
     }
-      
+
     static class MySessionReferenceProvider implements SessionReferenceProvider {
 
         public JCoSessionReference getCurrentSessionReference(String scopeType) {
@@ -827,6 +948,16 @@ public class ConvertPSCD {
             for (int i = 0; i < thread_vat; i++) {
                 new WorkerThread(doneSignal).start();
             }
+        } else if (callFunc.equals(Constants.PS) && chk_pscd.equals("X")) {
+            doneSignal = new CountDownLatch(thread_vat);
+            for (int i = 0; i < thread_vat; i++) {
+                new WorkerThread(doneSignal).start();
+            }
+        } else if (callFunc.equals(Constants.NO) && chk_pscd.equals("X")) {
+            doneSignal = new CountDownLatch(thread_vat);
+            for (int i = 0; i < thread_vat; i++) {
+                new WorkerThread(doneSignal).start();
+            }
         } else {
             doneSignal = new CountDownLatch(Constants.NUMBER_OF_PROCESS_PSCD);
             for (int i = 0; i < Constants.NUMBER_OF_PROCESS_PSCD; i++) {
@@ -840,12 +971,12 @@ public class ConvertPSCD {
             //just leave
             logger.log(Level.WARNING, "InterruptException:", ie);
         }
-        System.out.println(">>> Done");
+        //System.out.println(">>> Done");
         //******************* CLEAR ARRAY INFOR DATA IN FILE CSV *************
         //--------------------------------------------------------------------          
         arrData.clear();
         //Lấy file name đã convert 
-        ConvertPSCDVATView.getSuccesFile(">>> DONE CONVERT " + callFunc + " !!!");
+        ConvertPSCDVATView.getSuccesFile(">>> DONE " + short_name + " DATA " + callFunc + " !!!");
     }
 
     // Load data PSCD sau khi lấy từng loại dữ liệu (NO, PS, TK) trong database
@@ -955,17 +1086,17 @@ public class ConvertPSCD {
                 String id = "";//key trong table NO, PS, TK  
                 String tin = "";//mã tinh
                 if (numRows > 0) {
-                    //Add info short_name, id
-                    t_form_10.setRow(0);
-                    sql_info = "select * from tb_tk where id = " + t_form_10.getString("ROW_NUM").trim();
-                    String add_info[] = ConnectDB.getInfoLog(sql_info).split(",");
-                    short_name = add_info[0];
-                    id = add_info[1];
-                    tin = add_info[2];
-                    //import date
-                    imp_date = Constants.dateFormat.format(new Date());
+
                     for (int i = 0; i < numRows; i++) {
                         t_form_10.setRow(i);
+                        //Add info short_name, id                    
+                        sql_info = "select * from tb_tk where id = " + t_form_10.getString("ROW_NUM").trim();
+                        String add_info[] = ConnectDB.getInfoLog(sql_info).split(",");
+                        short_name = add_info[0];
+                        id = add_info[1];
+                        tin = add_info[2];
+                        //import date
+                        imp_date = Constants.dateFormat.format(new Date());
                         //Convert font
                         String convFont = Tcvn3Converter.convertU(t_form_10.getString("MESSAGE").replaceAll("'", ""));
                         SQL = "insert into tb_log_pscd (tin, FIELDNAME, MSG_NO, MSG_TYPE, msg_des, file_name,ID,SHORT_NAME,TYPE_DATA,IMP_DATE) "
@@ -978,8 +1109,7 @@ public class ConvertPSCD {
                     }
                 }
 
-            } 
-            /**---------------------------------------------------------------------*
+            } /**---------------------------------------------------------------------*
              *                         WRITE LOG NỢ, PHÁT SINH                      *
              **---------------------------------------------------------------------*/
             else {
@@ -991,29 +1121,25 @@ public class ConvertPSCD {
                 String id = "";
                 if (numRows > 0) {
 
-                    t_pscd.setRow(0);
-
-                    if (type_data.equals(Constants.NO)) {
-                        // add short_name and id to table tb_log_pscd                        
-                        sql_info = "select * from tb_no where id = " + t_pscd.getString("RECORD_NUM").trim();
-
-                        String add_info[] = ConnectDB.getInfoLog(sql_info).split(",");
-                        sort_name = add_info[0];
-                        id = add_info[1];
-                    } else {
-                        System.out.println("t_pscd.getString(RECORD_NUM).trim()" + t_pscd.getString("RECORD_NUM").trim());
-                        sql_info = "select * from tb_ps where id = " + t_pscd.getString("RECORD_NUM").trim();
-
-                        String add_info[] = ConnectDB.getInfoLog(sql_info).split(",");
-                        sort_name = add_info[0];
-                        id = add_info[1];
-                    }
-
-                    //import date
-                    imp_date = Constants.dateFormat.format(new Date());
                     for (int i = 0; i < numRows; i++) {
                         t_pscd.setRow(i);
+                        if (type_data.equals(Constants.NO)) {
+                            // add short_name and id to table tb_log_pscd                        
+                            sql_info = "select * from tb_no where id = " + t_pscd.getString("RECORD_NUM").trim();
 
+                            String add_info[] = ConnectDB.getInfoLog(sql_info).split(",");
+                            sort_name = add_info[0];
+                            id = add_info[1];
+                        } else {                           
+                            sql_info = "select * from tb_ps where id = " + t_pscd.getString("RECORD_NUM").trim();
+                            System.out.println("sql_info: "+sql_info);
+                            String add_info[] = ConnectDB.getInfoLog(sql_info).split(",");
+                            sort_name = add_info[0];
+                            id = add_info[1];
+                        }
+
+                        //import date
+                        imp_date = Constants.dateFormat.format(new Date());
                         //Convert font
                         String convFont_ = Tcvn3Converter.convertU(t_pscd.getString("MSG_DES")).replaceAll("'", "");
 
@@ -1054,28 +1180,33 @@ public class ConvertPSCD {
             JCoDestination destination = JCoDestinationManager.getDestination(DESTINATION_NAME2);
 
             // Xử lý Nợ
-            if (type_cv.equals(Constants.NO)  && chk_pscd.isEmpty()) {
+            if (type_cv.equals(Constants.NO) && chk_pscd.isEmpty()) {
                 convertDKTTemplate = destination.getRepository().getFunctionTemplate("ZBAPI_PSCD_CD_DC");
             }
+            if (type_cv.equals(Constants.NO) && chk_pscd.equals("X")) { // Kiểm tra Nợ
+                convertDKTTemplate = destination.getRepository().getFunctionTemplate("ZFM_PSCD_MAPPING_DC");
+            }
             //Xử lý Phát sinh
-            if (type_cv.equals(Constants.PS)  && chk_pscd.isEmpty()) {
+            if (type_cv.equals(Constants.PS) && chk_pscd.isEmpty()) {
                 convertDKTTemplate = destination.getRepository().getFunctionTemplate("ZBAPI_PSCD_TK_DC");
+            }
+            if (type_cv.equals(Constants.PS) && chk_pscd.equals("X")) { // Kiểm tra Phát sinh
+                convertDKTTemplate = destination.getRepository().getFunctionTemplate("ZFM_PSCD_MAPPING_TK_DC");
             }
             //Xử lý Tờ khai
             if (type_cv.equals(Constants.TK) && chk_pscd.isEmpty()) {
                 convertDKTTemplate = destination.getRepository().getFunctionTemplate("ZBAPI_DETAIL_10");
-            }            
-            //Check Data Tờ khai
-            if (chk_pscd.equals("X")) {
+            }
+            if (type_cv.equals(Constants.TK) && chk_pscd.equals("X")) { // Kiểm tra Tờ khai
                 convertDKTTemplate = destination.getRepository().getFunctionTemplate("ZBAPI_DETAIL_10_CHECK");
             }
 
             if (convertDKTTemplate == null) {
                 throw new RuntimeException("Service could not run due to lack of function");
             }
-            
+
             runJobs(destination, type_cv, thread_vat, short_name, chk_pscd);
-            
+
         } catch (JCoException je) {
             //je.printStackTrace();
             throw new JCoException(thread_vat, type_cv, je.getMessage());
