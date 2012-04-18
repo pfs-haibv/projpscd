@@ -1,25 +1,20 @@
-/*
- * @Class ConvertPSCDVATView.java
- * @Author HaiBV
- * @Desc 
- * @Version 1.0
- * @Tool Development Netbean 7.0.1
- * @jvm jdk 7
- */
 package com.pit.convert;
 
 import com.pit.conn.ConnectDB;
 import com.sap.conn.jco.JCoException;
 import javax.xml.parsers.ParserConfigurationException;
+
 import org.jdesktop.application.Action;
 import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
 import org.jdesktop.application.FrameView;
 import org.jdesktop.application.TaskMonitor;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+
 import javax.swing.Timer;
 import javax.swing.Icon;
 import javax.swing.JDialog;
@@ -60,7 +55,7 @@ public class ConvertPSCDVATView extends FrameView {
         this.getRootPane().setDefaultButton(btnConvert);
 
         try {
-            //Initial commobox CQT
+            //Initial commobox CQT           
             loadCQT();
             //Initial list chi cục thuế
             getListCQT(cboCQT.getSelectedItem().toString());
@@ -125,6 +120,11 @@ public class ConvertPSCDVATView extends FrameView {
         });
     }
 
+    /**
+     * Load toàn bộ cục và chi cục thuế
+     *
+     * @throws SQLException
+     */
     public void loadCQT() throws SQLException {
 
         //Initial commobox CQT
@@ -162,8 +162,9 @@ public class ConvertPSCDVATView extends FrameView {
     }
 
     /**
-     * @desc Lấy thông tin của tất cả các chi cục của CQT
-     * @param cqt 
+     * Lấy thông tin của tất cả các chi cục của CQT
+     *
+     * @param cqt
      */
     public void getListCQT(String cqt) {
         sourceListModel.clear();
@@ -186,6 +187,12 @@ public class ConvertPSCDVATView extends FrameView {
         lstCCT_CV.setModel(destListModel);
     }
 
+    /**
+     * Lấy dữ liệu NPT trước và sau khi chuyển đổi
+     *
+     * @param short_name
+     * @throws SQLException
+     */
     public void loadCQTConvertNPT(String short_name) throws SQLException {
         //Clear data NPT
         cqt_convert_npt.clear();
@@ -217,10 +224,11 @@ public class ConvertPSCDVATView extends FrameView {
     }
 
     /**
-     * @Desc Kiểm tra cqt đã chuyển đổi hay chưa
-     *       Nếu chuyển đổi rồi đưa ra thông tin chuyển đổi
+     * Kiểm tra cqt đã chuyển đổi hay chưa Nếu chuyển đổi rồi đưa ra thông tin
+     * chuyển đổi
+     *
      * @param short_name
-     * @throws SQLException 
+     * @throws SQLException
      */
     public void loadCQTConvertPSCD(String short_name, String[] type_cv) throws SQLException {
 
@@ -286,6 +294,12 @@ public class ConvertPSCDVATView extends FrameView {
         }
     }
 
+    /**
+     * Lấy ngày chốt dữ liệu
+     * @param short_name
+     * @return
+     * @throws SQLException
+     */
     public String loadNgayChotDL(String short_name) throws SQLException {
         //Ngày chốt
         String ngay_chot = "";
@@ -298,7 +312,7 @@ public class ConvertPSCDVATView extends FrameView {
             stmt = conn.createStatement();
             rset = stmt.executeQuery("SELECT a.short_name, a.tax_code cqt, to_char(a.ky_no_den, 'YYYYMMDD') as ky_no_den FROM tb_lst_taxo a where a.short_name = '" + short_name + "'");
             while (rset.next()) {
-                ngay_chot = rset.getString("ky_no_den") +"_"+rset.getString("cqt");
+                ngay_chot = rset.getString("ky_no_den") + "_" + rset.getString("cqt");
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -321,9 +335,10 @@ public class ConvertPSCDVATView extends FrameView {
     }
 
     /**
-     * @desc hiển thị thông tin cqt và loại dữ liệu convert
+     * Hiển thị thông tin cqt và loại dữ liệu convert
+     *
      * @param cqt_convert
-     * @return 
+     * @return
      */
     public String MessCQTConvert(ArrayList<String> cqt_convert) {
 
@@ -341,12 +356,13 @@ public class ConvertPSCDVATView extends FrameView {
     }
 
     /**
-     * @desc thực hiện convert NPT
+     * Thực hiện convert NPT
+     *
      * @throws IOException
      * @throws SQLException
      * @throws ParserConfigurationException
      * @throws ExceptionInInitializerError
-     * @throws JCoException 
+     * @throws JCoException
      */
     @Action
     public void ActionConvertNPT() throws IOException, SQLException, ParserConfigurationException, ExceptionInInitializerError, JCoException {
@@ -363,7 +379,9 @@ public class ConvertPSCDVATView extends FrameView {
                 cct_cv = cct_cv.substring(0, cct_cv.length() - 1);
             }
 
-            /*Thực hiện kiểm tra xem cqt đã thực hiện convert hay chưa*/
+            /*
+             * Thực hiện kiểm tra xem cqt đã thực hiện convert hay chưa
+             */
             if (!(lstCCT_CV.getModel().getSize() > 0)) {
                 lblDisplay.setText("Chọn chi cục để thực hiện chuyển đổi.");
             } else {
@@ -472,7 +490,14 @@ public class ConvertPSCDVATView extends FrameView {
         }
 
     }
-
+    /**
+     * Check dữ liệu PSCD, TK
+     * @throws IOException
+     * @throws ExceptionInInitializerError
+     * @throws JCoException
+     * @throws ParserConfigurationException
+     * @throws SQLException 
+     */
     @Action
     public void ActionCheckPSCD() throws IOException, ExceptionInInitializerError, JCoException, ParserConfigurationException, SQLException {
         //Gọi hàm thực hiện chuyển đổi
@@ -556,30 +581,13 @@ public class ConvertPSCDVATView extends FrameView {
 
     }
     /**
-     * @desc get lại log do sai id
+     * Chuyển đổi dữ liệu qlt, qct, vat
+     *
      * @throws IOException
      * @throws ExceptionInInitializerError
      * @throws JCoException
      * @throws ParserConfigurationException
-     * @throws SQLException 
-     */
-
-    @Action
-    public void tryGetLogPSCD() throws IOException, ExceptionInInitializerError, JCoException, ParserConfigurationException, SQLException {
-
-       
-            LoadData.getLogPSCDbyFileName();
-            System.out.println("done");
-     
-    }
-    
-    /**
-     * @desc Chuyển đổi dữ liệu qlt, qct, vat
-     * @throws IOException
-     * @throws ExceptionInInitializerError
-     * @throws JCoException
-     * @throws ParserConfigurationException
-     * @throws SQLException 
+     * @throws SQLException
      */
     @Action
     public void ActionConvertPSCD() throws IOException, ExceptionInInitializerError, JCoException, ParserConfigurationException, SQLException {
@@ -620,13 +628,13 @@ public class ConvertPSCDVATView extends FrameView {
             int choose = 0;
             //không có dữ liệu -> hiển thị thông báo
             if (type_cv[0].equals(Constants.LK) && type_cv[1].equals(Constants.LK) && type_cv[2].equals(Constants.LK)) {
-                JOptionPane.showMessageDialog(btnConvert,
-                        "Chọn loại dữ liệu để thực hiện chuyển đổi.",
-                        "Thông báo",
+                JOptionPane.showMessageDialog(btnConvert,"Chọn loại dữ liệu để thực hiện chuyển đổi.","Thông báo",
                         JOptionPane.INFORMATION_MESSAGE);
                 lblDisplay.setText("Chọn loại dữ liệu để thực hiện chuyển đổi.");
             } else {
-                /*Thực hiện kiểm tra xem cqt đã thực hiện convert hay chưa*/
+                /*
+                 * Thực hiện kiểm tra xem cqt đã thực hiện convert hay chưa
+                 */
                 if (!(lstCCT_CV.getModel().getSize() > 0)) {
                     lblDisplay.setText("Chọn chi cục để thực hiện chuyển đổi.");
                 } else {
@@ -635,9 +643,7 @@ public class ConvertPSCDVATView extends FrameView {
 
                 //Thực hiện kiểm tra xem cqt có dữ liệu để chuyển đổi hay không
                 if (cqt_convert.isEmpty() || !(lstCCT_CV.getModel().getSize() > 0)) {
-                    JOptionPane.showMessageDialog(btnConvert,
-                            "Không tồn tại dữ liệu để chuyển đổi.",
-                            "Thông báo",
+                    JOptionPane.showMessageDialog(btnConvert,"Không tồn tại dữ liệu để chuyển đổi.","Thông báo",
                             JOptionPane.INFORMATION_MESSAGE);
                     lblDisplay.setText("Chọn CQT hoặc loại dữ liệu khác để thực hiện chuyển đổi.");
                 } else {
@@ -738,23 +744,17 @@ public class ConvertPSCDVATView extends FrameView {
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch (JCoException jx) {
-            JOptionPane.showMessageDialog(btnConvert,
-                    jx.getMessage(),
-                    "Lỗi kết nối đến server",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(btnConvert,jx.getMessage(),"Lỗi kết nối đến server",JOptionPane.ERROR_MESSAGE);
         } catch (JCoRuntimeException jr) {
-            JOptionPane.showMessageDialog(btnConvert,
-                    jr.getMessage(),
-                    "Lỗi khi gọi hàm SAP",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(btnConvert,jr.getMessage(),"Lỗi khi gọi hàm SAP",JOptionPane.ERROR_MESSAGE);
         }
 
     }
 
     /**
-     * 
+     * Tìm tên của cqt
      * @param short_name
-     * @return tax_code
+     * @return tax_code tên cqt
      */
     public String getTaxCode(String short_name) {
         String tax_code = "";
@@ -768,6 +768,11 @@ public class ConvertPSCDVATView extends FrameView {
 
         return tax_code;
     }
+    /**
+     * Sinh tên file khi chuyển đổi
+     * @param ngay_chot
+     * @param cqt 
+     */
 
     @Action
     public void randomFileName(String ngay_chot, String cqt) {
@@ -814,8 +819,9 @@ public class ConvertPSCDVATView extends FrameView {
     }
 
     /**
-     * @desc display file choose
-     * @param c 
+     * display file choose
+     *
+     * @param c
      */
     public void getDirectory(char c) {
         fc.showOpenDialog(btnImport);
@@ -836,7 +842,8 @@ public class ConvertPSCDVATView extends FrameView {
     }
 
     /**
-     * @desc Cập nhật trạng thái cho các table TB_NO, TB_PS, TB_TK
+     * Cập nhật trạng thái cho các table TB_NO, TB_PS, TB_TK
+     * @throws SQLException 
      */
     @Action
     public void updateStatus() throws SQLException {
@@ -942,7 +949,8 @@ public class ConvertPSCDVATView extends FrameView {
     }
 
     /**
-     * @desc import data from excel to oracle
+     * import data from excel to oracle
+     *
      * @param table tb_no, tb_ps, tb_tk
      */
     @Action
@@ -971,7 +979,9 @@ public class ConvertPSCDVATView extends FrameView {
             // Forder file scand
             File dirForder = new File(txtSrcFolder.getText());
 
-            /* Thực hiện chuyển đổi khi chọn tất cả CQT */
+            /*
+             * Thực hiện chuyển đổi khi chọn tất cả CQT
+             */
             if (try_cqt.equals(Constants.ALL_CQT)) {
                 //Scand list folder 
                 for (File f : dirForder.listFiles()) {
@@ -1086,7 +1096,10 @@ public class ConvertPSCDVATView extends FrameView {
             status = "Có lỗi khi chuyển đổi dữ liệu ngoài, xin hãy kiểm tra lại trong log.";
         }
     }
-
+    /**
+     * Xóa file excel
+     * @throws SQLException 
+     */
     @Action
     public void delExlData() throws SQLException {
 
@@ -1098,7 +1111,8 @@ public class ConvertPSCDVATView extends FrameView {
     }
 
     /**
-     * @desc cập nhật list cqt convert và xóa
+     * Add List
+     * @see com.pit.list.SortedListModel
      */
     @Action
     public void getAdd() {
@@ -1110,7 +1124,8 @@ public class ConvertPSCDVATView extends FrameView {
     }
 
     /**
-     * @desc cập nhật list cqt convert và xóa
+     * Remove List
+     * @see com.pit.list.SortedListModel
      */
     @Action
     public void getRemove() {
@@ -1150,16 +1165,17 @@ public class ConvertPSCDVATView extends FrameView {
 
     /**
      * @desc display file convert success
-     * @param file 
+     *
+     * @param file
      */
     public static void getSuccesFile(String file) {
         lblDisplay.setText(file);
     }
 
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
