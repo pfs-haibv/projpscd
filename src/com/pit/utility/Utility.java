@@ -22,14 +22,15 @@ import java.util.Calendar;
 
 
 /**
- *
+ * Methods utility
  * @author HAIBV
  */
 public class Utility {
-
+   
     /**
-     * @param directory file on folder
-     * @param files
+     * Directory file on folder
+     * @param name
+     * @param files 
      */
     public static void dirFiles(String name, String files) {
         try {
@@ -42,10 +43,11 @@ public class Utility {
     }
 
     /**
-     * @param move file from folder to folder
+     * Move file from folder to folder
      * @param source
-     * @param targer
+     * @param targer 
      */
+    
     public static void moveFiles(String source, String targer) {
         // File (or directory) to be moved
         File file = new File(source);
@@ -63,7 +65,7 @@ public class Utility {
     }
 
     /**
-     * 
+     * Delete file on folder
      * @param file 
      */
     public static void delFiles(File file) {
@@ -76,6 +78,12 @@ public class Utility {
         }
 
     }
+    /**
+     * Copy files from folder to folder
+     * @param srcPath
+     * @param dstPath
+     * @throws IOException 
+     */
 
     public static void copyDirectory(File srcPath, File dstPath) throws IOException {
         // bỏ trường hợp srcPath = dstPath
@@ -112,7 +120,8 @@ public class Utility {
     }
 
     /**
-     * @desc khởi tạo tham số mặc định
+     * Tạo thư mục chứa các file excel      
+     * @param short_name_ 
      */
     public static void getConfig(String[] short_name_) {
         File crtForder = null;
@@ -134,6 +143,11 @@ public class Utility {
         crtForder.mkdir();
     }
 
+    /**
+     * Kiểm tra gía trị là number
+     * @param i
+     * @return boolean
+     */
     public static boolean isNumber(String i) {
         try {
             Integer.parseInt(i);
@@ -143,8 +157,10 @@ public class Utility {
         }
     }
 
-    /*
-     * @param get datetime
+    /**
+     * Kiểm tra giá trị date
+     * @param dateFormat
+     * @return date_format
      */
     public static String nowDate(String dateFormat) {
         Calendar cal = Calendar.getInstance();
@@ -153,8 +169,8 @@ public class Utility {
     }
 
     /**
-     * @desc Tạo file lấy thông số config oracle
-     *       write thông tin config       
+     * Tạo file lấy thông số connect database oracle
+     * write thông tin config       
      * @param file_ora
      * @return getConnORA
      */
@@ -202,13 +218,13 @@ public class Utility {
     }
 
     /**
-     * 
+     * Lấy ngày cuối cùng của tháng
      * @param datetime
-     * @return DD\MM\YYYY
+     * @return max_date
      */
     public static String getMaxDate(String datetime) {
 
-        String d = "";
+        String max_date = "";
 
         String month_year[] = datetime.split("/");
         //Year
@@ -224,16 +240,16 @@ public class Utility {
 
         int maxDay = calendar.getActualMaximum(calendar.DATE);
 
-        d = maxDay + "/" + datetime;
+        max_date = maxDay + "/" + datetime;
 
-        return d;
+        return max_date;
 
     }
 
     /**
-     * 
+     * Lây thông tin năm và quý VD: 2012QI
      * @param datetime
-     * @return DD\MM\YYYY
+     * @return year_quy
      */
     public static String getQuy(String datetime) {
 
@@ -263,8 +279,10 @@ public class Utility {
     }
 
     /**
-     * @desc Check tin: length, and format
-     * @param tin 
+     * Check tin: length, and format
+     * @param tin
+     * @return mess_err
+     * @throws Exception 
      */
     public static String checkTIN(String tin) throws Exception {
         String dess = "";
@@ -282,25 +300,43 @@ public class Utility {
     }
 
     /**
-     * @desc:
-     *          + Mẫu tờ khai theo tiểu mục: 
+     * 
+     *          Mẫu tờ khai theo tiểu mục: 
+     * <p>
      *               1001: 02T/KK-TNCN, 02Q/KK-TNCN, 07/KK-TNCN 
+     * <p>
      *               1003: 03T/KK-TNCN, 03Q/KK-TNCN, 07/KK-TNCN, 01/KK-BH, 01/KK-XS, 08/KK-TNCN, 08A/KK-TNCN, 10/KK-TNCN, 10A/KK-TNCN 
+     * <p>
      *               1004: 03T/KK-TNCN, 03Q/KK-TNCN 
+     * <p>   
      *               1007: 03T/KK-TNCN, 03Q/KK-TNCN 
+     * <p>               
      *               1008: 03T/KK-TNCN, 03Q/KK-TNCN 
+     * <p>
      *               1014: 08TN/KK-TNCN, 08ATN/KK-TNCN 
-     *           + Mã tờ khai theo kỳ kê khai: 
+     * <p>
+     *           Mã tờ khai theo kỳ kê khai: 
+     * <p>
      *               02T/KK-TNCN: kỳ kê khai định dạng tháng 
+     * <p>
      *               02Q/KK-TNCN: kỳ kê khai định dáng quý 
+     * <p>
      *               03T/KK-TNCN: kỳ kê khai định dạng tháng 
+     * <p>
      *               03Q/KK-TNCN: kỳ kê khai định dạng quý 
+     * <p>
      *               07/KK-TNCN: kỳ kê khai định dạng tháng 
+     * <p>
      *               01/KK-BH: kỳ kê khai định dạng tháng 
+     * <p>
      *               01/KK-XS: Kỳ kê khai định dạng tháng 
+     * <p>
      *               08/KK-TNCN: định dạng cả tháng, quý, năm 
+     * <p>
      *               08A/KK-TNCN: định dạng cả tháng, quý, năm 
+     * <p>
      *               10/KK-TNCN: định dạng năm 
+     * <p>
      *               10A/KK-TNCN: định dạng năm
      * @param tmuc
      * @param mau_tk
@@ -372,9 +408,9 @@ public class Utility {
     }
 
     /**
-     * @desc kiểm tra tiểu mục CDNT có thuộc tiểu mục TNCN hay không
+     * Kiểm tra tiểu mục CDNT có thuộc tiểu mục TNCN hay không
      * @param tmuc
-     * @return 
+     * @return mess_err
      */
     public static String checkDataCDNT(String tmuc) {
 
@@ -388,9 +424,9 @@ public class Utility {
     }
 
     /**
-     * @desc kiểm tra theo định dạng DD/MM/YYYY
+     * Kiểm tra theo định dạng DD/MM/YYYY
      * @param date
-     * @return
+     * @return mess_err
      * @throws Exception 
      */
     public static String checkDateDDMMYYYY(String date) throws Exception {
@@ -421,9 +457,9 @@ public class Utility {
     }
 
     /**
-     * @desc kiểm tra theo định dạng DD/MM/YYYY
+     * Kiểm tra theo định dạng DD/MM/YYYY
      * @param date
-     * @return
+     * @return mess_err
      * @throws Exception 
      */
     public static String checkDateMMYYYY(String date) throws Exception {
@@ -454,9 +490,9 @@ public class Utility {
     }
 
     /**
-     * @desc kiểm tra theo định dạng DD/MM/YYYY
+     * Kiểm tra theo định dạng DD/MM/YYYY
      * @param date
-     * @return
+     * @return mess_err
      * @throws Exception 
      */
     public static String checkKyLBMMYYYY(String date) throws Exception {
@@ -494,16 +530,15 @@ public class Utility {
     }   
 
     /**
-     * @desc kiểm tra tỷ lệ thu nhập chịu thuế
-     * @param date
-     * @return
+     * Kiểm tra tỷ lệ thu nhập chịu thuế
+     * @param tltnct
+     * @return mess_err
      * @throws Exception 
      */
     public static String checkTLTNCT(int tltnct) throws Exception {
         String desc = "";
         if( !(tltnct >= 0 && tltnct <= 100) )           
-        desc = "tû lÖ thu nhËp chÞu thuÕ trong kho¶ng (0, 100)";
-       
+        desc = "tû lÖ thu nhËp chÞu thuÕ trong kho¶ng (0, 100)";       
 
         return desc;
     }
