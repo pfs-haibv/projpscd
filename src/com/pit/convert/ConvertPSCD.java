@@ -1034,11 +1034,11 @@ public class ConvertPSCD {
     }
 
     /**
+     * 
      * Thực hiện ghi log sau khi chuyển đôi
-     *
-     * @param destination
      * @param file
-     * @throws AbapException
+     * @param tax
+     * @throws AbapException 
      */
     static void sqlDatabase(String file, String tax) throws AbapException {
         try {
