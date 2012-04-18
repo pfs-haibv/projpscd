@@ -13,7 +13,6 @@ public class ConnectDB {
 
     /**
      * Get connection oracle database
-     * @param sql
      * @return connection to database
      * @throws SQLException 
      */
@@ -62,7 +61,9 @@ public class ConnectDB {
 
     /**
      * Insert cqt convert to database
-     * @param sql
+     * @param short_name
+     * @param type_date
+     * @param imp_time
      * @throws SQLException 
      */
     public static void insCQTConvert(String short_name, String type_date, String imp_time) throws SQLException {
@@ -82,10 +83,11 @@ public class ConnectDB {
 //            conn.close();
         }
     }
-
+   
     /**
      * Delete data of file excel
-     * @param sql
+     * @param try_cqt
+     * @param file_imp
      * @throws SQLException 
      */
     public static void delExlData(String try_cqt, String file_imp) throws SQLException {
@@ -218,7 +220,7 @@ public class ConnectDB {
 
     /**
      * Lấy thông tin số lượng dữ liệu đã chuyển đổi
-     * @param sql
+     * @param short_name
      * @throws SQLException 
      * @return number convert
      */
@@ -250,8 +252,11 @@ public class ConnectDB {
 
     /**
      * Insert error code into database
-     * @param sql
-     * @throws SQLException
+     * @param short_name
+     * @param rid
+     * @param table_name
+     * @param err_string
+     * @throws SQLException 
      */
     public static void insUnSplitErrCode(String short_name, String rid, String table_name, String err_string) throws SQLException {
         Connection conn = null;
@@ -375,9 +380,9 @@ public class ConnectDB {
 
     /**
      * Gọi thủ tục kiểm tra dữ liệu
-     * @param fncName
-     * @param tax
-     * @param tb_name
+     * @param prcName
+     * @param short_name
+     * @param table_name
      * @throws SQLException 
      */
     public static void callOraclePrcInsSplitErr(String prcName, String short_name, String table_name) throws SQLException {
@@ -402,7 +407,7 @@ public class ConnectDB {
     /**
      * Lấy thông tin kỳ chốt (ky_no_den)
      * @param short_name
-     * @return
+     * @return ngay_chot
      * @throws SQLException 
      */
     public static String loadNgayChotDL(String short_name) throws SQLException {
