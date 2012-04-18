@@ -1,9 +1,10 @@
 package com.pit.datatype;
 
 /**
- *
+ * 
+ * Chứa các thuộc tính thông tin người phụ thuộc
  * @author Administrator
- * @desc Class chứa thông tin dữ liệu Người phụ thuộc
+ *  
  */
 public class DataNPT {
     
