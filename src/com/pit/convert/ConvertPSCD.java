@@ -1,6 +1,5 @@
 package com.pit.convert;
 
-import UnicodeConverter.Converter;
 import UnicodeConverter.Tcvn3Converter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -41,6 +40,11 @@ import com.pit.conn.ConnectDB;
 import java.sql.SQLException;
 import java.util.Date;
 
+/**
+ * Chứa càc methods thực hiện chuyển đội dữ liệu
+ *
+ * @author Administrator
+ */
 public class ConvertPSCD {
 
     static String DESTINATION_NAME1 = "ABAP_AS_WITHOUT_PSCD_POOL";
@@ -48,7 +52,9 @@ public class ConvertPSCD {
 
     static {
         Properties connectProperties = new Properties();
-        /* Connection type: Custom Application server */
+        /*
+         * Connection type: Custom Application server
+         */
 //        connectProperties.setProperty(DestinationDataProvider.JCO_ASHOST, "10.64.8.93");
 //        connectProperties.setProperty(DestinationDataProvider.JCO_SYSNR, "00");
 //        connectProperties.setProperty(DestinationDataProvider.JCO_CLIENT, "500");
@@ -59,7 +65,9 @@ public class ConvertPSCD {
 //        connectProperties.setProperty(DestinationDataProvider.JCO_POOL_CAPACITY, "70");
 //        connectProperties.setProperty(DestinationDataProvider.JCO_PEAK_LIMIT, "50");
 //        createDataFile(DESTINATION_NAME2, "jcoDestination", connectProperties);
-        /* Connection type: Group/Server Selection */
+        /*
+         * Connection type: Group/Server Selection
+         */
         connectProperties.setProperty(DestinationDataProvider.JCO_CLIENT, "500");
         connectProperties.setProperty(DestinationDataProvider.JCO_MSHOST, "10.64.85.12");
         connectProperties.setProperty(DestinationDataProvider.JCO_R3NAME, "PE1");
@@ -74,7 +82,7 @@ public class ConvertPSCD {
 
     }
     private static BlockingQueue<MultiStepJob> queue = new LinkedBlockingQueue<MultiStepJob>();
-    private static JCoFunctionTemplate convertDKTTemplate, convertNPT, chkPSCD;
+    private static JCoFunctionTemplate convertDKTTemplate, convertNPT;
     //Danh sách NNT          
     public static ArrayList<DataCVPSCD> arrData = new ArrayList<DataCVPSCD>();
     public static ArrayList<DataCVNPT> arrNPT = new ArrayList<DataCVNPT>();
@@ -179,10 +187,9 @@ public class ConvertPSCD {
         }
     }
 
-    /**------------------------------------------------------------------------*
-     *@param: Xử lý riêng từng trường hợp                                      *
-     *        Nợ, Phát sinh, Tờ khai                                           *            
-     *-------------------------------------------------------------------------*/
+    /**
+     * Thực hiện xử lý cho từng trường hợp chuyển đổi PSCD, check PSCD
+     */
     static class StatefulMultiStepNNTExample extends StatelessMultiStepExample {
 
         DataCVPSCD nnt = null;
@@ -214,13 +221,17 @@ public class ConvertPSCD {
             String sql_status = "";
             //Import date
             String imp_date = "";
-            /**------------------------------------------------------------------------*
-             *                          01. XỬ LÝ NỢ                                   *
-             **------------------------------------------------------------------------*/
+            /**
+             * ------------------------------------------------------------------------*
+             * 01. XỬ LÝ NỢ *
+             * *------------------------------------------------------------------------
+             */
             if (type_.equals(Constants.NO) && chk_pscd.isEmpty()) {
-                /**--------------------------------------------------------------------*
-                 *                      A. THỰC HIỆN CONVERT                           * 
-                 **--------------------------------------------------------------------*/
+                /**
+                 * --------------------------------------------------------------------*
+                 * A. THỰC HIỆN CONVERT *
+                 * *--------------------------------------------------------------------
+                 */
                 try {
 
                     JCoContext.begin(destination);
@@ -315,9 +326,11 @@ public class ConvertPSCD {
                 }
 
             } else if (type_.equals(Constants.NO) && !chk_pscd.isEmpty()) {
-                /**--------------------------------------------------------------------*
-                 *                      B. THỰC HIỆN KIỂM TRA                          * 
-                 **--------------------------------------------------------------------*/
+                /**
+                 * --------------------------------------------------------------------*
+                 * B. THỰC HIỆN KIỂM TRA *
+                 * *--------------------------------------------------------------------
+                 */
                 try {
 
                     JCoContext.begin(destination);
@@ -378,13 +391,17 @@ public class ConvertPSCD {
             }
 
 
-            /**------------------------------------------------------------------------*
-             *                          02. XỬ LÝ PHÁT SINH                            *
-             **------------------------------------------------------------------------*/
+            /**
+             * ------------------------------------------------------------------------*
+             * 02. XỬ LÝ PHÁT SINH *
+             * *------------------------------------------------------------------------
+             */
             if (type_.equals(Constants.PS) && chk_pscd.isEmpty()) {
-                /**--------------------------------------------------------------------*
-                 *                      A. THỰC HIỆN CONVERT                           * 
-                 **--------------------------------------------------------------------*/
+                /**
+                 * --------------------------------------------------------------------*
+                 * A. THỰC HIỆN CONVERT *
+                 * *--------------------------------------------------------------------
+                 */
                 try {
                     JCoContext.begin(destination);
                     //Structure I_DATA
@@ -478,9 +495,11 @@ public class ConvertPSCD {
                 }
 
             } else if (type_.equals(Constants.PS) && !chk_pscd.isEmpty()) {
-                /**--------------------------------------------------------------------*
-                 *                      B. THỰC HIỆN KIỂM TRA                          * 
-                 **--------------------------------------------------------------------*/
+                /**
+                 * --------------------------------------------------------------------*
+                 * B. THỰC HIỆN KIỂM TRA *
+                 * *--------------------------------------------------------------------
+                 */
                 try {
                     JCoContext.begin(destination);
                     //Structure I_SOURCE
@@ -535,13 +554,17 @@ public class ConvertPSCD {
 
 
 
-            /**------------------------------------------------------------------------*
-             *                          03. XỬ LÝ TỜ KHAI                              *
-             **------------------------------------------------------------------------*/
+            /**
+             * ------------------------------------------------------------------------*
+             * 03. XỬ LÝ TỜ KHAI *
+             * *------------------------------------------------------------------------
+             */
             if (type_.equals(Constants.TK) && chk_pscd.isEmpty()) {
-                /**--------------------------------------------------------------------*
-                 *                      A. THỰC HIỆN CONVERT                           * 
-                 **--------------------------------------------------------------------*/
+                /**
+                 * --------------------------------------------------------------------*
+                 * A. THỰC HIỆN CONVERT *
+                 * *--------------------------------------------------------------------
+                 */
                 try {
 
                     JCoContext.begin(destination);
@@ -595,11 +618,7 @@ public class ConvertPSCD {
                     JCoStructure JcoStrE_RETURN = fnConvert.getExportParameterList().getStructure("RETURN");
                     //Clear sql
                     sql_status = "";
-                    /*
-                     * @param Xử lý log tờ khai
-                     *        ghi log vào table tb_log_pscd
-                     *        chuyển trạng thái Status = 'S' or 'E'
-                     */
+                    //Xử lý log tờ khai ghi log vào table tb_log_pscd chuyển trạng thái Status = 'S' or 'E'                     
                     if (JcoStrE_RETURN.getValue("TYPE").equals("E")) {
                         String sql_info = "select * from tb_tk where id = '" + nnt.arrTK.get(0).getID().trim() + "'";
                         String add_info[];
@@ -618,7 +637,7 @@ public class ConvertPSCD {
                         }
 
                         String convFont = Tcvn3Converter.convertU(JcoStrE_RETURN.getValue("MESSAGE").toString()).replaceAll("'", "");
-                        
+
                         String SQL = "insert into tb_log_pscd (file_name, tin, msg_no, msg_des,ID,SHORT_NAME,TYPE_DATA,IMP_DATE)"
                                 + "values ('" + ConvertPSCDVATView.name_tk + "','" + tin + "',"
                                 + "'" + JcoStrE_RETURN.getValue("NUMBER") + "','" + convFont.replaceAll("Oõ", "Õ") + "','" + id + "','" + sort_name + "','TK','" + imp_date + "')";
@@ -662,9 +681,11 @@ public class ConvertPSCD {
                     executedCalls++;
                 }
             } else if (type_.equals(Constants.TK) && !chk_pscd.isEmpty()) {
-                /**--------------------------------------------------------------------*
-                 *                      B. THỰC HIỆN KIỂM TRA                          * 
-                 **--------------------------------------------------------------------*/
+                /**
+                 * --------------------------------------------------------------------*
+                 * B. THỰC HIỆN KIỂM TRA *
+                 * *--------------------------------------------------------------------
+                 */
                 try {
 
                     JCoContext.begin(destination);
@@ -718,10 +739,7 @@ public class ConvertPSCD {
 
                     if (!fnConvert.getExportParameterList().getString("E_ERROR_CODE").isEmpty()) {
                         try {
-                            // System.out.println("E_ERROR_CODE: " + fnChkPSCD.getExportParameterList().getString("E_ERROR_CODE"));
-                            ConnectDB.insUnSplitErrCode(short_name,
-                                    nnt.arrTK.get(0).getRID(),
-                                    "TB_TK",
+                            ConnectDB.insUnSplitErrCode(short_name, nnt.arrTK.get(0).getRID(), "TB_TK",
                                     fnConvert.getExportParameterList().getString("E_ERROR_CODE"));
                         } catch (SQLException ex) {
                             ex.printStackTrace();
@@ -761,6 +779,14 @@ public class ConvertPSCD {
         }
     }
 
+    /**
+     * Thực hiện chuyển đổi dữ liệu NPT
+     *
+     * @throws ParserConfigurationException
+     * @throws IOException
+     * @throws JCoException
+     * @throws SQLException
+     */
     static void convertNPT() throws ParserConfigurationException, IOException, JCoException, SQLException {
         try {
             JCoDestination destination = JCoDestinationManager.getDestination(DESTINATION_NAME1);
@@ -798,7 +824,9 @@ public class ConvertPSCD {
             //Execute
             fn_imp_appendix_10.execute(destination);
 
-            /** Set Country name for Header */
+            /**
+             * Set Country name for Header
+             */
             tblExGT_APPENDIX.firstRow();
             String sql = "";
             String mess = "";
@@ -812,11 +840,6 @@ public class ConvertPSCD {
                 //Update table TB_PT
                 ConnectDB.sqlDatabase(sql);
             }
-
-            /**
-             * @date 29.09.2011
-             * @des try set value NNT
-             */
         } catch (JCoException je) {
             throw new JCoException(1, "", je.getMessage());
         } catch (JCoRuntimeException jr) {
@@ -931,12 +954,13 @@ public class ConvertPSCD {
     }
 
     /**
-     * @des đối với thread PSCD(NO, PS) mặc định là 1 vì khi xử lý trong SAP log table nên không xử lý nhiều thread đc
-     * @des với Tờ khai (TK) xử lý nhiều thread     
+     * PSCD(NO, PS) mặc định là 1 thread vì khi xử lý trong SAP log table nên
+     * không xử lý nhiều thread đc Tờ khai (TK) xử lý nhiều thread
+     *
      * @param destination
      * @param callFunc
      * @param thread_vat
-     * @param short_name 
+     * @param short_name
      */
     static void runJobs(JCoDestination destination, String callFunc, int thread_vat, String short_name, String chk_pscd) {
         for (int i = 0; i < arrData.size(); i++) {
@@ -1001,22 +1025,22 @@ public class ConvertPSCD {
             arrNPT.add(npt);
         } catch (JCoRuntimeException jrex) {
             //System.out.println(jrex.getMessage());
-            logger.log(Level.WARNING, "JCoRuntimeException :", jrex);
+            logger.log(Level.WARNING, "JCoRuntimeException :", jrex.getMessage());
 
         } catch (Exception ex) {
             //System.out.println(ex.getMessage());
-            logger.log(Level.WARNING, "Exception:", ex);
+            logger.log(Level.WARNING, "Exception:", ex.getMessage());
         }
     }
 
     /**
-     * @desc Thực hiện ghi log
+     * Thực hiện ghi log sau khi chuyển đôi
+     *
      * @param destination
      * @param file
-     * @throws AbapException 
+     * @throws AbapException
      */
     static void sqlDatabase(String file, String tax) throws AbapException {
-
         try {
             JCoDestination destination = JCoDestinationManager.getDestination(DESTINATION_NAME2);
             convertDKTTemplate = destination.getRepository().getFunctionTemplate("ZFM_GET_LOG_PSCD");
@@ -1070,12 +1094,9 @@ public class ConvertPSCD {
 
             //SQL -> write log to table tb_log_pscd
             String SQL = "";
-            //Record number
-//            String record_num = "";
-
-            /**---------------------------------------------------------------------*
-             *                         WRITE LOG TỜ KHAI                            *
-             **---------------------------------------------------------------------*/
+            /*
+             * WRITE LOG TỜ KHAI
+             */
             if (log_type == 'T') {
 
                 t_form_10.firstRow();
@@ -1109,9 +1130,8 @@ public class ConvertPSCD {
                     }
                 }
 
-            } /**---------------------------------------------------------------------*
-             *                         WRITE LOG NỢ, PHÁT SINH                      *
-             **---------------------------------------------------------------------*/
+            } 
+            /* WRITE LOG NỢ, PHÁT SINH */             
             else {
                 t_pscd.firstRow();
                 int numRows = t_pscd.getNumRows();
@@ -1130,9 +1150,9 @@ public class ConvertPSCD {
                             String add_info[] = ConnectDB.getInfoLog(sql_info).split(",");
                             sort_name = add_info[0];
                             id = add_info[1];
-                        } else {                           
+                        } else {
                             sql_info = "select * from tb_ps where id = " + t_pscd.getString("RECORD_NUM").trim();
-                            System.out.println("sql_info: "+sql_info);
+                            System.out.println("sql_info: " + sql_info);
                             String add_info[] = ConnectDB.getInfoLog(sql_info).split(",");
                             sort_name = add_info[0];
                             id = add_info[1];
@@ -1169,9 +1189,16 @@ public class ConvertPSCD {
 
     }
 
-    //********************************************************************************
-    //         Thực hiện ConvertPSCD                                                 *
-    //********************************************************************************
+    /**
+     * Thực hiện chuyển đội và kiểm tra dữ liệu dữ liệu
+     * @param type_cv
+     * @param thread_vat
+     * @param short_name
+     * @param chk_pscd
+     * @throws ParserConfigurationException
+     * @throws IOException
+     * @throws JCoException 
+     */
     static void runConvert(String type_cv, int thread_vat, String short_name, String chk_pscd) throws ParserConfigurationException, IOException, JCoException {
         MySessionReferenceProvider mySessionRP = new MySessionReferenceProvider();
         Environment.registerSessionReferenceProvider(mySessionRP);
