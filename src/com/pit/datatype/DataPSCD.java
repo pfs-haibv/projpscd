@@ -3,7 +3,7 @@ package com.pit.datatype;
 import java.io.Serializable;
 
 /**
- *
+ * Chứa thuộc tính dữ liệu PSCD gồm NO, và PS
  * @author HAIBV
  */
 public class DataPSCD{
