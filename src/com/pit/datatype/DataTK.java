@@ -1,7 +1,7 @@
 package com.pit.datatype;
 
 /**
- *
+ * Chứa thuộc tính dữ liệu Tờ Khai
  * @author HAIBV
  */
 public class DataTK {
