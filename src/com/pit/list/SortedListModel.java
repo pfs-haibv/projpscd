@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.pit.list;
 
 import java.util.Arrays;
@@ -12,7 +8,7 @@ import java.util.TreeSet;
 import javax.swing.AbstractListModel;
 
 /**
- *
+ * Action (Add, Remove) JList on Interface
  * @author Administrator
  */
 public class SortedListModel extends AbstractListModel {
