@@ -1,7 +1,3 @@
-/*
- * ConvertPSCDVATApp.java
- */
-
 package com.pit.convert;
 
 import java.io.IOException;
@@ -15,6 +11,7 @@ import javax.swing.JOptionPane;
 
 /**
  * The main class of the application.
+ * @author Administrator
  */
 public class ConvertPSCDVATApp extends SingleFrameApplication {
     
