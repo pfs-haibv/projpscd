@@ -23,6 +23,7 @@ public class DataPSCD{
     private String RETURN_CODE; //Return code
     private String AMOUNT; //Amount
     private String ID;
+    private String RID; //Row ID
 
     public DataPSCD() {
     }   
@@ -150,7 +151,15 @@ public class DataPSCD{
 
     public void setID(String ID) {
         this.ID = ID;
-    }  
+    }
+
+    public String getRID() {
+        return RID;
+    }
+
+    public void setRID(String RID) {
+        this.RID = RID;
+    }
     
     
 }
