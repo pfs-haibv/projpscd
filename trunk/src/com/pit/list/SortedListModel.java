@@ -8,7 +8,7 @@ import java.util.TreeSet;
 import javax.swing.AbstractListModel;
 
 /**
- * Action (Add, Remove) JList on Interface
+ * Action (Add, Remove) JList on Interface  
  * @author Administrator
  */
 public class SortedListModel extends AbstractListModel {
