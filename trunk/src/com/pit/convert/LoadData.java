@@ -29,10 +29,16 @@ public class LoadData {
 
     /**
      * Thực hiện đọc từng loại dữ liệu (NO, PS, TK)
-     * @param source_file
+     * @param type_cv
+     * @param thread_vat
+     * @param f_name
+     * @param tax
+     * @param chk_pscd
      * @throws ParserConfigurationException
-     * @throws SAXException
      * @throws IOException
+     * @throws ExceptionInInitializerError
+     * @throws JCoException
+     * @throws SQLException 
      */
     static void readDataPSCD(String[] type_cv, int thread_vat, String f_name[], String tax, String chk_pscd) throws ParserConfigurationException, IOException, ExceptionInInitializerError, JCoException, SQLException {
         try {
