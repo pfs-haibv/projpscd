@@ -662,4 +662,8 @@ public class ImpExlToOra {
     public static void setFlag(String flag) {
         ImpExlToOra.flag = flag;
     }
+    
+    public static void main(String[] args) {
+        
+    }
 }
