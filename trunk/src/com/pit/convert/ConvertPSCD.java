@@ -1151,8 +1151,7 @@ public class ConvertPSCD {
                             sort_name = add_info[0];
                             id = add_info[1];
                         } else {
-                            sql_info = "select * from tb_ps where id = " + t_pscd.getString("RECORD_NUM").trim();
-                            System.out.println("sql_info: " + sql_info);
+                            sql_info = "select * from tb_ps where id = " + t_pscd.getString("RECORD_NUM").trim();                            
                             String add_info[] = ConnectDB.getInfoLog(sql_info).split(",");
                             sort_name = add_info[0];
                             id = add_info[1];
