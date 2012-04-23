@@ -1,6 +1,7 @@
 package com.pit.convert;
 
 import com.pit.conn.ConnectDB;
+import com.sap.conn.jco.AbapException;
 import com.sap.conn.jco.JCoException;
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -185,8 +186,8 @@ public class ConvertPSCDVATView extends FrameView {
         addDestinationElements(selected);
         clearSourceSelected();
         lstCCT_CV.setModel(destListModel);
-    }
-
+    }   
+    
     /**
      * Lấy dữ liệu NPT trước và sau khi chuyển đổi
      *
@@ -221,7 +222,8 @@ public class ConvertPSCDVATView extends FrameView {
 //          conn.close();
         }
 
-    }
+    }    
+    
 
     /**
      * Kiểm tra cqt đã chuyển đổi hay chưa Nếu chuyển đổi rồi đưa ra thông tin
@@ -490,6 +492,30 @@ public class ConvertPSCDVATView extends FrameView {
         }
 
     }
+    
+     /**
+     * Thực hiện lấy lại log trên PIT theo tên file
+     */    
+    @Action
+    public void getLogPIT() throws SQLException, AbapException{
+        String file_name[] = txtLog.getText().split(",");   
+        String sql = "";
+        //Write log file
+        for(int i =0; i < file_name.length ; i++){
+            sql = "delete tb_log_pscd a where a.file_name = '"+file_name[i]+"'";            
+            //Thực hiện xóa log theo file
+            ConnectDB.sqlDatabase(sql);
+            //Ghi lại log
+            ConvertPSCD.sqlDatabase(file_name[i], "");
+        }
+        //Hiển thị thông báo
+            JOptionPane.showMessageDialog(btnGetLog,
+                    "Đã cập nhật lại log.",
+                    "Thông báo",
+                    JOptionPane.INFORMATION_MESSAGE);
+        
+    }
+    
     /**
      * Check dữ liệu PSCD, TK
      * @throws IOException
@@ -1241,6 +1267,11 @@ public class ConvertPSCDVATView extends FrameView {
         chkTB_TK = new javax.swing.JCheckBox();
         btnStatus = new javax.swing.JButton();
         chkTB_PT = new javax.swing.JCheckBox();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        btnGetLog = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtLog = new javax.swing.JTextArea();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
@@ -1763,7 +1794,7 @@ public class ConvertPSCDVATView extends FrameView {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addComponent(btnStatus)
                         .addGap(88, 88, 88)))
-                .addGap(85, 85, 85))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1787,6 +1818,58 @@ public class ConvertPSCDVATView extends FrameView {
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanel5.border.title"))); // NOI18N
+        jPanel5.setName("jPanel5"); // NOI18N
+
+        jLabel4.setText(resourceMap.getString("jLabel4.text")); // NOI18N
+        jLabel4.setName("jLabel4"); // NOI18N
+
+        btnGetLog.setAction(actionMap.get("getLogPIT")); // NOI18N
+        btnGetLog.setText(resourceMap.getString("btnGetLog.text")); // NOI18N
+        btnGetLog.setName("btnGetLog"); // NOI18N
+
+        jScrollPane3.setName("jScrollPane3"); // NOI18N
+
+        txtLog.setColumns(20);
+        txtLog.setRows(5);
+        txtLog.setText(resourceMap.getString("txtLog.text")); // NOI18N
+        txtLog.setName("txtLog"); // NOI18N
+        txtLog.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtLogMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(txtLog);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(142, 142, 142)
+                        .addComponent(btnGetLog)))
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnGetLog)))
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -1794,13 +1877,17 @@ public class ConvertPSCDVATView extends FrameView {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(321, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(153, Short.MAX_VALUE))
         );
 
@@ -1907,6 +1994,11 @@ public class ConvertPSCDVATView extends FrameView {
         destListModel.clear();
         lstCCT_CV.setModel(destListModel);
     }//GEN-LAST:event_cboCQTPropertyChange
+
+    private void txtLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtLogMouseClicked
+        txtLog.setText("");
+    }//GEN-LAST:event_txtLogMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBckFld;
@@ -1916,6 +2008,7 @@ public class ConvertPSCDVATView extends FrameView {
     private javax.swing.JButton btnConvert;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnError;
+    private javax.swing.JButton btnGetLog;
     private javax.swing.JPanel btnImpExl;
     private javax.swing.JButton btnImport;
     private javax.swing.JButton btnKTao;
@@ -1941,6 +2034,7 @@ public class ConvertPSCDVATView extends FrameView {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1950,8 +2044,10 @@ public class ConvertPSCDVATView extends FrameView {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private static java.awt.Label lblDisplay;
     private static java.awt.Label lblStatus;
     private javax.swing.JList lstCCT;
@@ -1973,6 +2069,7 @@ public class ConvertPSCDVATView extends FrameView {
     private javax.swing.JTextField txtBckFolder;
     private javax.swing.JTextField txtErrFolder;
     private javax.swing.JTextField txtFileImp;
+    private javax.swing.JTextArea txtLog;
     private javax.swing.JTextField txtSrcFolder;
     private javax.swing.JTextField txtThread;
     // End of variables declaration//GEN-END:variables
