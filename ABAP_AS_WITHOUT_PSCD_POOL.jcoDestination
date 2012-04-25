@@ -1,0 +1,9 @@
+#for tests only !
+#Wed Apr 25 14:06:10 ICT 2012
+jco.client.lang=en
+jco.client.client=500
+jco.client.passwd=1234567
+jco.client.user=dc_dev02
+jco.client.mshost=10.64.85.12
+jco.client.group=PE1-GROUP
+jco.client.r3name=PE1

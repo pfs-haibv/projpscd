@@ -97,7 +97,7 @@ public class ConvertPSCD {
                 FileOutputStream fos = new FileOutputStream(cfg, false);
                 properties.store(fos, "for tests only !");
                 fos.close();
-                DESTINATION_NAME1.startsWith("100");
+                DESTINATION_NAME1.startsWith("100");                
             } catch (Exception e) {
                 logger.log(Level.WARNING, "Unable to create the destination file " + cfg.getName(), e);
             }
