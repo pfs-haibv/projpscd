@@ -83,7 +83,7 @@ public class ConnectDB {
 //            conn.close();
         }
     }
-   
+
     /**
      * Delete data of file excel
      * @param try_cqt
@@ -123,7 +123,7 @@ public class ConnectDB {
 //            conn.close();
         }
     }
-    
+
     /**
      * Delete data file excel 
      * @param file_imp
@@ -224,7 +224,7 @@ public class ConnectDB {
      * @throws SQLException 
      * @return number convert
      */
-    public static int[] getNumCV (String short_name) throws SQLException {
+    public static int[] getNumCV(String short_name) throws SQLException {
         int cqt_cv[] = new int[3];
         Connection conn = null;
         Statement stmt = null;
@@ -328,6 +328,31 @@ public class ConnectDB {
     }
 
     /**
+     * Cập nhật trường update_no của dữ liệu cũ (cùng cơ quan thuế)
+     * @param short_name
+     * @param table_name
+     * @throws SQLException 
+     */
+    public static void updateDataErrCode(String short_name, String table_name) throws SQLException {
+        Connection conn = null;
+        Statement stmt = null;
+        String sql = "update tb_data_error"
+                + " set update_no = update_no + 1"
+                + " where short_name = '" + short_name + "'"
+                + " and table_name = '" + table_name + "'";
+
+        try {
+            conn = ConvertPSCDVATApp.connORA;
+            stmt = conn.createStatement();
+            stmt.executeUpdate(sql);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            stmt.close();
+        }
+    }
+
+    /**
      * Gọi tới thủ tục kiểm tra dữ liệu Oracle
      * @param prcName
      * @param short_name
@@ -404,6 +429,7 @@ public class ConnectDB {
             stmt.close();
         }
     }
+
     /**
      * Lấy thông tin kỳ chốt (ky_no_den)
      * @param short_name

@@ -1392,6 +1392,7 @@ public class ConvertPSCDVATView extends FrameView {
 
         jScrollPane2.setName("jScrollPane2"); // NOI18N
 
+        lstCCT_CV.setEnabled(false);
         lstCCT_CV.setName("lstCCT_CV"); // NOI18N
         jScrollPane2.setViewportView(lstCCT_CV);
 

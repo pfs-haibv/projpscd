@@ -55,8 +55,9 @@ public class LoadData {
                     try {
                         // Xóa dữ liệu cũ ở bảng tb_unsplit_data_error
                         ConnectDB.delUnSplitErrCode(tax, "TB_NO");
-                        // Xóa dữ liệu cũ ở bảng tb_data_error
-                        ConnectDB.delDataErrCode(tax, "TB_NO");
+                        // Cập nhật trường update_no của các bản ghi cũ
+                        ConnectDB.updateDataErrCode(tax, "TB_NO");
+                        // Check PSCD
                         // Check PSCD bằng thủ tục Oracle
                         ConnectDB.callOraclePrcChk("prc_ktra_du_lieu_no", tax);
                         // Check PSCD bằng hàm SAP
@@ -85,8 +86,8 @@ public class LoadData {
                     try {
                         // Xóa dữ liệu cũ ở bảng tb_unsplit_data_error
                         ConnectDB.delUnSplitErrCode(tax, "TB_PS");                       
-                        // Xóa dữ liệu cũ ở bảng tb_data_error
-                        ConnectDB.delDataErrCode(tax, "TB_PS");
+                        // Cập nhật trường update_no của các bản ghi cũ
+                        ConnectDB.updateDataErrCode(tax, "TB_PS");                        
                         // Check PSCD
                         // Check PSCD bằng thủ tục Oracle
                         ConnectDB.callOraclePrcChk("prc_ktra_du_lieu_ps", tax);
@@ -117,8 +118,8 @@ public class LoadData {
                     try {
                         // Xóa dữ liệu cũ ở bảng tb_unsplit_data_error
                         ConnectDB.delUnSplitErrCode(tax, "TB_TK");
-                        // Xóa dữ liệu cũ ở bảng tb_data_error
-                        ConnectDB.delDataErrCode(tax, "TB_TK");
+                        // Cập nhật trường update_no của các bản ghi cũ
+                        ConnectDB.updateDataErrCode(tax, "TB_TK");
                         // Check TK bằng thủ tục Oracle
                         ConnectDB.callOraclePrcChk("prc_ktra_du_lieu_tk", tax);
                         // Check TK bằng hàm SAP

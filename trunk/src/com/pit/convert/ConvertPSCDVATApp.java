@@ -52,7 +52,7 @@ public class ConvertPSCDVATApp extends SingleFrameApplication {
             JOptionPane.showMessageDialog(null,ex.getMessage(),
                                     "Lỗi kết nối CSDL",
                                     JOptionPane.ERROR_MESSAGE);            
-        }
+    }
         launch(ConvertPSCDVATApp.class, args);
     }
     
