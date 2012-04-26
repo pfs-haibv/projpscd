@@ -39,6 +39,7 @@ import com.pit.system.Constants;
 import com.pit.conn.ConnectDB;
 import java.sql.SQLException;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  * Chứa càc methods thực hiện chuyển đội dữ liệu
@@ -789,7 +790,7 @@ public class ConvertPSCD {
      */
     static void convertNPT() throws ParserConfigurationException, IOException, JCoException, SQLException {
         try {
-            JCoDestination destination = JCoDestinationManager.getDestination(DESTINATION_NAME1);
+            JCoDestination destination = JCoDestinationManager.getDestination(DESTINATION_NAME1);          
             convertNPT = destination.getRepository().getFunctionTemplate("ZFM_IMP_APPENDIX_10");
             JCoFunction fn_imp_appendix_10 = convertNPT.getFunction();
             //import parameter
@@ -797,9 +798,7 @@ public class ConvertPSCD {
             //export parameter
             JCoTable tblExGT_APPENDIX = fn_imp_appendix_10.getTableParameterList().getTable("GT_APPENDIX");
 
-
-
-            int NumberOfNPT = arrNPT.size();
+            int NumberOfNPT = arrNPT.size(); 
             for (int i = 0; i < NumberOfNPT; i++) {
 
                 for (int r = 0; r < arrNPT.get(i).arrdtNPT.size(); r++) {
@@ -841,7 +840,7 @@ public class ConvertPSCD {
 
                 //Update table TB_PT
                 ConnectDB.sqlDatabase(sql);
-            }
+            }            
         } catch (JCoException je) {
             throw new JCoException(1, "", je.getMessage());
         } catch (JCoRuntimeException jr) {
