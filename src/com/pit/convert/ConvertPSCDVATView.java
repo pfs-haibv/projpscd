@@ -35,6 +35,8 @@ import com.pit.exltoora.ImpExlToOra;
 import java.util.ArrayList;
 import com.pit.list.SortedListModel;
 import com.sap.conn.jco.JCoRuntimeException;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 /**
  * The application's main frame.
@@ -58,6 +60,24 @@ public class ConvertPSCDVATView extends FrameView {
         try {
             //Initial commobox CQT           
             loadCQT();
+
+            // Đặt listenner cho combobox CQT            
+            cboCQT.addItemListener(new ItemListener() {
+
+                /**
+                 * Xử lý sự kiện khi item được chọn thay đổi
+                 */
+                @Override                
+                public void itemStateChanged(ItemEvent e) {                    
+                    getListCQT(cboCQT.getSelectedItem().toString());
+                    // Xóa toàn bộ chi cục thuế convert
+                    destListModel.clear();
+                    lstCCT_CV.setModel(destListModel);
+                    //throw new UnsupportedOperationException("Not supported yet.");
+                }
+            });
+
+
             //Initial list chi cục thuế
             getListCQT(cboCQT.getSelectedItem().toString());
         } catch (SQLException ex) {
@@ -186,8 +206,8 @@ public class ConvertPSCDVATView extends FrameView {
         addDestinationElements(selected);
         clearSourceSelected();
         lstCCT_CV.setModel(destListModel);
-    }   
-    
+    }
+
     /**
      * Lấy dữ liệu NPT trước và sau khi chuyển đổi
      *
@@ -222,8 +242,7 @@ public class ConvertPSCDVATView extends FrameView {
 //          conn.close();
         }
 
-    }    
-    
+    }
 
     /**
      * Kiểm tra cqt đã chuyển đổi hay chưa Nếu chuyển đổi rồi đưa ra thông tin
@@ -492,30 +511,30 @@ public class ConvertPSCDVATView extends FrameView {
         }
 
     }
-    
-     /**
+
+    /**
      * Thực hiện lấy lại log trên PIT theo tên file
-     */    
+     */
     @Action
-    public void getLogPIT() throws SQLException, AbapException{
-        String file_name[] = txtLog.getText().split(",");   
+    public void getLogPIT() throws SQLException, AbapException {
+        String file_name[] = txtLog.getText().split(",");
         String sql = "";
         //Write log file
-        for(int i =0; i < file_name.length ; i++){
-            sql = "delete tb_log_pscd a where a.file_name = '"+file_name[i]+"'";            
+        for (int i = 0; i < file_name.length; i++) {
+            sql = "delete tb_log_pscd a where a.file_name = '" + file_name[i] + "'";
             //Thực hiện xóa log theo file
             ConnectDB.sqlDatabase(sql);
             //Ghi lại log
             ConvertPSCD.sqlDatabase(file_name[i], "");
         }
         //Hiển thị thông báo
-            JOptionPane.showMessageDialog(btnGetLog,
-                    "Đã cập nhật lại log.",
-                    "Thông báo",
-                    JOptionPane.INFORMATION_MESSAGE);
-        
+        JOptionPane.showMessageDialog(btnGetLog,
+                "Đã cập nhật lại log.",
+                "Thông báo",
+                JOptionPane.INFORMATION_MESSAGE);
+
     }
-    
+
     /**
      * Check dữ liệu PSCD, TK
      * @throws IOException
@@ -606,6 +625,7 @@ public class ConvertPSCDVATView extends FrameView {
 
 
     }
+
     /**
      * Chuyển đổi dữ liệu qlt, qct, vat
      *
@@ -654,7 +674,7 @@ public class ConvertPSCDVATView extends FrameView {
             int choose = 0;
             //không có dữ liệu -> hiển thị thông báo
             if (type_cv[0].equals(Constants.LK) && type_cv[1].equals(Constants.LK) && type_cv[2].equals(Constants.LK)) {
-                JOptionPane.showMessageDialog(btnConvert,"Chọn loại dữ liệu để thực hiện chuyển đổi.","Thông báo",
+                JOptionPane.showMessageDialog(btnConvert, "Chọn loại dữ liệu để thực hiện chuyển đổi.", "Thông báo",
                         JOptionPane.INFORMATION_MESSAGE);
                 lblDisplay.setText("Chọn loại dữ liệu để thực hiện chuyển đổi.");
             } else {
@@ -669,7 +689,7 @@ public class ConvertPSCDVATView extends FrameView {
 
                 //Thực hiện kiểm tra xem cqt có dữ liệu để chuyển đổi hay không
                 if (cqt_convert.isEmpty() || !(lstCCT_CV.getModel().getSize() > 0)) {
-                    JOptionPane.showMessageDialog(btnConvert,"Không tồn tại dữ liệu để chuyển đổi.","Thông báo",
+                    JOptionPane.showMessageDialog(btnConvert, "Không tồn tại dữ liệu để chuyển đổi.", "Thông báo",
                             JOptionPane.INFORMATION_MESSAGE);
                     lblDisplay.setText("Chọn CQT hoặc loại dữ liệu khác để thực hiện chuyển đổi.");
                 } else {
@@ -770,9 +790,9 @@ public class ConvertPSCDVATView extends FrameView {
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch (JCoException jx) {
-            JOptionPane.showMessageDialog(btnConvert,jx.getMessage(),"Lỗi kết nối đến server",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(btnConvert, jx.getMessage(), "Lỗi kết nối đến server", JOptionPane.ERROR_MESSAGE);
         } catch (JCoRuntimeException jr) {
-            JOptionPane.showMessageDialog(btnConvert,jr.getMessage(),"Lỗi khi gọi hàm SAP",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(btnConvert, jr.getMessage(), "Lỗi khi gọi hàm SAP", JOptionPane.ERROR_MESSAGE);
         }
 
     }
@@ -794,12 +814,12 @@ public class ConvertPSCDVATView extends FrameView {
 
         return tax_code;
     }
+
     /**
      * Sinh tên file khi chuyển đổi
      * @param ngay_chot
      * @param cqt 
      */
-
     @Action
     public void randomFileName(String ngay_chot, String cqt) {
         Random generator = new Random();
@@ -1122,6 +1142,7 @@ public class ConvertPSCDVATView extends FrameView {
             status = "Có lỗi khi chuyển đổi dữ liệu ngoài, xin hãy kiểm tra lại trong log.";
         }
     }
+
     /**
      * Xóa file excel
      * @throws SQLException 
@@ -1307,6 +1328,9 @@ public class ConvertPSCDVATView extends FrameView {
         cboCQT.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 cboCQTKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cboCQTKeyReleased(evt);
             }
         });
 
@@ -1983,10 +2007,11 @@ public class ConvertPSCDVATView extends FrameView {
     }//GEN-LAST:event_chkConfigMouseClicked
 
     private void cboCQTKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cboCQTKeyPressed
-        getListCQT(cboCQT.getSelectedItem().toString());
-        //Xóa toàn bộ chi cục thuế convert
-        destListModel.clear();
-        lstCCT_CV.setModel(destListModel);
+//        JOptionPane.showMessageDialog(btnConvert, cboCQT.getSelectedItem().toString());
+//        getListCQT(cboCQT.getSelectedItem().toString());
+//        //Xóa toàn bộ chi cục thuế convert
+//        destListModel.clear();
+//        lstCCT_CV.setModel(destListModel);
     }//GEN-LAST:event_cboCQTKeyPressed
 
     private void cboCQTPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cboCQTPropertyChange
@@ -2000,6 +2025,13 @@ public class ConvertPSCDVATView extends FrameView {
         txtLog.setText("");
     }//GEN-LAST:event_txtLogMouseClicked
 
+    private void cboCQTKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cboCQTKeyReleased
+        // TODO add your handling code here:        
+        getListCQT(cboCQT.getSelectedItem().toString());
+        //Xóa toàn bộ chi cục thuế convert
+        destListModel.clear();
+        lstCCT_CV.setModel(destListModel);
+    }//GEN-LAST:event_cboCQTKeyReleased
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBckFld;

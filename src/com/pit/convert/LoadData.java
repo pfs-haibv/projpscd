@@ -14,6 +14,7 @@ import java.sql.Statement;
 import com.pit.system.Constants;
 import com.pit.datatype.*;
 import com.sap.conn.jco.JCoRuntimeException;
+import javax.swing.JOptionPane;
 
 public class LoadData {
     //Mảng chứa toàn bộ dữ liệu PSCD, TK
@@ -183,7 +184,10 @@ public class LoadData {
 
     static void getDataORA(String tax) throws SQLException, UnsupportedEncodingException {
         // Clear 
-        arrNPT.clear();
+        LoadData.arrNPT.clear();
+        // Clear dữ liệu NPT chuyển đổi của phiên làm việc trước đấy
+        ConvertPSCD.arrNPT.clear();
+        
         Connection conn = null;
         Statement stmt = null;
         ResultSet rset = null;
@@ -195,7 +199,7 @@ public class LoadData {
             sql = "select * from tb_pt where short_name in (" + tax + ")";
 
             rset = stmt.executeQuery(sql);
-            while (rset.next()) {
+            while (rset.next()) {                
                 DataNPT npt = new DataNPT();
                 data_npt = null;
                 arrNPT.clear();
