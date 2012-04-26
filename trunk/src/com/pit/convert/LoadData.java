@@ -215,6 +215,8 @@ public class LoadData {
                 npt.setNUM_OF_RELIEF(rset.getString("SOTHANG_GTRU"));
                 npt.setINCOME_RELIEF(rset.getString("SOTIEN_GTRU"));
                 npt.setRELATIONSHIP_WH(rset.getString("QHE_VCHONG"));
+                npt.setBUKRS(rset.getString("BUKRS"));
+                npt.setMA_QLT(rset.getString("TAX_CODE"));
                 arrNPT.add(npt);
 
                 data_npt = new DataCVNPT(arrNPT);
