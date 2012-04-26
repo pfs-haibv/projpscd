@@ -817,6 +817,8 @@ public class ConvertPSCD {
                     tblInGT_APPENDIX.setValue("NUM_OF_RELIEF", arrNPT.get(i).arrdtNPT.get(r).getNUM_OF_RELIEF());
                     tblInGT_APPENDIX.setValue("INCOME_RELIEF", arrNPT.get(i).arrdtNPT.get(r).getINCOME_RELIEF());
                     tblInGT_APPENDIX.setValue("RELATIONSHIP_WH", arrNPT.get(i).arrdtNPT.get(r).getRELATIONSHIP_WH());
+                    tblInGT_APPENDIX.setValue("BUKRS", arrNPT.get(i).arrdtNPT.get(r).getBUKRS());
+                    tblInGT_APPENDIX.setValue("MA_QLT", arrNPT.get(i).arrdtNPT.get(r).getMA_QLT());
 
                 }
 

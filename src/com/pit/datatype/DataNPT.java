@@ -26,6 +26,8 @@ public class DataNPT {
     private String 	MESSAGE;        //	Mô tả lỗi
     private String 	ICON_STATUS;    //	Trạng thái
     private String 	WAERS;          //	Tiền tệ
+    private String      BUKRS;          //      Mã CQT PIT
+    private String      MA_QLT;         //      Mã CQT QLT            
 
     public String getID() {
         return ID;
@@ -170,5 +172,23 @@ public class DataNPT {
     public void setWAERS(String WAERS) {
         this.WAERS = WAERS;
     }
+
+    public String getBUKRS() {
+        return BUKRS;
+    }
+
+    public void setBUKRS(String BUKRS) {
+        this.BUKRS = BUKRS;
+    }
+
+    public String getMA_QLT() {
+        return MA_QLT;
+    }
+
+    public void setMA_QLT(String MA_QLT) {
+        this.MA_QLT = MA_QLT;
+    }
+    
+    
     
 }
