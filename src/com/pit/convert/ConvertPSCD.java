@@ -98,7 +98,7 @@ public class ConvertPSCD {
                 FileOutputStream fos = new FileOutputStream(cfg, false);
                 properties.store(fos, "for tests only !");
                 fos.close();
-                DESTINATION_NAME1.startsWith("100");                
+                DESTINATION_NAME1.startsWith("100");
             } catch (Exception e) {
                 logger.log(Level.WARNING, "Unable to create the destination file " + cfg.getName(), e);
             }
@@ -790,7 +790,7 @@ public class ConvertPSCD {
      */
     static void convertNPT() throws ParserConfigurationException, IOException, JCoException, SQLException {
         try {
-            JCoDestination destination = JCoDestinationManager.getDestination(DESTINATION_NAME1);          
+            JCoDestination destination = JCoDestinationManager.getDestination(DESTINATION_NAME1);
             convertNPT = destination.getRepository().getFunctionTemplate("ZFM_IMP_APPENDIX_10");
             JCoFunction fn_imp_appendix_10 = convertNPT.getFunction();
             //import parameter
@@ -798,7 +798,7 @@ public class ConvertPSCD {
             //export parameter
             JCoTable tblExGT_APPENDIX = fn_imp_appendix_10.getTableParameterList().getTable("GT_APPENDIX");
 
-            int NumberOfNPT = arrNPT.size(); 
+            int NumberOfNPT = arrNPT.size();
             for (int i = 0; i < NumberOfNPT; i++) {
 
                 for (int r = 0; r < arrNPT.get(i).arrdtNPT.size(); r++) {
@@ -834,13 +834,15 @@ public class ConvertPSCD {
             for (int i = 0; i < tblExGT_APPENDIX.getNumRows(); i++) {
                 tblExGT_APPENDIX.setRow(i);
 
-                //update lại thông tin Status và Message                
+                //update lại thông tin Status và Message
                 mess = Tcvn3Converter.convertU(tblExGT_APPENDIX.getString("MESSAGE").replaceAll("'", ""));
-                sql = "update tb_pt set status = '" + tblExGT_APPENDIX.getString("STATUS") + "',  message = '" + mess + "' where id = " + tblExGT_APPENDIX.getString("ID");
+                sql = "update tb_pt set status = '" + tblExGT_APPENDIX.getString("STATUS")
+                        + "',  message = '" + mess
+                        + "' where id = " + tblExGT_APPENDIX.getString("ID");                
 
                 //Update table TB_PT
                 ConnectDB.sqlDatabase(sql);
-            }            
+            }
         } catch (JCoException je) {
             throw new JCoException(1, "", je.getMessage());
         } catch (JCoRuntimeException jr) {
@@ -1131,9 +1133,7 @@ public class ConvertPSCD {
                     }
                 }
 
-            } 
-            /* WRITE LOG NỢ, PHÁT SINH */             
-            else {
+            } /* WRITE LOG NỢ, PHÁT SINH */ else {
                 t_pscd.firstRow();
                 int numRows = t_pscd.getNumRows();
                 //Add info short_name, id                
@@ -1152,7 +1152,7 @@ public class ConvertPSCD {
                             sort_name = add_info[0];
                             id = add_info[1];
                         } else {
-                            sql_info = "select * from tb_ps where id = " + t_pscd.getString("RECORD_NUM").trim();                            
+                            sql_info = "select * from tb_ps where id = " + t_pscd.getString("RECORD_NUM").trim();
                             String add_info[] = ConnectDB.getInfoLog(sql_info).split(",");
                             sort_name = add_info[0];
                             id = add_info[1];
