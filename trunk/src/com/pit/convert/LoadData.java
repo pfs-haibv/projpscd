@@ -196,7 +196,7 @@ public class LoadData {
             conn = ConvertPSCDVATApp.connORA;
             stmt = conn.createStatement();
 
-            sql = "select * from tb_pt where short_name in (" + tax + ")";
+            sql = "select * from tb_pt where short_name in (" + tax + ") and status is null";
 
             rset = stmt.executeQuery(sql);
             while (rset.next()) {                

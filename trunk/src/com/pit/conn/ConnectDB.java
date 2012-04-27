@@ -336,10 +336,14 @@ public class ConnectDB {
     public static void updateDataErrCode(String short_name, String table_name) throws SQLException {
         Connection conn = null;
         Statement stmt = null;
-        String sql = "update tb_data_error"
-                + " set update_no = update_no + 1"
-                + " where short_name = '" + short_name + "'"
-                + " and table_name = '" + table_name + "'";
+        String sql = "UPDATE tb_data_error a "
+                + "SET a.update_no = (SELECT MAX (b.update_no) + 1 "
+                + "                     FROM tb_data_error b "
+                + "                    WHERE b.short_name = '" + short_name + "' "
+                + "                      AND b.table_name = '" + table_name + "') "
+                + "WHERE a.short_name = '" + short_name +"' "
+                + "AND a.table_name = '" + table_name + "' "
+                + "AND a.update_no = 0";
 
         try {
             conn = ConvertPSCDVATApp.connORA;
