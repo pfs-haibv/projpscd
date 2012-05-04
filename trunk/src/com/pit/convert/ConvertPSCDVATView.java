@@ -32,6 +32,7 @@ import java.util.Random;
 import com.pit.system.Constants;
 import com.pit.utility.Utility;
 import com.pit.exltoora.ImpExlToOra;
+import com.pit.help.sources.HelpAndSupport;
 import java.util.ArrayList;
 import com.pit.list.SortedListModel;
 import com.sap.conn.jco.JCoRuntimeException;
@@ -49,6 +50,7 @@ public class ConvertPSCDVATView extends FrameView {
     private String status = "";//Status lỗi dữ liệu trong file
     private ArrayList<String> cqt_convert = new ArrayList<String>();
     private ArrayList<String> cqt_convert_npt = new ArrayList<String>();
+    private JFrame helpAndSupportFrame;
 
     public ConvertPSCDVATView(SingleFrameApplication app) {
         super(app);
@@ -67,8 +69,8 @@ public class ConvertPSCDVATView extends FrameView {
                 /**
                  * Xử lý sự kiện khi item được chọn thay đổi
                  */
-                @Override                
-                public void itemStateChanged(ItemEvent e) {                    
+                @Override
+                public void itemStateChanged(ItemEvent e) {
                     getListCQT(cboCQT.getSelectedItem().toString());
                     // Xóa toàn bộ chi cục thuế convert
                     destListModel.clear();
@@ -1298,6 +1300,7 @@ public class ConvertPSCDVATView extends FrameView {
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
         javax.swing.JMenu helpMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
+        helpAndSupportMenuItem = new javax.swing.JMenuItem();
         statusPanel = new javax.swing.JPanel();
         javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
         statusMessageLabel = new javax.swing.JLabel();
@@ -1949,6 +1952,11 @@ public class ConvertPSCDVATView extends FrameView {
         aboutMenuItem.setName("aboutMenuItem"); // NOI18N
         helpMenu.add(aboutMenuItem);
 
+        helpAndSupportMenuItem.setAction(actionMap.get("showHelpAndSupportWindow")); // NOI18N
+        helpAndSupportMenuItem.setText(resourceMap.getString("helpAndSupportMenuItem.text")); // NOI18N
+        helpAndSupportMenuItem.setName("helpAndSupportMenuItem"); // NOI18N
+        helpMenu.add(helpAndSupportMenuItem);
+
         menuBar.add(helpMenu);
 
         statusPanel.setName("statusPanel"); // NOI18N
@@ -2062,6 +2070,7 @@ public class ConvertPSCDVATView extends FrameView {
     private javax.swing.JCheckBox chkTB_PT;
     private javax.swing.JCheckBox chkTB_TK;
     private javax.swing.JCheckBox chkTK;
+    private javax.swing.JMenuItem helpAndSupportMenuItem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2136,5 +2145,16 @@ public class ConvertPSCDVATView extends FrameView {
 
     public static void setDir_file(String dir_file) {
         ConvertPSCDVATView.dir_file = dir_file;
+    }
+
+    @Action
+    public void showHelpAndSupportWindow() {
+        if (helpAndSupportFrame == null) {
+            helpAndSupportFrame = new HelpAndSupport();
+            ConvertPSCDVATApp.getApplication().show(helpAndSupportFrame);
+        } else {
+            helpAndSupportFrame.setVisible(true);
+        }
+
     }
 }
