@@ -1113,6 +1113,15 @@
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
               </AuxValues>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="helpAndSupportMenuItem">
+              <Properties>
+                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+                  <action class="com.pit.convert.ConvertPSCDVATView" id="showHelpAndSupportWindow" methodName="showHelpAndSupportWindow"/>
+                </Property>
+                <Property name="text" type="java.lang.String" resourceKey="helpAndSupportMenuItem.text"/>
+                <Property name="name" type="java.lang.String" value="helpAndSupportMenuItem" noResource="true"/>
+              </Properties>
+            </MenuItem>
           </SubComponents>
         </Menu>
       </SubComponents>
