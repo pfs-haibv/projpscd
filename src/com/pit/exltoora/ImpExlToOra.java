@@ -115,22 +115,22 @@ public class ImpExlToOra {
             String[] arr_short_name = file_name.split("_");
             String short_name = "";
             if (arr_short_name.length > 2) {
-                short_name = arr_short_name[1] + "_" + arr_short_name[2].substring(0, arr_short_name[2].length() - 4);
+                short_name = arr_short_name[0] + "_" + arr_short_name[1];
             } else {
-                short_name = arr_short_name[1].substring(0, arr_short_name[1].length() - 4);
+                short_name = arr_short_name[0];
             }
             String sql_cqt = "SELECT a.tax_code, a.short_name, a.tax_model FROM tb_lst_taxo a where a.short_name = '" + short_name.toUpperCase() + "'";
             // get info cqt
             String InfoCQT[] = ConnectDB.getInfoCQT(sql_cqt).split(",");
             //set short_name
             setShort_name(short_name);
-            
-            if(InfoCQT[0].isEmpty() || InfoCQT[1].isEmpty() || InfoCQT[2].isEmpty()){
-                String log = "Không tồn tại dữ liệu, kiểm tra lại tên CQT hoặc tax_model. \n kiểm tra file :"+file;
+
+            if (InfoCQT[0].isEmpty() || InfoCQT[1].isEmpty() || InfoCQT[2].isEmpty()) {
+                String log = "Không tồn tại dữ liệu, kiểm tra lại tên CQT hoặc tax_model. \n kiểm tra file :" + file;
                 setGetlog(log);
                 throw new Exception(log);
             }
-            
+
             /**-----------------------------------------------------------------*
              *                      SHEET PS                                    *
              **-----------------------------------------------------------------*/
@@ -153,7 +153,10 @@ public class ImpExlToOra {
             //Start from row 6
             for (int i = 6; i <= t_rows; i++) {
                 row = sheet_name.getRow(i);
-
+                //Kiểm tra nếu không tồn tại mã TIN -> thoát
+                if (row.getCell(0).toString().isEmpty()) {
+                    break;
+                }
                 //clear
                 desc_ps = "";
                 desc_tin = "";
@@ -163,8 +166,8 @@ public class ImpExlToOra {
                 //check date
                 desc_ngay_ddmmyyyy[0] = Utility.checkDateDDMMYYYY(row.getCell(5).toString());
                 desc_ngay_ddmmyyyy[1] = Utility.checkDateDDMMYYYY(row.getCell(6).toString());
-                desc_ngay_mmyyyy[0]   = Utility.checkDateMMYYYY(row.getCell(3).toString());
-                desc_ngay_mmyyyy[1]   = Utility.checkDateMMYYYY(row.getCell(4).toString());
+                desc_ngay_mmyyyy[0] = Utility.checkDateMMYYYY(row.getCell(3).toString());
+                desc_ngay_mmyyyy[1] = Utility.checkDateMMYYYY(row.getCell(4).toString());
 
                 //Check data PS
                 desc_ps = Utility.checkDataPS(row.getCell(1).toString(), row.getCell(2).toString().toUpperCase(), row.getCell(3).toString(), row.getCell(4).toString());
@@ -251,7 +254,10 @@ public class ImpExlToOra {
             //Start from row 6
             for (int i = 6; i <= t_rows; i++) {
                 row = sheet_name.getRow(i);
-
+                //Kiểm tra nếu không tồn tại mã TIN -> thoát
+                if (row.getCell(0).toString().isEmpty()) {
+                    break;
+                }
                 /**
                  * @param get ma chuong 
                  *        tiểu muc 1001, 1003, 1004, 1005
@@ -289,7 +295,7 @@ public class ImpExlToOra {
 
 
                 if (desc_tin.isEmpty() && desc_nt.isEmpty() && desc_ngay_ddmmyyyy[0].isEmpty() && desc_ngay_mmyyyy[0].isEmpty()
-                    && desc_ngay_mmyyyy[1].isEmpty() && desc_ngay_mmyyyy[2].isEmpty()  ) {
+                        && desc_ngay_mmyyyy[1].isEmpty() && desc_ngay_mmyyyy[2].isEmpty()) {
                     sql = "insert into tb_no (tin, ma_chuong, ma_khoan, "
                             + "TMT_MA_TMUC, tkhoan, KYKK_TU_NGAY, KYKK_DEN_NGAY, "
                             + "ngay_hach_toan, HAN_NOP, NO_CUOI_KY, imp_file, "
@@ -368,12 +374,15 @@ public class ImpExlToOra {
             sheet_name = workbook.getSheet("10KK-TNCN");
             t_rows = sheet_name.getLastRowNum();
 
-            String mst_dtk = "", hd_dlt_so = "", hd_dlt_ngay ="";
-            
+            String mst_dtk = "", hd_dlt_so = "", hd_dlt_ngay = "";
+
             //Start from row 6
             for (int i = 6; i <= t_rows; i++) {
                 row = sheet_name.getRow(i);
-
+                //Kiểm tra nếu không tồn tại mã TIN -> thoát
+                if (row.getCell(0).toString().isEmpty()) {
+                    break;
+                }
                 //clear
                 desc_tin = "";
                 desc_kylb = "";
@@ -381,7 +390,7 @@ public class ImpExlToOra {
                 desc_money_tk = "";
                 desc_ngay_ddmmyyyy = new String[9];
                 //kiểm tra định dạng ngày
-                desc_ngay_ddmmyyyy[0] = Utility.checkDateDDMMYYYY(row.getCell(11).toString()); 
+                desc_ngay_ddmmyyyy[0] = Utility.checkDateDDMMYYYY(row.getCell(11).toString());
                 desc_ngay_ddmmyyyy[1] = Utility.checkDateDDMMYYYY(row.getCell(12).toString());
                 desc_ngay_ddmmyyyy[2] = Utility.checkDateDDMMYYYY(row.getCell(14).toString());
                 desc_ngay_ddmmyyyy[3] = Utility.checkDateDDMMYYYY(row.getCell(15).toString());
@@ -389,13 +398,14 @@ public class ImpExlToOra {
                 desc_ngay_ddmmyyyy[5] = Utility.checkDateDDMMYYYY(row.getCell(18).toString());
                 desc_ngay_ddmmyyyy[6] = Utility.checkDateDDMMYYYY(row.getCell(20).toString());
                 desc_ngay_ddmmyyyy[7] = Utility.checkDateDDMMYYYY(row.getCell(21).toString());
-                if(!row.getCell(24).toString().isEmpty())
-                {
-                desc_ngay_ddmmyyyy[8] = Utility.checkDateDDMMYYYY(row.getCell(24).toString());
-                } else { desc_ngay_ddmmyyyy[8] = ""; }
-                
+                if (!row.getCell(24).toString().isEmpty()) {
+                    desc_ngay_ddmmyyyy[8] = Utility.checkDateDDMMYYYY(row.getCell(24).toString());
+                } else {
+                    desc_ngay_ddmmyyyy[8] = "";
+                }
+
                 //kiểm tra số tiền không âm
-                desc_money_tk = Utility.checkAm("Doanh thu ph¸t sinh trong kú", row.getCell(2).toString()); 
+                desc_money_tk = Utility.checkAm("Doanh thu ph¸t sinh trong kú", row.getCell(2).toString());
                 desc_money_tk = desc_money_tk + Utility.checkAm("Thu nhËp chÞu thuÕ", row.getCell(4).toString());
                 desc_money_tk = desc_money_tk + Utility.checkAm("Gi¶m trõ gia c¶nh", row.getCell(5).toString());
                 desc_money_tk = desc_money_tk + Utility.checkAm("Gi¶m trõ b¶n th©n", row.getCell(6).toString());
@@ -407,34 +417,40 @@ public class ImpExlToOra {
                 desc_money_tk = desc_money_tk + Utility.checkAm("Quý III ph©n bæ", row.getCell(16).toString());
                 desc_money_tk = desc_money_tk + Utility.checkAm("Quý IV ph©n bæ", row.getCell(19).toString());
                 desc_money_tk = desc_money_tk + Utility.checkAm("Sè tiÒn ®· ho¹ch to¸n", row.getCell(25).toString());
-                
+
                 //Check tỷ lệ thu nhập chịu thuế
                 desc_cltnct = Utility.checkTLTNCT(Integer.parseInt(row.getCell(3).toString()));
                 //Check data 10KK-TNCN
-                desc_tin  = Utility.checkTIN(row.getCell(0).toString());
+                desc_tin = Utility.checkTIN(row.getCell(0).toString());
 
                 desc_kylb = Utility.checkKyLBMMYYYY(row.getCell(1).toString());
-                
+
                 //ghi vào database trung gian
-                if (desc_tin.isEmpty() && desc_kylb.isEmpty() && desc_ngay_ddmmyyyy[0].isEmpty() && desc_ngay_ddmmyyyy[1].isEmpty() && desc_ngay_ddmmyyyy[2].isEmpty() && desc_ngay_ddmmyyyy[3].isEmpty() 
-                        && desc_ngay_ddmmyyyy[4].isEmpty() && desc_ngay_ddmmyyyy[5].isEmpty() && desc_ngay_ddmmyyyy[6].isEmpty() 
+                if (desc_tin.isEmpty() && desc_kylb.isEmpty() && desc_ngay_ddmmyyyy[0].isEmpty() && desc_ngay_ddmmyyyy[1].isEmpty() && desc_ngay_ddmmyyyy[2].isEmpty() && desc_ngay_ddmmyyyy[3].isEmpty()
+                        && desc_ngay_ddmmyyyy[4].isEmpty() && desc_ngay_ddmmyyyy[5].isEmpty() && desc_ngay_ddmmyyyy[6].isEmpty()
                         && desc_ngay_ddmmyyyy[7].isEmpty() && desc_ngay_ddmmyyyy[8].isEmpty() && desc_cltnct.isEmpty() && desc_money_tk.isEmpty()) {
-                    
+
                     //Kiểm tra mã số thuế đại lý có giá trị hay không
-                    if(!row.getCell(22).toString().isEmpty()){
+                    if (!row.getCell(22).toString().isEmpty()) {
                         mst_dtk = row.getCell(22).toString();
-                    }else{ mst_dtk = "";}
-                    
+                    } else {
+                        mst_dtk = "";
+                    }
+
                     //Kiểm tra hợp đồng đại lý thuế số
-                    if(!row.getCell(23).toString().isEmpty()){
+                    if (!row.getCell(23).toString().isEmpty()) {
                         hd_dlt_so = row.getCell(23).toString();
-                    }else{ hd_dlt_so = "";}
-                    
+                    } else {
+                        hd_dlt_so = "";
+                    }
+
                     //Kiểm tra ngày hợp đồng
-                    if(!row.getCell(24).toString().isEmpty()){
+                    if (!row.getCell(24).toString().isEmpty()) {
                         hd_dlt_ngay = row.getCell(24).toString();
-                    }else{ hd_dlt_ngay = "";}
-                    
+                    } else {
+                        hd_dlt_ngay = "";
+                    }
+
                     sql = "insert into tb_tk (TIN, KYLB_TU_NGAY, KYKK_TU_NGAY, "
                             + "KYKK_DEN_NGAY, DTHU_DKIEN, TL_THNHAP_DKIEN, THNHAP_CTHUE_DKIEN, "
                             + "GTRU_GCANH, BAN_THAN, PHU_THUOC, THNHAP_TTHUE_DKIEN, "
@@ -470,7 +486,7 @@ public class ImpExlToOra {
 
                         ConnectDB.sqlDatabase(sql_log);
                     }
-                    
+
                     //log tỷ lệ thu nhập chịu thuế
                     if (!desc_cltnct.isEmpty()) {
                         imp_date = Constants.dateFormat.format(new Date());//import date
@@ -479,7 +495,7 @@ public class ImpExlToOra {
 
                         ConnectDB.sqlDatabase(sql_log);
                     }
-                    
+
                     //log kiểm tra số tiền âm
                     if (!desc_money_tk.isEmpty()) {
                         imp_date = Constants.dateFormat.format(new Date());//import date
@@ -488,8 +504,8 @@ public class ImpExlToOra {
 
                         ConnectDB.sqlDatabase(sql_log);
                     }
-                    
-                    
+
+
                     //log ky_lb
                     if (!desc_kylb.isEmpty()) {
                         imp_date = Constants.dateFormat.format(new Date());//import date
@@ -506,7 +522,7 @@ public class ImpExlToOra {
 
                         ConnectDB.sqlDatabase(sql_log);
                     }
-                    
+
                     if (!desc_ngay_ddmmyyyy[1].isEmpty()) {
                         imp_date = Constants.dateFormat.format(new Date());//import date
                         sql_log = "INSERT INTO tb_log_excel (short_name, sheet, file_imp, status, imp_date, desc_err, row_err)"
@@ -514,7 +530,7 @@ public class ImpExlToOra {
 
                         ConnectDB.sqlDatabase(sql_log);
                     }
-                    
+
                     if (!desc_ngay_ddmmyyyy[2].isEmpty()) {
                         imp_date = Constants.dateFormat.format(new Date());//import date
                         sql_log = "INSERT INTO tb_log_excel (short_name, sheet, file_imp, status, imp_date, desc_err, row_err)"
@@ -522,7 +538,7 @@ public class ImpExlToOra {
 
                         ConnectDB.sqlDatabase(sql_log);
                     }
-                    
+
                     if (!desc_ngay_ddmmyyyy[3].isEmpty()) {
                         imp_date = Constants.dateFormat.format(new Date());//import date
                         sql_log = "INSERT INTO tb_log_excel (short_name, sheet, file_imp, status, imp_date, desc_err, row_err)"
@@ -530,7 +546,7 @@ public class ImpExlToOra {
 
                         ConnectDB.sqlDatabase(sql_log);
                     }
-                    
+
                     if (!desc_ngay_ddmmyyyy[4].isEmpty()) {
                         imp_date = Constants.dateFormat.format(new Date());//import date
                         sql_log = "INSERT INTO tb_log_excel (short_name, sheet, file_imp, status, imp_date, desc_err, row_err)"
@@ -538,7 +554,7 @@ public class ImpExlToOra {
 
                         ConnectDB.sqlDatabase(sql_log);
                     }
-                    
+
                     if (!desc_ngay_ddmmyyyy[5].isEmpty()) {
                         imp_date = Constants.dateFormat.format(new Date());//import date
                         sql_log = "INSERT INTO tb_log_excel (short_name, sheet, file_imp, status, imp_date, desc_err, row_err)"
@@ -546,7 +562,7 @@ public class ImpExlToOra {
 
                         ConnectDB.sqlDatabase(sql_log);
                     }
-                    
+
                     if (!desc_ngay_ddmmyyyy[6].isEmpty()) {
                         imp_date = Constants.dateFormat.format(new Date());//import date
                         sql_log = "INSERT INTO tb_log_excel (short_name, sheet, file_imp, status, imp_date, desc_err, row_err)"
@@ -554,7 +570,7 @@ public class ImpExlToOra {
 
                         ConnectDB.sqlDatabase(sql_log);
                     }
-                    
+
                     if (!desc_ngay_ddmmyyyy[7].isEmpty()) {
                         imp_date = Constants.dateFormat.format(new Date());//import date
                         sql_log = "INSERT INTO tb_log_excel (short_name, sheet, file_imp, status, imp_date, desc_err, row_err)"
@@ -562,7 +578,7 @@ public class ImpExlToOra {
 
                         ConnectDB.sqlDatabase(sql_log);
                     }
-                    
+
                     if (!desc_ngay_ddmmyyyy[8].isEmpty()) {
                         imp_date = Constants.dateFormat.format(new Date());//import date
                         sql_log = "INSERT INTO tb_log_excel (short_name, sheet, file_imp, status, imp_date, desc_err, row_err)"
@@ -570,11 +586,11 @@ public class ImpExlToOra {
 
                         ConnectDB.sqlDatabase(sql_log);
                     }
-                    
+
                     //có lỗi
                     flag_log = Constants.FLAG_VALUES_X;
                 }
-                
+
             }
 
 
@@ -662,7 +678,7 @@ public class ImpExlToOra {
     public static void setFlag(String flag) {
         ImpExlToOra.flag = flag;
     }
-    
+
     public static void main(String[] args) {
         System.out.println("test");
     }
