@@ -278,6 +278,36 @@ public class ConnectDB {
     }
 
     /**
+     * Insert error into table tb_data_error
+     * @param short_name
+     * @param rid
+     * @param table_name
+     * @param err_id
+     * @param field_name
+     * @throws SQLException 
+     */
+    public static void insDataErr(String short_name, String rid, String table_name, String err_id, String field_name) throws SQLException {
+        Connection conn = null;
+        Statement stmt = null;
+        String sql = "insert into tb_data_error (short_name, rid, table_name, err_id, field_name, update_no)"
+                + " values ('" + short_name + "', "
+                + "'" + rid + "', "
+                + "'" + table_name + "', "
+                + "'" + err_id + "', "
+                + "(select dppit_column from tb_pitms_dppit_mapping where pitms_column = '" + field_name + "'), "
+                + "0)";
+        try {
+            conn = ConvertPSCDVATApp.connORA;
+            stmt = conn.createStatement();
+            stmt.executeUpdate(sql);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            stmt.close();
+        }
+    }
+
+    /**
      * Xóa dữ liệu trong bảng tb_unsplit_data_error khi thực hiện kiểm tra lại
      * @param short_name
      * @param table_name
@@ -341,7 +371,7 @@ public class ConnectDB {
                 + "                     FROM tb_data_error b "
                 + "                    WHERE b.short_name = '" + short_name + "' "
                 + "                      AND b.table_name = '" + table_name + "') "
-                + "WHERE a.short_name = '" + short_name +"' "
+                + "WHERE a.short_name = '" + short_name + "' "
                 + "AND a.table_name = '" + table_name + "' "
                 + "AND a.update_no = 0";
 
