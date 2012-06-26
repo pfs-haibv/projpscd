@@ -1,10 +1,11 @@
-/*
+﻿/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package com.pit.utility;
 
 import com.pit.system.Constants;
+import com.sap.conn.jco.JCoTable;
 import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
@@ -19,14 +20,14 @@ import java.io.OutputStream;
 import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
+import sun.security.util.Cache.EqualByteArray;
 
 /**
  * Methods utility
  * @author HAIBV
  */
 public class Utility {
-   
+
     /**
      * Directory file on folder
      * @param name
@@ -47,7 +48,6 @@ public class Utility {
      * @param source
      * @param targer 
      */
-    
     public static void moveFiles(String source, String targer) {
         // File (or directory) to be moved
         File file = new File(source);
@@ -78,13 +78,13 @@ public class Utility {
         }
 
     }
+
     /**
      * Copy files from folder to folder
      * @param srcPath
      * @param dstPath
      * @throws IOException 
      */
-
     public static void copyDirectory(File srcPath, File dstPath) throws IOException {
         // bỏ trường hợp srcPath = dstPath
         if (!srcPath.equals(dstPath)) {
@@ -472,7 +472,7 @@ public class Utility {
                 //temp_d = Constants.DATE_DDMMYYY.parse(date);
                 String day[] = date.toString().split("/");
 
-                    int m = Integer.parseInt(day[0]) - 1,
+                int m = Integer.parseInt(day[0]) - 1,
                         d = 01,
                         y = Integer.parseInt(day[1]);
                 Calendar c = Calendar.getInstance();
@@ -505,12 +505,12 @@ public class Utility {
                 //temp_d = Constants.DATE_DDMMYYY.parse(date);
                 String day[] = date.toString().split("/");
 
-                    int m = Integer.parseInt(day[0]) - 1,
+                int m = Integer.parseInt(day[0]) - 1,
                         d = 01,
                         y = Integer.parseInt(day[1]);
                 //kỳ LB theo năm 2012
                 if (y != 2012) {
-                    desc = "Kú lËp bé "+date+" cã n¨m lÊy theo n¨m 2012";
+                    desc = "Kú lËp bé " + date + " cã n¨m lÊy theo n¨m 2012";
                 } else {
                     Calendar c = Calendar.getInstance();
                     c.set(y, m, d);
@@ -527,7 +527,7 @@ public class Utility {
         }
 
         return desc;
-    }   
+    }
 
     /**
      * Kiểm tra tỷ lệ thu nhập chịu thuế
@@ -537,35 +537,66 @@ public class Utility {
      */
     public static String checkTLTNCT(int tltnct) throws Exception {
         String desc = "";
-        if( !(tltnct >= 0 && tltnct <= 100) )           
-        desc = "tû lÖ thu nhËp chÞu thuÕ trong kho¶ng (0, 100)";       
+        if (!(tltnct >= 0 && tltnct <= 100)) {
+            desc = "tû lÖ thu nhËp chÞu thuÕ trong kho¶ng (0, 100)";
+        }
 
         return desc;
     }
-    
+
     /**
      * kiểm tra trường số tiền có âm không
      * @param field
      * @param money
      * @return mô tả số tiền
      */
-    public static String checkAm(String field,String money){
-        
+    public static String checkAm(String field, String money) {
+
         String desc = "";
-        
+
         double d = Double.parseDouble(money);
-        
-        if(d < 0){
-           desc = field+ " , ";
+
+        if (d < 0) {
+            desc = field + " , ";
 
         }
-        
+
         return desc;
-        
+
     }
-    
-    
-    public static void main(String[] args) {
-        
+
+    public static JCoTable checkErrID(JCoTable JcoT_RETURN) {
+        // Khai báo        
+        String err_string = "";
+
+        JcoT_RETURN.firstRow();
+        for (int i = 0; i < JcoT_RETURN.getNumRows(); i++) {
+            JcoT_RETURN.setRow(i);
+            err_string += "-" + JcoT_RETURN.getString("NUMBER");
+        }
+        if (err_string.contains("-009")) {
+            for (int i = 0; i < JcoT_RETURN.getNumRows(); i++) {
+                JcoT_RETURN.setRow(i);
+                if ((JcoT_RETURN.getString("NUMBER").equals("046")) || (JcoT_RETURN.getString("NUMBER").equals("048"))) {
+                    JcoT_RETURN.deleteRow(i);
+                    i--;
+                }
+            }
+        } else if (err_string.contains("-046")) {
+            for (int i = 0; i < JcoT_RETURN.getNumRows(); i++) {
+                JcoT_RETURN.setRow(i);
+                if (JcoT_RETURN.getString("NUMBER").equals("048")) {
+                    JcoT_RETURN.deleteRow(i);
+                    i--;
+                }
+            }
+        }
+
+        for (int i = 0; i < JcoT_RETURN.getNumRows(); i++) {
+            JcoT_RETURN.setRow(i);
+            err_string += JcoT_RETURN.getString("NUMBER");
+        }
+
+        return JcoT_RETURN;
     }
 }
