@@ -118,7 +118,7 @@ public class LoadData {
                 } else {
                     try {
                         // Xóa dữ liệu cũ ở bảng tb_unsplit_data_error
-                        ConnectDB.delUnSplitErrCode(tax, "TB_TK");
+                        //ConnectDB.delUnSplitErrCode(tax, "TB_TK");
                         // Cập nhật trường update_no của các bản ghi cũ
                         ConnectDB.updateDataErrCode(tax, "TB_TK");
                         // Check TK bằng thủ tục Oracle
@@ -126,8 +126,7 @@ public class LoadData {
                         // Check TK bằng hàm SAP
                         ConvertPSCD.runConvert(type_cv[2], thread_vat, tax, "X");
                         // Tách mã lỗi từ bảng tb_unsplit_data_error vào bảng tb_data_error
-                        ConnectDB.callOraclePrcInsSplitErr("prc_insert_splitted_err", tax, "TB_TK");
-
+                        //ConnectDB.callOraclePrcInsSplitErr("prc_insert_splitted_err", tax, "TB_TK");
                         ConnectDB.callOraclePrc_Ins_Log_Vs(tax, "PRC_KTRA_TK", "Y", "");
                     } catch (JCoException je) {
                         ConnectDB.callOraclePrc_Ins_Log_Vs(tax, "PRC_KTRA_TK", "N", je.getMessage());

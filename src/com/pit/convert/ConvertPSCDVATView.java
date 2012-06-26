@@ -602,11 +602,11 @@ public class ConvertPSCDVATView extends FrameView {
             //Thời gian hòan thành
             result_time = (f_convert - s_convert) / 1000;
 
-            lblDisplay.setText("Hoàn thành chuyển đổi dữ liệu trong " + result_time + " seconds, chọn CQT khác để chuyển đổi.");
+            lblDisplay.setText("Hoàn thành kiểm tra dữ liệu trong " + result_time + " seconds, chọn CQT khác để kiểm tra.");
 
             //Hiển thị thông báo khi convert hoàn thành
             JOptionPane.showMessageDialog(btnConvert,
-                    "Đã hoàn thành chuyển đổi dữ liệu.",
+                    "Đã hoàn thành kiểm tra dữ liệu.",
                     "Thông báo",
                     JOptionPane.INFORMATION_MESSAGE);
 

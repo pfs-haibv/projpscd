@@ -37,6 +37,7 @@ import java.util.logging.Logger;
 
 import com.pit.system.Constants;
 import com.pit.conn.ConnectDB;
+import com.pit.utility.Utility;
 import java.sql.SQLException;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -47,10 +48,10 @@ import javax.swing.JOptionPane;
  * @author Administrator
  */
 public class ConvertPSCD {
-
+    
     static String DESTINATION_NAME1 = "ABAP_AS_WITHOUT_PSCD_POOL";
     static String DESTINATION_NAME2 = "ABAP_AS_WITH_PSCD_POOL";
-
+    
     static {
         Properties connectProperties = new Properties();
         /*
@@ -80,7 +81,7 @@ public class ConvertPSCD {
         connectProperties.setProperty(DestinationDataProvider.JCO_POOL_CAPACITY, "70");
         connectProperties.setProperty(DestinationDataProvider.JCO_PEAK_LIMIT, "50");
         createDataFile(DESTINATION_NAME2, "jcoDestination", connectProperties);
-
+        
     }
     private static BlockingQueue<MultiStepJob> queue = new LinkedBlockingQueue<MultiStepJob>();
     private static JCoFunctionTemplate convertDKTTemplate, convertNPT;
@@ -90,7 +91,7 @@ public class ConvertPSCD {
     // Log
     static LogManager lm = LogManager.getLogManager();
     static Logger logger;
-
+    
     static void createDataFile(String name, String suffix, Properties properties) {
         File cfg = new File(name + "." + suffix);
         if (!cfg.exists()) {
@@ -104,7 +105,7 @@ public class ConvertPSCD {
             }
         }
     }
-
+    
     static void createDestinationDataFile(String destinationName, Properties connectProperties) {
         File destCfg = new File(destinationName + ".jcoDestination");
         try {
@@ -115,20 +116,20 @@ public class ConvertPSCD {
             throw new RuntimeException("Unable to create the destination files", e);
         }
     }
-
+    
     interface MultiStepJob {
-
+        
         boolean isFinished();
-
+        
         public void runNextStep();
-
+        
         String getName();
-
+        
         public void cleanUp();
     }
-
+    
     static class StatelessMultiStepExample implements MultiStepJob {
-
+        
         static AtomicInteger JOB_COUNT = new AtomicInteger(0);
         int jobID = JOB_COUNT.addAndGet(1);
         int calls;
@@ -136,24 +137,24 @@ public class ConvertPSCD {
         int executedCalls = 0;
         Exception ex = null;
         int remoteCounter;
-
+        
         StatelessMultiStepExample(JCoDestination destination, int calls) {
             this.calls = calls;
             this.destination = destination;
         }
-
+        
         public boolean isFinished() {
             return executedCalls >= calls || ex != null;
         }
-
+        
         public String getName() {
             return "stateless Job-" + jobID;
         }
-
+        
         public JCoDestination getDestionation() {
             return this.destination;
         }
-
+        
         public void runNextStep() {
 //              try
 //              {
@@ -177,7 +178,7 @@ public class ConvertPSCD {
 //                  ex = re;
 //              }
         }
-
+        
         public void cleanUp() {
             StringBuilder sb = new StringBuilder("Task ").append(getName()).append(" is finished ");
             if (ex != null) {
@@ -192,28 +193,28 @@ public class ConvertPSCD {
      * Thực hiện xử lý cho từng trường hợp chuyển đổi PSCD, check PSCD
      */
     static class StatefulMultiStepNNTExample extends StatelessMultiStepExample {
-
+        
         DataCVPSCD nnt = null;
         // Loại dữ liệu convert Nợ, Phát sinh, Tờ khai (NO, PS, TK)
         String type = "";
         //tên ngắn của cơ quan thuế
         String short_name = "";
         String chk_pscd = "";
-
+        
         StatefulMultiStepNNTExample(JCoDestination destination, int calls, String type, DataCVPSCD nnt, String short_name, String chk_pscd) {
             super(destination, calls);
             this.type = type;
             this.nnt = nnt;
             this.short_name = short_name;
             this.chk_pscd = chk_pscd;
-
+            
         }
-
+        
         @Override
         public String getName() {
             return "stateful Job-" + jobID;
         }
-
+        
         @Override
         public synchronized void runNextStep() {
             JCoFunction fnConvert = convertDKTTemplate.getFunction();
@@ -234,11 +235,11 @@ public class ConvertPSCD {
                  * *--------------------------------------------------------------------
                  */
                 try {
-
+                    
                     JCoContext.begin(destination);
                     //Structure Import I_DATA
                     JCoStructure JcoStrI_DATA = fnConvert.getImportParameterList().getStructure("I_DATA");
-
+                    
                     JcoStrI_DATA.setValue("ROW_NUM", nnt.arrPSCD.get(0).getID());                       //ROW_NUM thay bằng ID vì ROW_NUM có thể trung nhau
                     JcoStrI_DATA.setValue("DOC_TYPE", nnt.arrPSCD.get(0).getDOC_TYPE());                //DOC_TYPE
                     JcoStrI_DATA.setValue("TAX_OFFICE_CODE", nnt.arrPSCD.get(0).getTAX_OFFICE_CODE());  //TAX_OFFICE_CODE
@@ -260,7 +261,7 @@ public class ConvertPSCD {
                     fnConvert.getImportParameterList().setValue("I_FILE", ConvertPSCDVATView.name_no);
                     // Structure I_DATA
                     fnConvert.getImportParameterList().setValue("I_DATA", JcoStrI_DATA);
-
+                    
                     fnConvert.execute(destination);
 
                     //Structure  Export RETURN
@@ -286,7 +287,7 @@ public class ConvertPSCD {
                             ex.printStackTrace();
                         }
                         String convFont = Tcvn3Converter.convertU(JcoStrE_RETURN.getValue("MESSAGE").toString()).replaceAll("'", "");
-
+                        
                         String SQL = "insert into tb_log_pscd (file_name, tin, msg_no,msg_des,ID,SHORT_NAME,TYPE_DATA,IMP_DATE)"
                                 + "values ('" + ConvertPSCDVATView.name_no + "','" + tin + "',"
                                 + "'" + JcoStrE_RETURN.getValue("NUMBER") + "','" + convFont.replaceAll("Oõ", "Õ") + "','" + id + "','" + sort_name + "','NO','" + imp_date + "')";
@@ -315,7 +316,7 @@ public class ConvertPSCD {
                     }
                     executedCalls++;
                     JCoContext.end(destination);
-
+                    
                 } catch (JCoException je) {
                     ex = je;
                     ex.printStackTrace();
@@ -325,7 +326,7 @@ public class ConvertPSCD {
                 } finally {
                     executedCalls++;
                 }
-
+                
             } else if (type_.equals(Constants.NO) && !chk_pscd.isEmpty()) {
                 /**
                  * --------------------------------------------------------------------*
@@ -333,11 +334,11 @@ public class ConvertPSCD {
                  * *--------------------------------------------------------------------
                  */
                 try {
-
+                    
                     JCoContext.begin(destination);
                     //Structure Import I_DATA
                     JCoStructure JcoStrI_DATA = fnConvert.getImportParameterList().getStructure("I_SOURCE");
-
+                    
                     JcoStrI_DATA.setValue("ROW_NUM", nnt.arrPSCD.get(0).getID());                       //ROW_NUM thay bằng ID vì ROW_NUM có thể trung nhau
                     JcoStrI_DATA.setValue("DOC_TYPE", nnt.arrPSCD.get(0).getDOC_TYPE());                //DOC_TYPE
                     JcoStrI_DATA.setValue("TAX_OFFICE_CODE", nnt.arrPSCD.get(0).getTAX_OFFICE_CODE());  //TAX_OFFICE_CODE
@@ -357,10 +358,10 @@ public class ConvertPSCD {
                     //**-----------------------------------------------------------------------*                    
                     // Structure I_SOURCE
                     fnConvert.getImportParameterList().setValue("I_SOURCE", JcoStrI_DATA);
-
+                    
                     fnConvert.execute(destination);
-
-
+                    
+                    
                     if (!fnConvert.getExportParameterList().getString("E_ERROR_CODE").isEmpty()) {
                         try {
                             // System.out.println("E_ERROR_CODE: " + fnChkPSCD.getExportParameterList().getString("E_ERROR_CODE"));
@@ -372,7 +373,7 @@ public class ConvertPSCD {
                             ex.printStackTrace();
                         }
                     }
-
+                    
                     executedCalls++;
                     JCoContext.end(destination);
                 } catch (JCoException je) {
@@ -388,7 +389,7 @@ public class ConvertPSCD {
                 } finally {
                     executedCalls++;
                 }
-
+                
             }
 
 
@@ -429,7 +430,7 @@ public class ConvertPSCD {
                     fnConvert.getImportParameterList().setValue("I_FILE", ConvertPSCDVATView.name_ps);
                     // Structure I_DATA
                     fnConvert.getImportParameterList().setValue("I_DATA", JcoStrI_DATA);
-
+                    
                     fnConvert.execute(destination);
                     //Structure  Export RETURN
                     JcoStrE_RETURN = fnConvert.getExportParameterList().getStructure("RETURN");
@@ -453,7 +454,7 @@ public class ConvertPSCD {
                             ex.printStackTrace();
                         }
                         String convFont = Tcvn3Converter.convertU(JcoStrE_RETURN.getValue("MESSAGE").toString()).replaceAll("'", "");
-
+                        
                         String SQL = "insert into tb_log_pscd (file_name, tin, msg_no, msg_des,ID,SHORT_NAME,TYPE_DATA,IMP_DATE)"
                                 + "values ('" + ConvertPSCDVATView.name_ps + "','" + tin + "',"
                                 + "'" + JcoStrE_RETURN.getValue("NUMBER") + "','" + convFont.replaceAll("Oõ", "Õ") + "','" + id + "','" + sort_name + "','PS','" + imp_date + "')";
@@ -481,10 +482,10 @@ public class ConvertPSCD {
                             ex.printStackTrace();
                         }
                     }
-
+                    
                     executedCalls++;
                     JCoContext.end(destination);
-
+                    
                 } catch (JCoException je) {
                     ex = je;
                     ex.printStackTrace();
@@ -494,7 +495,7 @@ public class ConvertPSCD {
                 } finally {
                     executedCalls++;
                 }
-
+                
             } else if (type_.equals(Constants.PS) && !chk_pscd.isEmpty()) {
                 /**
                  * --------------------------------------------------------------------*
@@ -525,9 +526,9 @@ public class ConvertPSCD {
                     //**-----------------------------------------------------------------------*                    
                     // Structure I_SOURCE
                     fnConvert.getImportParameterList().setValue("I_SOURCE", JcoStrI_DATA);
-
+                    
                     fnConvert.execute(destination);
-
+                    
                     if (!fnConvert.getExportParameterList().getString("E_ERROR_CODE").isEmpty()) {
                         try {
                             ConnectDB.insUnSplitErrCode(short_name,
@@ -538,10 +539,10 @@ public class ConvertPSCD {
                             ex.printStackTrace();
                         }
                     }
-
+                    
                     executedCalls++;
                     JCoContext.end(destination);
-
+                    
                 } catch (JCoException je) {
                     ex = je;
                     ex.printStackTrace();
@@ -567,11 +568,11 @@ public class ConvertPSCD {
                  * *--------------------------------------------------------------------
                  */
                 try {
-
+                    
                     JCoContext.begin(destination);
                     //Structure I_DATA
                     JCoStructure JcoStrI_DATA = fnConvert.getImportParameterList().getStructure("I_DATA");
-
+                    
                     JcoStrI_DATA.setValue("ROW_NUM", nnt.arrTK.get(0).getID());                                          //ROW_NUM thay bằng ID vì ROW_NUM có thể trung nhau
                     JcoStrI_DATA.setValue("TAX_OFFICE_CODE", nnt.arrTK.get(0).getTAX_OFFICE_CODE());                     //TAX_OFFICE_CODE
                     JcoStrI_DATA.setValue("TAXPAYER_ID", nnt.arrTK.get(0).getTAXPAYER_ID());                             //TAXPAYER_ID
@@ -612,7 +613,7 @@ public class ConvertPSCD {
                     //**Get value parameter and execute                                        *
                     //**-----------------------------------------------------------------------*
                     fnConvert.getImportParameterList().setValue("I_FILE", ConvertPSCDVATView.name_tk);
-
+                    
                     fnConvert.getImportParameterList().setValue("I_DATA", JcoStrI_DATA);
                     fnConvert.execute(destination);
                     //Structure  Export RETURN
@@ -636,9 +637,9 @@ public class ConvertPSCD {
                         } catch (SQLException ex) {
                             ex.printStackTrace();
                         }
-
+                        
                         String convFont = Tcvn3Converter.convertU(JcoStrE_RETURN.getValue("MESSAGE").toString()).replaceAll("'", "");
-
+                        
                         String SQL = "insert into tb_log_pscd (file_name, tin, msg_no, msg_des,ID,SHORT_NAME,TYPE_DATA,IMP_DATE)"
                                 + "values ('" + ConvertPSCDVATView.name_tk + "','" + tin + "',"
                                 + "'" + JcoStrE_RETURN.getValue("NUMBER") + "','" + convFont.replaceAll("Oõ", "Õ") + "','" + id + "','" + sort_name + "','TK','" + imp_date + "')";
@@ -667,7 +668,7 @@ public class ConvertPSCD {
                     }
                     executedCalls++;
                     JCoContext.end(destination);
-
+                    
                 } catch (JCoException je) {
                     try {
                         throw new JCoException(1, "", je.getMessage());
@@ -688,11 +689,12 @@ public class ConvertPSCD {
                  * *--------------------------------------------------------------------
                  */
                 try {
-
+                    
                     JCoContext.begin(destination);
                     //Structure I_DATA
                     JCoStructure JcoStrI_DATA = fnConvert.getImportParameterList().getStructure("I_DATA");
-
+                    JCoTable JcoTabRETURN = null;
+                    
                     JcoStrI_DATA.setValue("ROW_NUM", nnt.arrTK.get(0).getID());                                          //ROW_NUM thay bằng ID vì ROW_NUM có thể trung nhau
                     JcoStrI_DATA.setValue("TAX_OFFICE_CODE", nnt.arrTK.get(0).getTAX_OFFICE_CODE());                     //TAX_OFFICE_CODE
                     JcoStrI_DATA.setValue("TAXPAYER_ID", nnt.arrTK.get(0).getTAXPAYER_ID());                             //TAXPAYER_ID
@@ -734,29 +736,41 @@ public class ConvertPSCD {
                     //**-----------------------------------------------------------------------*
 
                     fnConvert.getImportParameterList().setValue("I_FILE", "TKQLT20100101_50901_1252.CSV");
-
+                    
                     fnConvert.getImportParameterList().setValue("I_DATA", JcoStrI_DATA);
                     fnConvert.execute(destination);
-
-                    if (!fnConvert.getExportParameterList().getString("E_ERROR_CODE").isEmpty()) {
+                    
+                    JcoTabRETURN = fnConvert.getTableParameterList().getTable("RETURN");
+                    
+                    JcoTabRETURN = Utility.checkErrID(JcoTabRETURN);
+                    
+                    JcoTabRETURN.firstRow();
+                    
+                    for (int i = 0; i < JcoTabRETURN.getNumRows(); i++) {
+                        JcoTabRETURN.setRow(i);
                         try {
-                            ConnectDB.insUnSplitErrCode(short_name, nnt.arrTK.get(0).getRID(), "TB_TK",
-                                    fnConvert.getExportParameterList().getString("E_ERROR_CODE"));
+                            ConnectDB.insDataErr(short_name,
+                                    nnt.arrTK.get(0).getRID(),
+                                    "TB_TK",
+                                    JcoTabRETURN.getString("NUMBER"),
+                                    JcoTabRETURN.getString("FIELD"));
                         } catch (SQLException ex) {
                             ex.printStackTrace();
                         }
                     }
-
+                    
                     executedCalls++;
                     JCoContext.end(destination);
-
+                    
                 } catch (JCoException je) {
                     try {
+                        je.printStackTrace();
                         throw new JCoException(1, "", je.getMessage());
                     } catch (JCoException ex) {
                         ex.printStackTrace();
                     }
                 } catch (JCoRuntimeException jr) {
+                    jr.printStackTrace();
                     throw new JCoRuntimeException(1, "", jr.getMessage());
                 } catch (RuntimeException re) {
                     re.printStackTrace();
@@ -764,10 +778,10 @@ public class ConvertPSCD {
                     executedCalls++;
                 }
             }
-
-
+            
+            
         }
-
+        
         @Override
         public void cleanUp() {
             try {
@@ -797,10 +811,10 @@ public class ConvertPSCD {
             JCoTable tblInGT_APPENDIX = fn_imp_appendix_10.getTableParameterList().getTable("GT_APPENDIX");
             //export parameter
             JCoTable tblExGT_APPENDIX = fn_imp_appendix_10.getTableParameterList().getTable("GT_APPENDIX");
-
+            
             int NumberOfNPT = arrNPT.size();
             for (int i = 0; i < NumberOfNPT; i++) {
-
+                
                 for (int r = 0; r < arrNPT.get(i).arrdtNPT.size(); r++) {
                     tblInGT_APPENDIX.appendRow();
                     tblInGT_APPENDIX.setValue("ID", arrNPT.get(i).arrdtNPT.get(r).getID());
@@ -818,9 +832,9 @@ public class ConvertPSCD {
                     tblInGT_APPENDIX.setValue("RELATIONSHIP_WH", arrNPT.get(i).arrdtNPT.get(r).getRELATIONSHIP_WH());
                     tblInGT_APPENDIX.setValue("BUKRS", arrNPT.get(i).arrdtNPT.get(r).getBUKRS());
                     tblInGT_APPENDIX.setValue("MA_QLT", arrNPT.get(i).arrdtNPT.get(r).getMA_QLT());
-
+                    
                 }
-
+                
             }
             //Execute
             fn_imp_appendix_10.execute(destination);
@@ -838,7 +852,7 @@ public class ConvertPSCD {
                 mess = Tcvn3Converter.convertU(tblExGT_APPENDIX.getString("MESSAGE").replaceAll("'", ""));
                 sql = "update tb_pt set status = '" + tblExGT_APPENDIX.getString("STATUS")
                         + "',  message = '" + mess
-                        + "' where id = " + tblExGT_APPENDIX.getString("ID");                
+                        + "' where id = " + tblExGT_APPENDIX.getString("ID");
 
                 //Update table TB_PT
                 ConnectDB.sqlDatabase(sql);
@@ -851,18 +865,18 @@ public class ConvertPSCD {
             e.printStackTrace();
         }
     }
-
+    
     static class MySessionReferenceProvider implements SessionReferenceProvider {
-
+        
         public JCoSessionReference getCurrentSessionReference(String scopeType) {
             MySessionReference sesRef = WorkerThread.localSessionReference.get();
             if (sesRef != null) {
                 return sesRef;
             }
-
+            
             throw new RuntimeException("Unknown thread:" + Thread.currentThread().getId());
         }
-
+        
         public boolean isSessionAlive(String sessionId) {
             Collection<MySessionReference> availableSessions = WorkerThread.sessions.values();
             for (MySessionReference ref : availableSessions) {
@@ -872,49 +886,49 @@ public class ConvertPSCD {
             }
             return false;
         }
-
+        
         public void jcoServerSessionContinued(String sessionID) throws SessionException {
         }
-
+        
         public void jcoServerSessionFinished(String sessionID) {
         }
-
+        
         public void jcoServerSessionPassivated(String sessionID) throws SessionException {
         }
-
+        
         public JCoSessionReference jcoServerSessionStarted() throws SessionException {
             return null;
         }
     }
-
+    
     static class MySessionReference implements JCoSessionReference {
-
+        
         static AtomicInteger atomicInt = new AtomicInteger(0);
         private String id = "session-" + String.valueOf(atomicInt.addAndGet(1));
-
+        
         ;
 
           public void contextFinished() {
         }
-
+        
         public void contextStarted() {
         }
-
+        
         public String getID() {
             return id;
         }
     }
-
+    
     static class WorkerThread extends Thread {
-
+        
         static Hashtable<MultiStepJob, MySessionReference> sessions = new Hashtable<MultiStepJob, MySessionReference>();
         static ThreadLocal<MySessionReference> localSessionReference = new ThreadLocal<MySessionReference>();
         private CountDownLatch doneSignal;
-
+        
         WorkerThread(CountDownLatch doneSignal) {
             this.doneSignal = doneSignal;
         }
-
+        
         @Override
         public void run() {
             try {
@@ -931,7 +945,7 @@ public class ConvertPSCD {
                         sessions.put(job, sesRef);
                     }
                     localSessionReference.set(sesRef);
-
+                    
                     System.out.println("Task " + job.getName() + " is started.");
                     try {
                         job.runNextStep();
@@ -991,7 +1005,7 @@ public class ConvertPSCD {
                 new WorkerThread(doneSignal).start();
             }
         }
-
+        
         try {
             doneSignal.await();
         } catch (InterruptedException ie) {
@@ -1014,7 +1028,7 @@ public class ConvertPSCD {
         } catch (JCoRuntimeException jrex) {
             //System.out.println(jrex.getMessage());
             logger.log(Level.WARNING, "JCoRuntimeException :", jrex);
-
+            
         } catch (Exception ex) {
             //System.out.println(ex.getMessage());
             logger.log(Level.WARNING, "Exception:", ex);
@@ -1029,7 +1043,7 @@ public class ConvertPSCD {
         } catch (JCoRuntimeException jrex) {
             //System.out.println(jrex.getMessage());
             logger.log(Level.WARNING, "JCoRuntimeException :", jrex.getMessage());
-
+            
         } catch (Exception ex) {
             //System.out.println(ex.getMessage());
             logger.log(Level.WARNING, "Exception:", ex.getMessage());
@@ -1056,9 +1070,9 @@ public class ConvertPSCD {
             String type_data = "";
             //import date
             String imp_date = "";
-
+            
             switch (log_type) {
-
+                
                 case 'N':
                     fnLog.getImportParameterList().setValue("I_PROJECT", Constants.LOG_PROJECT);
                     fnLog.getImportParameterList().setValue("I_SUBPRO", Constants.LOG_SUB_PSCD_CD);
@@ -1066,7 +1080,7 @@ public class ConvertPSCD {
                     fnLog.getImportParameterList().setValue("I_FILE", file);
                     type_data = "NO";
                     break;
-
+                
                 case 'P':
                     fnLog.getImportParameterList().setValue("I_PROJECT", Constants.LOG_PROJECT);
                     fnLog.getImportParameterList().setValue("I_SUBPRO", Constants.LOG_SUB_PSCD_TK);
@@ -1074,7 +1088,7 @@ public class ConvertPSCD {
                     fnLog.getImportParameterList().setValue("I_FILE", file);
                     type_data = "PS";
                     break;
-
+                
                 case 'T':
                     fnLog.getImportParameterList().setValue("I_PROJECT", Constants.LOG_PRO_FORM_10);
                     fnLog.getImportParameterList().setValue("I_SUBPRO", Constants.LOG_SUB_FORM_10);
@@ -1082,7 +1096,7 @@ public class ConvertPSCD {
                     fnLog.getImportParameterList().setValue("I_FILE", file);
                     type_data = "TK";
                     break;
-
+                
                 default:
                     break;
             }
@@ -1101,16 +1115,16 @@ public class ConvertPSCD {
              * WRITE LOG TỜ KHAI
              */
             if (log_type == 'T') {
-
+                
                 t_form_10.firstRow();
-
+                
                 int numRows = t_form_10.getNumRows();
-
+                
                 String short_name = "";//Tên ngắn cơ quan thuế
                 String id = "";//key trong table NO, PS, TK  
                 String tin = "";//mã tinh
                 if (numRows > 0) {
-
+                    
                     for (int i = 0; i < numRows; i++) {
                         t_form_10.setRow(i);
                         //Add info short_name, id                    
@@ -1132,7 +1146,7 @@ public class ConvertPSCD {
                         ConnectDB.sqlDatabase(SQL);
                     }
                 }
-
+                
             } /* WRITE LOG NỢ, PHÁT SINH */ else {
                 t_pscd.firstRow();
                 int numRows = t_pscd.getNumRows();
@@ -1141,13 +1155,13 @@ public class ConvertPSCD {
                 String sort_name = "";
                 String id = "";
                 if (numRows > 0) {
-
+                    
                     for (int i = 0; i < numRows; i++) {
                         t_pscd.setRow(i);
                         if (type_data.equals(Constants.NO)) {
                             // add short_name and id to table tb_log_pscd                        
                             sql_info = "select * from tb_no where id = " + t_pscd.getString("RECORD_NUM").trim();
-
+                            
                             String add_info[] = ConnectDB.getInfoLog(sql_info).split(",");
                             sort_name = add_info[0];
                             id = add_info[1];
@@ -1162,7 +1176,7 @@ public class ConvertPSCD {
                         imp_date = Constants.dateFormat.format(new Date());
                         //Convert font
                         String convFont_ = Tcvn3Converter.convertU(t_pscd.getString("MSG_DES")).replaceAll("'", "");
-
+                        
                         SQL = "insert into tb_log_pscd (tin, msg_no, msg_des, process_step, status,FILE_NAME,ID,SHORT_NAME,TYPE_DATA,IMP_DATE) "
                                 + "values ('" + t_pscd.getString("TIN") + "','" + t_pscd.getString("MSG_NO")
                                 + "','" + convFont_.replaceAll("Oõ", "Õ") + "','" + t_pscd.getString("PROCESS_STEP") + "','" + Tcvn3Converter.convertU(t_pscd.getString("STATUS")) + "','" + file
@@ -1172,7 +1186,7 @@ public class ConvertPSCD {
                     }
                 }
             }
-
+            
         } catch (AbapException aex) {
             if (aex.getMessage().equals("NOT_FOUND")) {
                 throw new AbapException(aex.getMessage());
@@ -1181,12 +1195,12 @@ public class ConvertPSCD {
             logger.log(Level.WARNING, "JCoException:", jex);
         } catch (JCoRuntimeException jrex) {
             logger.log(Level.WARNING, "JCoRuntimeException :", jrex);
-
+            
         } catch (Exception ex) {
             ex.printStackTrace();
             logger.log(Level.WARNING, "Exception:", ex);
         }
-
+        
     }
 
     /**
@@ -1227,13 +1241,13 @@ public class ConvertPSCD {
             if (type_cv.equals(Constants.TK) && chk_pscd.equals("X")) { // Kiểm tra Tờ khai
                 convertDKTTemplate = destination.getRepository().getFunctionTemplate("ZBAPI_DETAIL_10_CHECK");
             }
-
+            
             if (convertDKTTemplate == null) {
                 throw new RuntimeException("Service could not run due to lack of function");
             }
-
+            
             runJobs(destination, type_cv, thread_vat, short_name, chk_pscd);
-
+            
         } catch (JCoException je) {
             //je.printStackTrace();
             throw new JCoException(thread_vat, type_cv, je.getMessage());
