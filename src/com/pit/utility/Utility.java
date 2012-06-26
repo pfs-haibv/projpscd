@@ -1,7 +1,3 @@
-﻿/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.pit.utility;
 
 import com.pit.system.Constants;
@@ -20,12 +16,7 @@ import java.io.OutputStream;
 import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import sun.security.util.Cache.EqualByteArray;
 
-/**
- * Methods utility
- * @author HAIBV
- */
 public class Utility {
 
     /**
