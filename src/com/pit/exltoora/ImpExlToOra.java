@@ -70,9 +70,9 @@ public class ImpExlToOra {
         try {
 
             /**
-             * @desc CQT được chọn và hình thức chuyển đôi 
-             *       Hình thức chuyển đổi lại -> xóa dữ liệu theo cqt và file truyền vào
-             *       Hình thức chuyển đổi bổ sung -> Update thêm dữ liệu
+             * <b> CQT được chọn và hình thức chuyển đôi: </b>
+             *       <p> Hình thức chuyển đổi lại -> xóa dữ liệu theo cqt và file truyền vào
+             *       <p> Hình thức chuyển đổi bổ sung -> Update thêm dữ liệu
              */
             if (htcd.equals("I")) {
                 //Xóa dữ liệu trong database
@@ -138,10 +138,8 @@ public class ImpExlToOra {
             t_rows = sheet_name.getLastRowNum();
 
             /**
-             * @param get ma chuong 
-             *        không phân biệt tiểu muc
-             *        Cuc -> ma_chuong = '557' 
-             *        Chi cục = > ma_chuong = '757'
+             * get ma chuong 
+             * không phân biệt tiểu muc, Cuc -> ma_chuong = '557', Chi cục = > ma_chuong = '757'
              */
             if (InfoCQT[1].length() > 3) {
                 ma_chuong = "757";
@@ -259,10 +257,9 @@ public class ImpExlToOra {
                     break;
                 }
                 /**
-                 * @param get ma chuong 
-                 *        tiểu muc 1001, 1003, 1004, 1005
-                 *        Cuc -> ma_chuong = '557' 
-                 *        Chi cục = > ma_chuong = '757'
+                 * get ma chuong: tiểu muc 1001, 1003, 1004, 1005  
+                 * Cuc -> ma_chuong = '557', 
+                 * Chi cục = > ma_chuong = '757'
                  */
                 if (InfoCQT[1].length() == 3) {
                     if (Constants.CHUONG_MTMUC.indexOf(row.getCell(1).toString()) >= 0) {
@@ -679,7 +676,4 @@ public class ImpExlToOra {
         ImpExlToOra.flag = flag;
     }
 
-    public static void main(String[] args) {
-        System.out.println("test");
-    }
 }
