@@ -38,6 +38,7 @@ import com.pit.list.SortedListModel;
 import com.sap.conn.jco.JCoRuntimeException;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * The application's main frame.
@@ -62,7 +63,6 @@ public class ConvertPSCDVATView extends FrameView {
         try {
             //Initial commobox CQT           
             loadCQT();
-
             // Đặt listenner cho combobox CQT            
             cboCQT.addItemListener(new ItemListener() {
 
@@ -182,6 +182,80 @@ public class ConvertPSCDVATView extends FrameView {
             stmt.close();
 //            conn.close();
         }
+    }
+
+    public void viewCheckList(String cqt) throws SQLException {
+        //set header column
+        model = new DefaultTableModel();
+        model.addColumn("STT");
+        model.addColumn("Step by step");
+        model.addColumn("Status");
+        model.addColumn("Note");
+
+
+        //Initial commobox CQT
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rset = null;
+        try {
+            conn = ConvertPSCDVATApp.connORA;
+            stmt = conn.createStatement();
+            rset = stmt.executeQuery("select * from tb_chk_lst a where a.short_name = '" + cqt + "'");
+            while (rset.next()) {
+                String rows[] = {rset.getString("stt"), rset.getString("step"), rset.getString("status"), rset.getString("note")};
+                model.addRow(rows);
+                tblChkLst.setModel(model);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            rset.close();
+            stmt.close();
+//            conn.close();
+        }
+
+
+    }
+
+    /**
+     * save check list
+     * @throws SQLException 
+     */
+    @Action
+    public void saveCheckList() throws SQLException {
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rset = null;
+        try {
+
+            conn = ConvertPSCDVATApp.connORA;
+            stmt = conn.createStatement();
+
+                int t = tblChkLst.getModel().getRowCount();
+
+                for (int i = 0; i < t; i++) {
+                    String status = (String) tblChkLst.getModel().getValueAt(i, 2);
+                    String note_ = (String) tblChkLst.getModel().getValueAt(i, 3);
+                    if (note_ == null) {
+                        note_ = "";
+                    }
+                    if (status != null) {
+                        String sql = "update tb_chk_lst a set a.status = '" + tblChkLst.getModel().getValueAt(i, 2) + "', a.note = '" + note_ + "'  where a.short_name = '" + cboCkhLst.getSelectedItem() + "' and a.stt = " + tblChkLst.getModel().getValueAt(i, 0);
+                        rset = stmt.executeQuery(sql);
+                    }
+                }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            rset.close();
+            stmt.close();
+//            conn.close();
+        }
+
+
     }
 
     /**
@@ -1295,6 +1369,12 @@ public class ConvertPSCDVATView extends FrameView {
         btnGetLog = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtLog = new javax.swing.JTextArea();
+        jPanel6 = new javax.swing.JPanel();
+        cboCkhLst = new javax.swing.JComboBox();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblChkLst = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
@@ -1516,7 +1596,7 @@ public class ConvertPSCDVATView extends FrameView {
                                 .addComponent(btnRemove)))))
                 .addGap(46, 46, 46)
                 .addComponent(lblDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(168, Short.MAX_VALUE))
         );
 
         tabPSCD.addTab(resourceMap.getString("pnlConvertPSCD.TabConstraints.tabTitle"), pnlPSCD); // NOI18N
@@ -1751,7 +1831,7 @@ public class ConvertPSCDVATView extends FrameView {
                     .addComponent(btnDelete)
                     .addComponent(btnKTao)
                     .addComponent(btnClose1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(157, Short.MAX_VALUE))
         );
 
         tabPSCD.addTab(resourceMap.getString("btnImpExl.TabConstraints.tabTitle"), btnImpExl); // NOI18N
@@ -1916,10 +1996,76 @@ public class ConvertPSCDVATView extends FrameView {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addContainerGap(283, Short.MAX_VALUE))
         );
 
         tabPSCD.addTab(resourceMap.getString("jPanel3.TabConstraints.tabTitle"), jPanel3); // NOI18N
+
+        jPanel6.setName("jPanel6"); // NOI18N
+
+        cboCkhLst.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "AGI", "BCA", "BDI", "BDU", "BGI", "BLI", "BNI", "BPH", "BRV", "BTH", "BTR", "CBA", "CMA", "CTH", "DAN", "DBI", "DLA", "DNO", "DON", "DTH", "GLA", "HAG", "HAN", "HBI", "HCM", "HDU", "HGI", "HNA", "HPH", "HTI", "HYE", "KGI", "KHH", "KTU", "LAN", "LCA", "LCH", "LDO", "LSO", "NAN", "NBI", "NDI", "NTH", "PHY", "PTH", "QBI", "QNA", "QNG", "QNI", "QTR", "SLA", "STR", "TBI", "TGI", "THO", "TNG", "TNI", "TQU", "TTH", "TVI", "VLO", "VPH", "YBA" }));
+        cboCkhLst.setName("cboCkhLst"); // NOI18N
+        cboCkhLst.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                cboCkhLstPropertyChange(evt);
+            }
+        });
+        cboCkhLst.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cboCkhLstKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cboCkhLstKeyReleased(evt);
+            }
+        });
+
+        jScrollPane4.setName("jScrollPane4"); // NOI18N
+
+        tblChkLst.setName("tblChkLst"); // NOI18N
+        jScrollPane4.setViewportView(tblChkLst);
+
+        jButton1.setAction(actionMap.get("saveCheckList")); // NOI18N
+        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
+        jButton1.setName("jButton1"); // NOI18N
+
+        jButton2.setAction(actionMap.get("quit")); // NOI18N
+        jButton2.setName("jButton2"); // NOI18N
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(104, 104, 104)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(cboCkhLst, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 467, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(320, 320, 320)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(224, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(cboCkhLst, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(116, Short.MAX_VALUE))
+        );
+
+        tabPSCD.addTab(resourceMap.getString("jPanel6.TabConstraints.tabTitle"), jPanel6); // NOI18N
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -1929,7 +2075,7 @@ public class ConvertPSCDVATView extends FrameView {
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabPSCD, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+            .addComponent(tabPSCD, javax.swing.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)
         );
 
         tabPSCD.getAccessibleContext().setAccessibleName(resourceMap.getString("jTabbedPane1.AccessibleContext.accessibleName")); // NOI18N
@@ -2040,6 +2186,30 @@ public class ConvertPSCDVATView extends FrameView {
         destListModel.clear();
         lstCCT_CV.setModel(destListModel);
     }//GEN-LAST:event_cboCQTKeyReleased
+
+    private void cboCkhLstKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cboCkhLstKeyPressed
+        try {
+            viewCheckList(cboCkhLst.getSelectedItem().toString());
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_cboCkhLstKeyPressed
+
+    private void cboCkhLstKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cboCkhLstKeyReleased
+        try {
+            viewCheckList(cboCkhLst.getSelectedItem().toString());
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_cboCkhLstKeyReleased
+
+    private void cboCkhLstPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cboCkhLstPropertyChange
+        try {
+            viewCheckList(cboCkhLst.getSelectedItem().toString());
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_cboCkhLstPropertyChange
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBckFld;
@@ -2060,6 +2230,7 @@ public class ConvertPSCDVATView extends FrameView {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox cboCQT;
     private javax.swing.JComboBox cboCQTUtility;
+    private javax.swing.JComboBox cboCkhLst;
     private javax.swing.JComboBox cboNhapNgoai;
     private javax.swing.JCheckBox chkConfig;
     private javax.swing.JCheckBox chkNO;
@@ -2071,6 +2242,8 @@ public class ConvertPSCDVATView extends FrameView {
     private javax.swing.JCheckBox chkTB_TK;
     private javax.swing.JCheckBox chkTK;
     private javax.swing.JMenuItem helpAndSupportMenuItem;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2087,9 +2260,11 @@ public class ConvertPSCDVATView extends FrameView {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private static java.awt.Label lblDisplay;
     private static java.awt.Label lblStatus;
     private javax.swing.JList lstCCT;
@@ -2108,6 +2283,7 @@ public class ConvertPSCDVATView extends FrameView {
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;
     private javax.swing.JTabbedPane tabPSCD;
+    private javax.swing.JTable tblChkLst;
     private javax.swing.JTextField txtBckFolder;
     private javax.swing.JTextField txtErrFolder;
     private javax.swing.JTextField txtFileImp;
@@ -2116,6 +2292,7 @@ public class ConvertPSCDVATView extends FrameView {
     private javax.swing.JTextField txtThread;
     // End of variables declaration//GEN-END:variables
     private final Timer messageTimer;
+    DefaultTableModel model;
     private final Timer busyIconTimer;
     private final Icon idleIcon;
     private final Icon[] busyIcons = new Icon[15];
