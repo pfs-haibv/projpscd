@@ -152,7 +152,7 @@ public class ImpExlToOra {
             for (int i = 6; i <= t_rows; i++) {
                 row = sheet_name.getRow(i);
                 //Kiểm tra nếu không tồn tại mã TIN -> thoát
-                if (row.getCell(0).toString().isEmpty()) {
+                if (row.getCell(0).toString().trim().isEmpty()) {
                     break;
                 }
                 //clear
@@ -162,14 +162,14 @@ public class ImpExlToOra {
                 desc_ngay_mmyyyy = new String[2];
 
                 //check date
-                desc_ngay_ddmmyyyy[0] = Utility.checkDateDDMMYYYY(row.getCell(5).toString());
-                desc_ngay_ddmmyyyy[1] = Utility.checkDateDDMMYYYY(row.getCell(6).toString());
-                desc_ngay_mmyyyy[0] = Utility.checkDateMMYYYY(row.getCell(3).toString());
-                desc_ngay_mmyyyy[1] = Utility.checkDateMMYYYY(row.getCell(4).toString());
+                desc_ngay_ddmmyyyy[0] = Utility.checkDateDDMMYYYY(row.getCell(5).toString().trim());
+                desc_ngay_ddmmyyyy[1] = Utility.checkDateDDMMYYYY(row.getCell(6).toString().trim());
+                desc_ngay_mmyyyy[0] = Utility.checkDateMMYYYY(row.getCell(3).toString().trim());
+                desc_ngay_mmyyyy[1] = Utility.checkDateMMYYYY(row.getCell(4).toString().trim());
 
                 //Check data PS
-                desc_ps = Utility.checkDataPS(row.getCell(1).toString(), row.getCell(2).toString().toUpperCase(), row.getCell(3).toString(), row.getCell(4).toString());
-                desc_tin = Utility.checkTIN(row.getCell(0).toString());
+                desc_ps = Utility.checkDataPS(row.getCell(1).toString().trim(), row.getCell(2).toString().trim().toUpperCase(), row.getCell(3).toString().trim(), row.getCell(4).toString().trim());
+                desc_tin = Utility.checkTIN(row.getCell(0).toString().trim());
 
                 //không lỗi thực hiện insert vào data
                 if (desc_ps.isEmpty() && desc_tin.isEmpty() && desc_ngay_ddmmyyyy[0].isEmpty() && desc_ngay_ddmmyyyy[1].isEmpty() && desc_ngay_mmyyyy[0].isEmpty() && desc_ngay_mmyyyy[1].isEmpty()) {
@@ -177,8 +177,8 @@ public class ImpExlToOra {
                             + "ma_tkhai, ky_psinh_tu, ky_psinh_den, ngay_nop, "
                             + "ngay_htoan, han_nop, so_tien, imp_file, "
                             + "tax_model, short_name, ma_cqt, tkhoan, loai, ma_tmuc) values ("
-                            + "'" + row.getCell(0).toString() + "','" + ma_chuong + "','" + Constants.MA_KHOAN_000 + "','"
-                            + row.getCell(2).toString().toUpperCase() + "','01/" + row.getCell(3) + "','" + Utility.getMaxDate(row.getCell(4).toString()) + "','" + row.getCell(5) + "','"
+                            + "'" + row.getCell(0).toString().trim() + "','" + ma_chuong + "','" + Constants.MA_KHOAN_000 + "','"
+                            + row.getCell(2).toString().trim().toUpperCase() + "','01/" + row.getCell(3) + "','" + Utility.getMaxDate(row.getCell(4).toString().trim()) + "','" + row.getCell(5) + "','"
                             + row.getCell(5) + "','" + row.getCell(6) + "'," + row.getCell(7) + ",'" + file_name + "','"
                             + InfoCQT[2] + Constants.TAX_MODEL + "','" + InfoCQT[1] + "','" + InfoCQT[0] + "','TKNS','TK','" + row.getCell(1) + "')";
 
@@ -253,7 +253,7 @@ public class ImpExlToOra {
             for (int i = 6; i <= t_rows; i++) {
                 row = sheet_name.getRow(i);
                 //Kiểm tra nếu không tồn tại mã TIN -> thoát
-                if (row.getCell(0).toString().isEmpty()) {
+                if (row.getCell(0).toString().trim().isEmpty()) {
                     break;
                 }
                 /**
@@ -262,7 +262,7 @@ public class ImpExlToOra {
                  * Chi cục = > ma_chuong = '757'
                  */
                 if (InfoCQT[1].length() == 3) {
-                    if (Constants.CHUONG_MTMUC.indexOf(row.getCell(1).toString()) >= 0) {
+                    if (Constants.CHUONG_MTMUC.indexOf(row.getCell(1).toString().trim()) >= 0) {
                         ma_chuong = "557";
                     } else {
                         ma_chuong = "757";
@@ -279,15 +279,15 @@ public class ImpExlToOra {
                 desc_ngay_mmyyyy = new String[3];
 
                 //check date
-                desc_ngay_ddmmyyyy[0] = Utility.checkDateDDMMYYYY(row.getCell(5).toString());
+                desc_ngay_ddmmyyyy[0] = Utility.checkDateDDMMYYYY(row.getCell(5).toString().trim());
 
-                desc_ngay_mmyyyy[0] = Utility.checkDateMMYYYY(row.getCell(2).toString());
-                desc_ngay_mmyyyy[1] = Utility.checkDateMMYYYY(row.getCell(3).toString());
-                desc_ngay_mmyyyy[2] = Utility.checkDateMMYYYY(row.getCell(4).toString());
+                desc_ngay_mmyyyy[0] = Utility.checkDateMMYYYY(row.getCell(2).toString().trim());
+                desc_ngay_mmyyyy[1] = Utility.checkDateMMYYYY(row.getCell(3).toString().trim());
+                desc_ngay_mmyyyy[2] = Utility.checkDateMMYYYY(row.getCell(4).toString().trim());
 
                 //Check data CDNT
-                desc_nt = Utility.checkDataCDNT(row.getCell(1).toString().substring(0, 4));
-                desc_tin = Utility.checkTIN(row.getCell(0).toString());
+                desc_nt = Utility.checkDataCDNT(row.getCell(1).toString().trim().substring(0, 4));
+                desc_tin = Utility.checkTIN(row.getCell(0).toString().trim());
 
 
 
@@ -297,9 +297,9 @@ public class ImpExlToOra {
                             + "TMT_MA_TMUC, tkhoan, KYKK_TU_NGAY, KYKK_DEN_NGAY, "
                             + "ngay_hach_toan, HAN_NOP, NO_CUOI_KY, imp_file, "
                             + "tax_model, short_name, ma_cqt, loai) values ("
-                            + "'" + row.getCell(0).toString() + "','" + ma_chuong + "','" + Constants.MA_KHOAN_000 + "','"
-                            + row.getCell(1).toString().substring(0, 4) + "','TKNS','01/" + row.getCell(3) + "','" + Utility.getMaxDate(row.getCell(4).toString()) + "','"
-                            + Utility.getMaxDate(row.getCell(2).toString()) + "','" + row.getCell(5) + "'," + row.getCell(6) + ",'" + file_name + "','"
+                            + "'" + row.getCell(0).toString().trim() + "','" + ma_chuong + "','" + Constants.MA_KHOAN_000 + "','"
+                            + row.getCell(1).toString().trim().substring(0, 4) + "','TKNS','01/" + row.getCell(3) + "','" + Utility.getMaxDate(row.getCell(4).toString().trim()) + "','"
+                            + Utility.getMaxDate(row.getCell(2).toString().trim()) + "','" + row.getCell(5) + "'," + row.getCell(6) + ",'" + file_name + "','"
                             + InfoCQT[2] + Constants.TAX_MODEL + "','" + InfoCQT[1] + "','" + InfoCQT[0] + "','CD')";
 
                     //Insert to db
@@ -377,7 +377,7 @@ public class ImpExlToOra {
             for (int i = 6; i <= t_rows; i++) {
                 row = sheet_name.getRow(i);
                 //Kiểm tra nếu không tồn tại mã TIN -> thoát
-                if (row.getCell(0).toString().isEmpty()) {
+                if (row.getCell(0).toString().trim().isEmpty()) {
                     break;
                 }
                 //clear
@@ -387,40 +387,40 @@ public class ImpExlToOra {
                 desc_money_tk = "";
                 desc_ngay_ddmmyyyy = new String[9];
                 //kiểm tra định dạng ngày
-                desc_ngay_ddmmyyyy[0] = Utility.checkDateDDMMYYYY(row.getCell(11).toString());
-                desc_ngay_ddmmyyyy[1] = Utility.checkDateDDMMYYYY(row.getCell(12).toString());
-                desc_ngay_ddmmyyyy[2] = Utility.checkDateDDMMYYYY(row.getCell(14).toString());
-                desc_ngay_ddmmyyyy[3] = Utility.checkDateDDMMYYYY(row.getCell(15).toString());
-                desc_ngay_ddmmyyyy[4] = Utility.checkDateDDMMYYYY(row.getCell(17).toString());
-                desc_ngay_ddmmyyyy[5] = Utility.checkDateDDMMYYYY(row.getCell(18).toString());
-                desc_ngay_ddmmyyyy[6] = Utility.checkDateDDMMYYYY(row.getCell(20).toString());
-                desc_ngay_ddmmyyyy[7] = Utility.checkDateDDMMYYYY(row.getCell(21).toString());
+                desc_ngay_ddmmyyyy[0] = Utility.checkDateDDMMYYYY(row.getCell(11).toString().trim());
+                desc_ngay_ddmmyyyy[1] = Utility.checkDateDDMMYYYY(row.getCell(12).toString().trim());
+                desc_ngay_ddmmyyyy[2] = Utility.checkDateDDMMYYYY(row.getCell(14).toString().trim());
+                desc_ngay_ddmmyyyy[3] = Utility.checkDateDDMMYYYY(row.getCell(15).toString().trim());
+                desc_ngay_ddmmyyyy[4] = Utility.checkDateDDMMYYYY(row.getCell(17).toString().trim());
+                desc_ngay_ddmmyyyy[5] = Utility.checkDateDDMMYYYY(row.getCell(18).toString().trim());
+                desc_ngay_ddmmyyyy[6] = Utility.checkDateDDMMYYYY(row.getCell(20).toString().trim());
+                desc_ngay_ddmmyyyy[7] = Utility.checkDateDDMMYYYY(row.getCell(21).toString().trim());
                 if (!row.getCell(24).toString().isEmpty()) {
-                    desc_ngay_ddmmyyyy[8] = Utility.checkDateDDMMYYYY(row.getCell(24).toString());
+                    desc_ngay_ddmmyyyy[8] = Utility.checkDateDDMMYYYY(row.getCell(24).toString().trim());
                 } else {
                     desc_ngay_ddmmyyyy[8] = "";
                 }
 
                 //kiểm tra số tiền không âm
-                desc_money_tk = Utility.checkAm("Doanh thu ph¸t sinh trong kú", row.getCell(2).toString());
-                desc_money_tk = desc_money_tk + Utility.checkAm("Thu nhËp chÞu thuÕ", row.getCell(4).toString());
-                desc_money_tk = desc_money_tk + Utility.checkAm("Gi¶m trõ gia c¶nh", row.getCell(5).toString());
-                desc_money_tk = desc_money_tk + Utility.checkAm("Gi¶m trõ b¶n th©n", row.getCell(6).toString());
-                desc_money_tk = desc_money_tk + Utility.checkAm("Gi¶m trõ cho ng­êi phô thuéc", row.getCell(7).toString());
-                desc_money_tk = desc_money_tk + Utility.checkAm("Thu nhËp tÝnh thuÕ", row.getCell(8).toString());
-                desc_money_tk = desc_money_tk + Utility.checkAm("Thu nhËp dù kiÕn ph¶i nép", row.getCell(9).toString());
-                desc_money_tk = desc_money_tk + Utility.checkAm("Quý I ph©n bæ", row.getCell(10).toString());
-                desc_money_tk = desc_money_tk + Utility.checkAm("Quý II ph©n bæ", row.getCell(13).toString());
-                desc_money_tk = desc_money_tk + Utility.checkAm("Quý III ph©n bæ", row.getCell(16).toString());
-                desc_money_tk = desc_money_tk + Utility.checkAm("Quý IV ph©n bæ", row.getCell(19).toString());
-                desc_money_tk = desc_money_tk + Utility.checkAm("Sè tiÒn ®· ho¹ch to¸n", row.getCell(25).toString());
+                desc_money_tk = Utility.checkAm("Doanh thu ph¸t sinh trong kú", row.getCell(2).toString().trim());
+                desc_money_tk = desc_money_tk + Utility.checkAm("Thu nhËp chÞu thuÕ", row.getCell(4).toString().trim());
+                desc_money_tk = desc_money_tk + Utility.checkAm("Gi¶m trõ gia c¶nh", row.getCell(5).toString().trim());
+                desc_money_tk = desc_money_tk + Utility.checkAm("Gi¶m trõ b¶n th©n", row.getCell(6).toString().trim());
+                desc_money_tk = desc_money_tk + Utility.checkAm("Gi¶m trõ cho ng­êi phô thuéc", row.getCell(7).toString().trim());
+                desc_money_tk = desc_money_tk + Utility.checkAm("Thu nhËp tÝnh thuÕ", row.getCell(8).toString().trim());
+                desc_money_tk = desc_money_tk + Utility.checkAm("Thu nhËp dù kiÕn ph¶i nép", row.getCell(9).toString().trim());
+                desc_money_tk = desc_money_tk + Utility.checkAm("Quý I ph©n bæ", row.getCell(10).toString().trim());
+                desc_money_tk = desc_money_tk + Utility.checkAm("Quý II ph©n bæ", row.getCell(13).toString().trim());
+                desc_money_tk = desc_money_tk + Utility.checkAm("Quý III ph©n bæ", row.getCell(16).toString().trim());
+                desc_money_tk = desc_money_tk + Utility.checkAm("Quý IV ph©n bæ", row.getCell(19).toString().trim());
+                desc_money_tk = desc_money_tk + Utility.checkAm("Sè tiÒn ®· ho¹ch to¸n", row.getCell(25).toString().trim());
 
                 //Check tỷ lệ thu nhập chịu thuế
-                desc_cltnct = Utility.checkTLTNCT(Integer.parseInt(row.getCell(3).toString()));
+                desc_cltnct = Utility.checkTLTNCT(Integer.parseInt(row.getCell(3).toString().trim()));
                 //Check data 10KK-TNCN
-                desc_tin = Utility.checkTIN(row.getCell(0).toString());
+                desc_tin = Utility.checkTIN(row.getCell(0).toString().trim());
 
-                desc_kylb = Utility.checkKyLBMMYYYY(row.getCell(1).toString());
+                desc_kylb = Utility.checkKyLBMMYYYY(row.getCell(1).toString().trim());
 
                 //ghi vào database trung gian
                 if (desc_tin.isEmpty() && desc_kylb.isEmpty() && desc_ngay_ddmmyyyy[0].isEmpty() && desc_ngay_ddmmyyyy[1].isEmpty() && desc_ngay_ddmmyyyy[2].isEmpty() && desc_ngay_ddmmyyyy[3].isEmpty()
@@ -429,21 +429,21 @@ public class ImpExlToOra {
 
                     //Kiểm tra mã số thuế đại lý có giá trị hay không
                     if (!row.getCell(22).toString().isEmpty()) {
-                        mst_dtk = row.getCell(22).toString();
+                        mst_dtk = row.getCell(22).toString().trim();
                     } else {
                         mst_dtk = "";
                     }
 
                     //Kiểm tra hợp đồng đại lý thuế số
                     if (!row.getCell(23).toString().isEmpty()) {
-                        hd_dlt_so = row.getCell(23).toString();
+                        hd_dlt_so = row.getCell(23).toString().trim();
                     } else {
                         hd_dlt_so = "";
                     }
 
                     //Kiểm tra ngày hợp đồng
                     if (!row.getCell(24).toString().isEmpty()) {
-                        hd_dlt_ngay = row.getCell(24).toString();
+                        hd_dlt_ngay = row.getCell(24).toString().trim();
                     } else {
                         hd_dlt_ngay = "";
                     }
@@ -457,13 +457,13 @@ public class ImpExlToOra {
                             + "HN03, PB04, kytt04, HT04, "
                             + "HN04, imp_file, tax_model, short_name, "
                             + "ma_cqt, mst_dtk, hd_dlt_so, hd_dlt_ngay, rv_so_tien) values ("
-                            + "'" + row.getCell(0).toString() + "','01/" + row.getCell(1) + "','" + Constants.KYKK_TU_NGAY + "','"
+                            + "'" + row.getCell(0).toString().trim() + "','01/" + row.getCell(1) + "','" + Constants.KYKK_TU_NGAY + "','"
                             + Constants.KYKK_DEN_NGAY + "'," + row.getCell(2) + ", " + row.getCell(3) + "," + row.getCell(4) + ","
                             + row.getCell(5) + "," + row.getCell(6) + "," + row.getCell(7) + "," + row.getCell(8) + ","
-                            + row.getCell(9) + "," + row.getCell(10) + ",'" + Utility.getQuy(row.getCell(11).toString()) + "','" + row.getCell(11) + "','"
-                            + row.getCell(12) + "','" + row.getCell(13) + "','" + Utility.getQuy(row.getCell(14).toString()) + "','" + row.getCell(14) + "','"
-                            + row.getCell(15) + "','" + row.getCell(16) + "','" + Utility.getQuy(row.getCell(17).toString()) + "','" + row.getCell(17) + "','"
-                            + row.getCell(18) + "','" + row.getCell(19) + "','" + Utility.getQuy(row.getCell(20).toString()) + "','" + row.getCell(20) + "','"
+                            + row.getCell(9) + "," + row.getCell(10) + ",'" + Utility.getQuy(row.getCell(11).toString().trim()) + "','" + row.getCell(11) + "','"
+                            + row.getCell(12) + "','" + row.getCell(13) + "','" + Utility.getQuy(row.getCell(14).toString().trim()) + "','" + row.getCell(14) + "','"
+                            + row.getCell(15) + "','" + row.getCell(16) + "','" + Utility.getQuy(row.getCell(17).toString().trim()) + "','" + row.getCell(17) + "','"
+                            + row.getCell(18) + "','" + row.getCell(19) + "','" + Utility.getQuy(row.getCell(20).toString().trim()) + "','" + row.getCell(20) + "','"
                             + row.getCell(21) + "','" + file_name + "','" + InfoCQT[2] + Constants.TAX_MODEL + "','"
                             + InfoCQT[1] + "','" + InfoCQT[0] + "','" + mst_dtk + "','" + hd_dlt_so + "','" + hd_dlt_ngay + "'," + row.getCell(25) + ")";
 
