@@ -57,30 +57,30 @@ public class ConvertPSCD {
         /*
          * Connection type: Custom Application server
          */
-//        connectProperties.setProperty(DestinationDataProvider.JCO_ASHOST, "10.64.8.93");
-//        connectProperties.setProperty(DestinationDataProvider.JCO_SYSNR, "00");
-//        connectProperties.setProperty(DestinationDataProvider.JCO_CLIENT, "500");
-//        connectProperties.setProperty(DestinationDataProvider.JCO_USER, "dc_dev02");
-//        connectProperties.setProperty(DestinationDataProvider.JCO_PASSWD, "1234567");
-//        connectProperties.setProperty(DestinationDataProvider.JCO_LANG, "en");       
-//        createDataFile(DESTINATION_NAME1, "jcoDestination", connectProperties);
-//        connectProperties.setProperty(DestinationDataProvider.JCO_POOL_CAPACITY, "70");
-//        connectProperties.setProperty(DestinationDataProvider.JCO_PEAK_LIMIT, "50");
-//        createDataFile(DESTINATION_NAME2, "jcoDestination", connectProperties);
-        /*
-         * Connection type: Group/Server Selection
-         */
+        connectProperties.setProperty(DestinationDataProvider.JCO_ASHOST, "10.64.85.19");
+        connectProperties.setProperty(DestinationDataProvider.JCO_SYSNR, "50");
         connectProperties.setProperty(DestinationDataProvider.JCO_CLIENT, "500");
-        connectProperties.setProperty(DestinationDataProvider.JCO_MSHOST, "10.64.85.12");
-        connectProperties.setProperty(DestinationDataProvider.JCO_R3NAME, "PE1");
-        connectProperties.setProperty(DestinationDataProvider.JCO_GROUP, "PE1-GROUP");
         connectProperties.setProperty(DestinationDataProvider.JCO_USER, "dc_dev02");
-        connectProperties.setProperty(DestinationDataProvider.JCO_PASSWD, "1234567");
-        connectProperties.setProperty(DestinationDataProvider.JCO_LANG, "en");
+        connectProperties.setProperty(DestinationDataProvider.JCO_PASSWD, "abc123");
+        connectProperties.setProperty(DestinationDataProvider.JCO_LANG, "en");       
         createDataFile(DESTINATION_NAME1, "jcoDestination", connectProperties);
         connectProperties.setProperty(DestinationDataProvider.JCO_POOL_CAPACITY, "70");
         connectProperties.setProperty(DestinationDataProvider.JCO_PEAK_LIMIT, "50");
         createDataFile(DESTINATION_NAME2, "jcoDestination", connectProperties);
+        /*
+         * Connection type: Group/Server Selection
+         */
+//        connectProperties.setProperty(DestinationDataProvider.JCO_CLIENT, "500");
+//        connectProperties.setProperty(DestinationDataProvider.JCO_MSHOST, "10.64.85.12");
+//        connectProperties.setProperty(DestinationDataProvider.JCO_R3NAME, "PE1");
+//        connectProperties.setProperty(DestinationDataProvider.JCO_GROUP, "PE1-GROUP");
+//        connectProperties.setProperty(DestinationDataProvider.JCO_USER, "dc_dev02");
+//        connectProperties.setProperty(DestinationDataProvider.JCO_PASSWD, "1234567");
+//        connectProperties.setProperty(DestinationDataProvider.JCO_LANG, "en");
+//        createDataFile(DESTINATION_NAME1, "jcoDestination", connectProperties);
+//        connectProperties.setProperty(DestinationDataProvider.JCO_POOL_CAPACITY, "70");
+//        connectProperties.setProperty(DestinationDataProvider.JCO_PEAK_LIMIT, "50");
+//        createDataFile(DESTINATION_NAME2, "jcoDestination", connectProperties);
 
     }
     private static BlockingQueue<MultiStepJob> queue = new LinkedBlockingQueue<MultiStepJob>();
@@ -823,14 +823,10 @@ public class ConvertPSCD {
                     tblInGT_APPENDIX.setValue("FBTYP", arrNPT.get(i).arrdtNPT.get(r).getFBTYP());
                     tblInGT_APPENDIX.setValue("APPEN_ID", arrNPT.get(i).arrdtNPT.get(r).getAPPEN_ID());
                     tblInGT_APPENDIX.setValue("TAXPAYER_ID", arrNPT.get(i).arrdtNPT.get(r).getTAXPAYER_ID());
-                    if (arrNPT.get(i).arrdtNPT.get(r).getTAXPAYER_NAME() != null) {
-                        tblInGT_APPENDIX.setValue("TAXPAYER_NAME", Tcvn3Converter.convert(arrNPT.get(i).arrdtNPT.get(r).getTAXPAYER_NAME()));
-                    }
+                    tblInGT_APPENDIX.setValue("TAXPAYER_NAME", Tcvn3Converter.convert(arrNPT.get(i).arrdtNPT.get(r).getTAXPAYER_NAME()));
                     tblInGT_APPENDIX.setValue("BIRTHDAY", arrNPT.get(i).arrdtNPT.get(r).getBIRTHDAY());
                     tblInGT_APPENDIX.setValue("IDENTIFY_NUM", arrNPT.get(i).arrdtNPT.get(r).getIDENTIFY_NUM());
-                    if (arrNPT.get(i).arrdtNPT.get(r).getRELATIONSHIP() != null) {
-                        tblInGT_APPENDIX.setValue("RELATIONSHIP", Tcvn3Converter.convert(arrNPT.get(i).arrdtNPT.get(r).getRELATIONSHIP()));
-                    }
+                    tblInGT_APPENDIX.setValue("RELATIONSHIP", Tcvn3Converter.convert(arrNPT.get(i).arrdtNPT.get(r).getRELATIONSHIP()));
                     tblInGT_APPENDIX.setValue("NUM_OF_RELIEF", arrNPT.get(i).arrdtNPT.get(r).getNUM_OF_RELIEF());
                     tblInGT_APPENDIX.setValue("INCOME_RELIEF", arrNPT.get(i).arrdtNPT.get(r).getINCOME_RELIEF());
                     tblInGT_APPENDIX.setValue("RELATIONSHIP_WH", arrNPT.get(i).arrdtNPT.get(r).getRELATIONSHIP_WH());
