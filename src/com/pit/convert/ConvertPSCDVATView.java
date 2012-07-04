@@ -1499,7 +1499,6 @@ public class ConvertPSCDVATView extends FrameView {
 
         jScrollPane2.setName("jScrollPane2"); // NOI18N
 
-        lstCCT_CV.setEnabled(false);
         lstCCT_CV.setName("lstCCT_CV"); // NOI18N
         jScrollPane2.setViewportView(lstCCT_CV);
 
@@ -2040,9 +2039,7 @@ public class ConvertPSCDVATView extends FrameView {
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(104, 104, 104)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(cboCkhLst, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 467, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cboCkhLst, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(320, 320, 320)
