@@ -40,7 +40,6 @@ import com.pit.conn.ConnectDB;
 import com.pit.utility.Utility;
 import java.sql.SQLException;
 import java.util.Date;
-import javax.swing.JOptionPane;
 
 /**
  * Chứa càc methods thực hiện chuyển đội dữ liệu
@@ -57,30 +56,30 @@ public class ConvertPSCD {
         /*
          * Connection type: Custom Application server
          */
-        connectProperties.setProperty(DestinationDataProvider.JCO_ASHOST, "10.64.85.19");
-        connectProperties.setProperty(DestinationDataProvider.JCO_SYSNR, "50");
-        connectProperties.setProperty(DestinationDataProvider.JCO_CLIENT, "500");
-        connectProperties.setProperty(DestinationDataProvider.JCO_USER, "dc_dev02");
-        connectProperties.setProperty(DestinationDataProvider.JCO_PASSWD, "abc123");
-        connectProperties.setProperty(DestinationDataProvider.JCO_LANG, "en");       
-        createDataFile(DESTINATION_NAME1, "jcoDestination", connectProperties);
-        connectProperties.setProperty(DestinationDataProvider.JCO_POOL_CAPACITY, "70");
-        connectProperties.setProperty(DestinationDataProvider.JCO_PEAK_LIMIT, "50");
-        createDataFile(DESTINATION_NAME2, "jcoDestination", connectProperties);
-        /*
-         * Connection type: Group/Server Selection
-         */
+//        connectProperties.setProperty(DestinationDataProvider.JCO_ASHOST, "10.64.85.19");
+//        connectProperties.setProperty(DestinationDataProvider.JCO_SYSNR, "50");
 //        connectProperties.setProperty(DestinationDataProvider.JCO_CLIENT, "500");
-//        connectProperties.setProperty(DestinationDataProvider.JCO_MSHOST, "10.64.85.12");
-//        connectProperties.setProperty(DestinationDataProvider.JCO_R3NAME, "PE1");
-//        connectProperties.setProperty(DestinationDataProvider.JCO_GROUP, "PE1-GROUP");
 //        connectProperties.setProperty(DestinationDataProvider.JCO_USER, "dc_dev02");
-//        connectProperties.setProperty(DestinationDataProvider.JCO_PASSWD, "1234567");
-//        connectProperties.setProperty(DestinationDataProvider.JCO_LANG, "en");
+//        connectProperties.setProperty(DestinationDataProvider.JCO_PASSWD, "abc123");
+//        connectProperties.setProperty(DestinationDataProvider.JCO_LANG, "en");       
 //        createDataFile(DESTINATION_NAME1, "jcoDestination", connectProperties);
 //        connectProperties.setProperty(DestinationDataProvider.JCO_POOL_CAPACITY, "70");
 //        connectProperties.setProperty(DestinationDataProvider.JCO_PEAK_LIMIT, "50");
 //        createDataFile(DESTINATION_NAME2, "jcoDestination", connectProperties);
+        /*
+         * Connection type: Group/Server Selection
+         */
+        connectProperties.setProperty(DestinationDataProvider.JCO_CLIENT, "500");
+        connectProperties.setProperty(DestinationDataProvider.JCO_MSHOST, "10.64.85.12");
+        connectProperties.setProperty(DestinationDataProvider.JCO_R3NAME, "PE1");
+        connectProperties.setProperty(DestinationDataProvider.JCO_GROUP, "PE1-GROUP");
+        connectProperties.setProperty(DestinationDataProvider.JCO_USER, "dc_dev02");
+        connectProperties.setProperty(DestinationDataProvider.JCO_PASSWD, "1234567");
+        connectProperties.setProperty(DestinationDataProvider.JCO_LANG, "en");
+        createDataFile(DESTINATION_NAME1, "jcoDestination", connectProperties);
+        connectProperties.setProperty(DestinationDataProvider.JCO_POOL_CAPACITY, "70");
+        connectProperties.setProperty(DestinationDataProvider.JCO_PEAK_LIMIT, "50");
+        createDataFile(DESTINATION_NAME2, "jcoDestination", connectProperties);
 
     }
     private static BlockingQueue<MultiStepJob> queue = new LinkedBlockingQueue<MultiStepJob>();
