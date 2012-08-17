@@ -1404,6 +1404,7 @@ public class ConvertPSCDVATView extends FrameView {
         lblStatusList = new java.awt.Label();
         btnUpdateList = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
@@ -2095,19 +2096,26 @@ public class ConvertPSCDVATView extends FrameView {
 
         jLabel12.setName("jLabel12"); // NOI18N
 
+        txtSrcList.setText(resourceMap.getString("txtSrcList.text")); // NOI18N
+        txtSrcList.setToolTipText(resourceMap.getString("txtSrcList.toolTipText")); // NOI18N
         txtSrcList.setName("txtSrcList"); // NOI18N
 
         btnSrcLst.setAction(actionMap.get("PartLstFolder")); // NOI18N
+        btnSrcLst.setText(resourceMap.getString("btnSrcLst.text")); // NOI18N
         btnSrcLst.setName("btnSrcLst"); // NOI18N
 
         lblStatusList.setAlignment(java.awt.Label.CENTER);
         lblStatusList.setName("lblStatusList"); // NOI18N
 
         btnUpdateList.setAction(actionMap.get("updateList")); // NOI18N
+        btnUpdateList.setText(resourceMap.getString("btnUpdateList.text")); // NOI18N
         btnUpdateList.setName("btnUpdateList"); // NOI18N
 
         jButton4.setAction(actionMap.get("quit")); // NOI18N
         jButton4.setName("jButton4"); // NOI18N
+
+        jLabel13.setText(resourceMap.getString("jLabel13.text")); // NOI18N
+        jLabel13.setName("jLabel13"); // NOI18N
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -2116,9 +2124,15 @@ public class ConvertPSCDVATView extends FrameView {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(171, 171, 171)
-                        .addComponent(jLabel12)
-                        .addGap(18, 18, 18)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addGap(171, 171, 171)
+                                .addComponent(jLabel12)
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel13)
+                                .addGap(7, 7, 7)))
                         .addComponent(txtSrcList, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSrcLst, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -2139,7 +2153,8 @@ public class ConvertPSCDVATView extends FrameView {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(txtSrcList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSrcLst))
+                    .addComponent(btnSrcLst, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
                 .addGap(25, 25, 25)
                 .addComponent(lblStatusList, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
@@ -2335,6 +2350,7 @@ public class ConvertPSCDVATView extends FrameView {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
