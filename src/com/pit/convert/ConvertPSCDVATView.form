@@ -1234,9 +1234,18 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="171" max="-2" attributes="0"/>
-                                  <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="171" max="-2" attributes="0"/>
+                                          <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="1">
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
                                   <Component id="txtSrcList" min="-2" pref="430" max="-2" attributes="1"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="btnSrcLst" min="-2" pref="26" max="-2" attributes="0"/>
@@ -1263,7 +1272,8 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtSrcList" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnSrcLst" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnSrcLst" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                           <Component id="lblStatusList" min="-2" pref="32" max="-2" attributes="0"/>
@@ -1285,6 +1295,8 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtSrcList">
                   <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="txtSrcList.text"/>
+                    <Property name="toolTipText" type="java.lang.String" resourceKey="txtSrcList.toolTipText"/>
                     <Property name="name" type="java.lang.String" value="txtSrcList" noResource="true"/>
                   </Properties>
                 </Component>
@@ -1293,6 +1305,7 @@
                     <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
                       <action class="com.pit.convert.ConvertPSCDVATView" id="PartLstFolder" methodName="PartLstFolder"/>
                     </Property>
+                    <Property name="text" type="java.lang.String" resourceKey="btnSrcLst.text"/>
                     <Property name="name" type="java.lang.String" value="btnSrcLst" noResource="true"/>
                   </Properties>
                 </Component>
@@ -1310,6 +1323,7 @@
                     <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
                       <action class="com.pit.convert.ConvertPSCDVATView" id="updateList" methodName="updateList"/>
                     </Property>
+                    <Property name="text" type="java.lang.String" resourceKey="btnUpdateList.text"/>
                     <Property name="name" type="java.lang.String" value="btnUpdateList" noResource="true"/>
                   </Properties>
                 </Component>
@@ -1319,6 +1333,12 @@
                       <action class="org.jdesktop.application.Application" id="quit" methodName="quit"/>
                     </Property>
                     <Property name="name" type="java.lang.String" value="jButton4" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel13">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jLabel13.text"/>
+                    <Property name="name" type="java.lang.String" value="jLabel13" noResource="true"/>
                   </Properties>
                 </Component>
               </SubComponents>
