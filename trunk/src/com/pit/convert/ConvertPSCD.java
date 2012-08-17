@@ -37,6 +37,7 @@ import java.util.logging.Logger;
 
 import com.pit.system.Constants;
 import com.pit.conn.ConnectDB;
+import com.pit.datatype.DataList;
 import com.pit.utility.Utility;
 import java.sql.SQLException;
 import java.util.Date;
@@ -56,37 +57,38 @@ public class ConvertPSCD {
         /*
          * Connection type: Custom Application server
          */
-//        connectProperties.setProperty(DestinationDataProvider.JCO_ASHOST, "10.64.85.19");
-//        connectProperties.setProperty(DestinationDataProvider.JCO_SYSNR, "50");
-//        connectProperties.setProperty(DestinationDataProvider.JCO_CLIENT, "500");
-//        connectProperties.setProperty(DestinationDataProvider.JCO_USER, "dc_dev02");
-//        connectProperties.setProperty(DestinationDataProvider.JCO_PASSWD, "abc123");
-//        connectProperties.setProperty(DestinationDataProvider.JCO_LANG, "en");       
-//        createDataFile(DESTINATION_NAME1, "jcoDestination", connectProperties);
-//        connectProperties.setProperty(DestinationDataProvider.JCO_POOL_CAPACITY, "70");
-//        connectProperties.setProperty(DestinationDataProvider.JCO_PEAK_LIMIT, "50");
-//        createDataFile(DESTINATION_NAME2, "jcoDestination", connectProperties);
-        /*
-         * Connection type: Group/Server Selection
-         */
-        connectProperties.setProperty(DestinationDataProvider.JCO_CLIENT, "500");
-        connectProperties.setProperty(DestinationDataProvider.JCO_MSHOST, "10.64.85.12");
-        connectProperties.setProperty(DestinationDataProvider.JCO_R3NAME, "PE1");
-        connectProperties.setProperty(DestinationDataProvider.JCO_GROUP, "PE1-GROUP");
-        connectProperties.setProperty(DestinationDataProvider.JCO_USER, "dc_dev02");
-        connectProperties.setProperty(DestinationDataProvider.JCO_PASSWD, "1234567");
+        connectProperties.setProperty(DestinationDataProvider.JCO_ASHOST, "10.15.119.44");
+        connectProperties.setProperty(DestinationDataProvider.JCO_SYSNR, "01");
+        connectProperties.setProperty(DestinationDataProvider.JCO_CLIENT, "600");
+        connectProperties.setProperty(DestinationDataProvider.JCO_USER, "haibv2");
+        connectProperties.setProperty(DestinationDataProvider.JCO_PASSWD, "123456a@");
         connectProperties.setProperty(DestinationDataProvider.JCO_LANG, "en");
         createDataFile(DESTINATION_NAME1, "jcoDestination", connectProperties);
         connectProperties.setProperty(DestinationDataProvider.JCO_POOL_CAPACITY, "70");
         connectProperties.setProperty(DestinationDataProvider.JCO_PEAK_LIMIT, "50");
         createDataFile(DESTINATION_NAME2, "jcoDestination", connectProperties);
+        /*
+         * Connection type: Group/Server Selection
+         */
+//        connectProperties.setProperty(DestinationDataProvider.JCO_CLIENT, "500");
+//        connectProperties.setProperty(DestinationDataProvider.JCO_MSHOST, "10.64.85.12");
+//        connectProperties.setProperty(DestinationDataProvider.JCO_R3NAME, "PE1");
+//        connectProperties.setProperty(DestinationDataProvider.JCO_GROUP, "PE1-GROUP");
+//        connectProperties.setProperty(DestinationDataProvider.JCO_USER, "dc_dev02");
+//        connectProperties.setProperty(DestinationDataProvider.JCO_PASSWD, "1234567");
+//        connectProperties.setProperty(DestinationDataProvider.JCO_LANG, "en");
+//        createDataFile(DESTINATION_NAME1, "jcoDestination", connectProperties);
+//        connectProperties.setProperty(DestinationDataProvider.JCO_POOL_CAPACITY, "70");
+//        connectProperties.setProperty(DestinationDataProvider.JCO_PEAK_LIMIT, "50");
+//        createDataFile(DESTINATION_NAME2, "jcoDestination", connectProperties);
 
     }
     private static BlockingQueue<MultiStepJob> queue = new LinkedBlockingQueue<MultiStepJob>();
-    private static JCoFunctionTemplate convertDKTTemplate, convertNPT;
+    private static JCoFunctionTemplate convertDKTTemplate, convertNPT, convertList;
     //Danh sách NNT          
     public static ArrayList<DataCVPSCD> arrData = new ArrayList<DataCVPSCD>();
     public static ArrayList<DataCVNPT> arrNPT = new ArrayList<DataCVNPT>();
+    public static ArrayList<DataList> arrList = new ArrayList<DataList>();
     // Log
     static LogManager lm = LogManager.getLogManager();
     static Logger logger;
@@ -1255,5 +1257,154 @@ public class ConvertPSCD {
 //            logger.log(Level.WARNING, "Lỗi RuntimeExceptions: ", e.getMessage());
         }
         Environment.unregisterSessionReferenceProvider(mySessionRP);
+    }
+
+    static void updList(File file, int thread) {
+        try {
+            //get danh mục
+            arrList = UpdateList.getList(file);
+            //run update list
+            runUpdateList(thread);
+        } catch (ParserConfigurationException ex) {
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (JCoException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    /**
+     * Thực hiện update danh mục
+     * @param thread_vat
+     * @throws ParserConfigurationException
+     * @throws IOException
+     * @throws JCoException 
+     */
+    static void runUpdateList(int thread_vat) throws ParserConfigurationException, IOException, JCoException {
+        MySessionReferenceProvider mySessionRP = new MySessionReferenceProvider();
+        Environment.registerSessionReferenceProvider(mySessionRP);
+        try {
+            //Get properties SAP, call function, and convert data to PIT
+            JCoDestination destination = JCoDestinationManager.getDestination(DESTINATION_NAME2);
+
+            convertList = destination.getRepository().getFunctionTemplate("ZBAPI_UPDATE_LIST");
+
+            if (convertList == null) {
+                throw new RuntimeException("Service could not run due to lack of function");
+            }
+
+            runListJobs(destination, thread_vat);
+
+        } catch (JCoException je) {
+            //je.printStackTrace();
+            throw new JCoException(thread_vat, "", je.getMessage());
+//            logger.log(Level.WARNING, "JCoException: ", je.getMessage());
+        } catch (RuntimeException e) {
+//            logger.log(Level.WARNING, "Lỗi RuntimeExceptions: ", e.getMessage());
+        }
+        Environment.unregisterSessionReferenceProvider(mySessionRP);
+    }
+
+    /**
+     * Update list
+     * @param destination
+     * @param thread_vat 
+     */
+    static void runListJobs(JCoDestination destination, int thread_vat) {
+        for (int i = 0; i < arrList.size(); i++) {
+            queue.add(new StatefulMultiStepUpdateList(destination, 1, arrList.get(i)));
+        }
+        CountDownLatch doneSignal;
+
+        doneSignal = new CountDownLatch(thread_vat);
+        for (int i = 0; i < thread_vat; i++) {
+            new WorkerThread(doneSignal).start();
+        }
+        try {
+            doneSignal.await();
+        } catch (InterruptedException ie) {
+            //just leave
+            logger.log(Level.WARNING, "InterruptException:", ie);
+        }
+        //System.out.println(">>> Done");
+        //******************* CLEAR ARRAY INFOR DATA IN FILE CSV *************
+        //--------------------------------------------------------------------          
+        arrData.clear();
+        //Lấy file name đã convert 
+        ConvertPSCDVATView.getSuccesUpdateList(">>> DONE !!!");
+    }
+
+    static class StatefulMultiStepUpdateList extends StatelessMultiStepExample {
+
+        DataList list = null;
+
+        StatefulMultiStepUpdateList(JCoDestination destination, int calls, DataList list) {
+            super(destination, calls);
+            this.list = list;
+
+        }
+
+        @Override
+        public String getName() {
+            return "stateful Job-" + jobID;
+        }
+
+        @Override
+        public synchronized void runNextStep() {
+            JCoFunction fnConvert = convertList.getFunction();
+            JCoTable JcoTabRETURN = null;
+            /* --------------------------------------------------------------------*
+             * B. THỰC HIỆN KIỂM TRA *
+             * *--------------------------------------------------------------------
+             */
+            try {
+                JCoContext.begin(destination);
+                fnConvert.getImportParameterList().setValue("I_ID_DM", list.getTable());
+                fnConvert.getImportParameterList().setValue("I_ID", list.getId());
+                fnConvert.getImportParameterList().setValue("I_VALUE", list.getValues());
+                fnConvert.getImportParameterList().setValue("I_UPDATE", list.getMode());
+
+                //**-----------------------------------------------------------------------*
+                //**Get value parameter and execute                                        *
+                //**-----------------------------------------------------------------------*                    
+                fnConvert.execute(destination);
+
+
+                JcoTabRETURN = fnConvert.getTableParameterList().getTable("T_RETURN_LIST");
+
+
+                JcoTabRETURN.firstRow();
+
+                for (int i = 0; i < JcoTabRETURN.getNumRows(); i++) {
+                    JcoTabRETURN.setRow(i);
+                    System.out.println("Mess: " + JcoTabRETURN.getString("NUMBER") + "-" + JcoTabRETURN.getString("MESSAGE"));
+                }
+
+
+                executedCalls++;
+                JCoContext.end(destination);
+
+            } catch (JCoException je) {
+                ex = je;
+                ex.printStackTrace();
+            } catch (RuntimeException re) {
+                ex = re;
+                ex.printStackTrace();
+            } finally {
+                executedCalls++;
+            }
+        }
+
+        @Override
+        public void cleanUp() {
+            try {
+                JCoContext.end(destination);
+            } catch (JCoException je) {
+                ex = je;
+                logger.log(Level.WARNING, "JCoException: ", je);
+            }
+            super.cleanUp();
+        }
     }
 }
