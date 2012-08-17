@@ -45,8 +45,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ConvertPSCDVATView extends FrameView {
 
-    private String tax_code_[] = new String[759];
-    private String short_name_[] = new String[759];
+    private String tax_code_[] = new String[760];
+    private String short_name_[] = new String[760];
     public static String name_no = "", name_ps = "", name_tk = "";
     private String status = "";//Status lỗi dữ liệu trong file
     private ArrayList<String> cqt_convert = new ArrayList<String>();
