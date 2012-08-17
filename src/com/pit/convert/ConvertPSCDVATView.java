@@ -231,19 +231,19 @@ public class ConvertPSCDVATView extends FrameView {
             conn = ConvertPSCDVATApp.connORA;
             stmt = conn.createStatement();
 
-                int t = tblChkLst.getModel().getRowCount();
+            int t = tblChkLst.getModel().getRowCount();
 
-                for (int i = 0; i < t; i++) {
-                    String status = (String) tblChkLst.getModel().getValueAt(i, 2);
-                    String note_ = (String) tblChkLst.getModel().getValueAt(i, 3);
-                    if (note_ == null) {
-                        note_ = "";
-                    }
-                    if (status != null) {
-                        String sql = "update tb_chk_lst a set a.status = '" + tblChkLst.getModel().getValueAt(i, 2) + "', a.note = '" + note_ + "'  where a.short_name = '" + cboCkhLst.getSelectedItem() + "' and a.stt = " + tblChkLst.getModel().getValueAt(i, 0);
-                        rset = stmt.executeQuery(sql);
-                    }
+            for (int i = 0; i < t; i++) {
+                String status = (String) tblChkLst.getModel().getValueAt(i, 2);
+                String note_ = (String) tblChkLst.getModel().getValueAt(i, 3);
+                if (note_ == null) {
+                    note_ = "";
                 }
+                if (status != null) {
+                    String sql = "update tb_chk_lst a set a.status = '" + tblChkLst.getModel().getValueAt(i, 2) + "', a.note = '" + note_ + "'  where a.short_name = '" + cboCkhLst.getSelectedItem() + "' and a.stt = " + tblChkLst.getModel().getValueAt(i, 0);
+                    rset = stmt.executeQuery(sql);
+                }
+            }
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -940,6 +940,11 @@ public class ConvertPSCDVATView extends FrameView {
         getDirectory('E');
     }
 
+    @Action
+    public void PartLstFolder() {
+        getDirectory('L');
+    }
+
     /**
      * display file choose
      *
@@ -958,6 +963,8 @@ public class ConvertPSCDVATView extends FrameView {
             case 'E':
                 txtErrFolder.setText(file.getPath());
                 break;
+            case 'L':
+                txtSrcList.setText(file.getPath());
             default:
                 break;
         }
@@ -1068,6 +1075,17 @@ public class ConvertPSCDVATView extends FrameView {
                     JOptionPane.WARNING_MESSAGE);
         }
 
+    }
+
+    /**
+     * Update list district and province
+     */
+    @Action
+    public void updateList() {
+        File file = new File(txtSrcList.getText());
+        int thread = Integer.parseInt(txtThread.getText());
+        //Lấy danh sách danh mục thay đổi
+        ConvertPSCD.updList(file, thread);
     }
 
     /**
@@ -1295,6 +1313,10 @@ public class ConvertPSCDVATView extends FrameView {
         lblDisplay.setText(file);
     }
 
+    public static void getSuccesUpdateList(String file) {
+        lblStatusList.setText(file);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1375,6 +1397,13 @@ public class ConvertPSCDVATView extends FrameView {
         tblChkLst = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        txtSrcList = new javax.swing.JTextField();
+        btnSrcLst = new javax.swing.JButton();
+        lblStatusList = new java.awt.Label();
+        btnUpdateList = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
@@ -1516,8 +1545,6 @@ public class ConvertPSCDVATView extends FrameView {
 
         chkPSCD.setAction(actionMap.get("ActionCheckPSCD")); // NOI18N
         chkPSCD.setText(resourceMap.getString("chkPSCD.text")); // NOI18N
-        chkPSCD.setMaximumSize(new java.awt.Dimension(89, 23));
-        chkPSCD.setMinimumSize(new java.awt.Dimension(89, 23));
         chkPSCD.setName("chkPSCD"); // NOI18N
 
         javax.swing.GroupLayout pnlPSCDLayout = new javax.swing.GroupLayout(pnlPSCD);
@@ -1573,7 +1600,7 @@ public class ConvertPSCDVATView extends FrameView {
                             .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnCVNPT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnConvert)
-                            .addComponent(chkPSCD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(chkPSCD)))
                     .addGroup(pnlPSCDLayout.createSequentialGroup()
                         .addGroup(pnlPSCDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cboCQT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1922,7 +1949,7 @@ public class ConvertPSCDVATView extends FrameView {
                 .addComponent(radStatusALL)
                 .addGap(7, 7, 7)
                 .addComponent(btnStatus)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanel5.border.title"))); // NOI18N
@@ -1974,7 +2001,7 @@ public class ConvertPSCDVATView extends FrameView {
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnGetLog)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -1995,7 +2022,7 @@ public class ConvertPSCDVATView extends FrameView {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(283, Short.MAX_VALUE))
+                .addContainerGap(281, Short.MAX_VALUE))
         );
 
         tabPSCD.addTab(resourceMap.getString("jPanel3.TabConstraints.tabTitle"), jPanel3); // NOI18N
@@ -2063,6 +2090,66 @@ public class ConvertPSCDVATView extends FrameView {
         );
 
         tabPSCD.addTab(resourceMap.getString("jPanel6.TabConstraints.tabTitle"), jPanel6); // NOI18N
+
+        jPanel7.setName("jPanel7"); // NOI18N
+
+        jLabel12.setName("jLabel12"); // NOI18N
+
+        txtSrcList.setName("txtSrcList"); // NOI18N
+
+        btnSrcLst.setAction(actionMap.get("PartLstFolder")); // NOI18N
+        btnSrcLst.setName("btnSrcLst"); // NOI18N
+
+        lblStatusList.setAlignment(java.awt.Label.CENTER);
+        lblStatusList.setName("lblStatusList"); // NOI18N
+
+        btnUpdateList.setAction(actionMap.get("updateList")); // NOI18N
+        btnUpdateList.setName("btnUpdateList"); // NOI18N
+
+        jButton4.setAction(actionMap.get("quit")); // NOI18N
+        jButton4.setName("jButton4"); // NOI18N
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(171, 171, 171)
+                        .addComponent(jLabel12)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtSrcList, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSrcLst, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(lblStatusList, javax.swing.GroupLayout.PREFERRED_SIZE, 726, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(313, 313, 313)
+                        .addComponent(btnUpdateList, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(83, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(txtSrcList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSrcLst))
+                .addGap(25, 25, 25)
+                .addComponent(lblStatusList, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnUpdateList, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4))
+                .addContainerGap(323, Short.MAX_VALUE))
+        );
+
+        tabPSCD.addTab("Cập nhật danh mục", jPanel7);
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -2222,7 +2309,9 @@ public class ConvertPSCDVATView extends FrameView {
     private javax.swing.JButton btnKTao;
     private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnSrcExl;
+    private javax.swing.JButton btnSrcLst;
     private javax.swing.JButton btnStatus;
+    private javax.swing.JButton btnUpdateList;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox cboCQT;
@@ -2241,9 +2330,11 @@ public class ConvertPSCDVATView extends FrameView {
     private javax.swing.JMenuItem helpAndSupportMenuItem;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -2258,12 +2349,14 @@ public class ConvertPSCDVATView extends FrameView {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private static java.awt.Label lblDisplay;
     private static java.awt.Label lblStatus;
+    private static java.awt.Label lblStatusList;
     private javax.swing.JList lstCCT;
     private javax.swing.JList lstCCT_CV;
     private javax.swing.JPanel mainPanel;
@@ -2286,6 +2379,7 @@ public class ConvertPSCDVATView extends FrameView {
     private javax.swing.JTextField txtFileImp;
     private javax.swing.JTextArea txtLog;
     private javax.swing.JTextField txtSrcFolder;
+    private javax.swing.JTextField txtSrcList;
     private javax.swing.JTextField txtThread;
     // End of variables declaration//GEN-END:variables
     private final Timer messageTimer;
