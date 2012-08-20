@@ -36,6 +36,7 @@ import com.pit.help.sources.HelpAndSupport;
 import java.util.ArrayList;
 import com.pit.list.SortedListModel;
 import com.sap.conn.jco.JCoRuntimeException;
+import java.awt.Label;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import javax.swing.table.DefaultTableModel;
@@ -1303,18 +1304,14 @@ public class ConvertPSCDVATView extends FrameView {
         }
         lstCCT_CV.setModel(destListModel);
     }
-
+    
     /**
-     * Display file convert success
-     *
-     * @param file
+     * Display mess
+     * @param lbl
+     * @param mess 
      */
-    public static void getSuccesFile(String file) {
-        lblDisplay.setText(file);
-    }
-
-    public static void getSuccesUpdateList(String file) {
-        lblStatusList.setText(file);
+    public static void getMessSeccess(Label lbl, String mess) {
+        lbl.setText(mess);
     }
 
     /**
@@ -2370,9 +2367,9 @@ public class ConvertPSCDVATView extends FrameView {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private static java.awt.Label lblDisplay;
+    public static java.awt.Label lblDisplay;
     private static java.awt.Label lblStatus;
-    private static java.awt.Label lblStatusList;
+    public static java.awt.Label lblStatusList;
     private javax.swing.JList lstCCT;
     private javax.swing.JList lstCCT_CV;
     private javax.swing.JPanel mainPanel;
