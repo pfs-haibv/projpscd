@@ -1018,7 +1018,7 @@ public class ConvertPSCD {
         //--------------------------------------------------------------------          
         arrData.clear();
         //Lấy file name đã convert 
-        ConvertPSCDVATView.getSuccesFile(">>> DONE " + short_name + " DATA " + callFunc + " !!!");
+        ConvertPSCDVATView.getMessSeccess(ConvertPSCDVATView.lblDisplay, ">>> DONE " + short_name + " DATA " + callFunc + " !!!");
     }
 
     // Load data PSCD sau khi lấy từng loại dữ liệu (NO, PS, TK) trong database
@@ -1258,7 +1258,11 @@ public class ConvertPSCD {
         }
         Environment.unregisterSessionReferenceProvider(mySessionRP);
     }
-
+    /**
+     * Thực hiện các bước update danh mục
+     * @param file
+     * @param thread 
+     */
     static void updList(File file, int thread) {
         try {
             //get danh mục
@@ -1332,7 +1336,7 @@ public class ConvertPSCD {
         //--------------------------------------------------------------------          
         arrData.clear();
         //Lấy file name đã convert 
-        ConvertPSCDVATView.getSuccesUpdateList(">>> DONE !!!");
+        ConvertPSCDVATView.getMessSeccess(ConvertPSCDVATView.lblStatusList, ">>> DONE !!!");
     }
 
     static class StatefulMultiStepUpdateList extends StatelessMultiStepExample {
@@ -1370,9 +1374,7 @@ public class ConvertPSCD {
                 //**-----------------------------------------------------------------------*                    
                 fnConvert.execute(destination);
 
-
                 JcoTabRETURN = fnConvert.getTableParameterList().getTable("T_RETURN_LIST");
-
 
                 JcoTabRETURN.firstRow();
 
@@ -1380,7 +1382,6 @@ public class ConvertPSCD {
                     JcoTabRETURN.setRow(i);
                     System.out.println("Mess: " + JcoTabRETURN.getString("NUMBER") + "-" + JcoTabRETURN.getString("MESSAGE"));
                 }
-
 
                 executedCalls++;
                 JCoContext.end(destination);
