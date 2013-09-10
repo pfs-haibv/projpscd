@@ -221,6 +221,7 @@ namespace DC.Vatwin
                 return "Y";
             }
         }
+        //test check out
         //TienTM2 : Get parameter of Target Server
         public static void Prc_Targetes_Server_Parameter(ref string target_username, ref string target_password)
         {

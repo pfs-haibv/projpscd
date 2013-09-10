@@ -612,3 +612,7 @@ D:\NCKT\Database_Convert\TOOL\DConvert_New\Dconvert\obj\Debug\Dconvert.pdb
 D:\NCKT\Database_Convert\TOOL\DConvert\Dconvert\obj\Debug\Dconvert.csproj.ResolveComReference.cache
 D:\NCKT\Database_Convert\TOOL\DConvert\Dconvert\obj\Debug\Interop.ORAOLEDBLib.dll
 D:\NCKT\Database_Convert\TOOL\DConvert\Dconvert\bin\Debug\Interop.ORAOLEDBLib.dll
+D:\NCKT\Database_Convert\TOOL\projpscd\DConvert\Dconvert\obj\Debug\Interop.ORAOLEDBLib.dll
+D:\NCKT\Database_Convert\TOOL\projpscd\DConvert\Dconvert\obj\Debug\Dconvert.csproj.ResolveComReference.cache
+D:\NCKT\Database_Convert\TOOL\projpscd\DConvert\Dconvert\obj\Debug\Dconvert.exe
+D:\NCKT\Database_Convert\TOOL\projpscd\DConvert\Dconvert\obj\Debug\Dconvert.pdb
