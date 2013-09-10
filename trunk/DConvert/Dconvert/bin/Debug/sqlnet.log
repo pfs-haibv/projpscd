@@ -1,0 +1,216 @@
+
+
+***********************************************************************
+Fatal NI connect error 12518, connecting to:
+ (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.64.28.162)(PORT=1522))(CONNECT_DATA=(SID=DPPIT)(CID=(PROGRAM=C:\Users\Stauffenberg\Desktop\DConvert\Dconvert\bin\Debug\Dconvert.vshost.exe)(HOST=MANHTV01235)(USER=Stauffenberg))))
+
+  VERSION INFORMATION:
+	TNS for 32-bit Windows: Version 10.2.0.3.0 - Production
+	Windows NT TCP/IP NT Protocol Adapter for 32-bit Windows: Version 10.2.0.3.0 - Production
+  Time: 21-NOV-2011 14:43:44
+  Tracing not turned on.
+  Tns error struct:
+    ns main err code: 12564
+    TNS-12564: TNS:connection refused
+    ns secondary err code: 0
+    nt main err code: 0
+    nt secondary err code: 0
+    nt OS err code: 0
+
+
+***********************************************************************
+Fatal NI connect error 12518, connecting to:
+ (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.64.28.162)(PORT=1522))(CONNECT_DATA=(SID=DPPIT)(CID=(PROGRAM=C:\Users\Stauffenberg\Desktop\DConvert\Dconvert\bin\Debug\Dconvert.vshost.exe)(HOST=MANHTV01235)(USER=Stauffenberg))))
+
+  VERSION INFORMATION:
+	TNS for 32-bit Windows: Version 10.2.0.3.0 - Production
+	Windows NT TCP/IP NT Protocol Adapter for 32-bit Windows: Version 10.2.0.3.0 - Production
+  Time: 21-NOV-2011 14:45:21
+  Tracing not turned on.
+  Tns error struct:
+    ns main err code: 12564
+    TNS-12564: TNS:connection refused
+    ns secondary err code: 0
+    nt main err code: 0
+    nt secondary err code: 0
+    nt OS err code: 0
+
+
+***********************************************************************
+Fatal NI connect error 12518, connecting to:
+ (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.64.28.162)(PORT=1522))(CONNECT_DATA=(SID=DPPIT)(CID=(PROGRAM=C:\Users\Stauffenberg\Desktop\DConvert\Dconvert\bin\Debug\Dconvert.vshost.exe)(HOST=MANHTV01235)(USER=Stauffenberg))))
+
+  VERSION INFORMATION:
+	TNS for 32-bit Windows: Version 10.2.0.3.0 - Production
+	Windows NT TCP/IP NT Protocol Adapter for 32-bit Windows: Version 10.2.0.3.0 - Production
+  Time: 21-NOV-2011 14:46:12
+  Tracing not turned on.
+  Tns error struct:
+    ns main err code: 12564
+    TNS-12564: TNS:connection refused
+    ns secondary err code: 0
+    nt main err code: 0
+    nt secondary err code: 0
+    nt OS err code: 0
+
+
+***********************************************************************
+Fatal NI connect error 12518, connecting to:
+ (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.64.28.162)(PORT=1522))(CONNECT_DATA=(SID=DPPIT)(CID=(PROGRAM=C:\Users\Stauffenberg\Desktop\DConvert\Dconvert\bin\Debug\Dconvert.vshost.exe)(HOST=MANHTV01235)(USER=Stauffenberg))))
+
+  VERSION INFORMATION:
+	TNS for 32-bit Windows: Version 10.2.0.3.0 - Production
+	Windows NT TCP/IP NT Protocol Adapter for 32-bit Windows: Version 10.2.0.3.0 - Production
+  Time: 21-NOV-2011 14:52:14
+  Tracing not turned on.
+  Tns error struct:
+    ns main err code: 12564
+    TNS-12564: TNS:connection refused
+    ns secondary err code: 0
+    nt main err code: 0
+    nt secondary err code: 0
+    nt OS err code: 0
+
+
+***********************************************************************
+Fatal NI connect error 12518, connecting to:
+ (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.64.28.162)(PORT=1522))(CONNECT_DATA=(SID=DPPIT)(CID=(PROGRAM=C:\Users\Stauffenberg\Desktop\DConvert\Dconvert\bin\Debug\Dconvert.vshost.exe)(HOST=MANHTV01235)(USER=Stauffenberg))))
+
+  VERSION INFORMATION:
+	TNS for 32-bit Windows: Version 10.2.0.3.0 - Production
+	Windows NT TCP/IP NT Protocol Adapter for 32-bit Windows: Version 10.2.0.3.0 - Production
+  Time: 21-NOV-2011 14:54:55
+  Tracing not turned on.
+  Tns error struct:
+    ns main err code: 12564
+    TNS-12564: TNS:connection refused
+    ns secondary err code: 0
+    nt main err code: 0
+    nt secondary err code: 0
+    nt OS err code: 0
+
+
+***********************************************************************
+Fatal NI connect error 12518, connecting to:
+ (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.64.28.162)(PORT=1522))(CONNECT_DATA=(SID=DPPIT)(CID=(PROGRAM=C:\Users\Stauffenberg\Desktop\DConvert\Dconvert\bin\Debug\Dconvert.vshost.exe)(HOST=MANHTV01235)(USER=Stauffenberg))))
+
+  VERSION INFORMATION:
+	TNS for 32-bit Windows: Version 10.2.0.3.0 - Production
+	Windows NT TCP/IP NT Protocol Adapter for 32-bit Windows: Version 10.2.0.3.0 - Production
+  Time: 21-NOV-2011 15:06:37
+  Tracing not turned on.
+  Tns error struct:
+    ns main err code: 12564
+    TNS-12564: TNS:connection refused
+    ns secondary err code: 0
+    nt main err code: 0
+    nt secondary err code: 0
+    nt OS err code: 0
+
+
+***********************************************************************
+Fatal NI connect error 12518, connecting to:
+ (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.64.28.162)(PORT=1522))(CONNECT_DATA=(SID=DPPIT)(CID=(PROGRAM=C:\Users\Stauffenberg\Desktop\DConvert\Dconvert\bin\Debug\Dconvert.vshost.exe)(HOST=MANHTV01235)(USER=Stauffenberg))))
+
+  VERSION INFORMATION:
+	TNS for 32-bit Windows: Version 10.2.0.3.0 - Production
+	Windows NT TCP/IP NT Protocol Adapter for 32-bit Windows: Version 10.2.0.3.0 - Production
+  Time: 21-NOV-2011 15:07:50
+  Tracing not turned on.
+  Tns error struct:
+    ns main err code: 12564
+    TNS-12564: TNS:connection refused
+    ns secondary err code: 0
+    nt main err code: 0
+    nt secondary err code: 0
+    nt OS err code: 0
+
+
+***********************************************************************
+Fatal NI connect error 12518, connecting to:
+ (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.64.28.162)(PORT=1522))(CONNECT_DATA=(SID=DPPIT)(CID=(PROGRAM=C:\Users\Stauffenberg\Desktop\DConvert\Dconvert\bin\Debug\Dconvert.vshost.exe)(HOST=MANHTV01235)(USER=Stauffenberg))))
+
+  VERSION INFORMATION:
+	TNS for 32-bit Windows: Version 10.2.0.3.0 - Production
+	Windows NT TCP/IP NT Protocol Adapter for 32-bit Windows: Version 10.2.0.3.0 - Production
+  Time: 21-NOV-2011 15:08:41
+  Tracing not turned on.
+  Tns error struct:
+    ns main err code: 12564
+    TNS-12564: TNS:connection refused
+    ns secondary err code: 0
+    nt main err code: 0
+    nt secondary err code: 0
+    nt OS err code: 0
+
+
+***********************************************************************
+Fatal NI connect error 12518, connecting to:
+ (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.64.28.162)(PORT=1522))(CONNECT_DATA=(SID=DPPIT)(CID=(PROGRAM=C:\Users\Stauffenberg\Desktop\DConvert\Dconvert\bin\Debug\Dconvert.vshost.exe)(HOST=MANHTV01235)(USER=Stauffenberg))))
+
+  VERSION INFORMATION:
+	TNS for 32-bit Windows: Version 10.2.0.3.0 - Production
+	Windows NT TCP/IP NT Protocol Adapter for 32-bit Windows: Version 10.2.0.3.0 - Production
+  Time: 21-NOV-2011 15:09:21
+  Tracing not turned on.
+  Tns error struct:
+    ns main err code: 12564
+    TNS-12564: TNS:connection refused
+    ns secondary err code: 0
+    nt main err code: 0
+    nt secondary err code: 0
+    nt OS err code: 0
+
+
+***********************************************************************
+Fatal NI connect error 12518, connecting to:
+ (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.64.28.162)(PORT=1522))(CONNECT_DATA=(SID=DPPIT)(CID=(PROGRAM=C:\Users\Stauffenberg\Desktop\DConvert\Dconvert\bin\Debug\Dconvert.vshost.exe)(HOST=MANHTV01235)(USER=Stauffenberg))))
+
+  VERSION INFORMATION:
+	TNS for 32-bit Windows: Version 10.2.0.3.0 - Production
+	Windows NT TCP/IP NT Protocol Adapter for 32-bit Windows: Version 10.2.0.3.0 - Production
+  Time: 21-NOV-2011 15:09:59
+  Tracing not turned on.
+  Tns error struct:
+    ns main err code: 12564
+    TNS-12564: TNS:connection refused
+    ns secondary err code: 0
+    nt main err code: 0
+    nt secondary err code: 0
+    nt OS err code: 0
+
+
+***********************************************************************
+Fatal NI connect error 12518, connecting to:
+ (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.64.28.162)(PORT=1522))(CONNECT_DATA=(SID=DPPIT)(CID=(PROGRAM=C:\Users\Stauffenberg\Desktop\DConvert\Dconvert\bin\Debug\Dconvert.vshost.exe)(HOST=MANHTV01235)(USER=Stauffenberg))))
+
+  VERSION INFORMATION:
+	TNS for 32-bit Windows: Version 10.2.0.3.0 - Production
+	Windows NT TCP/IP NT Protocol Adapter for 32-bit Windows: Version 10.2.0.3.0 - Production
+  Time: 21-NOV-2011 15:10:21
+  Tracing not turned on.
+  Tns error struct:
+    ns main err code: 12564
+    TNS-12564: TNS:connection refused
+    ns secondary err code: 0
+    nt main err code: 0
+    nt secondary err code: 0
+    nt OS err code: 0
+
+
+***********************************************************************
+Fatal NI connect error 12518, connecting to:
+ (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.15.117.98)(PORT=1522))(CONNECT_DATA=(SERVICE_NAME=DPPIT)(CID=(PROGRAM=E:\TEMP_USER\TienTM2\DConvert\Dconvert\bin\Debug\Dconvert.vshost.exe)(HOST=DEMODPC)(USER=administrator))))
+
+  VERSION INFORMATION:
+	TNS for 32-bit Windows: Version 10.2.0.1.0 - Production
+	Windows NT TCP/IP NT Protocol Adapter for 32-bit Windows: Version 10.2.0.1.0 - Production
+  Time: 05-MAR-2012 21:58:05
+  Tracing not turned on.
+  Tns error struct:
+    ns main err code: 12564
+    TNS-12564: TNS:connection refused
+    ns secondary err code: 0
+    nt main err code: 0
+    nt secondary err code: 0
+    nt OS err code: 0

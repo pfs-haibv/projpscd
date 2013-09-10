@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dconvert", "Dconvert\Dconvert.csproj", "{5F6FA04F-4085-4C42-A7A9-B59E547C5BF6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5F6FA04F-4085-4C42-A7A9-B59E547C5BF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F6FA04F-4085-4C42-A7A9-B59E547C5BF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F6FA04F-4085-4C42-A7A9-B59E547C5BF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F6FA04F-4085-4C42-A7A9-B59E547C5BF6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

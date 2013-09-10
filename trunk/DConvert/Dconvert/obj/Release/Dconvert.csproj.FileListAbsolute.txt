@@ -1,0 +1,54 @@
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\obj\Release\Dconvert.exe
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\obj\Release\Dconvert.pdb
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\bin\Release\Dconvert.exe
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\bin\Release\Dconvert.pdb
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\bin\Release\DataGridViewAutoFilter.dll
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\bin\Release\rscp4n.dll
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\bin\Release\sapnco.dll
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\bin\Release\sapnco_utils.dll
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\obj\Release\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\obj\Release\DC.Forms.Frm_QLCD.resources
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\obj\Release\DC.Forms.Main.resources
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\obj\Release\Dconvert.csproj.GenerateResource.Cache
+F:\DConvert\Dconvert\bin\Release\Dconvert.exe.manifest
+F:\DConvert\Dconvert\bin\Release\Dconvert.application
+F:\DConvert\Dconvert\bin\Release\Dconvert.exe
+F:\DConvert\Dconvert\bin\Release\Dconvert.pdb
+F:\DConvert\Dconvert\bin\Release\DataGridViewAutoFilter.dll
+F:\DConvert\Dconvert\bin\Release\Microsoft.Office.Interop.Excel.dll
+F:\DConvert\Dconvert\bin\Release\Microsoft.Office.Interop.Word.dll
+F:\DConvert\Dconvert\bin\Release\Oracle.DataAccess.dll
+F:\DConvert\Dconvert\bin\Release\rscp4n.dll
+F:\DConvert\Dconvert\bin\Release\sapnco.dll
+F:\DConvert\Dconvert\bin\Release\sapnco_utils.dll
+F:\DConvert\Dconvert\obj\Release\ResolveAssemblyReference.cache
+F:\DConvert\Dconvert\obj\Release\WindowsFormsApplication1.Properties.Resources.resources
+F:\DConvert\Dconvert\obj\Release\DC.Forms.Frm_Inf.resources
+F:\DConvert\Dconvert\obj\Release\DC.Forms.Frm_QLCD.resources
+F:\DConvert\Dconvert\obj\Release\DC.Forms.Main.resources
+F:\DConvert\Dconvert\obj\Release\Dconvert.csproj.GenerateResource.Cache
+F:\DConvert\Dconvert\obj\Release\Dconvert.exe.manifest
+F:\DConvert\Dconvert\obj\Release\Dconvert.application
+F:\DConvert\Dconvert\obj\Release\Dconvert.exe
+F:\DConvert\Dconvert\obj\Release\Dconvert.pdb
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\obj\Release\Dconvert.exe
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\obj\Release\Dconvert.pdb
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\bin\Release\Dconvert.exe.manifest
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\bin\Release\Dconvert.application
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\bin\Release\Dconvert.exe
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\bin\Release\Dconvert.pdb
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\bin\Release\DataGridViewAutoFilter.dll
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\bin\Release\rscp4n.dll
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\bin\Release\sapnco.dll
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\bin\Release\sapnco_utils.dll
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\obj\Release\ResolveAssemblyReference.cache
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\obj\Release\WindowsFormsApplication1.Properties.Resources.resources
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\obj\Release\DC.Forms.Frm_Inf.resources
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\obj\Release\DC.Forms.Frm_QLCD.resources
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\obj\Release\DC.Forms.Main.resources
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\obj\Release\Dconvert.csproj.GenerateResource.Cache
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\obj\Release\Dconvert.exe.manifest
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\obj\Release\Dconvert.application
+\\10.15.68.60\app\DConvert\Dconvert\obj\Release\Dconvert.exe
+\\10.15.68.60\app\DConvert\Dconvert\obj\Release\Dconvert.pdb

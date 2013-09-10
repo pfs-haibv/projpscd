@@ -1,0 +1,614 @@
+F:\DConvert\Dconvert\bin\Debug\Dconvert.exe
+F:\DConvert\Dconvert\bin\Debug\Dconvert.pdb
+F:\DConvert\Dconvert\bin\Debug\rscp4n.dll
+F:\DConvert\Dconvert\bin\Debug\sapnco.dll
+F:\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
+F:\DConvert\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+F:\DConvert\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+F:\DConvert\Dconvert\obj\Debug\DC.Forms.Main.resources
+F:\DConvert\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+F:\DConvert\Dconvert\obj\Debug\Dconvert.exe
+F:\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+F:\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+F:\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+C:\Users\Stauffenberg\Desktop\DConvert\Dconvert\obj\Debug\Dconvert.exe
+C:\Users\Stauffenberg\Desktop\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+C:\Users\Stauffenberg\Desktop\DConvert\Dconvert\bin\Debug\Dconvert.exe
+C:\Users\Stauffenberg\Desktop\DConvert\Dconvert\bin\Debug\Dconvert.pdb
+C:\Users\Stauffenberg\Desktop\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+C:\Users\Stauffenberg\Desktop\DConvert\Dconvert\bin\Debug\rscp4n.dll
+C:\Users\Stauffenberg\Desktop\DConvert\Dconvert\bin\Debug\sapnco.dll
+C:\Users\Stauffenberg\Desktop\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
+C:\Users\Stauffenberg\Desktop\DConvert\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Stauffenberg\Desktop\DConvert\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\Stauffenberg\Desktop\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+C:\Users\Stauffenberg\Desktop\DConvert\Dconvert\obj\Debug\DC.Forms.Main.resources
+C:\Users\Stauffenberg\Desktop\DConvert\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+E:\APP\DConvert\Dconvert\bin\Debug\Dconvert.exe
+E:\APP\DConvert\Dconvert\bin\Debug\Dconvert.pdb
+E:\APP\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+E:\APP\DConvert\Dconvert\bin\Debug\rscp4n.dll
+E:\APP\DConvert\Dconvert\bin\Debug\sapnco.dll
+E:\APP\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
+E:\APP\DConvert\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+E:\APP\DConvert\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+E:\APP\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+E:\APP\DConvert\Dconvert\obj\Debug\DC.Forms.Main.resources
+E:\APP\DConvert\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+E:\APP\DConvert\Dconvert\obj\Debug\Dconvert.exe
+E:\APP\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\obj\Debug\DC.Forms.Main.resources
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\bin\Debug\Dconvert.exe
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\bin\Debug\Dconvert.pdb
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\bin\Debug\rscp4n.dll
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\bin\Debug\sapnco.dll
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\obj\Debug\Dconvert.exe
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\bin\Debug\Dconvert.exe.manifest
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\bin\Debug\Dconvert.application
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\obj\Debug\Dconvert.exe.manifest
+C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\obj\Debug\Dconvert.application
+E:\TEMP_USER\ManhTV3\DConvert_12_01_2012\DConvert\Dconvert\obj\Debug\Dconvert.exe
+E:\TEMP_USER\ManhTV3\DConvert_12_01_2012\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+F:\DConvert\Dconvert\bin\Debug\Dconvert.exe.manifest
+F:\DConvert\Dconvert\bin\Debug\Dconvert.application
+F:\DConvert\Dconvert\bin\Debug\Microsoft.Office.Interop.Excel.dll
+F:\DConvert\Dconvert\bin\Debug\Microsoft.Office.Interop.Word.dll
+F:\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+F:\DConvert\Dconvert\obj\Debug\Dconvert.exe.manifest
+F:\DConvert\Dconvert\obj\Debug\Dconvert.application
+E:\TEMP_USER\ManhTV3\DConvert\Dconvert\obj\Debug\Dconvert.exe
+E:\TEMP_USER\ManhTV3\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+E:\TEMP_USER\ManhTV3\DConvert\Dconvert\bin\Debug\Dconvert.exe.manifest
+E:\TEMP_USER\ManhTV3\DConvert\Dconvert\bin\Debug\Dconvert.application
+E:\TEMP_USER\ManhTV3\DConvert\Dconvert\bin\Debug\Dconvert.exe
+E:\TEMP_USER\ManhTV3\DConvert\Dconvert\bin\Debug\Dconvert.pdb
+E:\TEMP_USER\ManhTV3\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+E:\TEMP_USER\ManhTV3\DConvert\Dconvert\bin\Debug\rscp4n.dll
+E:\TEMP_USER\ManhTV3\DConvert\Dconvert\bin\Debug\sapnco.dll
+E:\TEMP_USER\ManhTV3\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
+E:\TEMP_USER\ManhTV3\DConvert\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+E:\TEMP_USER\ManhTV3\DConvert\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+E:\TEMP_USER\ManhTV3\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+E:\TEMP_USER\ManhTV3\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+E:\TEMP_USER\ManhTV3\DConvert\Dconvert\obj\Debug\DC.Forms.Main.resources
+E:\TEMP_USER\ManhTV3\DConvert\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+E:\TEMP_USER\ManhTV3\DConvert\Dconvert\obj\Debug\Dconvert.exe.manifest
+E:\TEMP_USER\ManhTV3\DConvert\Dconvert\obj\Debug\Dconvert.application
+E:\TEMP_USER\ManhTV3\DConvert_20120224\DConvert\Dconvert\obj\Debug\Dconvert.exe
+E:\TEMP_USER\ManhTV3\DConvert_20120224\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+E:\TEMP_USER\ManhTV3\DConvert_20120224\DConvert\Dconvert\bin\Debug\Dconvert.exe.manifest
+E:\TEMP_USER\ManhTV3\DConvert_20120224\DConvert\Dconvert\bin\Debug\Dconvert.application
+E:\TEMP_USER\ManhTV3\DConvert_20120224\DConvert\Dconvert\bin\Debug\Dconvert.exe
+E:\TEMP_USER\ManhTV3\DConvert_20120224\DConvert\Dconvert\bin\Debug\Dconvert.pdb
+E:\TEMP_USER\ManhTV3\DConvert_20120224\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+E:\TEMP_USER\ManhTV3\DConvert_20120224\DConvert\Dconvert\bin\Debug\rscp4n.dll
+E:\TEMP_USER\ManhTV3\DConvert_20120224\DConvert\Dconvert\bin\Debug\sapnco.dll
+E:\TEMP_USER\ManhTV3\DConvert_20120224\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
+E:\TEMP_USER\ManhTV3\DConvert_20120224\DConvert\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+E:\TEMP_USER\ManhTV3\DConvert_20120224\DConvert\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+E:\TEMP_USER\ManhTV3\DConvert_20120224\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+E:\TEMP_USER\ManhTV3\DConvert_20120224\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+E:\TEMP_USER\ManhTV3\DConvert_20120224\DConvert\Dconvert\obj\Debug\DC.Forms.Main.resources
+E:\TEMP_USER\ManhTV3\DConvert_20120224\DConvert\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+E:\TEMP_USER\ManhTV3\DConvert_20120224\DConvert\Dconvert\obj\Debug\Dconvert.exe.manifest
+E:\TEMP_USER\ManhTV3\DConvert_20120224\DConvert\Dconvert\obj\Debug\Dconvert.application
+\\10.15.68.60\app\DConvert\Dconvert\obj\Debug\Dconvert.exe
+\\10.15.68.60\app\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+E:\TEMP_USER\ManhTV3\DConvert_20120227_15\DConvert\Dconvert\obj\Debug\Dconvert.exe
+E:\TEMP_USER\ManhTV3\DConvert_20120227_15\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+E:\TEMP_USER\ManhTV3\DConvert_20120227_15\DConvert\Dconvert\bin\Debug\Dconvert.exe.manifest
+E:\TEMP_USER\ManhTV3\DConvert_20120227_15\DConvert\Dconvert\bin\Debug\Dconvert.application
+E:\TEMP_USER\ManhTV3\DConvert_20120227_15\DConvert\Dconvert\bin\Debug\Dconvert.exe
+E:\TEMP_USER\ManhTV3\DConvert_20120227_15\DConvert\Dconvert\bin\Debug\Dconvert.pdb
+E:\TEMP_USER\ManhTV3\DConvert_20120227_15\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+E:\TEMP_USER\ManhTV3\DConvert_20120227_15\DConvert\Dconvert\bin\Debug\rscp4n.dll
+E:\TEMP_USER\ManhTV3\DConvert_20120227_15\DConvert\Dconvert\bin\Debug\sapnco.dll
+E:\TEMP_USER\ManhTV3\DConvert_20120227_15\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
+E:\TEMP_USER\ManhTV3\DConvert_20120227_15\DConvert\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+E:\TEMP_USER\ManhTV3\DConvert_20120227_15\DConvert\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+E:\TEMP_USER\ManhTV3\DConvert_20120227_15\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+E:\TEMP_USER\ManhTV3\DConvert_20120227_15\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+E:\TEMP_USER\ManhTV3\DConvert_20120227_15\DConvert\Dconvert\obj\Debug\DC.Forms.Main.resources
+E:\TEMP_USER\ManhTV3\DConvert_20120227_15\DConvert\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+E:\TEMP_USER\ManhTV3\DConvert_20120227_15\DConvert\Dconvert\obj\Debug\Dconvert.exe.manifest
+E:\TEMP_USER\ManhTV3\DConvert_20120227_15\DConvert\Dconvert\obj\Debug\Dconvert.application
+E:\TEMP_USER\ManhTV3\DConvert_20120228_13\DConvert\Dconvert\obj\Debug\Dconvert.exe
+E:\TEMP_USER\ManhTV3\DConvert_20120228_13\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+E:\TEMP_USER\ManhTV3\DConvert_20120228_13\DConvert\Dconvert\bin\Debug\Dconvert.exe.manifest
+E:\TEMP_USER\ManhTV3\DConvert_20120228_13\DConvert\Dconvert\bin\Debug\Dconvert.application
+E:\TEMP_USER\ManhTV3\DConvert_20120228_13\DConvert\Dconvert\bin\Debug\Dconvert.exe
+E:\TEMP_USER\ManhTV3\DConvert_20120228_13\DConvert\Dconvert\bin\Debug\Dconvert.pdb
+E:\TEMP_USER\ManhTV3\DConvert_20120228_13\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+E:\TEMP_USER\ManhTV3\DConvert_20120228_13\DConvert\Dconvert\bin\Debug\rscp4n.dll
+E:\TEMP_USER\ManhTV3\DConvert_20120228_13\DConvert\Dconvert\bin\Debug\sapnco.dll
+E:\TEMP_USER\ManhTV3\DConvert_20120228_13\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
+E:\TEMP_USER\ManhTV3\DConvert_20120228_13\DConvert\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+E:\TEMP_USER\ManhTV3\DConvert_20120228_13\DConvert\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+E:\TEMP_USER\ManhTV3\DConvert_20120228_13\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+E:\TEMP_USER\ManhTV3\DConvert_20120228_13\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+E:\TEMP_USER\ManhTV3\DConvert_20120228_13\DConvert\Dconvert\obj\Debug\DC.Forms.Main.resources
+E:\TEMP_USER\ManhTV3\DConvert_20120228_13\DConvert\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+E:\TEMP_USER\ManhTV3\DConvert_20120228_13\DConvert\Dconvert\obj\Debug\Dconvert.exe.manifest
+E:\TEMP_USER\ManhTV3\DConvert_20120228_13\DConvert\Dconvert\obj\Debug\Dconvert.application
+E:\TEMP_USER\ManhTV3\DConvert_20120305_13\DConvert\Dconvert\obj\Debug\Dconvert.exe
+E:\TEMP_USER\ManhTV3\DConvert_20120305_13\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+E:\TEMP_USER\ManhTV3\DConvert_20120305_13\DConvert\Dconvert\bin\Debug\Dconvert.exe.manifest
+E:\TEMP_USER\ManhTV3\DConvert_20120305_13\DConvert\Dconvert\bin\Debug\Dconvert.application
+E:\TEMP_USER\ManhTV3\DConvert_20120305_13\DConvert\Dconvert\bin\Debug\Dconvert.exe
+E:\TEMP_USER\ManhTV3\DConvert_20120305_13\DConvert\Dconvert\bin\Debug\Dconvert.pdb
+E:\TEMP_USER\ManhTV3\DConvert_20120305_13\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+E:\TEMP_USER\ManhTV3\DConvert_20120305_13\DConvert\Dconvert\bin\Debug\rscp4n.dll
+E:\TEMP_USER\ManhTV3\DConvert_20120305_13\DConvert\Dconvert\bin\Debug\sapnco.dll
+E:\TEMP_USER\ManhTV3\DConvert_20120305_13\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
+E:\TEMP_USER\ManhTV3\DConvert_20120305_13\DConvert\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+E:\TEMP_USER\ManhTV3\DConvert_20120305_13\DConvert\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+E:\TEMP_USER\ManhTV3\DConvert_20120305_13\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+E:\TEMP_USER\ManhTV3\DConvert_20120305_13\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+E:\TEMP_USER\ManhTV3\DConvert_20120305_13\DConvert\Dconvert\obj\Debug\DC.Forms.Main.resources
+E:\TEMP_USER\ManhTV3\DConvert_20120305_13\DConvert\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+E:\TEMP_USER\ManhTV3\DConvert_20120305_13\DConvert\Dconvert\obj\Debug\Dconvert.exe.manifest
+E:\TEMP_USER\ManhTV3\DConvert_20120305_13\DConvert\Dconvert\obj\Debug\Dconvert.application
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\bin\Debug\Dconvert.exe.manifest
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\bin\Debug\Dconvert.application
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\bin\Debug\Dconvert.exe
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\bin\Debug\Dconvert.pdb
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\bin\Debug\rscp4n.dll
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\bin\Debug\sapnco.dll
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\obj\Debug\DC.Forms.Main.resources
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\obj\Debug\Dconvert.exe.manifest
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\obj\Debug\Dconvert.application
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\obj\Debug\Dconvert.exe
+E:\TEMP_USER\TienTM2\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+\\10.15.68.60\app\DConvert\Dconvert\bin\Debug\Dconvert.exe.manifest
+\\10.15.68.60\app\DConvert\Dconvert\bin\Debug\Dconvert.application
+\\10.15.68.60\app\DConvert\Dconvert\bin\Debug\Dconvert.exe
+\\10.15.68.60\app\DConvert\Dconvert\bin\Debug\Dconvert.pdb
+\\10.15.68.60\app\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+\\10.15.68.60\app\DConvert\Dconvert\bin\Debug\rscp4n.dll
+\\10.15.68.60\app\DConvert\Dconvert\bin\Debug\sapnco.dll
+\\10.15.68.60\app\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
+\\10.15.68.60\app\DConvert\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+\\10.15.68.60\app\DConvert\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+\\10.15.68.60\app\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+\\10.15.68.60\app\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+\\10.15.68.60\app\DConvert\Dconvert\obj\Debug\DC.Forms.Main.resources
+\\10.15.68.60\app\DConvert\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+\\10.15.68.60\app\DConvert\Dconvert\obj\Debug\Dconvert.exe.manifest
+\\10.15.68.60\app\DConvert\Dconvert\obj\Debug\Dconvert.application
+E:\APP\DConvert\Dconvert\bin\Debug\Dconvert.exe.manifest
+E:\APP\DConvert\Dconvert\bin\Debug\Dconvert.application
+E:\APP\DConvert\Dconvert\bin\Debug\Microsoft.Office.Interop.Excel.dll
+E:\APP\DConvert\Dconvert\bin\Debug\Microsoft.Office.Interop.Word.dll
+E:\APP\DConvert\Dconvert\bin\Debug\office.dll
+E:\APP\DConvert\Dconvert\bin\Debug\Microsoft.Vbe.Interop.dll
+E:\APP\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+E:\APP\DConvert\Dconvert\obj\Debug\Dconvert.exe.manifest
+E:\APP\DConvert\Dconvert\obj\Debug\Dconvert.application
+C:\Documents and Settings\Administrator\Desktop\Current DConvert\DConvert\Dconvert\obj\Debug\Dconvert.exe
+C:\Documents and Settings\Administrator\Desktop\Current DConvert\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+C:\Documents and Settings\Administrator\Desktop\Current DConvert\DConvert\Dconvert\bin\Debug\Dconvert.exe.manifest
+C:\Documents and Settings\Administrator\Desktop\Current DConvert\DConvert\Dconvert\bin\Debug\Dconvert.application
+C:\Documents and Settings\Administrator\Desktop\Current DConvert\DConvert\Dconvert\bin\Debug\Dconvert.exe
+C:\Documents and Settings\Administrator\Desktop\Current DConvert\DConvert\Dconvert\bin\Debug\Dconvert.pdb
+C:\Documents and Settings\Administrator\Desktop\Current DConvert\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+C:\Documents and Settings\Administrator\Desktop\Current DConvert\DConvert\Dconvert\bin\Debug\rscp4n.dll
+C:\Documents and Settings\Administrator\Desktop\Current DConvert\DConvert\Dconvert\bin\Debug\sapnco.dll
+C:\Documents and Settings\Administrator\Desktop\Current DConvert\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
+C:\Documents and Settings\Administrator\Desktop\Current DConvert\DConvert\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\Desktop\Current DConvert\DConvert\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Documents and Settings\Administrator\Desktop\Current DConvert\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+C:\Documents and Settings\Administrator\Desktop\Current DConvert\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+C:\Documents and Settings\Administrator\Desktop\Current DConvert\DConvert\Dconvert\obj\Debug\DC.Forms.Main.resources
+C:\Documents and Settings\Administrator\Desktop\Current DConvert\DConvert\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+C:\Documents and Settings\Administrator\Desktop\Current DConvert\DConvert\Dconvert\obj\Debug\Dconvert.exe.manifest
+C:\Documents and Settings\Administrator\Desktop\Current DConvert\DConvert\Dconvert\obj\Debug\Dconvert.application
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\obj\Debug\Dconvert.exe
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\obj\Debug\Dconvert.pdb
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\obj\Debug\DC.Forms.Main.resources
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\bin\Debug\Dconvert.exe.manifest
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\bin\Debug\Dconvert.application
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\bin\Debug\Dconvert.exe
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\bin\Debug\Dconvert.pdb
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\bin\Debug\rscp4n.dll
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\bin\Debug\sapnco.dll
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\bin\Debug\sapnco_utils.dll
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\obj\Debug\Dconvert.exe.manifest
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\obj\Debug\Dconvert.application
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\DConvert\Dconvert\obj\Debug\Dconvert.exe
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\DConvert\Dconvert\bin\Debug\Dconvert.exe.manifest
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\DConvert\Dconvert\bin\Debug\Dconvert.application
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\DConvert\Dconvert\bin\Debug\Dconvert.exe
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\DConvert\Dconvert\bin\Debug\Dconvert.pdb
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\DConvert\Dconvert\bin\Debug\rscp4n.dll
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\DConvert\Dconvert\bin\Debug\sapnco.dll
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\DConvert\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\DConvert\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\DConvert\Dconvert\obj\Debug\DC.Forms.Main.resources
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\DConvert\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\DConvert\Dconvert\obj\Debug\Dconvert.exe.manifest
+E:\TEMP_USER\TienTM2\DConvert``\Dconvert\DConvert\Dconvert\obj\Debug\Dconvert.application
+C:\Users\Administrator\Desktop\Current DConvert\DConvert\Dconvert\obj\Debug\Dconvert.exe
+C:\Users\Administrator\Desktop\Current DConvert\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+C:\Users\Administrator\Desktop\Current DConvert\DConvert\Dconvert\bin\Debug\Dconvert.exe.manifest
+C:\Users\Administrator\Desktop\Current DConvert\DConvert\Dconvert\bin\Debug\Dconvert.application
+C:\Users\Administrator\Desktop\Current DConvert\DConvert\Dconvert\bin\Debug\Dconvert.exe
+C:\Users\Administrator\Desktop\Current DConvert\DConvert\Dconvert\bin\Debug\Dconvert.pdb
+C:\Users\Administrator\Desktop\Current DConvert\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+C:\Users\Administrator\Desktop\Current DConvert\DConvert\Dconvert\bin\Debug\rscp4n.dll
+C:\Users\Administrator\Desktop\Current DConvert\DConvert\Dconvert\bin\Debug\sapnco.dll
+C:\Users\Administrator\Desktop\Current DConvert\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
+C:\Users\Administrator\Desktop\Current DConvert\DConvert\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\Current DConvert\DConvert\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\Administrator\Desktop\Current DConvert\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+C:\Users\Administrator\Desktop\Current DConvert\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+C:\Users\Administrator\Desktop\Current DConvert\DConvert\Dconvert\obj\Debug\DC.Forms.Main.resources
+C:\Users\Administrator\Desktop\Current DConvert\DConvert\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+C:\Users\Administrator\Desktop\Current DConvert\DConvert\Dconvert\obj\Debug\Dconvert.exe.manifest
+C:\Users\Administrator\Desktop\Current DConvert\DConvert\Dconvert\obj\Debug\Dconvert.application
+C:\Users\Administrator\Desktop\Current DConvert\Tool đã sửa\DConvert\Dconvert\obj\Debug\Dconvert.exe
+C:\Users\Administrator\Desktop\Current DConvert\Tool đã sửa\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+C:\Users\Administrator\Desktop\Current DConvert\Tool đã sửa\DConvert\Dconvert\bin\Debug\Dconvert.exe.manifest
+C:\Users\Administrator\Desktop\Current DConvert\Tool đã sửa\DConvert\Dconvert\bin\Debug\Dconvert.application
+C:\Users\Administrator\Desktop\Current DConvert\Tool đã sửa\DConvert\Dconvert\bin\Debug\Dconvert.exe
+C:\Users\Administrator\Desktop\Current DConvert\Tool đã sửa\DConvert\Dconvert\bin\Debug\Dconvert.pdb
+C:\Users\Administrator\Desktop\Current DConvert\Tool đã sửa\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+C:\Users\Administrator\Desktop\Current DConvert\Tool đã sửa\DConvert\Dconvert\bin\Debug\rscp4n.dll
+C:\Users\Administrator\Desktop\Current DConvert\Tool đã sửa\DConvert\Dconvert\bin\Debug\sapnco.dll
+C:\Users\Administrator\Desktop\Current DConvert\Tool đã sửa\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
+C:\Users\Administrator\Desktop\Current DConvert\Tool đã sửa\DConvert\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\Current DConvert\Tool đã sửa\DConvert\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\Administrator\Desktop\Current DConvert\Tool đã sửa\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+C:\Users\Administrator\Desktop\Current DConvert\Tool đã sửa\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+C:\Users\Administrator\Desktop\Current DConvert\Tool đã sửa\DConvert\Dconvert\obj\Debug\DC.Forms.Main.resources
+C:\Users\Administrator\Desktop\Current DConvert\Tool đã sửa\DConvert\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+C:\Users\Administrator\Desktop\Current DConvert\Tool đã sửa\DConvert\Dconvert\obj\Debug\Dconvert.exe.manifest
+C:\Users\Administrator\Desktop\Current DConvert\Tool đã sửa\DConvert\Dconvert\obj\Debug\Dconvert.application
+E:\TEMP_USER\TienTM2\DConvert`\Dconvert\obj\Debug\Dconvert.exe
+E:\TEMP_USER\TienTM2\DConvert`\Dconvert\obj\Debug\Dconvert.pdb
+E:\TEMP_USER\TienTM2\DConvert`\Dconvert\bin\Debug\Dconvert.exe.manifest
+E:\TEMP_USER\TienTM2\DConvert`\Dconvert\bin\Debug\Dconvert.application
+E:\TEMP_USER\TienTM2\DConvert`\Dconvert\bin\Debug\Dconvert.exe
+E:\TEMP_USER\TienTM2\DConvert`\Dconvert\bin\Debug\Dconvert.pdb
+E:\TEMP_USER\TienTM2\DConvert`\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+E:\TEMP_USER\TienTM2\DConvert`\Dconvert\bin\Debug\rscp4n.dll
+E:\TEMP_USER\TienTM2\DConvert`\Dconvert\bin\Debug\sapnco.dll
+E:\TEMP_USER\TienTM2\DConvert`\Dconvert\bin\Debug\sapnco_utils.dll
+E:\TEMP_USER\TienTM2\DConvert`\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+E:\TEMP_USER\TienTM2\DConvert`\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+E:\TEMP_USER\TienTM2\DConvert`\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+E:\TEMP_USER\TienTM2\DConvert`\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+E:\TEMP_USER\TienTM2\DConvert`\Dconvert\obj\Debug\DC.Forms.Main.resources
+E:\TEMP_USER\TienTM2\DConvert`\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+E:\TEMP_USER\TienTM2\DConvert`\Dconvert\obj\Debug\Dconvert.exe.manifest
+E:\TEMP_USER\TienTM2\DConvert`\Dconvert\obj\Debug\Dconvert.application
+E:\TEMP_USER\DConvert\Dconvert\obj\Debug\Dconvert.exe
+E:\TEMP_USER\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+E:\TEMP_USER\DConvert\Dconvert\bin\Debug\Dconvert.exe.manifest
+E:\TEMP_USER\DConvert\Dconvert\bin\Debug\Dconvert.application
+E:\TEMP_USER\DConvert\Dconvert\bin\Debug\Dconvert.exe
+E:\TEMP_USER\DConvert\Dconvert\bin\Debug\Dconvert.pdb
+E:\TEMP_USER\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+E:\TEMP_USER\DConvert\Dconvert\bin\Debug\rscp4n.dll
+E:\TEMP_USER\DConvert\Dconvert\bin\Debug\sapnco.dll
+E:\TEMP_USER\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
+E:\TEMP_USER\DConvert\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+E:\TEMP_USER\DConvert\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+E:\TEMP_USER\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+E:\TEMP_USER\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+E:\TEMP_USER\DConvert\Dconvert\obj\Debug\DC.Forms.Main.resources
+E:\TEMP_USER\DConvert\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+E:\TEMP_USER\DConvert\Dconvert\obj\Debug\Dconvert.exe.manifest
+E:\TEMP_USER\DConvert\Dconvert\obj\Debug\Dconvert.application
+C:\Users\Administrator\Desktop\DConvert\Dconvert\obj\Debug\Dconvert.exe
+C:\Users\Administrator\Desktop\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+C:\Users\Administrator\Desktop\DConvert\Dconvert\bin\Debug\Dconvert.exe.manifest
+C:\Users\Administrator\Desktop\DConvert\Dconvert\bin\Debug\Dconvert.application
+C:\Users\Administrator\Desktop\DConvert\Dconvert\bin\Debug\Dconvert.exe
+C:\Users\Administrator\Desktop\DConvert\Dconvert\bin\Debug\Dconvert.pdb
+C:\Users\Administrator\Desktop\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+C:\Users\Administrator\Desktop\DConvert\Dconvert\bin\Debug\Microsoft.Office.Interop.Excel.dll
+C:\Users\Administrator\Desktop\DConvert\Dconvert\bin\Debug\Microsoft.Office.Interop.Word.dll
+C:\Users\Administrator\Desktop\DConvert\Dconvert\bin\Debug\rscp4n.dll
+C:\Users\Administrator\Desktop\DConvert\Dconvert\bin\Debug\sapnco.dll
+C:\Users\Administrator\Desktop\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
+C:\Users\Administrator\Desktop\DConvert\Dconvert\bin\Debug\office.dll
+C:\Users\Administrator\Desktop\DConvert\Dconvert\bin\Debug\Microsoft.Vbe.Interop.dll
+C:\Users\Administrator\Desktop\DConvert\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\DConvert\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\Administrator\Desktop\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+C:\Users\Administrator\Desktop\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+C:\Users\Administrator\Desktop\DConvert\Dconvert\obj\Debug\DC.Forms.Main.resources
+C:\Users\Administrator\Desktop\DConvert\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+C:\Users\Administrator\Desktop\DConvert\Dconvert\obj\Debug\Dconvert.exe.manifest
+C:\Users\Administrator\Desktop\DConvert\Dconvert\obj\Debug\Dconvert.application
+C:\Documents and Settings\Administrator\Desktop\Checkout\DConvert\Dconvert\obj\Debug\Dconvert.exe
+C:\Documents and Settings\Administrator\Desktop\Checkout\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+C:\Documents and Settings\Administrator\Desktop\Checkout\DConvert\Dconvert\bin\Debug\Dconvert.exe.manifest
+C:\Documents and Settings\Administrator\Desktop\Checkout\DConvert\Dconvert\bin\Debug\Dconvert.application
+C:\Documents and Settings\Administrator\Desktop\Checkout\DConvert\Dconvert\bin\Debug\Dconvert.exe
+C:\Documents and Settings\Administrator\Desktop\Checkout\DConvert\Dconvert\bin\Debug\Dconvert.pdb
+C:\Documents and Settings\Administrator\Desktop\Checkout\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+C:\Documents and Settings\Administrator\Desktop\Checkout\DConvert\Dconvert\bin\Debug\rscp4n.dll
+C:\Documents and Settings\Administrator\Desktop\Checkout\DConvert\Dconvert\bin\Debug\sapnco.dll
+C:\Documents and Settings\Administrator\Desktop\Checkout\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
+C:\Documents and Settings\Administrator\Desktop\Checkout\DConvert\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\Desktop\Checkout\DConvert\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Documents and Settings\Administrator\Desktop\Checkout\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+C:\Documents and Settings\Administrator\Desktop\Checkout\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+C:\Documents and Settings\Administrator\Desktop\Checkout\DConvert\Dconvert\obj\Debug\DC.Forms.Main.resources
+C:\Documents and Settings\Administrator\Desktop\Checkout\DConvert\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+C:\Documents and Settings\Administrator\Desktop\Checkout\DConvert\Dconvert\obj\Debug\Dconvert.exe.manifest
+C:\Documents and Settings\Administrator\Desktop\Checkout\DConvert\Dconvert\obj\Debug\Dconvert.application
+C:\Documents and Settings\Administrator\Desktop\DConvert\Dconvert\bin\Debug\Dconvert.exe.manifest
+C:\Documents and Settings\Administrator\Desktop\DConvert\Dconvert\bin\Debug\Dconvert.application
+C:\Documents and Settings\Administrator\Desktop\DConvert\Dconvert\bin\Debug\Dconvert.exe
+C:\Documents and Settings\Administrator\Desktop\DConvert\Dconvert\bin\Debug\Dconvert.pdb
+C:\Documents and Settings\Administrator\Desktop\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+C:\Documents and Settings\Administrator\Desktop\DConvert\Dconvert\bin\Debug\rscp4n.dll
+C:\Documents and Settings\Administrator\Desktop\DConvert\Dconvert\bin\Debug\sapnco.dll
+C:\Documents and Settings\Administrator\Desktop\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
+C:\Documents and Settings\Administrator\Desktop\DConvert\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\Desktop\DConvert\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Documents and Settings\Administrator\Desktop\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+C:\Documents and Settings\Administrator\Desktop\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+C:\Documents and Settings\Administrator\Desktop\DConvert\Dconvert\obj\Debug\DC.Forms.Main.resources
+C:\Documents and Settings\Administrator\Desktop\DConvert\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+C:\Documents and Settings\Administrator\Desktop\DConvert\Dconvert\obj\Debug\Dconvert.exe.manifest
+C:\Documents and Settings\Administrator\Desktop\DConvert\Dconvert\obj\Debug\Dconvert.application
+C:\Documents and Settings\Administrator\Desktop\DConvert\Dconvert\obj\Debug\Dconvert.exe
+C:\Documents and Settings\Administrator\Desktop\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+E:\TEMP_USER\ManhTV3\Tools\DConvert\Dconvert\obj\Debug\Dconvert.exe
+E:\TEMP_USER\ManhTV3\Tools\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+E:\TEMP_USER\ManhTV3\Tools\DConvert\Dconvert\bin\Debug\Dconvert.exe.manifest
+E:\TEMP_USER\ManhTV3\Tools\DConvert\Dconvert\bin\Debug\Dconvert.application
+E:\TEMP_USER\ManhTV3\Tools\DConvert\Dconvert\bin\Debug\Dconvert.exe
+E:\TEMP_USER\ManhTV3\Tools\DConvert\Dconvert\bin\Debug\Dconvert.pdb
+E:\TEMP_USER\ManhTV3\Tools\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+E:\TEMP_USER\ManhTV3\Tools\DConvert\Dconvert\bin\Debug\rscp4n.dll
+E:\TEMP_USER\ManhTV3\Tools\DConvert\Dconvert\bin\Debug\sapnco.dll
+E:\TEMP_USER\ManhTV3\Tools\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
+E:\TEMP_USER\ManhTV3\Tools\DConvert\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+E:\TEMP_USER\ManhTV3\Tools\DConvert\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+E:\TEMP_USER\ManhTV3\Tools\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+E:\TEMP_USER\ManhTV3\Tools\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+E:\TEMP_USER\ManhTV3\Tools\DConvert\Dconvert\obj\Debug\DC.Forms.Main.resources
+E:\TEMP_USER\ManhTV3\Tools\DConvert\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+E:\TEMP_USER\ManhTV3\Tools\DConvert\Dconvert\obj\Debug\Dconvert.exe.manifest
+E:\TEMP_USER\ManhTV3\Tools\DConvert\Dconvert\obj\Debug\Dconvert.application
+D:\PIT\DC\QLT\Tools\DConvert\Dconvert\obj\Debug\Dconvert.exe
+D:\PIT\DC\QLT\Tools\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+D:\PIT\DC\QLT\Tools\DConvert\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+D:\PIT\DC\QLT\Tools\DConvert\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+D:\PIT\DC\QLT\Tools\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+D:\PIT\DC\QLT\Tools\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+D:\PIT\DC\QLT\Tools\DConvert\Dconvert\obj\Debug\DC.Forms.Main.resources
+D:\PIT\DC\QLT\Tools\DConvert\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+D:\PIT\DC\QLT\Tools\DConvert\Dconvert\bin\Debug\Dconvert.exe.manifest
+D:\PIT\DC\QLT\Tools\DConvert\Dconvert\bin\Debug\Dconvert.application
+D:\PIT\DC\QLT\Tools\DConvert\Dconvert\bin\Debug\Dconvert.exe
+D:\PIT\DC\QLT\Tools\DConvert\Dconvert\bin\Debug\Dconvert.pdb
+D:\PIT\DC\QLT\Tools\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+D:\PIT\DC\QLT\Tools\DConvert\Dconvert\bin\Debug\Oracle.DataAccess.dll
+D:\PIT\DC\QLT\Tools\DConvert\Dconvert\bin\Debug\rscp4n.dll
+D:\PIT\DC\QLT\Tools\DConvert\Dconvert\bin\Debug\sapnco.dll
+D:\PIT\DC\QLT\Tools\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
+D:\PIT\DC\QLT\Tools\DConvert\Dconvert\obj\Debug\Dconvert.exe.manifest
+D:\PIT\DC\QLT\Tools\DConvert\Dconvert\obj\Debug\Dconvert.application
+E:\PIT\DConvert\Dconvert\obj\Debug\Dconvert.exe
+E:\PIT\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+E:\PIT\DConvert\Dconvert\bin\Debug\Dconvert.exe.manifest
+E:\PIT\DConvert\Dconvert\bin\Debug\Dconvert.application
+E:\PIT\DConvert\Dconvert\bin\Debug\Dconvert.exe
+E:\PIT\DConvert\Dconvert\bin\Debug\Dconvert.pdb
+E:\PIT\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+E:\PIT\DConvert\Dconvert\bin\Debug\rscp4n.dll
+E:\PIT\DConvert\Dconvert\bin\Debug\sapnco.dll
+E:\PIT\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
+E:\PIT\DConvert\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+E:\PIT\DConvert\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+E:\PIT\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+E:\PIT\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+E:\PIT\DConvert\Dconvert\obj\Debug\DC.Forms.Main.resources
+E:\PIT\DConvert\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+E:\PIT\DConvert\Dconvert\obj\Debug\Dconvert.exe.manifest
+E:\PIT\DConvert\Dconvert\obj\Debug\Dconvert.application
+C:\TEMP\DConvert\Dconvert\obj\Debug\Dconvert.exe
+C:\TEMP\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+C:\TEMP\DConvert\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+C:\TEMP\DConvert\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\TEMP\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+C:\TEMP\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+C:\TEMP\DConvert\Dconvert\obj\Debug\DC.Forms.Main.resources
+C:\TEMP\DConvert\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+C:\TEMP\DConvert\Dconvert\bin\Debug\Dconvert.exe.manifest
+C:\TEMP\DConvert\Dconvert\bin\Debug\Dconvert.application
+C:\TEMP\DConvert\Dconvert\bin\Debug\Dconvert.exe
+C:\TEMP\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+C:\TEMP\DConvert\Dconvert\bin\Debug\Microsoft.Office.Interop.Excel.dll
+C:\TEMP\DConvert\Dconvert\bin\Debug\Microsoft.Office.Interop.Word.dll
+C:\TEMP\DConvert\Dconvert\bin\Debug\rscp4n.dll
+C:\TEMP\DConvert\Dconvert\bin\Debug\sapnco.dll
+C:\TEMP\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
+C:\TEMP\DConvert\Dconvert\bin\Debug\office.dll
+C:\TEMP\DConvert\Dconvert\bin\Debug\Microsoft.Vbe.Interop.dll
+C:\TEMP\DConvert\Dconvert\obj\Debug\Dconvert.exe.manifest
+C:\TEMP\DConvert\Dconvert\obj\Debug\Dconvert.application
+C:\TEMP\DConvert\Dconvert\bin\Debug\Dconvert.pdb
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.02\DConvert\Dconvert\obj\Debug\Dconvert.exe
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.02\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.02\DConvert\Dconvert\bin\Debug\Dconvert.exe.manifest
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.02\DConvert\Dconvert\bin\Debug\Dconvert.application
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.02\DConvert\Dconvert\bin\Debug\Dconvert.exe
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.02\DConvert\Dconvert\bin\Debug\Dconvert.pdb
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.02\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.02\DConvert\Dconvert\bin\Debug\rscp4n.dll
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.02\DConvert\Dconvert\bin\Debug\sapnco.dll
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.02\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.02\DConvert\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.02\DConvert\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.02\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.02\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.02\DConvert\Dconvert\obj\Debug\DC.Forms.Main.resources
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.02\DConvert\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.02\DConvert\Dconvert\obj\Debug\Dconvert.exe.manifest
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.02\DConvert\Dconvert\obj\Debug\Dconvert.application
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.03\DConvert\Dconvert\obj\Debug\Dconvert.exe
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.03\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.03\DConvert\Dconvert\bin\Debug\Dconvert.exe.manifest
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.03\DConvert\Dconvert\bin\Debug\Dconvert.application
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.03\DConvert\Dconvert\bin\Debug\Dconvert.exe
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.03\DConvert\Dconvert\bin\Debug\Dconvert.pdb
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.03\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.03\DConvert\Dconvert\bin\Debug\rscp4n.dll
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.03\DConvert\Dconvert\bin\Debug\sapnco.dll
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.03\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.03\DConvert\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.03\DConvert\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.03\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.03\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.03\DConvert\Dconvert\obj\Debug\DC.Forms.Main.resources
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.03\DConvert\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.03\DConvert\Dconvert\obj\Debug\Dconvert.exe.manifest
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.03\DConvert\Dconvert\obj\Debug\Dconvert.application
+C:\Documents and Settings\Administrator\My Documents\Downloads\DConvert\Dconvert\obj\Debug\Dconvert.exe
+C:\Documents and Settings\Administrator\My Documents\Downloads\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+C:\Documents and Settings\Administrator\My Documents\Downloads\DConvert\Dconvert\bin\Debug\Dconvert.exe.manifest
+C:\Documents and Settings\Administrator\My Documents\Downloads\DConvert\Dconvert\bin\Debug\Dconvert.application
+C:\Documents and Settings\Administrator\My Documents\Downloads\DConvert\Dconvert\bin\Debug\Dconvert.exe
+C:\Documents and Settings\Administrator\My Documents\Downloads\DConvert\Dconvert\bin\Debug\Dconvert.pdb
+C:\Documents and Settings\Administrator\My Documents\Downloads\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+C:\Documents and Settings\Administrator\My Documents\Downloads\DConvert\Dconvert\bin\Debug\rscp4n.dll
+C:\Documents and Settings\Administrator\My Documents\Downloads\DConvert\Dconvert\bin\Debug\sapnco.dll
+C:\Documents and Settings\Administrator\My Documents\Downloads\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
+C:\Documents and Settings\Administrator\My Documents\Downloads\DConvert\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\My Documents\Downloads\DConvert\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Documents and Settings\Administrator\My Documents\Downloads\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+C:\Documents and Settings\Administrator\My Documents\Downloads\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+C:\Documents and Settings\Administrator\My Documents\Downloads\DConvert\Dconvert\obj\Debug\DC.Forms.Main.resources
+C:\Documents and Settings\Administrator\My Documents\Downloads\DConvert\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+C:\Documents and Settings\Administrator\My Documents\Downloads\DConvert\Dconvert\obj\Debug\Dconvert.exe.manifest
+C:\Documents and Settings\Administrator\My Documents\Downloads\DConvert\Dconvert\obj\Debug\Dconvert.application
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\Checkout\DConvert\Dconvert\obj\Debug\Dconvert.exe
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\Checkout\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\Checkout\DConvert\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\Checkout\DConvert\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\Checkout\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\Checkout\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\Checkout\DConvert\Dconvert\obj\Debug\DC.Forms.Main.resources
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\Checkout\DConvert\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\Checkout\DConvert\Dconvert\bin\Debug\Dconvert.exe.manifest
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\Checkout\DConvert\Dconvert\bin\Debug\Dconvert.application
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\Checkout\DConvert\Dconvert\bin\Debug\Dconvert.exe
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\Checkout\DConvert\Dconvert\bin\Debug\Dconvert.pdb
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\Checkout\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\Checkout\DConvert\Dconvert\bin\Debug\rscp4n.dll
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\Checkout\DConvert\Dconvert\bin\Debug\sapnco.dll
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\Checkout\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\Checkout\DConvert\Dconvert\obj\Debug\Dconvert.exe.manifest
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\Checkout\DConvert\Dconvert\obj\Debug\Dconvert.application
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.09\DConvert\Dconvert\obj\Debug\Dconvert.exe
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.09\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.09\DConvert\Dconvert\bin\Debug\Dconvert.exe.manifest
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.09\DConvert\Dconvert\bin\Debug\Dconvert.application
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.09\DConvert\Dconvert\bin\Debug\Dconvert.exe
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.09\DConvert\Dconvert\bin\Debug\Dconvert.pdb
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.09\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.09\DConvert\Dconvert\bin\Debug\rscp4n.dll
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.09\DConvert\Dconvert\bin\Debug\sapnco.dll
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.09\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.09\DConvert\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.09\DConvert\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.09\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.09\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.09\DConvert\Dconvert\obj\Debug\DC.Forms.Main.resources
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.09\DConvert\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.09\DConvert\Dconvert\obj\Debug\Dconvert.exe.manifest
+C:\Documents and Settings\HC\My Documents\Dropbox\PIT_DC\DConvert\v.09\DConvert\Dconvert\obj\Debug\Dconvert.application
+C:\Documents and Settings\Administrator\Desktop\Runs\DConvert\Dconvert\obj\Debug\Dconvert.exe
+C:\Documents and Settings\Administrator\Desktop\Runs\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+C:\Documents and Settings\Administrator\Desktop\Runs\DConvert\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\Desktop\Runs\DConvert\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Documents and Settings\Administrator\Desktop\Runs\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+C:\Documents and Settings\Administrator\Desktop\Runs\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+C:\Documents and Settings\Administrator\Desktop\Runs\DConvert\Dconvert\obj\Debug\DC.Forms.Main.resources
+C:\Documents and Settings\Administrator\Desktop\Runs\DConvert\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+C:\Documents and Settings\Administrator\Desktop\Runs\DConvert\Dconvert\bin\Debug\Dconvert.exe.manifest
+C:\Documents and Settings\Administrator\Desktop\Runs\DConvert\Dconvert\bin\Debug\Dconvert.application
+C:\Documents and Settings\Administrator\Desktop\Runs\DConvert\Dconvert\bin\Debug\Dconvert.exe
+C:\Documents and Settings\Administrator\Desktop\Runs\DConvert\Dconvert\bin\Debug\Dconvert.pdb
+C:\Documents and Settings\Administrator\Desktop\Runs\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+C:\Documents and Settings\Administrator\Desktop\Runs\DConvert\Dconvert\bin\Debug\rscp4n.dll
+C:\Documents and Settings\Administrator\Desktop\Runs\DConvert\Dconvert\bin\Debug\sapnco.dll
+C:\Documents and Settings\Administrator\Desktop\Runs\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
+C:\Documents and Settings\Administrator\Desktop\Runs\DConvert\Dconvert\obj\Debug\Dconvert.exe.manifest
+C:\Documents and Settings\Administrator\Desktop\Runs\DConvert\Dconvert\obj\Debug\Dconvert.application
+C:\Documents and Settings\Administrator\Desktop\Runs\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_HTDC.resources
+E:\PIT\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_HTDC.resources
+F:\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_HTDC.resources
+D:\NCKT\Database_Convert\TOOL\DConvert\Dconvert\obj\Debug\Dconvert.exe
+D:\NCKT\Database_Convert\TOOL\DConvert\Dconvert\obj\Debug\Dconvert.pdb
+D:\NCKT\Database_Convert\TOOL\DConvert\Dconvert\bin\Debug\Dconvert.exe.manifest
+D:\NCKT\Database_Convert\TOOL\DConvert\Dconvert\bin\Debug\Dconvert.application
+D:\NCKT\Database_Convert\TOOL\DConvert\Dconvert\bin\Debug\Dconvert.exe
+D:\NCKT\Database_Convert\TOOL\DConvert\Dconvert\bin\Debug\Dconvert.pdb
+D:\NCKT\Database_Convert\TOOL\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+D:\NCKT\Database_Convert\TOOL\DConvert\Dconvert\bin\Debug\rscp4n.dll
+D:\NCKT\Database_Convert\TOOL\DConvert\Dconvert\bin\Debug\sapnco.dll
+D:\NCKT\Database_Convert\TOOL\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
+D:\NCKT\Database_Convert\TOOL\DConvert\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+D:\NCKT\Database_Convert\TOOL\DConvert\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+D:\NCKT\Database_Convert\TOOL\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_HTDC.resources
+D:\NCKT\Database_Convert\TOOL\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+D:\NCKT\Database_Convert\TOOL\DConvert\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+D:\NCKT\Database_Convert\TOOL\DConvert\Dconvert\obj\Debug\DC.Forms.Main.resources
+D:\NCKT\Database_Convert\TOOL\DConvert\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+D:\NCKT\Database_Convert\TOOL\DConvert\Dconvert\obj\Debug\Dconvert.exe.manifest
+D:\NCKT\Database_Convert\TOOL\DConvert\Dconvert\obj\Debug\Dconvert.application
+D:\NCKT\Database_Convert\TOOL\DConvert_New\Dconvert\obj\Debug\Dconvert.exe
+D:\NCKT\Database_Convert\TOOL\DConvert_New\Dconvert\bin\Debug\Dconvert.exe.manifest
+D:\NCKT\Database_Convert\TOOL\DConvert_New\Dconvert\bin\Debug\Dconvert.application
+D:\NCKT\Database_Convert\TOOL\DConvert_New\Dconvert\bin\Debug\Dconvert.exe
+D:\NCKT\Database_Convert\TOOL\DConvert_New\Dconvert\bin\Debug\Dconvert.pdb
+D:\NCKT\Database_Convert\TOOL\DConvert_New\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
+D:\NCKT\Database_Convert\TOOL\DConvert_New\Dconvert\bin\Debug\rscp4n.dll
+D:\NCKT\Database_Convert\TOOL\DConvert_New\Dconvert\bin\Debug\sapnco.dll
+D:\NCKT\Database_Convert\TOOL\DConvert_New\Dconvert\bin\Debug\sapnco_utils.dll
+D:\NCKT\Database_Convert\TOOL\DConvert_New\Dconvert\obj\Debug\ResolveAssemblyReference.cache
+D:\NCKT\Database_Convert\TOOL\DConvert_New\Dconvert\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+D:\NCKT\Database_Convert\TOOL\DConvert_New\Dconvert\obj\Debug\DC.Forms.Frm_HTDC.resources
+D:\NCKT\Database_Convert\TOOL\DConvert_New\Dconvert\obj\Debug\DC.Forms.Frm_Inf.resources
+D:\NCKT\Database_Convert\TOOL\DConvert_New\Dconvert\obj\Debug\DC.Forms.Frm_QLCD.resources
+D:\NCKT\Database_Convert\TOOL\DConvert_New\Dconvert\obj\Debug\DC.Forms.Main.resources
+D:\NCKT\Database_Convert\TOOL\DConvert_New\Dconvert\obj\Debug\Dconvert.csproj.GenerateResource.Cache
+D:\NCKT\Database_Convert\TOOL\DConvert_New\Dconvert\obj\Debug\Dconvert.exe.manifest
+D:\NCKT\Database_Convert\TOOL\DConvert_New\Dconvert\obj\Debug\Dconvert.application
+D:\NCKT\Database_Convert\TOOL\DConvert_New\Dconvert\obj\Debug\Dconvert.pdb
+D:\NCKT\Database_Convert\TOOL\DConvert\Dconvert\obj\Debug\Dconvert.csproj.ResolveComReference.cache
+D:\NCKT\Database_Convert\TOOL\DConvert\Dconvert\obj\Debug\Interop.ORAOLEDBLib.dll
+D:\NCKT\Database_Convert\TOOL\DConvert\Dconvert\bin\Debug\Interop.ORAOLEDBLib.dll
