@@ -1,0 +1,22 @@
+**** Trace file opened at 2011-12-08 11:15:03+07:00 (SE Asia Standard Time)
+	SAP .NET Connector: 3, 0, 2, 0, Working directory: C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\bin\Release, Program: C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\bin\Release\Dconvert.vshost.exe
+	Hardware: PC with Windows NT, Processor: 2x Intel 80686 (Mod 15 Step 13), Operating system: Microsoft Windows NT 6.1.7600.0, .NET CLR version: 2.0.50727.4963
+ 	SAP release: 720, Kernel release: 720, Kernel patch level: 87
+	Hostname: MANHTV01235, IP address: 10.64.35.42, IP_v6 address: 
+
+	Default trace level: None
+
+>> Error entry 2011-12-08 11:15:03.915
+SAP.Middleware.Connector.RfcInvalidStateException: destination configuration already initialized
+   at SAP.Middleware.Connector.RfcDestinationManager.RegisterDestinationConfiguration(IDestinationConfiguration config)
+**** Trace file opened at 2011-12-08 11:15:55+07:00 (SE Asia Standard Time)
+	SAP .NET Connector: 3, 0, 2, 0, Working directory: C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\bin\Release, Program: C:\Users\Stauffenberg\Documents\PIT\Chuyển đổi dữ liệu\DConvert\Dconvert\bin\Release\Dconvert.vshost.exe
+	Hardware: PC with Windows NT, Processor: 2x Intel 80686 (Mod 15 Step 13), Operating system: Microsoft Windows NT 6.1.7600.0, .NET CLR version: 2.0.50727.4963
+ 	SAP release: 720, Kernel release: 720, Kernel patch level: 87
+	Hostname: MANHTV01235, IP address: 10.64.35.42, IP_v6 address: 
+
+	Default trace level: None
+
+>> Error entry 2011-12-08 11:15:55.059
+SAP.Middleware.Connector.RfcInvalidStateException: destination configuration already initialized
+   at SAP.Middleware.Connector.RfcDestinationManager.RegisterDestinationConfiguration(IDestinationConfiguration config)
