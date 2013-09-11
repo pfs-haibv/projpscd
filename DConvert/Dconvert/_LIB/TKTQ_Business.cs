@@ -1342,6 +1342,12 @@ namespace DC.Lib
                     if (_dt.Rows.Count > 0) CLS_EXCEL.Prc_Add_Sheets(workBook, "DuLieu_DKNTK", _dt);
                     _dt.Clear();
 
+                    // Kết xuất tờ khai thuế môn bài
+                    _sql = "SELECT * FROM vw_sl_tkmb";
+                    _dt = _ora.TransExecute_DataTable(_sql);
+                    if (_dt.Rows.Count > 0) CLS_EXCEL.Prc_Add_Sheets(workBook, "DuLieu_TKMB", _dt);
+                    _dt.Clear();
+
                     /*
                     // Kết xuất chi tiết tờ khai 10KK
                     _sql = "SELECT * FROM vw_sl_tk";
