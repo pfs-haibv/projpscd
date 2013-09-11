@@ -1354,13 +1354,25 @@ namespace DC.Lib
                     if (_dt.Rows.Count > 0) CLS_EXCEL.Prc_Add_Sheets(workBook, "DuLieu_CON_KT", _dt);
                     _dt.Clear();
 
-                    /*
-                    // Kết xuất chi tiết tờ khai 10KK
-                    _sql = "SELECT * FROM vw_sl_tk";
+                    // Kết xuất dữ liệu 01_thkh
+                    _sql = "SELECT * FROM vw_sl_01_thkh";
                     _dt = _ora.TransExecute_DataTable(_sql);
-                    if (_dt.Rows.Count > 0) CLS_EXCEL.Prc_Add_Sheets(workBook, "DuLieu_TK", _dt);
+                    if (_dt.Rows.Count > 0) CLS_EXCEL.Prc_Add_Sheets(workBook, "DuLieu_01_THKH", _dt);
                     _dt.Clear();
 
+                    // Kết xuất dữ liệu 01/TK-SDDPNN
+                    _sql = "SELECT * FROM vw_sl_TK_SDDPNN where rownum < 100";
+                    _dt = _ora.TransExecute_DataTable(_sql);
+                    if (_dt.Rows.Count > 0) CLS_EXCEL.Prc_Add_Sheets(workBook, "DuLieu_TK_SDDPNN", _dt);
+                    _dt.Clear();
+
+                    // Kết xuất dữ liệu tính phạt
+                    _sql = "SELECT * FROM vw_sl_tinh_phat";
+                    _dt = _ora.TransExecute_DataTable(_sql);
+                    if (_dt.Rows.Count > 0) CLS_EXCEL.Prc_Add_Sheets(workBook, "DuLieu_TINH_PHAT", _dt);
+                    _dt.Clear();
+
+                    /*
                     // Kết xuất chi tiết sai lệch sổ nợ và sổ thu nộp
                     _sql = "SELECT * FROM vw_sl_tn";
                     _dt = _ora.TransExecute_DataTable(_sql);
