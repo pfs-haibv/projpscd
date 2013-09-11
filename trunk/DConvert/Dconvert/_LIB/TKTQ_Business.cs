@@ -1281,7 +1281,15 @@ namespace DC.Lib
                 }
             }
         }
-
+        /**
+         * Thuc hien lay du lieu va ket xuat file sai lech 
+         * @author Administrator
+         * @date   September 09, 2013
+         * @param  p_sourcePath
+         * @param  p_destinPath
+         * @param  p_short_name 
+         * 
+         */
         public static void Prc_SaiLech(string p_sourcePath,
                                        string p_destinPath,
                                        string p_short_name)
@@ -1328,6 +1336,13 @@ namespace DC.Lib
                     if (_dt.Rows.Count > 0) CLS_EXCEL.Prc_Add_Sheets(workBook, "DuLieu_NO", _dt);
                     _dt.Clear();
 
+                    // Kết xuất đăng ký nộp tờ khai quyết toán
+                    _sql = "SELECT * FROM vw_sl_dkntk";
+                    _dt = _ora.TransExecute_DataTable(_sql);
+                    if (_dt.Rows.Count > 0) CLS_EXCEL.Prc_Add_Sheets(workBook, "DuLieu_DKNTK", _dt);
+                    _dt.Clear();
+
+                    /*
                     // Kết xuất chi tiết tờ khai 10KK
                     _sql = "SELECT * FROM vw_sl_tk";
                     _dt = _ora.TransExecute_DataTable(_sql);
@@ -1345,7 +1360,7 @@ namespace DC.Lib
                     _dt = _ora.TransExecute_DataTable(_sql);
                     if (_dt.Rows.Count > 0) CLS_EXCEL.Prc_Add_Sheets(workBook, "SaiLechMST", _dt);
                     _dt.Clear();
-
+                    */
                     workBook.SaveAs(p_destinPath,
                                         Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookNormal,
                                         Type.Missing, Type.Missing, Type.Missing, Type.Missing,

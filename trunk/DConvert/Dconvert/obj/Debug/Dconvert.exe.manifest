@@ -63,7 +63,7 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
-      <assemblyIdentity name="Oracle.DataAccess" version="2.112.1.0" publicKeyToken="89B483F429C47342" language="neutral" processorArchitecture="x86" />
+      <assemblyIdentity name="Oracle.DataAccess" version="10.2.0.100" publicKeyToken="89B483F429C47342" language="neutral" />
     </dependentAssembly>
   </dependency>
   <dependency>
@@ -94,14 +94,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Dconvert.exe" size="291328">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Dconvert.exe" size="290816">
       <assemblyIdentity name="Dconvert" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>lKo3gEaDlvOyolubqxuRdrvHtrg=</dsig:DigestValue>
+        <dsig:DigestValue>9NZW9UyBvhL9P1eg1j0g9Lvd/Dk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -113,7 +113,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>vc5TcgvYnWrGx6w2b4Zsfw0X7Tc=</dsig:DigestValue>
+        <dsig:DigestValue>vCRwCTaHDx7dqf9JlZmkOed1HLk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
