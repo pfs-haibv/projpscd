@@ -299,11 +299,11 @@ namespace DC.Utl
 
         public static void WriteToServer(string connstring, string qualifiedDBName, DataTable dataTable)
         {                
-                using (OracleBulkCopy bulkCopy = new OracleBulkCopy(connstring))
+                /*using (OracleBulkCopy bulkCopy = new OracleBulkCopy(connstring))
                 {
                     bulkCopy.DestinationTableName = qualifiedDBName;
                     bulkCopy.WriteToServer(dataTable);
-                }
+                }*/
         }
      }
 
