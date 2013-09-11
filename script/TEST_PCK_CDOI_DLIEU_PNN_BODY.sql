@@ -1,3 +1,6 @@
+-- Start of DDL Script for Package Body TEST.PCK_CDOI_DLIEU_PNN
+-- Generated 11/09/2013 5:00:48 PM from TEST@DCNC
+
 CREATE OR REPLACE 
 PACKAGE BODY pck_cdoi_dlieu_pnn
 IS
@@ -436,13 +439,16 @@ IS
     BEGIN
         EXECUTE IMMEDIATE 'ALTER SESSION SET remote_dependencies_mode = SIGNATURE';
 
+        --get tax_code
+        SELECT   tax_code into v_ma_cqt
+                                       FROM   tb_lst_taxo
+                                      WHERE   short_name = p_short_name;
+
         --Clear data
         DELETE FROM   tb_tk_sddpnn a
               WHERE   a.ma_cqt = v_ma_cqt
                       AND a.ma_loai_tk = '01';
-        SELECT   tax_code into v_ma_cqt
-                                       FROM   tb_lst_taxo
-                                      WHERE   short_name = p_short_name;
+
 
         --Insert thong tin cqt
         INSERT INTO tb_tk_sddpnn (ma_cqt_par,
@@ -758,7 +764,7 @@ IS
                                          short_name)
             SELECT   a.ma_cqt_par,
                      a.ma_cqt,
-                     a.ky_tthue,
+                     to_char(a.ky_tthue, 'DD/MM/YYYY') ky_tthue,
                      a.ma_tkhai,
                      a.ltd,
                      a.trang_thai_cm,
@@ -848,6 +854,7 @@ IS
         pck_trace_log.prc_upd_log_max (p_short_name, 'PRC_KXUAT_CTIET');
 
         COMMIT;
+
     EXCEPTION
         WHEN OTHERS
 
@@ -914,6 +921,8 @@ IS
     END;
 
 END;
+/
 
 
+-- End of DDL Script for Package Body TEST.PCK_CDOI_DLIEU_PNN
 
