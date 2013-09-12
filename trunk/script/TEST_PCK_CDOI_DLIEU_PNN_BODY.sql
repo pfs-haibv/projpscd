@@ -1,5 +1,5 @@
 -- Start of DDL Script for Package Body TEST.PCK_CDOI_DLIEU_PNN
--- Generated 11/09/2013 5:00:48 PM from TEST@DCNC
+-- Generated 12/09/2013 11:00:59 AM from TEST@DCNC
 
 CREATE OR REPLACE 
 PACKAGE BODY pck_cdoi_dlieu_pnn
@@ -889,8 +889,8 @@ IS
         DELETE from tb_pnn_dm_thon a where a.ma_tinh = v_province;
         --02. Danh muc gia dat
         DELETE from tb_pnn_dm_gia_dat a where a.ma_tinh = v_province;
-        --03. Danh muc loai duong
-        DELETE from tb_pnn_dm_loai_duong a where a.ma_tinh = v_province;
+        --03. Danh muc duong/vung
+        DELETE from tb_pnn_dm_ten_duong a where a.ma_tinh = v_province;
         --04. Danh muc doan duong
         DELETE from TB_PNN_DM_DOAN_DUONG a where substr(a.ma_huyen,1,3) = v_province;
         --05. Danh muc vi tri
@@ -902,8 +902,8 @@ IS
         INSERT INTO tb_pnn_dm_thon select * from  pnn_dm_thon@pnn;
         --02. Danh muc gia dat
         INSERT INTO tb_pnn_dm_gia_dat select * from pnn_dm_gia_dat@pnn;
-        --03. Danh muc loai duong
-        INSERT INTO tb_pnn_dm_loai_duong select * from pnn_dm_loai_duong@pnn;
+        --03. Danh muc duong/vung
+        INSERT INTO tb_pnn_dm_ten_duong select * from pnn_dm_ten_duong@pnn;
         --04. Danh muc doan duong
         INSERT INTO TB_PNN_DM_DOAN_DUONG select * from PNN_DM_DOAN_DUONG@pnn;
         --05. Danh muc vi tri
@@ -917,7 +917,7 @@ IS
 
         THEN
             pck_trace_log.prc_ins_log (p_short_name, pck_trace_log.fnc_whocalledme);
-            
+
     END;
 
 END;
