@@ -508,7 +508,7 @@ namespace DC.Vatwin
                 // Biến lưu trữ trên hàm hoặc thủ tục
                 string v_pck = "FNC_COPY_FILE_DA";
 
-                int _thang = 6; //Số tháng tính từ kỳ chốt ngược về trước để copy file TK theo từng tháng
+                int _thang = 12; //Số tháng tính từ kỳ chốt ngược về trước để copy file TK theo từng tháng
 
                 // Biến lưu trữ số file đã copy về máy
                 int _so_file = 0;
@@ -520,9 +520,9 @@ namespace DC.Vatwin
 
                 try
                 {
-                    for (int i = 0; i <= _thang; i++)
+                    for (int i = 0; i < _thang; i++)
                     {
-                        string _search_pattern = "DA" + p_ky_chot.AddYears(i * -1).ToString("MMyyyy") + ".DBF";
+                        string _search_pattern = "DA" + p_ky_chot.AddMonths(i * -1).ToString("MMyyyy") + ".DBF";
                         ArrayList _listFile = new ArrayList();
                         _listFile.AddRange(_dir_source.GetFiles(_search_pattern));
                         foreach (FileInfo _file in _listFile)
