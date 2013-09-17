@@ -1,5 +1,5 @@
 -- Start of DDL Script for Table TEST.TB_TABLES
--- Generated 27/08/2013 2:44:37 PM from TEST@DCNC
+-- Generated 17/09/2013 3:33:07 PM from TEST@DCNC
 
 CREATE TABLE tb_tables
     (id                             NUMBER(10,0) ,

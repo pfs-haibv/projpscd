@@ -1,5 +1,5 @@
 -- Start of DDL Script for Table TEST.TB_TK_SDDPNN
--- Generated 11/09/2013 4:03:12 PM from TEST@DCNC
+-- Generated 16/09/2013 11:29:35 AM from TEST@DCNC
 
 CREATE TABLE tb_tk_sddpnn
     (ma_cqt_par                     VARCHAR2(5 CHAR) ,
@@ -120,7 +120,9 @@ CREATE TABLE tb_tk_sddpnn
     err_des                        VARCHAR2(200 BYTE),
     short_name                     VARCHAR2(7 BYTE),
     ky_kkhai_tu_ngay               VARCHAR2(15 BYTE),
-    ky_kkhai_den_ngay              VARCHAR2(15 BYTE))
+    ky_kkhai_den_ngay              VARCHAR2(15 BYTE),
+    cct_ma_loai_dat_tms            VARCHAR2(6 BYTE),
+    cct_ma_loai_duong_tms          VARCHAR2(6 BYTE))
   PCTFREE     10
   INITRANS    1
   MAXTRANS    255

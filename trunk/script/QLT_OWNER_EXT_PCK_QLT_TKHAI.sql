@@ -1,3 +1,6 @@
+-- Start of DDL Script for Package QLT_OWNER.EXT_PCK_QLT_TKHAI
+-- Generated 17/09/2013 3:26:52 PM from QLT_OWNER@QLT_BRV_VTA
+
 CREATE OR REPLACE 
 PACKAGE ext_pck_qlt_tkhai
               IS
@@ -17,15 +20,16 @@ PACKAGE ext_pck_qlt_tkhai
 
                 PROCEDURE Prc_Del_Log( p_pck VARCHAR2);
 
-                FUNCTION Fnc_GetKyTK ( loai_kkhai varchar2, ma_tk varchar2)
+                FUNCTION Fnc_GetKyTK ( ma_tk varchar2)
                 return varchar2 ;
-
-                FUNCTION fnc_get_tkhai_tms (loai_kkhai VARCHAR2,ma_tk VARCHAR2)
+                FUNCTION fnc_get_tkhai_tms (ma_tk VARCHAR2, loai_kkhai varchar2)
                 RETURN VARCHAR2;
                 --TAX_MODEL QLT-APP
                 c_qlt_tax_model Constant varchar2 (7 ) := 'QLT-APP';
 
+                --Kiem tra sai lech so thu nop
+                PROCEDURE Prc_Job_Qlt_Slech_No;
+                PROCEDURE Prc_Qlt_Slech_No;
+                v_gl_cqt VARCHAR2(5);
+
             END;
-/
-
-
