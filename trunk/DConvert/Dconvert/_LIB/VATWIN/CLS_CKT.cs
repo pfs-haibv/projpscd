@@ -215,7 +215,7 @@ namespace DC.Vatwin
                                                 so_tien,
                                                 tkhoan
                                                 )
-                                        VALUES ('{0}', {1}, '{2}', '{3}', '{4}','{5}','{6}','{7}',
+                                        VALUES ({0}, '{1}', '{2}', '{3}', '{4}','{5}','{6}','{7}',
                                                 '{8}','{9}','{10}','{11}','{12}','{13}',{14},'{15}')";
 
                                 _query = _query.Replace("{0}", _rowsnum.ToString());
@@ -303,10 +303,10 @@ namespace DC.Vatwin
                                           DirectoryInfo p_dir_source,
                                           Forms.Frm_QLCD p_frm_qlcd)
         {
-            int _thang = 6 ; //Số tháng tính từ kỳ chốt ngược về trước để lấy dữ liệu số khấu trừ 02/GTGT
+            int _thang = 12 ; //Số tháng tính từ kỳ chốt ngược về trước để lấy dữ liệu số khấu trừ 02/GTGT
             int _rowsnum = 0;
             DateTime _ky;
-            for (int j = 1; j <= _thang; j++)
+            for (int j = 0; j <= _thang; j++)
             {
                 _ky = p_ky_chot.AddMonths(j * -1);
                 // Xử lý cho trường hợp lấy dữ liệu từ trước tháng 8 năm 2011 thì bỏ qua vì cấu trúc file đã khác
@@ -469,7 +469,7 @@ namespace DC.Vatwin
                                                 so_tien,
                                                 tkhoan
                                                 )
-                                        VALUES ('{0}', {1}, '{2}', '{3}', '{4}','{5}','{6}','{7}',
+                                        VALUES ({0}, '{1}', '{2}', '{3}', '{4}','{5}','{6}','{7}',
                                                 '{8}','{9}','{10}','{11}','{12}','{13}',{14},'{15}')";
 
                                 _query = _query.Replace("{0}", _rowsnum.ToString());

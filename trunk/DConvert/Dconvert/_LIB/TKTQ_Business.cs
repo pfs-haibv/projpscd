@@ -1371,14 +1371,14 @@ namespace DC.Lib
                     _dt = _ora.TransExecute_DataTable(_sql);
                     if (_dt.Rows.Count > 0) CLS_EXCEL.Prc_Add_Sheets(workBook, "DuLieu_TINH_PHAT", _dt);
                     _dt.Clear();
-
-                    /*
+                    
                     // Kết xuất chi tiết sai lệch sổ nợ và sổ thu nộp
                     _sql = "SELECT * FROM vw_sl_tn";
                     _dt = _ora.TransExecute_DataTable(_sql);
                     if (_dt.Rows.Count > 0) CLS_EXCEL.Prc_Add_Sheets(workBook, "SaiLechNo", _dt);
                     _dt.Clear();
 
+                    /*
                     // Kết xuất chi tiết sai lệch mã số thuế trạng thái lỗi hoặc chưa có ngày đăng ký nhưng có phát sinh thuế
                     _sql = "SELECT * FROM vw_sl_mst";
                     _dt = _ora.TransExecute_DataTable(_sql);
