@@ -87,6 +87,8 @@ VALUES(483,4,'ltd','NUMBER(5,0) DEFAULT 0');
 INSERT INTO tb_columns 
 VALUES(484,4,'call_stack','VARCHAR2(2000)');
 INSERT INTO tb_columns 
+VALUES(1621,8,'ma_cqt','varchar2(5)');
+INSERT INTO tb_columns 
 VALUES(161,5,'ID','number(20,0)');
 INSERT INTO tb_columns 
 VALUES(162,5,'MA','varchar2(20)');
@@ -98,6 +100,12 @@ INSERT INTO tb_columns
 VALUES(181,5,'MA_TMS','varchar2(7)');
 INSERT INTO tb_columns 
 VALUES(182,1,'MAU_TK_TMS','varchar2(20)');
+INSERT INTO tb_columns 
+VALUES(1536,5,'flg_dkntk','varchar2(1)');
+INSERT INTO tb_columns 
+VALUES(1601,6,'TEN','VARCHAR2(100)');
+INSERT INTO tb_columns 
+VALUES(1602,6,'ten_pban','varchar2(150)');
 INSERT INTO tb_columns 
 VALUES(222,6,'TIN','varchar2(14)');
 INSERT INTO tb_columns 
@@ -197,7 +205,51 @@ VALUES(12,1,'MAU_TK','varchar2(20)');
 INSERT INTO tb_columns 
 VALUES(243,6,'MA_PBAN','varchar2(10)');
 INSERT INTO tb_columns 
+VALUES(1661,22,'loai','VARCHAR2(3)');
+INSERT INTO tb_columns 
 VALUES(261,5,'LOAI_KKHAI','varchar2(2)');
+INSERT INTO tb_columns 
+VALUES(1581,5,'flg_ps','varchar2(1)');
+INSERT INTO tb_columns 
+VALUES(1662,22,'ky_thue','VARCHAR2(14)');
+INSERT INTO tb_columns 
+VALUES(1663,22,'tin','VARCHAR2(14)');
+INSERT INTO tb_columns 
+VALUES(1664,22,'ten_dtnt','VARCHAR2(250)');
+INSERT INTO tb_columns 
+VALUES(1665,22,'tai_khoan','VARCHAR2(50)');
+INSERT INTO tb_columns 
+VALUES(1666,22,'muc','VARCHAR2(4)');
+INSERT INTO tb_columns 
+VALUES(1667,22,'tieumuc','VARCHAR2(4)');
+INSERT INTO tb_columns 
+VALUES(1668,22,'mathue','VARCHAR2(2)');
+INSERT INTO tb_columns 
+VALUES(1669,22,'sothue_no_cky','NUMBER(15,0)');
+INSERT INTO tb_columns 
+VALUES(1670,22,'sono_no_cky','NUMBER(15,0)');
+INSERT INTO tb_columns 
+VALUES(1671,22,'clech_no_cky','NUMBER(15,0)');
+INSERT INTO tb_columns 
+VALUES(1672,22,'update_no','NUMBER(3,0)');
+INSERT INTO tb_columns 
+VALUES(1673,22,'ma_cbo','VARCHAR2(15)');
+INSERT INTO tb_columns 
+VALUES(1674,22,'ten_cbo','VARCHAR2(150)');
+INSERT INTO tb_columns 
+VALUES(1675,22,'ma_pban','VARCHAR2(15)');
+INSERT INTO tb_columns 
+VALUES(1676,22,'ten_pban','VARCHAR2(250)');
+INSERT INTO tb_columns 
+VALUES(1677,22,'ma_slech','NUMBER(2,0)');
+INSERT INTO tb_columns 
+VALUES(1678,22,'ma_gdich','VARCHAR2(3)');
+INSERT INTO tb_columns 
+VALUES(1679,22,'ten_gdich','VARCHAR2(100)');
+INSERT INTO tb_columns 
+VALUES(1680,22,'da_dchinh','VARCHAR2(1)');
+INSERT INTO tb_columns 
+VALUES(1681,22,'ma_cqt','VARCHAR2(5)');
 INSERT INTO tb_columns 
 VALUES(424,6,'TM_1701','number(22,0)');
 INSERT INTO tb_columns 

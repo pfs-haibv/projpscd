@@ -1,5 +1,5 @@
 -- Start of DDL Script for Package Body TEST.PCK_CDOI_DLIEU_PNN
--- Generated 12/09/2013 11:00:59 AM from TEST@DCNC
+-- Generated 16/09/2013 11:29:59 AM from TEST@DCNC
 
 CREATE OR REPLACE 
 PACKAGE BODY pck_cdoi_dlieu_pnn
@@ -436,11 +436,12 @@ IS
     PROCEDURE prc_pnn_get_01tk_sddpnn (p_short_name VARCHAR2)
     IS
     v_ma_cqt varchar2(5);
+    v_province varchar2(3);
     BEGIN
         EXECUTE IMMEDIATE 'ALTER SESSION SET remote_dependencies_mode = SIGNATURE';
 
         --get tax_code
-        SELECT   tax_code into v_ma_cqt
+        SELECT   tax_code, province into v_ma_cqt, v_province
                                        FROM   tb_lst_taxo
                                       WHERE   short_name = p_short_name;
 
@@ -840,6 +841,8 @@ IS
                      AND b.ltd = 0;
                      --bo sung dieu kien lay to khai da hach toan
 
+        --Dong bo danh muc dung
+        pck_cdoi_dlieu_pnn.prc_pnn_sync_dmuc_tms(v_province, v_ma_cqt);
 
         -- Ghi log
         UPDATE   tb_lst_taxo
@@ -919,6 +922,94 @@ IS
             pck_trace_log.prc_ins_log (p_short_name, pck_trace_log.fnc_whocalledme);
 
     END;
+    /**
+     *Thuc hien lay ma map nhu ma loai dat, ma loai duong cua TMS
+     *<p> tu bang map danh muc
+     *@author Administrator
+     *@date 16/09/2013
+     *@param v_ma
+     *@param v_tbl_map
+     *@param v_ma_tinh
+     *@see pck_cdoi_dlieu_pnn.prc_pnn_get_data_tms
+     *@return v_get_key_tms
+     */
+
+    FUNCTION fnc_pnn_get_data_tms (p_ma varchar2, p_tbl_map varchar2, p_ma_tinh varchar2)
+
+    RETURN VARCHAR2
+    IS
+        v_get_key_tms varchar2(3);
+    BEGIN
+        --Kiem tra null
+        if(p_ma is null or p_tbl_map is null or p_ma_tinh is null) then
+            v_get_key_tms := null;
+        else
+            if (upper(p_tbl_map) = upper('tb_pnn_dm_loai_dat')) then
+                --Lay ma_loai_dat_tms trong danh muc tb_pnn_dm_loai_dat
+                EXECUTE IMMEDIATE 'SELECT   a.ma_loai_dat_tms
+                                   FROM   '||p_tbl_map||' a
+                                   WHERE   a.ma_loai_dat = '''||p_ma||'''
+                                   AND a.ma_tinh = '''||p_ma_tinh||''' and rownum = 1' into v_get_key_tms;
+            else
+                --Lay ma_loai_duong_tms trong danh muc tb_pnn_dm_loai_duong
+                EXECUTE IMMEDIATE 'SELECT   a.ma_loai_duong_tms
+                                   FROM   tb_pnn_dm_loai_duong a
+                                   WHERE   a.ma_loai_duong = '''||p_ma||'''
+                                   AND a.ma_tinh = '''||p_ma_tinh||''' and rownum = 1' into v_get_key_tms;
+            end if;
+
+        end if;
+
+        return v_get_key_tms;
+
+        EXCEPTION
+            WHEN OTHERS
+
+            THEN
+                pck_trace_log.prc_ins_log (p_tbl_map, pck_trace_log.fnc_whocalledme);
+     END;
+
+     /**
+      *Thuc hien dong bo ma loai dat, ma loai duong tu ma he thong cu
+      *<p> len su dung ma loai dat, ma loai duong chung tren he thong tms
+      *@author Adminstrator
+      *@date 16/09/2013
+      *@param p_short_name
+      *@see pck_cdoi_dlieu_pnn.prc_pnn_sync_dmuc_tms
+      */
+
+     PROCEDURE prc_pnn_sync_dmuc_tms (p_ma_tinh VARCHAR2, p_taxo VARCHAR2)
+     IS
+        --data pnn danh muc loai dat
+        cursor c_pnn_dm_loai_dat
+        is
+            select * from tb_pnn_dm_loai_dat a where a.ma_tinh = p_ma_tinh;
+
+        --data pnn danh muc loai duong
+        cursor c_pnn_dm_loai_duong
+        is
+            select * from tb_pnn_dm_loai_duong a where a.ma_tinh = p_ma_tinh;
+
+     BEGIN
+
+         --Update danh muc loai dat
+         FOR vc_pnn_dm_loai_dat IN c_pnn_dm_loai_dat
+            LOOP
+                update tb_tk_sddpnn set cct_ma_loai_dat_tms = vc_pnn_dm_loai_dat.ma_loai_dat_tms
+                where ma_cqt = p_taxo
+                  and cct_ma_loai_dat = vc_pnn_dm_loai_dat.ma_loai_dat;
+         END LOOP;
+
+         --Update danh muc loai duong
+         FOR vc_pnn_dm_loai_duong IN c_pnn_dm_loai_duong
+            LOOP
+                update tb_tk_sddpnn set cct_ma_loai_duong_tms = vc_pnn_dm_loai_duong.ma_loai_duong_tms
+                where ma_cqt = p_taxo
+                  and cct_ma_loai_duong = vc_pnn_dm_loai_duong.ma_loai_duong;
+         END LOOP;
+
+     END;
+
 
 END;
 /
