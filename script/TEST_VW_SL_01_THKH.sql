@@ -1,5 +1,5 @@
 -- Start of DDL Script for View TEST.VW_SL_01_THKH
--- Generated 11/09/2013 2:52:42 PM from TEST@DCNC
+-- Generated 18/09/2013 1:52:14 PM from TEST@DCNC
 
 CREATE OR REPLACE VIEW vw_sl_01_thkh (
    tax_model,
@@ -10,6 +10,7 @@ CREATE OR REPLACE VIEW vw_sl_01_thkh (
    ma_pban,
    ten_pban,
    tin,
+   ten_nnt,
    kytt_tu_ngay,
    kytt_den_ngay,
    ngay_htoan,
@@ -17,7 +18,8 @@ CREATE OR REPLACE VIEW vw_sl_01_thkh (
    han_nop,
    doanh_thu,
    gtgt_chiu_thue,
-   thue_gtgt )
+   thue_gtgt,
+   thue_suat_gtgt )
 AS
 SELECT   "TAX_MODEL",
            "ERR_ID",
@@ -27,6 +29,7 @@ SELECT   "TAX_MODEL",
            "MA_PBAN",
            "TEN_PBAN",
            "TIN",
+           "TEN_NNT",
            "KYTT_TU_NGAY",
            "KYTT_DEN_NGAY",
            "NGAY_HTOAN",
@@ -34,7 +37,8 @@ SELECT   "TAX_MODEL",
            "HAN_NOP",
            "DOANH_THU",
            "GTGT_CHIU_THUE",
-           "THUE_GTGT"
+           "THUE_GTGT",
+           "THUE_SUAT_GTGT"
     FROM   (SELECT   b.tax_model,
                      a.err_id err_id,
                      (SELECT   c.err_name
@@ -46,6 +50,7 @@ SELECT   "TAX_MODEL",
                      b.ma_pban,
                      b.ten_pban,
                      b.tin,
+                     b.ten_nnt,
                      b.kytt_tu_ngay,
                      b.kytt_den_ngay,
                      b.ngay_htoan,
@@ -56,7 +61,8 @@ SELECT   "TAX_MODEL",
                      (decode(b.gtgt_chiu_thue_ts_5, null, 0, b.gtgt_chiu_thue_ts_5) + 
                      decode(b.gtgt_chiu_thue_ts_10, null, 0, b.gtgt_chiu_thue_ts_10) ) gtgt_chiu_thue,
                      (decode(b.thue_gtgt_ts_5, null, 0, b.thue_gtgt_ts_5) + 
-                     decode(b.thue_gtgt_ts_10, null, 0, b.thue_gtgt_ts_10) ) thue_gtgt
+                     decode(b.thue_gtgt_ts_10, null, 0, b.thue_gtgt_ts_10) ) thue_gtgt,
+                     b.tsgtgt THUE_SUAT_GTGT
               FROM   tb_data_error a, tb_01_thkh_hdr b
              WHERE       a.rid = b.ROWID
                      AND a.table_name = 'TB_01_THKH_HDR'

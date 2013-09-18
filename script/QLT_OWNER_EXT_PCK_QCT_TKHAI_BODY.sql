@@ -1,5 +1,5 @@
 -- Start of DDL Script for Package Body QLT_OWNER.EXT_PCK_QCT_TKHAI
--- Generated 17/09/2013 3:25:35 PM from QLT_OWNER@QLT_BRV_VTA
+-- Generated 18/09/2013 2:05:25 PM from QLT_OWNER@QLT_BRV_VTA
 
 CREATE OR REPLACE 
 PACKAGE BODY ext_pck_qct_tkhai
@@ -576,7 +576,8 @@ IS
                                     doanh_thu_ts_5,
                                     gtgt_chiu_thue_ts_5,
                                     thue_gtgt_ts_5,
-                                    tm_1701
+                                    tm_1701,
+                                    tsgtgt
                                     )
         SELECT       tk_hdr.tin tin,
                      tk_hdr.ten_dtnt ten_nnt,
@@ -589,7 +590,8 @@ IS
                      tk_dtl.doanh_thu doanh_thu_ts_5,
                      tk_dtl.gtgt_chiu_thue gtgt_chiu_thue_ts_5,
                      tk_dtl.thue_gtgt thue_gtgt_ts_5,
-                     psinh.thue_psinh tm_1701
+                     psinh.thue_psinh tm_1701,
+                     5 tsgtgt
               FROM   qct_cctt_hdr tk_hdr,
                      qlt_nsd_dtnt nnt,
                      qct_cctt_dtl tk_dtl,
@@ -617,7 +619,8 @@ IS
                                     doanh_thu_ts_10,
                                     gtgt_chiu_thue_ts_10,
                                     thue_gtgt_ts_10,
-                                    tm_1701
+                                    tm_1701,
+                                    tsgtgt
                                     )
         SELECT       tk_hdr.tin tin,
                      tk_hdr.ten_dtnt ten_nnt,
@@ -630,7 +633,8 @@ IS
                      tk_dtl.doanh_thu doanh_thu_ts_10,
                      tk_dtl.gtgt_chiu_thue gtgt_chiu_thue_ts_10,
                      tk_dtl.thue_gtgt thue_gtgt_ts_10,
-                     psinh.thue_psinh tm_1701
+                     psinh.thue_psinh tm_1701,
+                     10 tsgtgt
               FROM   qct_cctt_hdr tk_hdr,
                      qlt_nsd_dtnt nnt,
                      qct_cctt_dtl tk_dtl,
@@ -651,7 +655,7 @@ IS
         prc_update_pbcb ('EXT_CCTT_HDR');
 
         COMMIT;
-/*
+
         qlt_pck_thop_no_thue.prc_unload_dsach_dtnt;
 
         prc_finnal (c_pro_name);
@@ -659,7 +663,7 @@ IS
         WHEN OTHERS
         THEN
             prc_finnal (c_pro_name);
-            */
+
     END;
 
     /**
@@ -883,3 +887,10 @@ IS
 
 
 END;
+
+-- End of DDL Script for Package Body QLT_OWNER.EXT_PCK_QCT_TKHAI
+/
+
+
+-- End of DDL Script for Package Body QLT_OWNER.EXT_PCK_QCT_TKHAI
+

@@ -1,7 +1,7 @@
--- Start of DDL Script for View TEST.VW_SL_DKNTK
--- Generated 18/09/2013 10:53:07 AM from TEST@DCNC
+-- Start of DDL Script for View TEST.VW_SL_CON_KT
+-- Generated 18/09/2013 1:26:57 PM from TEST@DCNC
 
-CREATE OR REPLACE VIEW vw_sl_dkntk (
+CREATE OR REPLACE VIEW vw_sl_con_kt (
    tax_model,
    err_id,
    err_name,
@@ -12,10 +12,17 @@ CREATE OR REPLACE VIEW vw_sl_dkntk (
    tin,
    ten_nnt,
    ma_tkhai,
-   ky_bat_dau,
-   ky_ket_thuc )
+   ma_chuong,
+   ma_khoan,
+   ma_tmuc,
+   tkhoan,
+   kykk_tu_ngay,
+   kykk_den_ngay,
+   so_tien,
+   han_nop,
+   ngay_htoan )
 AS
-SELECT     "TAX_MODEL",
+SELECT   "TAX_MODEL",
            "ERR_ID",
            "ERR_NAME",
            "MA_CBO",
@@ -25,8 +32,16 @@ SELECT     "TAX_MODEL",
            "TIN",
            "TEN_NNT",
            "MA_TKHAI",
-           "KY_BAT_DAU",
-           "KY_KET_THUC"          
+           "MA_CHUONG",
+           "MA_KHOAN",
+           "MA_TMUC",
+           "TKHOAN",
+           "KYKK_TU_NGAY",
+           "KYKK_DEN_NGAY",
+           "SO_TIEN",
+           "HAN_NOP",
+           "NGAY_HTOAN"
+           
     FROM   (SELECT   b.tax_model,
                      a.err_id err_id,
                      (SELECT   c.err_name
@@ -40,11 +55,18 @@ SELECT     "TAX_MODEL",
                      b.tin,
                      b.ten_nnt,
                      b.ma_tkhai,
-                     b.ky_bd_hthong_cu as ky_bat_dau,
-                     b.ky_kt_hthong_cu as ky_ket_thuc
-              FROM   tb_data_error a, tb_dkntk b
+                     b.ma_chuong,
+                     b.ma_khoan,
+                     b.ma_tmuc,
+                     b.tkhoan,
+                     b.kykk_tu_ngay,
+                     b.kykk_den_ngay,
+                     b.so_tien,
+                     b.han_nop,
+                     b.ngay_htoan
+              FROM   tb_data_error a, tb_con_kt b
              WHERE       a.rid = b.ROWID
-                     AND a.table_name = 'TB_DKNTK'
+                     AND a.table_name = 'TB_CON_KT'
                      AND a.short_name = b.short_name
                      AND b.short_name = USERENV ('client_info')
                      AND a.update_no = 0)

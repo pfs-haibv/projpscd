@@ -804,43 +804,43 @@ namespace DC.Lib
                 _dt.Reset();
                 #endregion
 
-                //Tạo bảng chi tiết tờ khai 10/KK-TNCN
-                #region ADD ROW TO_KHAI
-                _dt = _ora.TransExecute_DataTable(_query_tk);
-                if (_dt.Rows.Count == 0)
-                {
-                    if (_times == 1)
-                        _query_tk = "SELECT 0 stt, 0 loai_ud, 0 so_luong, 0 pbq1, 0 pbq2, 0 pbq3, 0 pbq4, 0 tncn FROM dual";
-                    else
-                        _query_tk = "SELECT 0 stt, 0 so_luong, 0 pbq1, 0 pbq2, 0 pbq3, 0 pbq4, 0 tncn FROM dual";
-                    _dt = _ora.TransExecute_DataTable(_query_tk);
-                }
-                _k = 6;
-                // Điền giá trị tờ khai
-                Prc_fill_tbBienBan(_k, _doc, _dt, 4);
+                ////Tạo bảng chi tiết tờ khai 10/KK-TNCN
+                //#region ADD ROW TO_KHAI
+                //_dt = _ora.TransExecute_DataTable(_query_tk);
+                //if (_dt.Rows.Count == 0)
+                //{
+                //    if (_times == 1)
+                //        _query_tk = "SELECT 0 stt, 0 loai_ud, 0 so_luong, 0 pbq1, 0 pbq2, 0 pbq3, 0 pbq4, 0 tncn FROM dual";
+                //    else
+                //        _query_tk = "SELECT 0 stt, 0 so_luong, 0 pbq1, 0 pbq2, 0 pbq3, 0 pbq4, 0 tncn FROM dual";
+                //    _dt = _ora.TransExecute_DataTable(_query_tk);
+                //}
+                //_k = 6;
+                //// Điền giá trị tờ khai
+                //Prc_fill_tbBienBan(_k, _doc, _dt, 4);
 
-                // Modify by ManhTV3 on 6/4/2012
-                // Tạo bảng nhập cho CQT
-                _dt = _ora.TransExecute_DataTable(_query_tk_bs);
-                if (_dt.Rows.Count == 0)
-                {
-                    if (_times == 1)
-                        _query_tk_bs = "SELECT 0 stt, 0 loai_ud, 0 so_luong, 0 pbq1, 0 pbq2, 0 pbq3, 0 pbq4, 0 tncn FROM dual";
-                    else
-                        _query_tk_bs = "SELECT 0 stt, 0 so_luong, 0 pbq1, 0 pbq2, 0 pbq3, 0 pbq4, 0 tncn FROM dual";
-                    _dt = _ora.TransExecute_DataTable(_query_tk_bs);
-                }
-                _k = 7;
-                Prc_fill_tbBienBan(_k, _doc, _dt, 4);
-                // Modify by ThanhNH5 on 07/04/2012
-                // Tạo bảng nhập sai lệch cho CQT
-                _k = 8;
-                Prc_fill_tbBienBan(_k, _doc, _dt, 4);
+                //// Modify by ManhTV3 on 6/4/2012
+                //// Tạo bảng nhập cho CQT
+                //_dt = _ora.TransExecute_DataTable(_query_tk_bs);
+                //if (_dt.Rows.Count == 0)
+                //{
+                //    if (_times == 1)
+                //        _query_tk_bs = "SELECT 0 stt, 0 loai_ud, 0 so_luong, 0 pbq1, 0 pbq2, 0 pbq3, 0 pbq4, 0 tncn FROM dual";
+                //    else
+                //        _query_tk_bs = "SELECT 0 stt, 0 so_luong, 0 pbq1, 0 pbq2, 0 pbq3, 0 pbq4, 0 tncn FROM dual";
+                //    _dt = _ora.TransExecute_DataTable(_query_tk_bs);
+                //}
+                //_k = 7;
+                //Prc_fill_tbBienBan(_k, _doc, _dt, 4);
+                //// Modify by ThanhNH5 on 07/04/2012
+                //// Tạo bảng nhập sai lệch cho CQT
+                //_k = 8;
+                //Prc_fill_tbBienBan(_k, _doc, _dt, 4);
 
-                // Add các index của table cần xóa
-                if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
-                _dt.Reset();
-                #endregion
+                //// Add các index của table cần xóa
+                //if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
+                //_dt.Reset();
+                //#endregion
 
                 // Xóa table không cần thiết của _Document
                 foreach (int i in _arr_delTable)

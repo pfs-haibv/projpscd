@@ -1,5 +1,5 @@
 -- Start of DDL Script for View TEST.VW_SL_TKMB
--- Generated 11/09/2013 10:22:13 AM from TEST@DCNC
+-- Generated 18/09/2013 11:12:10 AM from TEST@DCNC
 
 CREATE OR REPLACE VIEW vw_sl_tkmb (
    tax_model,
@@ -10,6 +10,7 @@ CREATE OR REPLACE VIEW vw_sl_tkmb (
    ma_pban,
    ten_pban,
    tin,
+   ten_nnt,
    kytt_tu_ngay,
    kytt_den_ngay,
    ngay_htoan,
@@ -32,6 +33,7 @@ SELECT   "TAX_MODEL",
            "MA_PBAN",
            "TEN_PBAN",
            "TIN",
+           "TEN_NNT",
            "KYTT_TU_NGAY",
            "KYTT_DEN_NGAY",
            "NGAY_HTOAN",
@@ -57,6 +59,7 @@ SELECT   "TAX_MODEL",
                      b.ma_pban,
                      b.ten_pban,
                      b.tin,
+                     b.ten_nnt,
                      b.kytt_tu_ngay,
                      b.kytt_den_ngay,
                      b.ngay_htoan,
@@ -77,7 +80,5 @@ SELECT   "TAX_MODEL",
                      AND b.short_name = USERENV ('client_info')
                      AND a.update_no = 0)
 ORDER BY   tax_model, err_id
-/
 
--- End of DDL Script for View TEST.VW_SL_TKMB
 
