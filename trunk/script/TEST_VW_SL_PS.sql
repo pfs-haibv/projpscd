@@ -1,5 +1,5 @@
 -- Start of DDL Script for View TEST.VW_SL_PS
--- Generated 11/09/2013 8:14:43 AM from TEST@DCNC
+-- Generated 18/09/2013 1:17:31 PM from TEST@DCNC
 
 CREATE OR REPLACE VIEW vw_sl_ps (
    tax_model,
@@ -10,14 +10,17 @@ CREATE OR REPLACE VIEW vw_sl_ps (
    ma_pban,
    ten_pban,
    tin,
+   ten_nnt,
    ma_tkhai,
    ma_chuong,
    ma_khoan,
    ma_tmuc,
    tkhoan,
+   kykk_tu_ngay,
+   kykk_den_ngay,
    so_tien,
-   han_nop,
-   ngay_htoan )
+   ngay_htoan,
+   han_nop )
 AS
 SELECT   "TAX_MODEL",
            "ERR_ID",
@@ -27,14 +30,18 @@ SELECT   "TAX_MODEL",
            "MA_PBAN",
            "TEN_PBAN",
            "TIN",
+           "TEN_NNT",
            "MA_TKHAI",
            "MA_CHUONG",
            "MA_KHOAN",
            "MA_TMUC",
            "TKHOAN",
+           "KYKK_TU_NGAY",
+           "KYKK_DEN_NGAY",
            "SO_TIEN",
-           "HAN_NOP",
-           "NGAY_HTOAN"
+           "NGAY_HTOAN",
+           "HAN_NOP"
+           
     FROM   (SELECT   b.tax_model,
                      a.err_id err_id,
                      (SELECT   c.err_name
@@ -46,11 +53,14 @@ SELECT   "TAX_MODEL",
                      b.ma_pban,
                      b.ten_pban,
                      b.tin,
+                     b.ten_nnt,
                      b.ma_tkhai,
                      b.ma_chuong,
                      b.ma_khoan,
                      b.ma_tmuc,
                      b.tkhoan,
+                     b.kykk_tu_ngay,
+                     b.kykk_den_ngay,
                      b.so_tien,
                      b.han_nop,
                      b.ngay_htoan
@@ -61,7 +71,5 @@ SELECT   "TAX_MODEL",
                      AND b.short_name = USERENV ('client_info')
                      AND a.update_no = 0)
 ORDER BY   tax_model, err_id, ma_tkhai
-/
 
--- End of DDL Script for View TEST.VW_SL_PS
 

@@ -1,3 +1,6 @@
+-- Start of DDL Script for Table TEST.TB_01_THKH_HDR
+-- Generated 18/09/2013 1:50:02 PM from TEST@DCNC
+
 CREATE TABLE tb_01_thkh_hdr
     (id                             NUMBER(20,0) ,
     tkh_id                         NUMBER(20,0),
@@ -34,7 +37,8 @@ CREATE TABLE tb_01_thkh_hdr
     thue_gtgt_ts_5                 NUMBER(20,0),
     doanh_thu_ts_10                NUMBER(20,0),
     gtgt_chiu_thue_ts_10           NUMBER(20,0),
-    thue_gtgt_ts_10                NUMBER(20,0))
+    thue_gtgt_ts_10                NUMBER(20,0),
+    tsgtgt                         NUMBER(5,0))
   PCTFREE     10
   INITRANS    1
   MAXTRANS    255
@@ -48,10 +52,10 @@ CREATE TABLE tb_01_thkh_hdr
   MONITORING
   NOPARALLEL
   LOGGING
-;
+/
 
 
-
+-- Indexes for TB_01_THKH_HDR
 
 CREATE INDEX idx_tb_cctt_hdr_id ON tb_01_thkh_hdr
   (
@@ -68,10 +72,16 @@ CREATE INDEX idx_tb_cctt_hdr_id ON tb_01_thkh_hdr
   )
 NOPARALLEL
 LOGGING
-;
+/
 
+
+
+-- Constraints for TB_01_THKH_HDR
 
 ALTER TABLE tb_01_thkh_hdr
 ADD CONSTRAINT pk_tb_cctt_hdr_id PRIMARY KEY (id)
-;
+/
+
+
+-- End of DDL Script for Table TEST.TB_01_THKH_HDR
 

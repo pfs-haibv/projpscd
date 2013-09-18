@@ -89,6 +89,8 @@ VALUES(484,4,'call_stack','VARCHAR2(2000)');
 INSERT INTO tb_columns 
 VALUES(1621,8,'ma_cqt','varchar2(5)');
 INSERT INTO tb_columns 
+VALUES(1701,6,'tsgtgt','NUMBER(5)');
+INSERT INTO tb_columns 
 VALUES(161,5,'ID','number(20,0)');
 INSERT INTO tb_columns 
 VALUES(162,5,'MA','varchar2(20)');
