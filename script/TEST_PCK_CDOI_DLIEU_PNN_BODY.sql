@@ -1,5 +1,5 @@
 -- Start of DDL Script for Package Body TEST.PCK_CDOI_DLIEU_PNN
--- Generated 16/09/2013 11:29:59 AM from TEST@DCNC
+-- Generated 19/09/2013 2:23:11 PM from TEST@DCNC
 
 CREATE OR REPLACE 
 PACKAGE BODY pck_cdoi_dlieu_pnn
@@ -902,15 +902,26 @@ IS
 
         /* Step 2: Insert danh muc */
         --01. Danh muc thon
-        INSERT INTO tb_pnn_dm_thon select * from  pnn_dm_thon@pnn;
+        INSERT INTO tb_pnn_dm_thon select * from  pnn_dm_thon@pnn where ngay_hl_den is null;
         --02. Danh muc gia dat
-        INSERT INTO tb_pnn_dm_gia_dat select * from pnn_dm_gia_dat@pnn;
+        INSERT INTO tb_pnn_dm_gia_dat select * from pnn_dm_gia_dat@pnn where ngay_hl_den is null;
         --03. Danh muc duong/vung
-        INSERT INTO tb_pnn_dm_ten_duong select * from pnn_dm_ten_duong@pnn;
+        INSERT INTO tb_pnn_dm_ten_duong select * from pnn_dm_ten_duong@pnn where ngay_hl_den is null;
         --04. Danh muc doan duong
-        INSERT INTO TB_PNN_DM_DOAN_DUONG select * from PNN_DM_DOAN_DUONG@pnn;
+        INSERT INTO TB_PNN_DM_DOAN_DUONG select * from PNN_DM_DOAN_DUONG@pnn where ngay_hl_den is null;
         --05. Danh muc vi tri
-        INSERT INTO tb_pnn_dm_vi_tri select * from pnn_dm_vi_tri@pnn;
+        INSERT INTO tb_pnn_dm_vi_tri select * from pnn_dm_vi_tri@pnn where ngay_hl_den is null;
+        /* END */
+
+        /**
+         * Thuc hien lay du lieu danh muc
+         *                  pnn_dm_mien_giam
+         * phuc vu cho ket xuat du lieu
+         */
+         --Xoa du lieu danh muc mien giam
+         DELETE from tb_pnn_dm_mien_giam a where a.ma_tinh = v_province;
+         --Insert danh muc mien giam
+         INSERT INTO tb_pnn_dm_mien_giam select * from pnn_dm_mien_giam@pnn where ngay_hl_den is null;
 
         --commit
         COMMIT;
@@ -1012,8 +1023,3 @@ IS
 
 
 END;
-/
-
-
--- End of DDL Script for Package Body TEST.PCK_CDOI_DLIEU_PNN
-
