@@ -727,8 +727,8 @@ namespace DC.Lib
                                        string _query_ps,
                                        string _query_no,
                                        string _query_tk,
-                                       string _query_tk_bs,
-                                       int _times)
+                                       string _query_tk_bs
+                                       )
         {
             using (CLS_DBASE.ORA _ora = new CLS_DBASE.ORA(GlobalVar.gl_connTKTQ))
             {
@@ -766,39 +766,21 @@ namespace DC.Lib
                                                         ref _objNULL,   //DocumentType 
                                                         ref _objFALSE   //Visible
                                                         );
-
-
-
-                // Tạo bảng Phát sinh
-                #region ADD ROW PHAT_SINH
+                                
+                #region In bảng phát sinh
                 _k = 4;
-                _dt = _ora.TransExecute_DataTable(_query_ps);
-                if (_times == 1)
-                {
-                    Prc_fill_tbBienBan(_k, _doc, _dt, 3);
-                }
-                else if (_times == 2)
-                {
-                    Prc_fill_tbBienBan2_PS(_k, _doc, _dt, 3);
-                }
+                _dt = _ora.TransExecute_DataTable(_query_ps);                
+                Prc_fill_tbBienBan(_k, _doc, _dt, 3);
+                
                 // Add các index của table cần xóa
                 if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
                 _dt.Reset();
                 #endregion
-
-                // Tạo bảng nợ
-                #region ADD ROW NO
+                                
+                #region In bảng nợ
                 _k = 5;
                 _dt = _ora.TransExecute_DataTable(_query_no);
-                if (_times == 1)
-                {
-                    Prc_fill_tbBienBan(_k, _doc, _dt, 4);
-                }
-                else if (_times == 2)
-                {
-                    Prc_fill_tbBienBan2_NO(_k, _doc, _dt, 4);
-                }
-
+                 Prc_fill_tbBienBan(_k, _doc, _dt, 4);
                 // Add các index của table cần xóa
                 if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
                 _dt.Reset();
@@ -894,7 +876,7 @@ namespace DC.Lib
                 #endregion
 
                 // Save tài liệu
-                Object _pathSaveFile = _pathFSave + "\\" + _short_name + "_BienBanDoiChieu_0" + _times.ToString() + ".doc";
+                Object _pathSaveFile = _pathFSave + "\\" + _short_name + "_BienBanDoiChieu_01.doc";
                 _doc.SaveAs(ref _pathSaveFile,  //FileName
                             ref _objNULL,       //FileFormat 
                             ref _objNULL,       //LockComments 
