@@ -19,7 +19,7 @@ namespace DC.Vatwin
         ~CLS_DTNT()
         { }        
 
-        public static void Prc_cap_nhat_danh_muc(string p_short_name,
+        public static void Prc_doc_danh_muc(string p_short_name,
                                         string p_tax_name,
                                         string p_tax_code,
                                         string p_path,
@@ -256,6 +256,26 @@ namespace DC.Vatwin
                 }
                 #endregion
             }
+        }
+
+        public static string Fnc_Capnhatdanhmuc(string p_short_name)
+        {
+            // Biến lưu trữ tên của hàm hoặc thủ tục
+            //string v_pck = "FNC_GHI_DU_LIEU_DKNTK";
+
+            // Hàm lưu số bản ghi đã được xóa
+            
+            string _query = null;
+            using (CLS_DBASE.ORA _ora = new CLS_DBASE.ORA(GlobalVar.gl_connTKTQ))
+            {
+                _ora.TransStart();
+                _query = "call PCK_CHUYENDOI_VAT.Prc_Capnhatdanhmuc('" + p_short_name + "')";
+                _ora.TransExecute(_query);
+                _ora.TransCommit();
+            }
+
+            return "Y";
+
         }
     }
 }
