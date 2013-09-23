@@ -94,14 +94,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Dconvert.exe" size="291328">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Dconvert.exe" size="292864">
       <assemblyIdentity name="Dconvert" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>C80u46GVD4mecKC5/+CBx7GGHZU=</dsig:DigestValue>
+        <dsig:DigestValue>4qZXpLus1GGTrLRyl+dtdh25NTQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
