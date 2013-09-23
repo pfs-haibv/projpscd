@@ -1,5 +1,5 @@
 -- Start of DDL Script for Package Body QLT_OWNER.EXT_PCK_QCT_TKHAI
--- Generated 23/09/2013 9:04:30 AM from QLT_OWNER@QLT_BRV_VTA
+-- Generated 23/09/2013 11:08:36 AM from QLT_OWNER@QLT_BRV_VTA
 
 CREATE OR REPLACE 
 PACKAGE BODY ext_pck_qct_tkhai
@@ -166,6 +166,10 @@ IS
      *@date   02/05/2013
      *@param  p_chot
      *@see ext_pck_qct_tkhai.Prc_Qlt_Thop_Dkntk
+     *
+     *@Modified by  Administator
+     *@Modified Date 23/09/2013
+     * Thuc hien bo cac trang thai cua ma TIN
      */
     PROCEDURE prc_qct_thop_dkntk (p_chot DATE)
     IS
@@ -195,7 +199,7 @@ IS
                      qlt_nsd_dtnt nnt
              WHERE   dk_hdr.id = dk_dtl.hdr_id
                      AND nnt.tin = dk_hdr.tin
-                     AND nnt.trang_thai NOT IN ('01', '02', '03')
+                    -- AND nnt.trang_thai NOT IN ('01', '02', '03')
                      AND dk_dtl.dcc_ma IN
                                 (SELECT   ma
                                    FROM   ext_dmuc_tkhai
@@ -205,6 +209,7 @@ IS
     BEGIN
 
         qlt_pck_thop_no_thue.prc_load_dsach_dtnt;
+
         DBMS_UTILITY.exec_ddl_statement ('truncate table ext_dkntk_qt');
 
         -- Lay ngay cuoi cung cua thang chua ky chot du lieu
@@ -385,6 +390,7 @@ IS
              WHERE   hdr_id = v_tkh_id order by btm_id;
 
     BEGIN
+
         qlt_pck_thop_no_thue.prc_load_dsach_dtnt;
         --Clear data
         DBMS_UTILITY.exec_ddl_statement ('truncate table ext_tktmb_hdr');
@@ -553,6 +559,10 @@ IS
      *@date    06/05/2013
      *@param   p_chot
      *@see EXT_PCK_QCT_TKHAI.prc_qct_thop_cctt_gtgt
+     *
+     *@Modified by  Administator
+     *@Modified Date 23/09/2013
+     * Thuc hien bo cac trang thai cua ma TIN
      */
     PROCEDURE prc_qct_thop_cctt_gtgt (p_chot DATE)
     IS
@@ -601,11 +611,11 @@ IS
                      AND tk_hdr.id = tk_dtl.hdr_id
                      AND tk_hdr.id = psinh.hdr_id
                      and tk_hdr.dcc_ma = c_dcc_ma
-                     AND nnt.trang_thai NOT IN ('01', '03')
+                     AND tk_dtl.tsgtgt = 5 -- thue suat 5%
+                     --AND nnt.trang_thai NOT IN ('01', '03')
                      AND tk_hdr.kykk_tu_ngay = tk_hdr.kylb_tu_ngay
                      AND tk_hdr.kylb_tu_ngay = v_ky_tu
                      AND psinh.tmt_ma_tmuc = '1701'
-                     AND tk_dtl.tsgtgt = 5 -- thue suat 5%
                             ;
 
          --Cap nhat EXT_CCTT_HDR
@@ -644,10 +654,10 @@ IS
                      AND tk_hdr.id = tk_dtl.hdr_id
                      AND tk_hdr.id = psinh.hdr_id
                      and tk_hdr.dcc_ma = c_dcc_ma
-                     AND nnt.trang_thai NOT IN ('01', '03')
+                     AND tk_dtl.tsgtgt = 10 -- thue suat 10%
+                     --AND nnt.trang_thai NOT IN ('01', '03')
                      AND tk_hdr.kykk_tu_ngay = tk_hdr.kylb_tu_ngay
                      AND tk_hdr.kykk_tu_ngay= v_ky_tu
-                     AND tk_dtl.tsgtgt = 10 -- thue suat 10%
                      AND psinh.tmt_ma_tmuc = '1701';
 
 

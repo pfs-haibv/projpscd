@@ -1,5 +1,5 @@
 -- Start of DDL Script for Package Body QLT_OWNER.EXT_PCK_QLT_TKHAI
--- Generated 23/09/2013 9:13:09 AM from QLT_OWNER@QLT_BRV_VTA
+-- Generated 23/09/2013 11:13:05 AM from QLT_OWNER@QLT_BRV_VTA
 
 CREATE OR REPLACE 
 PACKAGE BODY ext_pck_qlt_tkhai
@@ -161,6 +161,10 @@ IS
      *@date   11/04/2013
      *@param  p_chot
      *@see    EXT_PCK_QLT_TKHAI.Prc_Qlt_Thop_Dkntk
+     *
+     *@Modified by  Administator
+     *@Modified Date 23/09/2013
+     * Thuc hien bo cac trang thai cua ma TIN
      */
     PROCEDURE prc_qlt_thop_dkntk (p_chot DATE)
     IS
@@ -189,7 +193,7 @@ IS
                      qlt_nsd_dtnt nnt
              WHERE   dk_hdr.id = dk_dtl.dknh_id
                      AND nnt.tin = dk_hdr.tin
-                     AND nnt.trang_thai NOT IN ('01', '02', '03')
+                     --AND nnt.trang_thai NOT IN ('01', '02', '03')
                      AND dk_dtl.ma_loai IN
                                 (SELECT   ma
                                    FROM   ext_dmuc_tkhai
@@ -333,6 +337,10 @@ IS
      *@date    16/04/2013
      *@param   p_chot
      *@see EXT_PCK_QLT_TKHAI.Prc_Qlt_Thop_Monbai
+     *
+     *@Modified by  Administator
+     *@Modified Date 23/09/2013
+     * Thuc hien bo cac trang thai cua ma TIN
      */
     PROCEDURE prc_qlt_thop_monbai (p_chot DATE)
     IS
@@ -351,7 +359,7 @@ IS
                      tk_hdr.han_nop han_nop,
                      tk_hdr.ngay_nop ngay_nop
               FROM   qlt_tkhai_hdr tk_hdr, qlt_nsd_dtnt nnt
-             WHERE   nnt.tin = tk_hdr.tin AND tk_hdr.tthai IN ('1', '3', '4')
+             WHERE   nnt.tin = tk_hdr.tin-- AND tk_hdr.tthai IN ('1', '3', '4')
                      AND tk_hdr.dtk_ma_loai_tkhai = '53'
                      AND tk_hdr.kylb_den_ngay <= v_ky_den
                      AND TO_CHAR (TRUNC (tk_hdr.kykk_tu_ngay), 'YYYY') =
@@ -761,3 +769,8 @@ IS
     END;
 
 END;
+/
+
+
+-- End of DDL Script for Package Body QLT_OWNER.EXT_PCK_QLT_TKHAI
+
