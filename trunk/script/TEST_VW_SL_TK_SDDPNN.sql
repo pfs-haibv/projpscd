@@ -1,9 +1,10 @@
 -- Start of DDL Script for View TEST.VW_SL_TK_SDDPNN
--- Generated 19/09/2013 5:08:06 PM from TEST@DCNC
+-- Generated 20/09/2013 11:36:09 AM from TEST@DCNC
 
 CREATE OR REPLACE VIEW vw_sl_tk_sddpnn (
    err_id,
    err_name,
+   field_name,
    kytt_tu_ngay,
    ky_kkhai_tu_ngay,
    ngay_htoan,
@@ -125,6 +126,7 @@ CREATE OR REPLACE VIEW vw_sl_tk_sddpnn (
 AS
 SELECT   ERR_ID,
          ERR_NAME,
+         FIELD_NAME,
          kytt_tu_ngay,
          ky_kkhai_tu_ngay,
          ngay_htoan,
@@ -248,6 +250,7 @@ SELECT   ERR_ID,
                         FROM   tb_lst_err c
                        WHERE   a.err_id = c.err_id)
          err_name,
+         a.field_name,
          b.kytt_tu_ngay,
          b.ky_kkhai_tu_ngay,
          b.ngay_htoan,

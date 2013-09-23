@@ -1,5 +1,5 @@
 -- Start of DDL Script for Package Body TEST.PCK_CDOI_DLIEU_QCT
--- Generated 18/09/2013 2:10:07 PM from TEST@DCNC
+-- Generated 23/09/2013 9:51:21 AM from TEST@DCNC
 
 CREATE OR REPLACE 
 PACKAGE BODY pck_cdoi_dlieu_qct
@@ -83,11 +83,13 @@ IS
             pck_trace_log.prc_ins_log (p_short_name,pck_trace_log.fnc_whocalledme);
     END;
 
-    /*************************************************************************** PCK_CDOI_DLIEU_QCT.Prc_Qct_Get_DKNTK(p_short_name)
-     Nguoi thuc hien: Administrator
-     Ngay thuc hien: 15/04/2013
-     Noi dung: lay thong tin dang ky nop to khai, quyet toan tu CQT
-     ***************************************************************************/
+    /**
+     * Thuc hien lay du lieu dang ky nop to khai
+     *@author Administrator
+     *@date 15/04/2013
+     *@param p_short_name
+     *@see PCK_CDOI_DLIEU_QCT.Prc_Qct_Get_DKNTK(p_short_name)
+     */
     PROCEDURE prc_qct_get_dkntk (p_short_name VARCHAR2)
     IS
     BEGIN
@@ -402,10 +404,12 @@ IS
             pck_trace_log.prc_ins_log (p_short_name,pck_trace_log.fnc_whocalledme);
     END;
 
-    /***************************************************************************
-    pck_cdoi_dlieu_qct.Prc_Job_Qct_Thop_TKTMB(p_short_name)
-    Noi dung: Tong hop du lieu to khai thue mon bai
-    ***************************************************************************/
+    /**
+     * Thuc hien tao job tong hop to khai thue mon bai
+     * @author Administrator
+     * @param p_short_name
+     * @see pck_cdoi_dlieu_qct.Prc_Job_Qct_Thop_TKTMB(p_short_name)
+     */
     PROCEDURE prc_job_qct_thop_tktmb (p_short_name VARCHAR2)
     IS
         p_chot   DATE;
@@ -442,12 +446,12 @@ IS
             pck_trace_log.prc_ins_log (p_short_name,pck_trace_log.fnc_whocalledme);
     END;
 
-    /***************************************************************************
-    pck_cdoi_dlieu_qct.Prc_Qct_Get_TKTMB(p_short_name)
-    Nguoi thuc hien: Administrator
-    Ngay thuc hien: 07/05/2013
-    Noi dung: lay thong tin tai khai thue mon bai
-    ***************************************************************************/
+    /**
+     * Thuc hien lay du lieu to khai thue mon bai tu dia phuong
+     * @author Administrator
+     * @param p_short_name
+     * @see pck_cdoi_dlieu_qct.prc_qct_get_tktmb(p_short_name)
+     */
     PROCEDURE prc_qct_get_tktmb (p_short_name VARCHAR2)
     IS
         CURSOR c_update_hdr_id
@@ -572,6 +576,9 @@ IS
              WHERE   a.tkh_id = v.tkh_id AND a.hdr_id IS NULL;
         END LOOP;
 
+        --Thuc hien dong bo bac mon bai
+        pck_map_tms.Prc_Update_bac_mbai();
+
         -- Ghi log
         UPDATE   tb_lst_taxo
            SET   status = 3
@@ -642,10 +649,10 @@ IS
         EXECUTE IMMEDIATE 'ALTER SESSION SET remote_dependencies_mode = SIGNATURE';
 
         --Clear data
-        DELETE FROM   tb_cctt
+        DELETE FROM   tb_01_thkh_hdr
               WHERE   short_name = p_short_name AND tax_model = 'QCT-APP';
 
-        --Insert tb_cctt
+        --Insert tb_01_thkh_hdr
         EXECUTE IMMEDIATE '
                     INSERT INTO tb_01_thkh_hdr(id,
                                             tkh_id,
@@ -712,7 +719,8 @@ IS
 
         COMMIT;
         --Sync 01/THKH
-        pck_ult.Prc_sync_01_thkh(p_short_name);
+        --bo Sync 01/TKKH vi chi tiet to khai 10 dong bo tren pit
+        --pck_ult.Prc_sync_01_thkh(p_short_name);
     EXCEPTION
         WHEN OTHERS
         THEN
@@ -721,8 +729,3 @@ IS
     END;
 
 END;
-/
-
-
--- End of DDL Script for Package Body TEST.PCK_CDOI_DLIEU_QCT
-

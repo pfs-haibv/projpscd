@@ -1,5 +1,5 @@
 -- Start of DDL Script for Package Body QLT_OWNER.EXT_PCK_QCT_TKHAI
--- Generated 18/09/2013 2:05:25 PM from QLT_OWNER@QLT_BRV_VTA
+-- Generated 23/09/2013 9:04:30 AM from QLT_OWNER@QLT_BRV_VTA
 
 CREATE OR REPLACE 
 PACKAGE BODY ext_pck_qct_tkhai
@@ -161,11 +161,11 @@ IS
     END;
 
     /**
-     * @package: ext_pck_qct_tkhai.Prc_Qlt_Thop_Dkntk
-     * @desc:    Lay danh sach
-     * @author:  Administrator
-     * @date:    02/05/2013
-     * @param:   p_chot
+     * Thuc hien lay du lieu dang ky nop to khai tren QCT
+     *@author Administrator
+     *@date   02/05/2013
+     *@param  p_chot
+     *@see ext_pck_qct_tkhai.Prc_Qlt_Thop_Dkntk
      */
     PROCEDURE prc_qct_thop_dkntk (p_chot DATE)
     IS
@@ -322,12 +322,12 @@ IS
         COMMIT;
 
         qlt_pck_thop_no_thue.prc_unload_dsach_dtnt;
-/*
+
         prc_finnal (c_pro_name);
     EXCEPTION
         WHEN OTHERS
         THEN
-            prc_finnal (c_pro_name);*/
+            prc_finnal (c_pro_name);
     END;
 
     /***************************************************************************
@@ -347,11 +347,11 @@ IS
     END;
 
     /**
-     * @package: TMS_QCT_CDOI_TK.Prc_Qct_Thop_Monbai
-     * @desc:    Lay danh sach
-     * @author:  Administrator
-     * @date:    16/04/2013
-     * @param:   p_chot
+     * Thuc hien lay du lien to khai thue mon bai tren he thong QCT
+     *@author Administrator
+     *@date   16/04/2013
+     *@param  p_chot
+     *@see TMS_QCT_CDOI_TK.Prc_Qct_Thop_Monbai
      */
     PROCEDURE prc_qct_thop_monbai (p_chot DATE)
     IS
@@ -464,7 +464,8 @@ IS
                                             c_qct_tax_model);
                           end if;
                     END LOOP;
-
+                --set default chi_tieu = 0
+                v_chi_tieu := 0;
             END LOOP;
 
             -- Update Tong so thue phai nop cua nnt vs cqt tu table detail -> table header
@@ -547,11 +548,11 @@ IS
     END;
 
     /**
-     * @package: EXT_PCK_QCT_TKHAI.prc_qct_thop_cctt_gtgt
-     * @desc:    Lay danh sach
-     * @author:  Administrator
-     * @date:    06/05/2013
-     * @param:   p_chot
+     * Thuc hien lay danh sach can cu tinh thue gia tri gia tang tren QCT
+     *@author  Administrator
+     *@date    06/05/2013
+     *@param   p_chot
+     *@see EXT_PCK_QCT_TKHAI.prc_qct_thop_cctt_gtgt
      */
     PROCEDURE prc_qct_thop_cctt_gtgt (p_chot DATE)
     IS
@@ -667,11 +668,11 @@ IS
     END;
 
     /**
-     * @package: ext_pck_qct_tkhai.Fnc_GetKyTK
-     * @desc:    lay loai tk (thang, quy, nam)
-     * @author:  Administrator
-     * @date:    22/04/2013
-     * @param:   ma_tk
+     * Thuc hien lay loai to khai (thang, quy, nam)
+     *@author  Administrator
+     *@date    22/04/2013
+     *@param   ma_tk
+     *@see ext_pck_qct_tkhai.Fnc_GetKyTK
      */
     FUNCTION fnc_getkytk (ma_tk VARCHAR2)
         RETURN VARCHAR2
@@ -686,11 +687,11 @@ IS
     END;
 
     /**
-     * @package: ext_pck_qct_tkhai.Fnc_GetKyTK
-     * @desc:    lay loai tk (thang, quy, nam)
-     * @author:  Administrator
-     * @date:    22/04/2013
-     * @param:   ma_tk
+     * Thuc hien lay ma to khai da map tren he thong TMS
+     *@author  Administrator
+     *@date    22/04/2013
+     *@param   ma_tk
+     *@see ext_pck_qct_tkhai.fnc_get_tkhai_tms
      */
     FUNCTION fnc_get_tkhai_tms (ma_tk VARCHAR2)
         RETURN VARCHAR2
@@ -705,15 +706,25 @@ IS
         RETURN tk_tms;
     END;
 
-    /***************************************************************************
-    ext_pck_qct_tkhai.Prc_Job_Qct_Thop_Tk
-    ***************************************************************************/
+    /**
+     * Job chay thuc hien kiem tra sai lech so no, so thu nop
+     *@author Administrator
+     *@date 20/09/2013
+     *@see ext_pck_qct_tkhai.Prc_Job_Qct_Thop_Tk
+     */
     PROCEDURE Prc_Job_Qct_Slech_No IS
     BEGIN
         Prc_Del_Log('PRC_QCT_SLECH_NO');
         COMMIT;
         Prc_Create_Job('BEGIN EXT_PCK_QCT_TKHAI.Prc_Qct_Slech_No; END;');
     END;
+
+    /**
+     * Thuc hien kiem tra sai lech so no, so thu nop
+     *@author Administrator
+     *@date 20/09/2013
+     *@see ext_pck_qct_tkhai.Prc_Job_Qct_Thop_Tk
+     */
 
     PROCEDURE Prc_Qct_Slech_No IS
         c_pro_name CONSTANT VARCHAR2(30) := 'PRC_QCT_SLECH_NO';
@@ -740,14 +751,14 @@ IS
                (par.con_pnop_psinh + par.con_pnop_no) SOTHUE_NO_CKY,
                to_number(NULL) SONO_NO_CKY,
                to_number(NULL) CLECH_NO_CKY,
-               0 update_no, 5 ma_slech,
+               0 update_no, 5 ma_slech, -- Co trong so thue, nhung tk tam giu
                NULL ma_gdich,
                NULL ten_gdich,
                v_gl_cqt
           FROM qct_so_tdtn_tkhoan_tgiu par, qlt_nsd_dtnt nnt
          WHERE par.tin=nnt.tin(+)
            AND par.kylb_tu_ngay =(SELECT max(kyno_tu_ngay) FROM qlt_so_no)
-           AND (par.tmt_ma_muc='1000' or par.tmt_ma_tmuc = '4268')
+           AND (par.tmt_ma_muc <> '1000' or par.tmt_ma_tmuc <> '4268')
            AND (par.con_pnop_psinh + par.con_pnop_no)<>0
         UNION ALL
         SELECT 'QCT' loai,
@@ -761,7 +772,7 @@ IS
                to_number(NULL) SOTHUE_NO_CKY,
                par.no_cuoi_ky SONO_NO_CKY,
                to_number(NULL) CLECH_NO_CKY,
-               0 update_no, 2 ma_slech,
+               0 update_no, 2 ma_slech,--co trong so no nhung tk tam giu
                par.ma_gdich,
                gd.ten,
                v_gl_cqt
@@ -770,7 +781,7 @@ IS
            AND par.ma_gdich=gd.ma_gdich(+)
            AND par.tkhoan='TK_TAM_GIU'
            AND par.kyno_tu_ngay = (SELECT max(kyno_tu_ngay) FROM qct_so_no)
-           AND (par.tmt_ma_muc='1000' or par.tmt_ma_tmuc = '4268')
+           AND (par.tmt_ma_muc <> '1000' or par.tmt_ma_tmuc <> '4268')
         UNION ALL
         SELECT 'QCT' loai,
                par.kylb_tu_ngay ky_thue,
@@ -783,7 +794,7 @@ IS
                to_number(NULL) SOTHUE_NO_CKY,
                par.no_cuoi_ky SONO_NO_CKY,
                to_number(NULL) CLECH_NO_CKY,
-               0 update_no, 3 ma_slech,
+               0 update_no, 3 ma_slech,--co trong so no nhung han nop null
                par.ma_gdich,
                gd.ten,
                v_gl_cqt
@@ -792,7 +803,7 @@ IS
            AND par.ma_gdich=gd.ma_gdich(+)
            AND par.han_nop IS NULL
            AND par.kyno_tu_ngay = (SELECT max(kyno_tu_ngay) FROM qct_so_no)
-           AND (par.tmt_ma_muc='1000' or par.tmt_ma_tmuc = '4268')
+           AND (par.tmt_ma_muc <> '1000' or par.tmt_ma_tmuc <> '4268')
         UNION ALL
         SELECT 'QCT' loai,
                par.kylb_tu_ngay ky_thue,
@@ -805,7 +816,7 @@ IS
                to_number(NULL) SOTHUE_NO_CKY,
                par.no_cuoi_ky SONO_NO_CKY,
                to_number(NULL) CLECH_NO_CKY,
-               0 update_no, 4 ma_slech,
+               0 update_no, 4 ma_slech, --co trong so no nhung khong dang ky danh ba
                par.ma_gdich,
                gd.ten,
                v_gl_cqt
@@ -813,7 +824,7 @@ IS
          WHERE par.tin=nnt.tin(+)
            AND par.ma_gdich=gd.ma_gdich(+)
            AND par.kyno_tu_ngay = (SELECT max(kyno_tu_ngay) FROM qct_so_no)
-           AND (par.tmt_ma_muc='1000' or par.tmt_ma_tmuc = '4268')
+           AND (par.tmt_ma_muc <> '1000' or par.tmt_ma_tmuc <> '4268')
            AND NOT EXISTS (SELECT 1 FROM qct_dtnt b WHERE par.tin=b.tin)
         UNION ALL
         SELECT 'QCT' loai,
@@ -827,7 +838,7 @@ IS
                ROUND(sum(par.ST_NO_CKY),0) AS SOTHUE_NO_CKY,
                sum(par.SN_NO_CKY) AS SONO_NO_CKY,
                ROUND(sum(par.ST_NO_CKY),0)- sum(SN_NO_CKY) AS CLECH_NO_CKY,
-               0 update_no, 1 ma_slech,
+               0 update_no, 1 ma_slech,--co trong so thue, so no, nhung so thue cuoi ky trong so thue, so no khac nhau
                NULL ma_gdich,
                NULL ten_gdich,
                v_gl_cqt
@@ -843,7 +854,7 @@ IS
                0 AS SN_no_cky
           FROM qct_so_thue t
          WHERE t.kylb_tu_ngay=(SELECT max(kyno_tu_ngay) FROM qct_so_no)
-           AND (t.tmt_ma_muc='1000' or t.tmt_ma_tmuc = '4268')
+           AND (t.tmt_ma_muc <> '1000' or t.tmt_ma_tmuc <> '4268')
          UNION ALL
         SELECT 'TK_TAM_GIU' AS tai_khoan,
                t.tin,
@@ -855,7 +866,7 @@ IS
                0 AS SN_no_cky
           FROM qct_so_tdtn_tkhoan_tgiu t
          WHERE t.kylb_tu_ngay=(SELECT max(kyno_tu_ngay) FROM qct_so_no)
-           AND (t.tmt_ma_muc='1000' or t.tmt_ma_tmuc = '4268')
+           AND (t.tmt_ma_muc <> '1000' or t.tmt_ma_tmuc <> '4268')
          UNION ALL
         SELECT tkhoan,
                tin,
@@ -869,7 +880,7 @@ IS
                        a.tmt_ma_thue, kyno_tu_ngay, SUM (no_cuoi_ky) AS no_cky
                   FROM qct_so_no a
                  WHERE kyno_tu_ngay=(SELECT max(kyno_tu_ngay) FROM qct_so_no)
-                   AND (a.tmt_ma_muc='1000' or a.tmt_ma_tmuc = '4268')
+                   AND (a.tmt_ma_muc <> '1000' or a.tmt_ma_tmuc <> '4268')
               GROUP BY a.tkhoan,a.tin,a.tmt_ma_muc,a.tmt_ma_tmuc,
                        a.tmt_ma_thue,a.kyno_tu_ngay)
         ) par, qlt_nsd_dtnt nnt
@@ -887,10 +898,3 @@ IS
 
 
 END;
-
--- End of DDL Script for Package Body QLT_OWNER.EXT_PCK_QCT_TKHAI
-/
-
-
--- End of DDL Script for Package Body QLT_OWNER.EXT_PCK_QCT_TKHAI
-

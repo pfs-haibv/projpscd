@@ -1,10 +1,11 @@
 -- Start of DDL Script for View TEST.VW_SL_DKNTK
--- Generated 18/09/2013 10:53:07 AM from TEST@DCNC
+-- Generated 20/09/2013 10:44:58 AM from TEST@DCNC
 
 CREATE OR REPLACE VIEW vw_sl_dkntk (
    tax_model,
    err_id,
    err_name,
+   field_name,
    ma_cbo,
    ten_cbo,
    ma_pban,
@@ -18,6 +19,7 @@ AS
 SELECT     "TAX_MODEL",
            "ERR_ID",
            "ERR_NAME",
+           "FIELD_NAME",
            "MA_CBO",
            "TEN_CBO",
            "MA_PBAN",
@@ -33,6 +35,7 @@ SELECT     "TAX_MODEL",
                         FROM   tb_lst_err c
                        WHERE   a.err_id = c.err_id)
                      err_name,
+                     a.field_name,
                      b.ma_cbo,
                      b.ten_cbo,
                      b.ma_pban,
@@ -49,3 +52,7 @@ SELECT     "TAX_MODEL",
                      AND b.short_name = USERENV ('client_info')
                      AND a.update_no = 0)
 ORDER BY   tax_model, err_id, ma_tkhai
+/
+
+-- End of DDL Script for View TEST.VW_SL_DKNTK
+

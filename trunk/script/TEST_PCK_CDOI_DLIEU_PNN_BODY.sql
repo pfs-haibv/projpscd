@@ -1,5 +1,5 @@
 -- Start of DDL Script for Package Body TEST.PCK_CDOI_DLIEU_PNN
--- Generated 19/09/2013 2:23:11 PM from TEST@DCNC
+-- Generated 23/09/2013 9:43:03 AM from TEST@DCNC
 
 CREATE OR REPLACE 
 PACKAGE BODY pck_cdoi_dlieu_pnn
@@ -50,12 +50,13 @@ IS
                                        pck_trace_log.fnc_whocalledme);
     END;
 
-    /***************************************************************************
-    pck_cdoi_dlieu_pnn.prc_pnn_get_no(p_short_name)
-    Nguoi thuc hien: Administrator
-    Ngay thuc hien: 16/04/2013
-    Noi dung: lay thong tin du lieu nop thua
-    ***************************************************************************/
+    /**
+     * Thuc hien lay du lieu NO tren he thong PNN
+     *@author Administrator
+     *@date 16/04/2013
+     *@param p_short_name
+     *@see pck_cdoi_dlieu_pnn.prc_pnn_get_no
+     */
     PROCEDURE prc_pnn_get_no (p_short_name VARCHAR2)
     IS
     BEGIN
@@ -141,22 +142,27 @@ IS
                                        pck_trace_log.fnc_whocalledme);
     END;
 
-    /***************************************************************************
-    pck_cdoi_dlieu_pnn.prc_pnn_get_no(p_short_name)
-    Nguoi thuc hien: Administrator
-    Ngay thuc hien: 16/04/2013
-    Noi dung: lay thong tin du lieu nop thua
-    ***************************************************************************/
+    /**
+     * Thuc hien lay du lieu 02TK-SDDPNN tren he thong PNN
+     *@author Administrator
+     *@date 16/04/2013
+     *@param p_short_name
+     *@see pck_cdoi_dlieu_pnn.prc_pnn_get_02tk_sddpnn
+     */
     PROCEDURE prc_pnn_get_02tk_sddpnn (p_short_name VARCHAR2)
     IS
         v_ma_cqt varchar2(5);
+        v_ky_chot varchar2(15);
     BEGIN
         EXECUTE IMMEDIATE 'ALTER SESSION SET remote_dependencies_mode = SIGNATURE';
 
         SELECT   tax_code into v_ma_cqt
                                     FROM   tb_lst_taxo
                                    WHERE   short_name = p_short_name;
-
+        --get ky chot
+        SELECT   TO_CHAR (LAST_DAY (ky_chot), 'DD/MM/YYYY') INTO v_ky_chot
+                        FROM   tb_lst_taxo
+                       WHERE   short_name = p_short_name;
         --Clear data
         DELETE FROM   tb_tk_sddpnn a
               WHERE   a.ma_cqt = v_ma_cqt
@@ -273,8 +279,6 @@ IS
                                   sthue_pnop,
                                   kytt_tu_ngay,
                                   ngay_htoan,
-                                  --thd_gcn_ten_md,
-                                  --mgi_ten_ly_do,
                                   short_name)
             SELECT   a.ma_cqt_par,
                      a.ma_cqt,
@@ -306,8 +310,6 @@ IS
                      a.nnt_ten_thon,
                      a.nnt_cmnd,
                      TO_CHAR (a.nnt_cmnd_ngay_cap, 'DD/MM/YYYY') nnt_cmnd_ngay_cap,
-
-
                      a.nnt_cmnd_noi_cap,
                      a.nnt_so_dt,
                      a.nnt_so_tk,
@@ -321,7 +323,6 @@ IS
                      a.thd_gcn,
                      a.thd_gcn_so,
                      TO_CHAR (a.thd_gcn_ngay_cap, 'DD/MM/YYYY') thd_gcn_ngay_cap,
-
                      a.thd_thua_dat_so,
                      a.thd_ban_do_so,
                      a.thd_gcn_dien_tich,
@@ -388,19 +389,10 @@ IS
                      a.ccu_he_so,
                      a.nothue_nhadat sthue_pnop,
                      TO_CHAR (a.ky_tthue, 'DD/MM/YYYY') kytt_tu_ngay,
-                     (SELECT   TO_CHAR (LAST_DAY (ky_chot), 'DD/MM/YYYY')
-                        FROM   tb_lst_taxo
-                       WHERE   short_name = p_short_name)
-                         ngay_htoan,
-                     --b.ten mgi_ten_ly_do,
-                     --c.ten thd_gcn_ten_md,
+                     v_ky_chot ngay_htoan,
                      p_short_name short_name
-              FROM   pnn_can_cu_tt@pnn a                                   --,
-             --pnn_dm_mien_giam@pnn b,
-             --pnn_dm_muc_dich_sd@pnn c
-             WHERE                                --a.mgi_ma_ly_do = b.ma_lydo
-                         --AND a.thd_gcn_ma_md = c.ma_muc_dich
-                         a.ma_cqt = v_ma_cqt
+              FROM   pnn_can_cu_tt@pnn a
+             WHERE    a.ma_cqt = v_ma_cqt
                      AND a.ma_loai_tk = '02'
                      AND a.ltd = 0;
 
@@ -409,10 +401,8 @@ IS
            SET   status = 3
          WHERE   short_name = p_short_name;
 
-        pck_trace_log.prc_ins_log (p_short_name,
-                                   pck_trace_log.fnc_whocalledme);
-        pck_trace_log.prc_upd_log_max (p_short_name,
-                                       'prc_pnn_get_02tk_sddpnn');
+        pck_trace_log.prc_ins_log (p_short_name,pck_trace_log.fnc_whocalledme);
+        pck_trace_log.prc_upd_log_max (p_short_name,'prc_pnn_get_02tk_sddpnn');
         pck_trace_log.prc_upd_log_max (p_short_name, 'PRC_KTRA_PS');
         pck_trace_log.prc_upd_log_max (p_short_name, 'PRC_KXUAT_SLECH');
         pck_trace_log.prc_upd_log_max (p_short_name, 'PRC_KXUAT_BBAN');
@@ -427,16 +417,18 @@ IS
                                        pck_trace_log.fnc_whocalledme);
     END;
 
-    /***************************************************************************
-    pck_cdoi_dlieu_pnn.prc_pnn_get_no(p_short_name)
-    Nguoi thuc hien: Administrator
-    Ngay thuc hien: 16/04/2013
-    Noi dung: lay thong tin du lieu nop thua
-    ***************************************************************************/
+    /**
+     * Thuc hien lay du lieu 01TK-SDDPNN tren he thong PNN
+     *@author Administrator
+     *@date 16/04/2013
+     *@param p_short_name
+     *@see pck_cdoi_dlieu_pnn.prc_pnn_get_01tk_sddpnn
+     */
     PROCEDURE prc_pnn_get_01tk_sddpnn (p_short_name VARCHAR2)
     IS
     v_ma_cqt varchar2(5);
     v_province varchar2(3);
+    v_ky_chot varchar2(15);
     BEGIN
         EXECUTE IMMEDIATE 'ALTER SESSION SET remote_dependencies_mode = SIGNATURE';
 
@@ -444,12 +436,14 @@ IS
         SELECT   tax_code, province into v_ma_cqt, v_province
                                        FROM   tb_lst_taxo
                                       WHERE   short_name = p_short_name;
-
+        --get ky chot
+        SELECT   TO_CHAR (LAST_DAY (ky_chot), 'DD/MM/YYYY') INTO v_ky_chot
+                        FROM   tb_lst_taxo
+                       WHERE   short_name = p_short_name;
         --Clear data
         DELETE FROM   tb_tk_sddpnn a
               WHERE   a.ma_cqt = v_ma_cqt
                       AND a.ma_loai_tk = '01';
-
 
         --Insert thong tin cqt
         INSERT INTO tb_tk_sddpnn (ma_cqt_par,
@@ -562,8 +556,6 @@ IS
                                   sthue_pnop,
                                   kytt_tu_ngay,
                                   ngay_htoan,
-                                  --thd_gcn_ten_md,
-                                  --mgi_ten_ly_do,
                                   short_name)
             SELECT   a.ma_cqt_par,
                      a.ma_cqt,
@@ -674,20 +666,10 @@ IS
                      a.ccu_he_so,
                      a.nothue_nhadat sthue_pnop,
                      TO_CHAR (a.ky_kkhai, 'DD/MM/YYYY') ky_kkhai_tu_ngay,
-                     (SELECT   TO_CHAR (LAST_DAY (ky_chot), 'DD/MM/YYYY')
-                        FROM   tb_lst_taxo
-                       WHERE   short_name = p_short_name)
-                         ngay_htoan,
-                     --b.ten mgi_ten_ly_do,
-                     --c.ten thd_gcn_ten_md,
+                     v_ky_chot ngay_htoan,
                      p_short_name short_name
-              FROM   pnn_can_cu_tt@pnn a                                   --,
-             --pnn_dm_mien_giam@pnn b,
-             --pnn_dm_muc_dich_sd@pnn c
-             WHERE                                --a.mgi_ma_ly_do = b.ma_lydo
-                         --AND a.thd_gcn_ma_md = c.ma_muc_dich
-                         -- AND
-                         a.ma_cqt = v_ma_cqt
+              FROM   pnn_can_cu_tt@pnn a
+             WHERE   a.ma_cqt = v_ma_cqt
                      AND a.ma_loai_tk = '01'
                      AND a.ltd = 0;
 
@@ -759,9 +741,6 @@ IS
                                          mgi_ghi_chu,
                                          dkn_dknt,
                                          dkn_sonam,
-                                         --thd_gcn_ten_md,
-                                         --thd_chua_gcn_ten_md,
-                                         --mgi_ten_ly_do
                                          short_name)
             SELECT   a.ma_cqt_par,
                      a.ma_cqt,
@@ -864,19 +843,23 @@ IS
         THEN
             pck_trace_log.prc_ins_log (p_short_name, pck_trace_log.fnc_whocalledme);
     END;
+    /**
+     * Thuc hien lay du lieu danh muc tren PNN
+     * <p> bao gom cac danh muc:
+     * <ul>
+     *      <li>Danh muc to thon</li>
+     *      <li>Danh muc gia dat</li>
+     *      <li>Danh muc duong/vung</li>
+     *      <li>Danh muc doan duong/ khu vuc</li>
+     *      <li>Danh muc vi tri/ hang muc</li>
+     *      <li>Danh muc mien giam</li>
+     * </ul>
+     *
+     *@author Adminstrator
+     *@date
+     *@param p_short_name
+     */
 
-    /***************************************************************************
-    pck_cdoi_dlieu_pnn.prc_pnn_get_dmuc_pnn(p_short_name)
-    Nguoi thuc hien: Administrator
-    Ngay thuc hien: 28/08/2013
-    Noi dung: lay thong tin du lieu danh muc
-                >   Danh muc to thon
-                >   Danh muc gia dat
-                >   Danh muc duong/vung
-                >   Danh muc doan duong/ khu vuc
-                >   Danh muc vi tri/ hang muc
-
-    ***************************************************************************/
     PROCEDURE prc_pnn_get_dmuc_pnn (p_short_name VARCHAR2)
     IS
     v_province varchar2(3);
@@ -933,6 +916,7 @@ IS
             pck_trace_log.prc_ins_log (p_short_name, pck_trace_log.fnc_whocalledme);
 
     END;
+
     /**
      *Thuc hien lay ma map nhu ma loai dat, ma loai duong cua TMS
      *<p> tu bang map danh muc
@@ -944,7 +928,6 @@ IS
      *@see pck_cdoi_dlieu_pnn.prc_pnn_get_data_tms
      *@return v_get_key_tms
      */
-
     FUNCTION fnc_pnn_get_data_tms (p_ma varchar2, p_tbl_map varchar2, p_ma_tinh varchar2)
 
     RETURN VARCHAR2
@@ -1020,6 +1003,5 @@ IS
          END LOOP;
 
      END;
-
 
 END;

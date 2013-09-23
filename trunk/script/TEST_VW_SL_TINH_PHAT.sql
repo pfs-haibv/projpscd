@@ -1,10 +1,11 @@
 -- Start of DDL Script for View TEST.VW_SL_TINH_PHAT
--- Generated 11/09/2013 4:59:02 PM from TEST@DCNC
+-- Generated 20/09/2013 11:35:12 AM from TEST@DCNC
 
 CREATE OR REPLACE VIEW vw_sl_tinh_phat (
    tax_model,
    err_id,
    err_name,
+   field_name,
    tin,
    ma_chuong,
    ma_khoan,
@@ -17,6 +18,7 @@ AS
 SELECT   "TAX_MODEL",
            "ERR_ID",
            "ERR_NAME",
+           "FIELD_NAME",
            "TIN",
            "MA_CHUONG",
            "MA_KHOAN",
@@ -31,6 +33,7 @@ SELECT   "TAX_MODEL",
                         FROM   tb_lst_err c
                        WHERE   a.err_id = c.err_id)
                      err_name,
+                     a.field_name,
                      b.tin,
                      b.ma_chuong,
                      b.ma_khoan,

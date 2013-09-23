@@ -1,5 +1,5 @@
 -- Start of DDL Script for Package Body TEST.PCK_CDOI_DLIEU_QLT
--- Generated 18/09/2013 1:55:32 PM from TEST@DCNC
+-- Generated 23/09/2013 9:55:15 AM from TEST@DCNC
 
 CREATE OR REPLACE 
 PACKAGE BODY pck_cdoi_dlieu_qlt
@@ -28,7 +28,7 @@ IS
              END;'
                   ;
         pck_trace_log.prc_ins_log (p_short_name,pck_trace_log.fnc_whocalledme);
-        pck_trace_log.prc_upd_log_max (p_short_name, 'PRC_QLT_GET_PS');
+        pck_trace_log.prc_upd_log_max (p_short_name, 'prc_job_qlt_thop_ps');
         pck_trace_log.prc_upd_log_max (p_short_name, 'PRC_KTRA_PS');
         pck_trace_log.prc_upd_log_max (p_short_name, 'PRC_KXUAT_SLECH');
         pck_trace_log.prc_upd_log_max (p_short_name, 'PRC_KXUAT_BBAN');
@@ -581,20 +581,20 @@ IS
         pck_trace_log.prc_upd_log_max (p_short_name, 'PRC_KXUAT_CTIET');
 
         COMMIT;
-/*
+
     EXCEPTION
         WHEN OTHERS
         THEN
-            pck_trace_log.prc_ins_log (p_short_name,pck_trace_log.fnc_whocalledme);*/
+            pck_trace_log.prc_ins_log (p_short_name,pck_trace_log.fnc_whocalledme);
     END;
 
-
-    /***************************************************************************
-    PCK_CDOI_DLIEU_QLT.Prc_Qlt_Get_DKNTK_QT(p_short_name)
-    Nguoi thuc hien: Administrator
-    Ngay thuc hien: 15/04/2013
-    Noi dung: lay thong tin dang ky nop to khai, quyet toan tu CQT
-    ***************************************************************************/
+    /**
+     * Thuc hien lay du lieu dang ky nop to khai
+     *@author Administrator
+     *@date 15/04/2013
+     *@param p_short_name
+     *@see p_short_name
+     */
     PROCEDURE prc_qlt_get_dkntk_qt (p_short_name VARCHAR2)
     IS
         c_tax_model   CONSTANT VARCHAR2 (3) := 'QLT';
@@ -605,7 +605,7 @@ IS
         DELETE FROM   tb_dkntk
               WHERE   short_name = p_short_name AND tax_model = 'QLT-APP';
 
-        --Insert tms_dkntk_qt
+        --Insert tb_dkntk
         EXECUTE IMMEDIATE '
             INSERT INTO tb_dkntk (  id,
                                     tkh_id,
@@ -666,10 +666,12 @@ IS
             pck_trace_log.prc_ins_log (p_short_name, pck_trace_log.fnc_whocalledme);
     END;
 
-    /***************************************************************************
-    pck_cdoi_dlieu_qlt.Prc_Job_Qlt_Thop_TKTMB(p_short_name)
-    Noi dung: Tong hop du lieu to khai thue mon bai
-    ***************************************************************************/
+    /**
+     * Thuc hien tao job tong hop to khai thue mon bai
+     * @author Administrator
+     * @param p_short_name
+     * @see pck_cdoi_dlieu_qlt.Prc_Job_Qct_Thop_TKTMB(p_short_name)
+     */
     PROCEDURE prc_job_qlt_thop_tktmb (p_short_name VARCHAR2)
     IS
         p_tu   DATE;
@@ -688,7 +690,6 @@ IS
                          || p_tu
                          || ''');
              END;'
-
                   ;
 
         -- Ghi log
@@ -697,24 +698,26 @@ IS
          WHERE   short_name = p_short_name;
 
         pck_trace_log.prc_ins_log (p_short_name,pck_trace_log.fnc_whocalledme);
-        pck_trace_log.prc_upd_log_max (p_short_name, 'Prc_Qlt_Get_DKNTK_QT');
+        pck_trace_log.prc_upd_log_max (p_short_name, 'prc_job_qlt_thop_tktmb');
         pck_trace_log.prc_upd_log_max (p_short_name, 'PRC_KTRA_PS');
         pck_trace_log.prc_upd_log_max (p_short_name, 'PRC_KXUAT_SLECH');
         pck_trace_log.prc_upd_log_max (p_short_name, 'PRC_KXUAT_BBAN');
         pck_trace_log.prc_upd_log_max (p_short_name, 'PRC_KXUAT_CTIET');
         COMMIT;
+
     EXCEPTION
         WHEN OTHERS
         THEN
             pck_trace_log.prc_ins_log (p_short_name, pck_trace_log.fnc_whocalledme);
+
     END;
 
-    /***************************************************************************
-    PCK_CDOI_DLIEU_QLT.Prc_Qlt_Get_TKTMB(p_short_name)
-    Nguoi thuc hien: Administrator
-    Ngay thuc hien: 16/04/2013
-    Noi dung: lay thong tin tai khai thue mon bai
-    ***************************************************************************/
+    /**
+     * Thuc hien lay du lieu to khai thue mon bai tu dia phuong
+     * @author Administrator
+     * @param p_short_name
+     * @see pck_cdoi_dlieu_qlt.prc_qlt_get_tktmb(p_short_name)
+     */
     PROCEDURE prc_qlt_get_tktmb (p_short_name VARCHAR2)
     IS
         --c_tax_model CONSTANT VARCHAR2(3) := 'QLT';
@@ -823,13 +826,16 @@ IS
              WHERE   a.tkh_id = v.tkh_id AND a.hdr_id IS NULL;
         END LOOP;
 
+        --Thuc hien dong bo bac mon bai
+        pck_map_tms.Prc_Update_bac_mbai();
+
         -- Ghi log
         UPDATE   tb_lst_taxo
            SET   status = 3
          WHERE   short_name = p_short_name;
 
         pck_trace_log.prc_ins_log (p_short_name,pck_trace_log.fnc_whocalledme);
-        pck_trace_log.prc_upd_log_max (p_short_name, 'Prc_Qlt_Get_DKNTK_QT');
+        pck_trace_log.prc_upd_log_max (p_short_name, 'prc_qlt_get_tktmb');
         pck_trace_log.prc_upd_log_max (p_short_name, 'PRC_KTRA_PS');
         pck_trace_log.prc_upd_log_max (p_short_name, 'PRC_KXUAT_SLECH');
         pck_trace_log.prc_upd_log_max (p_short_name, 'PRC_KXUAT_BBAN');
@@ -845,8 +851,3 @@ IS
                                        pck_trace_log.fnc_whocalledme);
     END;
 END;
-/
-
-
--- End of DDL Script for Package Body TEST.PCK_CDOI_DLIEU_QLT
-
