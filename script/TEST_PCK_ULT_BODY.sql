@@ -1,3 +1,6 @@
+-- Start of DDL Script for Package Body TEST.PCK_ULT
+-- Generated 23/09/2013 9:18:57 AM from TEST@DCNC
+
 CREATE OR REPLACE 
 PACKAGE BODY pck_ult
 IS
@@ -302,12 +305,13 @@ IS
     END;
 
     /**
-     * @package: PCK_UTL.Prc_Ddep_Pck_Qlt
-     * @desc:    drop package qlt-app, qct-app
-     * @author:  Administrator
-     * @date:    04/08/2013
-     * @param:   tble_user_object = user_objects@db_link
-     *           v_tax_model  qlt-app
+     * Thuc hien don dep sau khi thuc hien lay du lieu hoan thanh
+     * <p> xoa package duoc config trong table tb_package
+     *@author  Administrator
+     *@date    04/08/2013
+     *@param   tble_user_object = user_objects@db_link
+     *         v_tax_model  qlt-app
+     *@see PCK_UTL.Prc_Ddep_Pck_Qlt
      */
     PROCEDURE Prc_Ddep_Pck_Qlt(tbl_user_objects varchar2, v_tax_model varchar2) IS
 
@@ -328,6 +332,7 @@ IS
             exit when cur%notfound;
             pck_moi_truong.prc_remote_sql('DROP PACKAGE '||v_table);
         END LOOP;
+
         --Close cursor
         close cur;
 
@@ -339,12 +344,13 @@ IS
     END;
 
     /**
-     * @package: PCK_UTL.Prc_Drop_Tbl_Qlt
-     * @desc:    drop table on qlt-app, qct-app
-     * @author:  Administrator
-     * @date:    04/08/2013
-     * @param:   tble_user_object = user_objects@db_link
-     *           v_tax_model  qlt-app
+     * Thuc hien don dep sau khi thuc hien lay du lieu hoan thanh
+     * <p> xoa table duoc config trong table tb_tables
+     *@author  Administrator
+     *@date    04/08/2013
+     *@param   tble_user_object = user_objects@db_link
+     *         v_tax_model  qlt-app
+     *@see PCK_UTL.Prc_Drop_Tbl_Qlt
      */
     PROCEDURE Prc_Drop_Tbl_Qlt (tbl_user_objects varchar2, v_tax_model varchar2)
     IS
@@ -397,11 +403,13 @@ IS
     END;
 
     /**
-     * @package: PCK_UTL.Prc_Create_Tbl_Qlt
-     * @desc:    Create table qlt vs QCT
-     * @author:  Administrator
-     * @date:    04/08/2013
-     * @param:   tbl_create, table_space, pk_name, pk_column, idx_name, idx_column
+     * Thuc hien khoi tao moi truong
+     * <p>Khoi tao table tren he thong QLT, QCT duoc config trong table tb_tables.
+     *@author  Administrator
+     *@date    04/08/2013
+     *@param   tbl_create, table_space, pk_name,
+     *         pk_column, idx_name, idx_column
+     *@see PCK_UTL.Prc_Create_Tbl_Qlt
      */
     PROCEDURE Prc_Create_Tbl_Qlt (v_tax_model varchar2)
     IS
@@ -412,7 +420,7 @@ IS
               SELECT   id, tbl_name, tablespace, p_name, p_value, index_name, index_value
                 FROM   tb_tables where tax_model = ''||v_tax_model||'' or tax_model is null;
         --Cursor column
-        CURSOR c_col_name (p_tbl_id VARCHAR2) -- id ztb_table
+        CURSOR c_col_name (p_tbl_id VARCHAR2) -- id tb_tables
         IS
               SELECT   tbl_id, col_name, TYPE types
                 FROM   tb_columns
@@ -496,9 +504,17 @@ IS
         EXCEPTION
             WHEN
                 others THEN Prc_Finnal(c_pro_name);
-
     END;
 
+     /**
+     * Thuc hien khoi tao moi truong
+     * <p>Khoi tao table tren he thong PNN duoc config trong table tb_tables.
+     *@author  Administrator
+     *@date    04/08/2013
+     *@param   tbl_create, table_space, pk_name,
+     *         pk_column, idx_name, idx_column
+     *@see PCK_UTL.Prc_Create_Tbl_Pnn
+     */
     PROCEDURE Prc_Create_Tbl_Pnn(v_tax_model varchar2)
     IS
         c_pro_name CONSTANT VARCHAR2(30) := 'Prc_Create_Tbl_Pnn';
@@ -508,7 +524,7 @@ IS
               SELECT   id, tbl_name, tablespace, p_name, p_value, index_name, index_value
                 FROM   tb_tables where tax_model = ''||v_tax_model||'' or tax_model is null;
         --Cursor column
-        CURSOR c_col_name (p_tbl_id VARCHAR2) -- id ztb_table
+        CURSOR c_col_name (p_tbl_id VARCHAR2) -- id tb_table
         IS
               SELECT   tbl_id, col_name, TYPE types
                 FROM   tb_columns
@@ -648,11 +664,13 @@ IS
         COMMIT ;
     END;
     /**
-     * @package: PCK_UTL.Prc_Crt_Pck_File
-     * @desc:    Create package by file
-     * @author:  Administrator
-     * @date:    20/05/2013
-     * @param:   p_file, p_dir
+     * Thuc hien khoi tao moi truong
+     * <p>Khoi tao package tren he thong QLT, QCT duoc config trong table tb_package.
+     * <p>Khoi tao bang cach doc du lieu trong file.
+     *@author  Administrator
+     *@date    20/05/2013
+     *@param   p_file, p_dir
+     *@see pck_ult.Prc_Crt_Pck_File
      */
     PROCEDURE Prc_Crt_Pck_File (v_tax_model varchar2)is
         c_pro_name CONSTANT VARCHAR2(30) := 'Prc_Crt_Pck_File';
@@ -696,6 +714,72 @@ IS
 
                     --Clear sql_text
                     sql_text :='';
+
+                    --Close file
+                    UTL_FILE.fclose (filehandler);
+
+                END LOOP;
+           Prc_Finnal(c_pro_name);
+
+        EXCEPTION
+            WHEN OTHERS
+            THEN
+
+            Prc_Finnal(c_pro_name);
+
+    END;
+
+    /**
+     * Thuc hien khoi tao moi truong
+     * <p>Khoi tao package tren he thong PNN duoc config trong table tb_package.
+     * <p>Khoi tao bang cach doc du lieu trong file.
+     *@package PCK_UTL.Prc_Crt_Pck_File_Pnn
+     *@author  Administrator
+     *@date    20/05/2013
+     *@param   p_file, p_dir
+     */
+    PROCEDURE Prc_Crt_Pck_File_Pnn (v_tax_model varchar2)is
+        c_pro_name CONSTANT VARCHAR2(30) := 'Prc_Crt_Pck_File';
+
+        filehandler   UTL_FILE.file_type;
+        buffer        CLOB;
+        sql_text      VARCHAR2 (32767);
+
+        --Lay thong tin file can tao trong table tb_package
+        CURSOR c_lstFile is
+
+            select DIRECTORY, PCK_NAME
+                from tb_package
+            where tax_model = v_tax_model and directory is not null order by PCK_ORDER;
+    BEGIN
+
+        FOR vc_lstFile IN c_lstFile
+            LOOP
+                begin
+                    --Create directory
+                    EXECUTE immediate 'Create OR replace DIRECTORY FILE_DIR AS '''||vc_lstFile.DIRECTORY||'''';
+                    --Grand to all user
+                    EXECUTE immediate 'GRANT READ, WRITE ON DIRECTORY FILE_DIR TO public';
+                end;
+                --UTL_FILE.fopen (thu_muc, ten_file, quyen)
+                filehandler := UTL_FILE.fopen ('FILE_DIR', vc_lstFile.PCK_NAME, 'r');
+                    LOOP
+                        BEGIN
+                            UTL_FILE.get_line (filehandler, buffer);
+
+                            sql_text := sql_text || buffer || CHR(10); --new line
+
+                        EXCEPTION
+                            WHEN NO_DATA_FOUND
+                            THEN
+                                EXIT;
+                        END;
+                    END LOOP;
+                    --SQL code
+                    pck_moi_truong.prc_remote_sql_pnn(sql_text);
+
+                    --Clear sql_text
+                    sql_text :='';
                     --Close file
                     UTL_FILE.fclose (filehandler);
                 END LOOP;
@@ -708,12 +792,15 @@ IS
             Prc_Finnal(c_pro_name);
 
     END;
+
     /**
-     * @package: PCK_UTL.Prc_sync_01_thkh
-     * @desc:    Sync 01/THKH
-     * @author:  Administrator
-     * @date:    10/07/2013
-     * @param:   p_short_name
+     * Thuc hien dong bo can cu tinh thue gia tri gia tang,
+     *<p> va chi tiet to khai 10 tren he thong TMS
+     *
+     *@author  Administrator
+     *@date    10/07/2013
+     *@param   p_short_name
+     *@see PCK_UTL.Prc_sync_01_thkh
      */
     PROCEDURE Prc_sync_01_thkh (p_short_name varchar2) is
         v_ma_cqt varchar2(10);

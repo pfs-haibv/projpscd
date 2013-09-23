@@ -1,16 +1,35 @@
+-- Start of DDL Script for Package Body TEST.PCK_CHECK_DATA_TMS
+-- Generated 23/09/2013 10:24:09 AM from TEST@DCNC
+
 CREATE OR REPLACE 
 PACKAGE BODY pck_check_data_tms
+/**
+ * Thuc hien kiem tra du lieu tren DBTMS
+ * <p> Kiem tra cac dau du lieu:
+ * <ul>
+ *      <li>du lieu NO </li>
+ *      <li>du lieu dang ky nop to khai </li>
+ *      <li>du lieu to khai thue mon bai </li>
+ *      <li>du lieu Phat sinh </li>
+ *      <li>du lieu to khai khoan 01-THKH </li>
+ *      <li>du lieu con khau tru </li>
+ *      <li>du lieu tinh phat  </li>
+ *      <li>du lieu 01,02TK-SDDPNN</li>
+ * </ul>
+ *@author Administrator
+ *@date 19/06/2013
+ */
 IS
-    /***************************************************************************
-     pck_check_data_tms.prc_insert_data(p_short_name)
-     Nguoi thuc hien: Administrator
-     Ngay thuc hien: 19/06/2013
-     Noi dung: kiem tra du lieu table tb_no
-     ***************************************************************************/
+    /**
+     * Thuc hien insert du lieu vao table loi (tb_data_error)
+     *@author Administrator
+     *@date 19/06/2013
+     *@see pck_check_data_tms.prc_insert_data
+     */
     PROCEDURE prc_insert_data (sqltext VARCHAR2)
     IS
     BEGIN
-        -- sql insert
+        -- sql insert data error
         EXECUTE IMMEDIATE 'INSERT INTO tb_data_error (short_name,
                                    rid,
                                    table_name,
@@ -23,14 +42,15 @@ IS
         THEN
             ROLLBACK;
             pck_ult.prc_finnal ('pck_check_data_tms.prc_insert_data');
+
     END;
 
-    /***************************************************************************
-     pck_check_data_tms.prc_check_tb_no(p_short_name)
-     Nguoi thuc hien: Administrator
-     Ngay thuc hien: 19/06/2013
-     Noi dung: kiem tra du lieu table tb_no
-     ***************************************************************************/
+    /**
+     * Thuc hien kiem tra du lieu table tb_no
+     *@author Administrator
+     *@date 19/06/2013
+     *@see pck_check_data_tms.prc_check_tb_no
+     */
     PROCEDURE prc_check_tb_no (p_short_name VARCHAR2)
     IS
         sqltext     VARCHAR2 (32767);
@@ -50,23 +70,25 @@ IS
         pck_glb_variables.set_short_name (p_short_name);
         pck_glb_variables.set_ky_chot (p_ky_chot);
 
-        sqltext := 'select * from vw_chect_tb_no';
+        sqltext := 'select * from vw_check_tb_no';
 
         --Thuc hien ghi loi
         prc_insert_data (sqltext);
+
     EXCEPTION
         WHEN OTHERS
         THEN
             ROLLBACK;
             pck_ult.prc_finnal ('pck_check_data_tms.prc_check_tb_no');
+
     END;
 
-    /***************************************************************************
-     pck_check_data_tms.prc_check_tb_dkntk(p_short_name)
-     Nguoi thuc hien: Administrator
-     Ngay thuc hien: 19/06/2013
-     Noi dung: kiem tra du lieu table tb_dkntk
-     ***************************************************************************/
+    /**
+     * Thuc hien kiem tra du lieu table tb_dkntk
+     *@author Administrator
+     *@date 19/06/2013
+     *@see pck_check_data_tms.prc_check_tb_dkntk
+     */
     PROCEDURE prc_check_tb_dkntk (p_short_name VARCHAR2)
     IS
         sqltext     VARCHAR2 (32767);
@@ -90,6 +112,7 @@ IS
 
         --Thuc hien ghi loi
         prc_insert_data (sqltext);
+
     EXCEPTION
         WHEN OTHERS
         THEN
@@ -97,12 +120,13 @@ IS
             pck_ult.prc_finnal ('pck_check_data_tms.prc_check_tb_dkntk');
     END;
 
-    /***************************************************************************
-     pck_check_data_tms.prc_check_tb_tkmb(p_short_name)
-     Nguoi thuc hien: Administrator
-     Ngay thuc hien: 19/06/2013
-     Noi dung: kiem tra du lieu table tb_tkmb_hdr, tb_tkmb_dtl
-     ***************************************************************************/
+    /**
+     * Thuc hien kiem tra du lieu table tb_tkmb_hdr, tb_tkmb_dtl
+     *@author Administrator
+     *@date 19/06/2013
+     *@see pck_check_data_tms.prc_check_tb_tkmb(p_short_name)
+     */
+
     PROCEDURE prc_check_tb_tkmb (p_short_name VARCHAR2)
     IS
         sqltext     VARCHAR2 (32767);
@@ -127,19 +151,21 @@ IS
 
         --Thuc hien ghi loi
         prc_insert_data (sqltext);
+
     EXCEPTION
         WHEN OTHERS
         THEN
             ROLLBACK;
             pck_ult.prc_finnal ('pck_check_data_tms.prc_check_tb_tkmb');
+
     END;
 
-    /***************************************************************************
-     pck_check_data_tms.prc_check_tb_ps(p_short_name)
-     Nguoi thuc hien: Administrator
-     Ngay thuc hien: 19/06/2013
-     Noi dung: kiem tra du lieu table tb_ps
-     ***************************************************************************/
+    /**
+     * Thuc hien kiem tra du lieu table tb_ps
+     *@author Administrator
+     *@date 19/06/2013
+     *@see pck_check_data_tms.prc_check_tb_ps(p_short_name)
+     */
     PROCEDURE prc_check_tb_ps (p_short_name VARCHAR2)
     IS
         sqltext     VARCHAR2 (32767);
@@ -170,12 +196,12 @@ IS
             pck_ult.prc_finnal ('pck_check_data_tms.prc_check_tb_ps');
     END;
 
-    /***************************************************************************
-     pck_check_data_tms.prc_check_tb_con_kt(p_short_name)
-     Nguoi thuc hien: Administrator
-     Ngay thuc hien: 19/06/2013
-     Noi dung: kiem tra du lieu table tb_ps
-     ***************************************************************************/
+    /**
+     * Thuc hien kiem tra du lieu table tb_con_kt
+     *@author Administrator
+     *@date 19/06/2013
+     *@see pck_check_data_tms.prc_check_tb_con_kt(p_short_name)
+     */
     PROCEDURE prc_check_tb_con_kt (p_short_name VARCHAR2)
     IS
         sqltext     VARCHAR2 (32767);
@@ -205,12 +231,12 @@ IS
             pck_ult.prc_finnal ('pck_check_data_tms.prc_check_tb_con_kt');
     END;
 
-    /***************************************************************************
-     pck_check_data_tms.prc_check_01_tb_tkkh(p_short_name)
-     Nguoi thuc hien: Administrator
-     Ngay thuc hien: 19/06/2013
-     Noi dung: kiem tra du lieu table tb_01_tkkh_hdr, tb_01_tkkh_dtl
-     ***************************************************************************/
+    /**
+     * Thuc hien kiem tra du lieu table tb_01_tkkh_hdr, tb_01_tkkh_dtl
+     *@author Administrator
+     *@date 19/06/2013
+     *@see pck_check_data_tms.prc_check_01_tb_tkkh(p_short_name)
+     */
     PROCEDURE prc_check_01_tb_thkh (p_short_name VARCHAR2)
     IS
         sqltext     VARCHAR2 (32767);
@@ -241,18 +267,23 @@ IS
             ROLLBACK;
             pck_ult.prc_finnal ('pck_check_data_tms.prc_check_01_tb_thkh');
     END;
-    /***************************************************************************
-     pck_check_data_tms.prc_check_tk_sddpnn(p_short_name)
-     Nguoi thuc hien: Administrator
-     Ngay thuc hien: 19/06/2013
-     Noi dung: kiem tra du lieu table TB_TK_SDDPNN, TB_TK_SDDPNN_01_NNT
-               - Doi voi to 01/TK-SDDPNN kiem tra tren 2 table
-                 TB_TK_SDDPNN (Thong tin xac dinh cua co quan chuc nang), voi ma_loai_tk = 01
-                 TB_TK_SDDPNN_01_NNT (Thong tin NNT Ke Khai)
-               - Doi voi to 02/TK-SDDPNN Kiem tra tren 1 table
-                 TB_TK_SDDPNN voi ma_loai_tk = 02
-               Do do se kiem tra chung ca 2 to 01/TK-SDDPNN vs 02/TK-SDDPNN
-     ***************************************************************************/
+
+    /**
+     * Thuc hien kiem tra du lieu table TB_TK_SDDPNN, TB_TK_SDDPNN_01_NNT
+     *<p> - Doi voi to 01/TK-SDDPNN kiem tra tren 2 table
+     *<ul>
+     *            <li> TB_TK_SDDPNN (Thong tin xac dinh cua co quan chuc nang), voi ma_loai_tk = 01 </li>
+     *            <li> TB_TK_SDDPNN_01_NNT (Thong tin NNT Ke Khai) </li>
+     *</ul>
+     *<p> - Doi voi to 02/TK-SDDPNN Kiem tra tren 1 table
+     *<ul>
+     *            <li> TB_TK_SDDPNN voi ma_loai_tk = 02 </li>
+     *            <li>o do se kiem tra chung ca 2 to 01/TK-SDDPNN vs 02/TK-SDDPNN </li>
+     *</ul>
+     *@author Administrator
+     *@date 19/06/2013
+     *@see pck_check_data_tms.prc_check_tk_sddpnn(p_short_name)
+     */
     PROCEDURE prc_check_tk_sddpnn (p_short_name VARCHAR2)
     IS
         sqltext     VARCHAR2 (32767);
@@ -292,12 +323,12 @@ IS
             pck_ult.prc_finnal ('pck_check_data_tms.prc_check_tk_sddpnn');
     END;
 
-    /***************************************************************************
-     pck_check_data_tms.prc_check_tb_tinh_phat(p_short_name)
-     Nguoi thuc hien: Administrator
-     Ngay thuc hien: 19/06/2013
-     Noi dung: kiem tra du lieu table tb_tinh_phat
-     ***************************************************************************/
+    /**
+     * Thuc hien kiem tra du lieu table tb_tinh_phat
+     *@author Administrator
+     *@date 19/06/2013
+     *@see pck_check_data_tms.prc_check_tb_tinh_phat(p_short_name)
+     */
     PROCEDURE prc_check_tb_tinh_phat (p_short_name VARCHAR2)
     IS
         sqltext     VARCHAR2 (32767);
@@ -328,6 +359,3 @@ IS
             pck_ult.prc_finnal ('pck_check_data_tms.prc_check_tb_tinh_phat');
     END;
 END;
-/
-
-

@@ -1,10 +1,11 @@
 -- Start of DDL Script for View TEST.VW_SL_NO
--- Generated 18/09/2013 11:26:54 AM from TEST@DCNC
+-- Generated 20/09/2013 10:42:33 AM from TEST@DCNC
 
 CREATE OR REPLACE VIEW vw_sl_no (
    tax_model,
    err_id,
    err_name,
+   field_name,
    ma_cbo,
    ten_cbo,
    ma_pban,
@@ -21,13 +22,13 @@ CREATE OR REPLACE VIEW vw_sl_no (
    han_nop,
    no_cuoi_ky )
 AS
-SELECT   tax_model, err_id, err_name, ma_cbo, ten_cbo, ma_pban, ten_pban, tin,ten_nnt,
+SELECT   tax_model, err_id, err_name, field_name, ma_cbo, ten_cbo, ma_pban, ten_pban, tin,ten_nnt,
          ma_chuong, ma_khoan, tmt_ma_tmuc, tkhoan, ngay_hach_toan,
          kykk_tu_ngay, kykk_den_ngay, han_nop, no_cuoi_ky
     FROM (SELECT b.tax_model, a.err_id,
                  (SELECT c.err_name
                     FROM tb_lst_err c
-                   WHERE a.err_id = c.err_id) err_name,
+                   WHERE a.err_id = c.err_id) err_name, a.field_name,
                  b.ma_cbo, b.ten_cbo, b.ma_pban, b.ten_pban, b.tin,b.ten_nnt,
                  b.ma_chuong, b.ma_khoan, b.tmt_ma_tmuc, b.tkhoan,
                  'bo ngay_hach_toan' ngay_hach_toan, b.kykk_tu_ngay, b.kykk_den_ngay, b.han_nop,
@@ -53,3 +54,7 @@ SELECT   tax_model, err_id, err_name, ma_cbo, ten_cbo, ma_pban, ten_pban, tin,te
             */
            )
 ORDER BY tax_model, err_id
+/
+
+-- End of DDL Script for View TEST.VW_SL_NO
+

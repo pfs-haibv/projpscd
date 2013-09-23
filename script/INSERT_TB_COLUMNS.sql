@@ -33,7 +33,7 @@ VALUES(385,2,'BMB_NNT','number(10,0)');
 INSERT INTO tb_columns 
 VALUES(386,2,'BMB_CQT','number(10,0)');
 INSERT INTO tb_columns 
-VALUES(401,3,'MST_DVTT','varchar2(14)');
+VALUES(401,3,'MST_DVTT','varchar2(100)');
 INSERT INTO tb_columns 
 VALUES(441,6,'DOANH_THU_TS_10','number(20,0)');
 INSERT INTO tb_columns 
