@@ -731,13 +731,20 @@ namespace DC.Lib
                 string _query_ps = "SELECT stt, tax_model, ten_tkhai, sotien FROM vw_bc_ps";
                 string _query_no = "SELECT stt, tax_model, tmt_ma_tmuc, so_no, so_pnop FROM vw_bc_no";
                 string _query_tcno = "SELECT STT, TAX_MODEL, TEN_TCNO, SO_NO FROM VW_BC_TCNO";
-                string _query_tphat = "SELECT Null stt, TAX_MODEL, SOTIEN FROM VW_BC_TPHAT";
-                string _query_tkh = "SELECT Null stt, TAX_MODEL, SL, SOTIEN FROM VW_BC_TKH";
+                string _query_tphat = "SELECT STT, TAX_MODEL, SL, SOTIEN FROM VW_BC_TPHAT";
+                string _query_tphat_1 = "SELECT STT, TAX_MODEL FROM VW_BC_TPHAT";
+                string _query_tkh = "SELECT STT, TAX_MODEL, SL, DOANHTHU, GTTT, THUEPN FROM VW_BC_TKH";
+                string _query_tkh_1 = "SELECT STT, TAX_MODEL FROM VW_BC_TKH";
                 string _query_dkntk = "SELECT STT, TAX_MODEL, TEN_TKHAI, SL FROM VW_BC_DKNTK";
                 string _query_ckt = "SELECT STT, TAX_MODEL, TEN_TKHAI, SOTIEN FROM VW_BC_CKT";
-                string _query_tkmb = "SELECT Null stt, TAX_MODEL, SL, SOTIEN FROM VW_BC_TKMB";
-                string _query_01pnn = "SELECT Null stt, TAX_MODEL, SL, SOTIEN FROM VW_BC_01PNN";
-                string _query_02pnn = "SELECT Null stt, TAX_MODEL, SL, SOTIEN FROM VW_BC_02PNN";
+                string _query_tkmb = "SELECT STT, TAX_MODEL, ten_bac, SL, SOTIEN FROM VW_BC_TKMB";
+                string _query_tkmb_1 = "SELECT STT, TAX_MODEL, ten_bac FROM VW_BC_TKMB";
+                string _query_01pnn = "SELECT stt, TAX_MODEL, ma_tmuc, SL, SOTIEN FROM VW_BC_01PNN";
+                string _query_01pnn_1 = "SELECT stt, TAX_MODEL, ma_tmuc FROM VW_BC_01PNN";
+                string _query_02pnn = "SELECT stt, TAX_MODEL, ma_tmuc, SL, SOTIEN FROM VW_BC_02PNN";
+                string _query_02pnn_1 = "SELECT stt, TAX_MODEL, ma_tmuc FROM VW_BC_02PNN";
+
+                const int _row_start_1 = 4;
 
                 Object _objNULL = System.Reflection.Missing.Value;
                 Object _objTRUE = true;
@@ -776,8 +783,8 @@ namespace DC.Lib
                                 
                 #region In bảng phát sinh
                 _k = 4;
-                _dt = _ora.TransExecute_DataTable(_query_ps);                
-                Prc_fill_tbBienBan(_k, _doc, _dt, 3);
+                _dt = _ora.TransExecute_DataTable(_query_ps);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
                 
                 // Add các index của table cần xóa
                 if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
@@ -785,84 +792,168 @@ namespace DC.Lib
                 #endregion
                                 
                 #region In bảng nợ
-                _k = 5;
+                _k = _k + 1;
                 _dt = _ora.TransExecute_DataTable(_query_no);
-                 Prc_fill_tbBienBan(_k, _doc, _dt, 4);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
                 // Add các index của table cần xóa
                 if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
                 _dt.Reset();
                 #endregion
 
                 #region In bảng tc nợ
-                _k = 6;
+                _k = _k + 1;
                 _dt = _ora.TransExecute_DataTable(_query_tcno);
-                Prc_fill_tbBienBan(_k, _doc, _dt, 3);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
                 // Add các index của table cần xóa
                 if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
                 _dt.Reset();
                 #endregion
                                 
                 #region In bảng tính phạt
-                _k = 7;
+                _k = _k + 1;
                 _dt = _ora.TransExecute_DataTable(_query_tphat);
-                Prc_fill_tbBienBan(_k, _doc, _dt, 3);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
                 // Add các index của table cần xóa
                 if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
                 _dt.Reset();
+
+                //So CQT quản lý
+                _k = _k + 1;
+                _dt = _ora.TransExecute_DataTable(_query_tphat_1);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
+                _dt.Reset();
+
+                //So sai lệch
+                _k = _k + 1;
+                _dt = _ora.TransExecute_DataTable(_query_tphat_1);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
+                _dt.Reset();
+
                 #endregion
 
                 #region In bảng tk khoán
-                _k = 8;
+                _k = _k + 1;
                 _dt = _ora.TransExecute_DataTable(_query_tkh);
-                Prc_fill_tbBienBan(_k, _doc, _dt, 3);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
+                _dt.Reset();
+
+                //Số CQT quản lý
+                _k = _k + 1;
+                _dt = _ora.TransExecute_DataTable(_query_tkh_1);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
+                _dt.Reset();
+
+                //Số sai lệch
+                _k = _k + 1;
+                _dt = _ora.TransExecute_DataTable(_query_tkh_1);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
                 // Add các index của table cần xóa
                 if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
                 _dt.Reset();
                 #endregion
 
                 #region In bảng dkntk
-                _k = 9;
+                _k = _k + 1;
                 _dt = _ora.TransExecute_DataTable(_query_dkntk);
-                Prc_fill_tbBienBan(_k, _doc, _dt, 4);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
                 // Add các index của table cần xóa
                 if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
                 _dt.Reset();
                 #endregion
 
                 #region In bảng còn khấu trừ
-                _k = 10;
+                _k = _k + 1;
                 _dt = _ora.TransExecute_DataTable(_query_ckt);
-                Prc_fill_tbBienBan(_k, _doc, _dt, 3);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
                 // Add các index của table cần xóa
                 if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
                 _dt.Reset();
                 #endregion
 
                 #region In bảng TKMB
-                _k = 11;
+                _k = _k + 1;
                 _dt = _ora.TransExecute_DataTable(_query_tkmb);
-                Prc_fill_tbBienBan(_k, _doc, _dt, 3);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
                 // Add các index của table cần xóa
                 if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
                 _dt.Reset();
+
+                //So CQT quan ly
+                _k = _k + 1;
+                _dt = _ora.TransExecute_DataTable(_query_tkmb_1);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
+                _dt.Reset();
+
+                //So sai lech
+                _k = _k + 1;
+                _dt = _ora.TransExecute_DataTable(_query_tkmb_1);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
+                _dt.Reset();
+
                 #endregion
 
                 #region In bảng 01 PNN
-                _k = 12;
+                _k = _k + 1;
                 _dt = _ora.TransExecute_DataTable(_query_01pnn);
-                Prc_fill_tbBienBan(_k, _doc, _dt, 3);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
                 // Add các index của table cần xóa
                 if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
                 _dt.Reset();
+
+                //So CQT quan ly
+                _k = _k + 1;
+                _dt = _ora.TransExecute_DataTable(_query_01pnn_1);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
+                _dt.Reset();
+
+                //So sai lech
+                _k = _k + 1;
+                _dt = _ora.TransExecute_DataTable(_query_01pnn_1);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
+                _dt.Reset();
+
                 #endregion
 
                 #region In bảng 02 pnn
-                _k = 13;
+                _k = _k + 1;
                 _dt = _ora.TransExecute_DataTable(_query_02pnn);
-                Prc_fill_tbBienBan(_k, _doc, _dt, 3);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
                 // Add các index của table cần xóa
                 if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
                 _dt.Reset();
+
+                //So CQT quan ly
+                _k = _k + 1;
+                _dt = _ora.TransExecute_DataTable(_query_02pnn);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
+                _dt.Reset();
+
+                //So sai lech
+                _k = _k + 1;
+                _dt = _ora.TransExecute_DataTable(_query_02pnn_1);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
+                _dt.Reset();
+
                 #endregion
 
                 // Xóa table không cần thiết của _Document
@@ -949,18 +1040,32 @@ namespace DC.Lib
         // Gen biên bản đối chiếu dữ liệu lần 2
         public static void Prc_BienBan2(string _pathFOpen,
                                         string _pathFSave,
-                                        string _short_name,
-                                        string _query_ps,
-                                        string _query_no,
-                                        string _query_tk,                                        
-                                        string _query_tk_bs,
-                                        string _query_pluc01,
-                                        string _query_pluc02,
-                                        string _query_pluc03,
-                                        int _times)
+                                        string _short_name
+                                        )
         {
             using (CLS_DBASE.ORA _ora = new CLS_DBASE.ORA(GlobalVar.gl_connTKTQ))
             {
+                string _query_ps = "SELECT stt, tax_model, ten_tkhai, sotien FROM vw_bc_ps";
+                string _query_no = "SELECT stt, tax_model, tmt_ma_tmuc, so_no, so_pnop FROM vw_bc_no";
+                string _query_tcno = "SELECT STT, TAX_MODEL, TEN_TCNO, SO_NO FROM VW_BC_TCNO";
+                string _query_tphat = "SELECT STT, TAX_MODEL, SL, SOTIEN FROM VW_BC_TPHAT";
+                string _query_tphat_1 = "SELECT STT, TAX_MODEL FROM VW_BC_TPHAT";
+                string _query_tkh = "SELECT STT, TAX_MODEL, SL, DOANHTHU, GTTT, THUEPN FROM VW_BC_TKH";
+                string _query_tkh_1 = "SELECT STT, TAX_MODEL FROM VW_BC_TKH";
+                string _query_dkntk = "SELECT STT, TAX_MODEL, TEN_TKHAI, SL FROM VW_BC_DKNTK";
+                string _query_ckt = "SELECT STT, TAX_MODEL, TEN_TKHAI, SOTIEN FROM VW_BC_CKT";
+                string _query_tkmb = "SELECT STT, TAX_MODEL, ten_bac, SL, SOTIEN FROM VW_BC_TKMB";
+                string _query_tkmb_1 = "SELECT STT, TAX_MODEL, ten_bac FROM VW_BC_TKMB";
+                string _query_01pnn = "SELECT stt, TAX_MODEL, ma_tmuc, SL, SOTIEN FROM VW_BC_01PNN";
+                string _query_01pnn_1 = "SELECT stt, TAX_MODEL, ma_tmuc FROM VW_BC_01PNN";
+                string _query_02pnn = "SELECT stt, TAX_MODEL, ma_tmuc, SL, SOTIEN FROM VW_BC_02PNN";
+                string _query_02pnn_1 = "SELECT stt, TAX_MODEL, ma_tmuc FROM VW_BC_02PNN";
+
+                string _query_pluc01 = "SELECT a.tax_model, a.ma_tkhai, a.tin, a.KY_PSINH_TU, a.KY_PSINH_DEN, a.so_tien, a.err_name FROM vw_cd_ps a";
+                string _query_pluc02 = "SELECT a.tax_model, a.tmt_ma_tmuc, a.tin, a.kykk_tu_ngay, a.kykk_den_ngay, a.han_nop, a.so_duong, a.so_am, a.err_name FROM vw_cd_no a";
+
+                const int _row_start_1 = 4;
+
                 Object _objNULL = System.Reflection.Missing.Value;
                 Object _objTRUE = true;
                 Object _objFALSE = false;
@@ -996,99 +1101,199 @@ namespace DC.Lib
                                                         ref _objFALSE   //Visible
                                                         );
 
-
-
-                // Tạo bảng Phát sinh
-                #region ADD ROW PHAT_SINH
+                #region In bảng phát sinh
                 _k = 4;
                 _dt = _ora.TransExecute_DataTable(_query_ps);
-                if (_times == 1)
-                {
-                    Prc_fill_tbBienBan(_k, _doc, _dt, 3);
-                }
-                else if (_times == 2)
-                {
-                    Prc_fill_tbBienBan2_PS(_k, _doc, _dt, 3);
-                }
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
+
                 // Add các index của table cần xóa
                 if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
                 _dt.Reset();
                 #endregion
 
-                // Tạo bảng nợ
-                #region ADD ROW NO
-                _k = 5;
+                #region In bảng nợ
+                _k = _k + 1;
                 _dt = _ora.TransExecute_DataTable(_query_no);
-                if (_times == 1)
-                {
-                    Prc_fill_tbBienBan(_k, _doc, _dt, 4);
-                }
-                else if (_times == 2)
-                {
-                    Prc_fill_tbBienBan2_NO(_k, _doc, _dt, 4);
-                }
-
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
                 // Add các index của table cần xóa
                 if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
                 _dt.Reset();
                 #endregion
 
-                //Tạo bảng chi tiết tờ khai 10/KK-TNCN
-                #region ADD ROW TO_KHAI
-                _dt = _ora.TransExecute_DataTable(_query_tk);
-                if (_dt.Rows.Count == 0)
-                {
-                    if (_times == 1)
-                        _query_tk = "SELECT 0 stt, 0 loai_ud, 0 so_luong, 0 pbq1, 0 pbq2, 0 pbq3, 0 pbq4, 0 tncn FROM dual";
-                    else
-                        _query_tk = "SELECT 0 stt, 0 so_luong, 0 pbq1, 0 pbq2, 0 pbq3, 0 pbq4, 0 tncn FROM dual";
-                    _dt = _ora.TransExecute_DataTable(_query_tk);
-                }
-                _k = 6;
-                // Điền giá trị tờ khai
-                Prc_fill_tbBienBan(_k, _doc, _dt, 4);
-
-                // Modify by ManhTV3 on 6/4/2012
-                // Tạo bảng nhập cho CQT
-                _dt = _ora.TransExecute_DataTable(_query_tk_bs);
-                if (_dt.Rows.Count == 0)
-                {
-                    if (_times == 1)
-                        _query_tk_bs = "SELECT 0 stt, 0 loai_ud, 0 so_luong, 0 pbq1, 0 pbq2, 0 pbq3, 0 pbq4, 0 tncn FROM dual";
-                    else
-                        _query_tk_bs = "SELECT 0 stt, 0 so_luong, 0 pbq1, 0 pbq2, 0 pbq3, 0 pbq4, 0 tncn FROM dual";
-                    _dt = _ora.TransExecute_DataTable(_query_tk_bs);
-                }
-                _k = 7;
-                Prc_fill_tbBienBan(_k, _doc, _dt, 4);
-                // Modify by ThanhNH5 on 07/04/2012
-                // Tạo bảng nhập sai lệch cho CQT
-                _k = 8;
-                Prc_fill_tbBienBan(_k, _doc, _dt, 4);
-
+                #region In bảng tc nợ
+                _k = _k + 1;
+                _dt = _ora.TransExecute_DataTable(_query_tcno);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
                 // Add các index của table cần xóa
                 if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
                 _dt.Reset();
-                #endregion                
+                #endregion
 
+                #region In bảng tính phạt
+                _k = _k + 1;
+                _dt = _ora.TransExecute_DataTable(_query_tphat);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
+                _dt.Reset();
+
+                //So CQT quản lý
+                _k = _k + 1;
+                _dt = _ora.TransExecute_DataTable(_query_tphat_1);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
+                _dt.Reset();
+
+                //So sai lệch
+                _k = _k + 1;
+                _dt = _ora.TransExecute_DataTable(_query_tphat_1);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
+                _dt.Reset();
+
+                #endregion
+
+                #region In bảng tk khoán
+                _k = _k + 1;
+                _dt = _ora.TransExecute_DataTable(_query_tkh);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
+                _dt.Reset();
+
+                //Số CQT quản lý
+                _k = _k + 1;
+                _dt = _ora.TransExecute_DataTable(_query_tkh_1);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
+                _dt.Reset();
+
+                //Số sai lệch
+                _k = _k + 1;
+                _dt = _ora.TransExecute_DataTable(_query_tkh_1);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
+                _dt.Reset();
+                #endregion
+
+                #region In bảng dkntk
+                _k = _k + 1;
+                _dt = _ora.TransExecute_DataTable(_query_dkntk);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
+                _dt.Reset();
+                #endregion
+
+                #region In bảng còn khấu trừ
+                _k = _k + 1;
+                _dt = _ora.TransExecute_DataTable(_query_ckt);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
+                _dt.Reset();
+                #endregion
+
+                #region In bảng TKMB
+                _k = _k + 1;
+                _dt = _ora.TransExecute_DataTable(_query_tkmb);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
+                _dt.Reset();
+
+                //So CQT quan ly
+                _k = _k + 1;
+                _dt = _ora.TransExecute_DataTable(_query_tkmb_1);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
+                _dt.Reset();
+
+                //So sai lech
+                _k = _k + 1;
+                _dt = _ora.TransExecute_DataTable(_query_tkmb_1);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
+                _dt.Reset();
+
+                #endregion
+
+                #region In bảng 01 PNN
+                _k = _k + 1;
+                _dt = _ora.TransExecute_DataTable(_query_01pnn);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
+                _dt.Reset();
+
+                //So CQT quan ly
+                _k = _k + 1;
+                _dt = _ora.TransExecute_DataTable(_query_01pnn_1);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
+                _dt.Reset();
+
+                //So sai lech
+                _k = _k + 1;
+                _dt = _ora.TransExecute_DataTable(_query_01pnn_1);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
+                _dt.Reset();
+
+                #endregion
+
+                #region In bảng 02 pnn
+                _k = _k + 1;
+                _dt = _ora.TransExecute_DataTable(_query_02pnn);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
+                _dt.Reset();
+
+                //So CQT quan ly
+                _k = _k + 1;
+                _dt = _ora.TransExecute_DataTable(_query_02pnn);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
+                _dt.Reset();
+
+                //So sai lech
+                _k = _k + 1;
+                _dt = _ora.TransExecute_DataTable(_query_02pnn_1);
+                Prc_fill_tbBienBan(_k, _doc, _dt, _row_start_1);
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
+                _dt.Reset();
+
+                #endregion
+                                
                 // Tạo bảng phụ lục 01
                 #region ADD ROW PHU_LUC01                
-                _k = 10;
+                _k = _k + 2;
                 _dt = _ora.TransExecute_DataTable(_query_pluc01);                
-                Prc_fill_tbBienBan(_k, _doc, _dt, 2);
+                Prc_fill_tbBienBan(_k, _doc, _dt, 4);
 
                 // Add các index của table cần xóa
                 if (_dt.Rows.Count == 0)
                 {
-                    _arr_delTable.Add(9);
-                    _arr_delTable.Add(10);
+                    _arr_delTable.Add(_k-1);
+                    _arr_delTable.Add(_k);
                 }
                 _dt.Reset();
                 #endregion
 
                 // Tạo bảng phụ lục 02
                 #region ADD ROW PHU_LUC02
-                _k = 12;
+                _k = _k + 2;
                 _dt = _ora.TransExecute_DataTable(_query_pluc02);
 
                 Prc_fill_tbBienBan(_k, _doc, _dt, 2);
@@ -1096,24 +1301,8 @@ namespace DC.Lib
                 // Add các index của table cần xóa
                 if (_dt.Rows.Count == 0)
                 {
-                    _arr_delTable.Add(11);
-                    _arr_delTable.Add(12);
-                }
-                _dt.Reset();
-                #endregion
-
-                // Tạo bảng phụ lục 03
-                #region ADD ROW PHU_LUC03
-                _k = 14;
-                _dt = _ora.TransExecute_DataTable(_query_pluc03);
-
-                Prc_fill_tbBienBan(_k, _doc, _dt, 2);
-
-                // Add các index của table cần xóa
-                if (_dt.Rows.Count == 0)
-                { 
-                    _arr_delTable.Add(13);
-                    _arr_delTable.Add(14);
+                    _arr_delTable.Add(_k - 1);
+                    _arr_delTable.Add(_k);
                 }
                 _dt.Reset();
                 #endregion
@@ -1128,7 +1317,6 @@ namespace DC.Lib
                 // Tính số trang của biên bản
                 Microsoft.Office.Interop.Word.WdStatistic _stat = Microsoft.Office.Interop.Word.WdStatistic.wdStatisticPages;
                 int _countPage = _doc.ComputeStatistics(_stat, ref _objNULL);
-
 
                 // Điền các giá trị MERGE MAIL
                 #region MERGE MAIL
@@ -1170,7 +1358,7 @@ namespace DC.Lib
                 #endregion
 
                 // Save tài liệu
-                Object _pathSaveFile = _pathFSave + "\\" + _short_name + "_BienBanDoiChieu_0" + _times.ToString() + ".doc";
+                Object _pathSaveFile = _pathFSave + "\\" + _short_name + "_BienBanDoiChieu_01.doc";
                 _doc.SaveAs(ref _pathSaveFile,  //FileName
                             ref _objNULL,       //FileFormat 
                             ref _objNULL,       //LockComments 
@@ -1539,25 +1727,37 @@ namespace DC.Lib
                     _dt = _ora.TransExecute_DataTable(_sql);
                     if (_dt.Rows.Count > 0) CLS_EXCEL.Prc_Add_Sheets(workBook, "DuLieu_TPHAT", _dt);
                     _dt.Clear();
-                    
+
                     // Kết xuất chi tiết tờ khai khoán
                     _sql = "SELECT * FROM VW_CT_TKH";
                     _dt = _ora.TransExecute_DataTable(_sql);
                     if (_dt.Rows.Count > 0) CLS_EXCEL.Prc_Add_Sheets(workBook, "DuLieu_TKH", _dt);
                     _dt.Clear();
-                    
+
                     // Kết xuất đkntk
                     _sql = "SELECT * FROM VW_CT_DKNTK";
                     _dt = _ora.TransExecute_DataTable(_sql);
                     if (_dt.Rows.Count > 0) CLS_EXCEL.Prc_Add_Sheets(workBook, "DuLieu_DKNTK", _dt);
                     _dt.Clear();
-                    
+
                     // Kết xuất chi tiết tkmb
                     _sql = "SELECT * FROM VW_CT_TKMB";
                     _dt = _ora.TransExecute_DataTable(_sql);
                     if (_dt.Rows.Count > 0) CLS_EXCEL.Prc_Add_Sheets(workBook, "DuLieu_TKMB", _dt);
                     _dt.Clear();
-                    
+
+                    // Kết xuất chi tiết tkmb
+                    _sql = "SELECT * FROM VW_CT_01PNN";
+                    _dt = _ora.TransExecute_DataTable(_sql);
+                    if (_dt.Rows.Count > 0) CLS_EXCEL.Prc_Add_Sheets(workBook, "DuLieu_TK01PNN", _dt);
+                    _dt.Clear();
+
+                    // Kết xuất chi tiết tkmb
+                    _sql = "SELECT * FROM VW_CT_02PNN";
+                    _dt = _ora.TransExecute_DataTable(_sql);
+                    if (_dt.Rows.Count > 0) CLS_EXCEL.Prc_Add_Sheets(workBook, "DuLieu_TK02PNN", _dt);
+                    _dt.Clear();
+
                     workBook.SaveAs(p_destinPath,
                                         Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookNormal,
                                         Type.Missing, Type.Missing, Type.Missing, Type.Missing,

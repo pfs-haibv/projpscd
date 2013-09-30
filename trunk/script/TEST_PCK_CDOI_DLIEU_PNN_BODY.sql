@@ -1,5 +1,5 @@
 -- Start of DDL Script for Package Body TEST.PCK_CDOI_DLIEU_PNN
--- Generated 23/09/2013 9:43:03 AM from TEST@DCNC
+-- Generated 28/09/2013 9:09:47 AM from TEST@DCNC
 
 CREATE OR REPLACE 
 PACKAGE BODY pck_cdoi_dlieu_pnn
@@ -885,15 +885,112 @@ IS
 
         /* Step 2: Insert danh muc */
         --01. Danh muc thon
-        INSERT INTO tb_pnn_dm_thon select * from  pnn_dm_thon@pnn where ngay_hl_den is null;
+        INSERT INTO tb_pnn_dm_thon (ma_thon,
+                                    ma_xa,
+                                    ten,
+                                    ma_huyen,
+                                    ma_tinh,
+                                    ngay_hl_tu,
+                                    ngay_hl_den)
+            SELECT   ma_thon,
+                     ma_xa,
+                     ten,
+                     ma_huyen,
+                     ma_tinh,
+                     to_char(ngay_hl_tu, 'DD/MM/YYYY')ngay_hl_tu,
+                     to_char(ngay_hl_den, 'DD/MM/YYYY') ngay_hl_den
+              FROM   pnn_dm_thon@pnn
+             WHERE   ngay_hl_den IS NULL;
         --02. Danh muc gia dat
-        INSERT INTO tb_pnn_dm_gia_dat select * from pnn_dm_gia_dat@pnn where ngay_hl_den is null;
+        INSERT INTO tb_pnn_dm_gia_dat (ma_gia_dat,
+                                       ma_tinh,
+                                       ma_huyen,
+                                       ma_loai_dat,
+                                       ma_muc_dich,
+                                       ma_duong,
+                                       ma_doan_duong,
+                                       ma_vi_tri,
+                                       gia,
+                                       ngay_hl_tu,
+                                       ngay_hl_den,
+                                       ma_loai_duong,
+                                       ghi_chu,
+                                       nam)
+            SELECT   ma_gia_dat,
+                     ma_tinh,
+                     ma_huyen,
+                     ma_loai_dat,
+                     ma_muc_dich,
+                     ma_duong,
+                     ma_doan_duong,
+                     ma_vi_tri,
+                     gia,
+                     to_char(ngay_hl_tu, 'DD/MM/YYYY')ngay_hl_tu,
+                     to_char(ngay_hl_den, 'DD/MM/YYYY')ngay_hl_den,
+                     ma_loai_duong,
+                     ghi_chu,
+                     to_char(nam, 'DD/MM/YYYY')nam
+              FROM   pnn_dm_gia_dat@pnn
+             WHERE   ngay_hl_den IS NULL;
         --03. Danh muc duong/vung
-        INSERT INTO tb_pnn_dm_ten_duong select * from pnn_dm_ten_duong@pnn where ngay_hl_den is null;
+        INSERT INTO tb_pnn_dm_ten_duong (ma_duong,
+                                         ten,
+                                         ma_tinh,
+                                         ma_huyen,
+                                         ghi_chu,
+                                         ma_duong_off,
+                                         ngay_hl_tu,
+                                         ngay_hl_den)
+            SELECT   ma_duong,
+                     ten,
+                     ma_tinh,
+                     ma_huyen,
+                     ghi_chu,
+                     ma_duong_off,
+                     to_char(ngay_hl_tu, 'DD/MM/YYYY')ngay_hl_tu,
+                     to_char(ngay_hl_den, 'DD/MM/YYYY')ngay_hl_den
+              FROM   pnn_dm_ten_duong@pnn
+             WHERE   ngay_hl_den IS NULL;
         --04. Danh muc doan duong
-        INSERT INTO TB_PNN_DM_DOAN_DUONG select * from PNN_DM_DOAN_DUONG@pnn where ngay_hl_den is null;
+        INSERT INTO tb_pnn_dm_doan_duong (ma_doan_duong,
+                                          ma_duong,
+                                          ten_doan_duong,
+                                          ma_huyen,
+                                          ma_doan_duong_off,
+                                          ngay_hl_tu,
+                                          ngay_hl_den,
+                                          ghi_chu)
+            SELECT   ma_doan_duong,
+                     ma_duong,
+                     ten_doan_duong,
+                     ma_huyen,
+                     ma_doan_duong_off,
+                     to_char(ngay_hl_tu,'DD/MM/YYYY')ngay_hl_tu,
+                     to_char(ngay_hl_den,'DD/MM/YYYY')ngay_hl_den,
+                     ghi_chu
+              FROM   pnn_dm_doan_duong@pnn
+             WHERE   ngay_hl_den IS NULL;
         --05. Danh muc vi tri
-        INSERT INTO tb_pnn_dm_vi_tri select * from pnn_dm_vi_tri@pnn where ngay_hl_den is null;
+        INSERT INTO tb_pnn_dm_vi_tri (ma_vi_tri,
+                                      ten,
+                                      ma_tinh,
+                                      heso,
+                                      ngay_hl_tu,
+                                      ngay_hl_den,
+                                      ghi_chu,
+                                      ma_vi_tri_off,
+                                      ma_huyen)
+            SELECT   ma_vi_tri,
+                     ten,
+                     ma_tinh,
+                     heso,
+                     to_char(ngay_hl_tu,'DD/MM/YYYY')ngay_hl_tu,
+                      to_char(ngay_hl_den,'DD/MM/YYYY')ngay_hl_den,
+                     ghi_chu,
+                     ma_vi_tri_off,
+                     ma_huyen
+              FROM   pnn_dm_vi_tri@pnn
+             WHERE   ngay_hl_den IS NULL;
         /* END */
 
         /**
@@ -908,12 +1005,12 @@ IS
 
         --commit
         COMMIT;
-
+/*
     EXCEPTION
         WHEN OTHERS
 
         THEN
-            pck_trace_log.prc_ins_log (p_short_name, pck_trace_log.fnc_whocalledme);
+            pck_trace_log.prc_ins_log (p_short_name, pck_trace_log.fnc_whocalledme);*/
 
     END;
 
@@ -1005,3 +1102,8 @@ IS
      END;
 
 END;
+/
+
+
+-- End of DDL Script for Package Body TEST.PCK_CDOI_DLIEU_PNN
+
