@@ -1,5 +1,5 @@
 -- Start of DDL Script for Package Body QLT_OWNER.EXT_PCK_QLT_TKHAI
--- Generated 23/09/2013 11:13:05 AM from QLT_OWNER@QLT_BRV_VTA
+-- Generated 27/09/2013 10:31:45 AM from QLT_OWNER@QLT_BRV_VTA
 
 CREATE OR REPLACE 
 PACKAGE BODY ext_pck_qlt_tkhai
@@ -323,7 +323,7 @@ IS
         prc_del_log ('Prc_Qlt_Thop_Monbai');
         COMMIT;
         prc_create_job('BEGIN
-                            TMS_QLT_CDOI_TK.Prc_Qlt_Thop_Monbai('''
+                            EXT_PCK_QLT_TKHAI.Prc_Qlt_Thop_Monbai('''
 
                        || p_chot
                        || ''');
@@ -365,6 +365,7 @@ IS
                      AND TO_CHAR (TRUNC (tk_hdr.kykk_tu_ngay), 'YYYY') =
                             TO_CHAR (TRUNC (p_chot), 'YYYY')
                      AND tk_hdr.ltd = 0
+                     --and tk_hdr.id = 2420022
                      ;
 
         -- List Dtl
@@ -373,7 +374,7 @@ IS
               SELECT   *
                 FROM   qlt_tkhai_mbai
                WHERE   tkh_id = v_tkh_id AND tkh_ltd = 0
-            ORDER BY   id;
+            ORDER BY   id, ky_hieu;
     BEGIN
         qlt_pck_thop_no_thue.prc_load_dsach_dtnt;
         --Clear Data
@@ -438,7 +439,6 @@ IS
                                where a.tkh_id = v_dtl.tkh_id;
                     else
 
-                    dbms_output.put_line(v_dtl.chi_tieu);
                         --Insert table ext_tktmb_dtl
                         INSERT INTO ext_tktmb_dtl (id,
                                                    tkh_id,
@@ -464,7 +464,7 @@ IS
                       end if;
                 END IF;
                 --Clear data
-                v_chi_tieu := 0;
+                --v_chi_tieu := 0;
 
             END LOOP;
 

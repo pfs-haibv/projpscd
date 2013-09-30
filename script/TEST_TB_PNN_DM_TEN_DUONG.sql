@@ -1,5 +1,5 @@
 -- Start of DDL Script for Table TEST.TB_PNN_DM_TEN_DUONG
--- Generated 12/09/2013 11:00:31 AM from TEST@DCNC
+-- Generated 27/09/2013 10:45:52 AM from TEST@DCNC
 
 CREATE TABLE tb_pnn_dm_ten_duong
     (ma_duong                       VARCHAR2(8 CHAR) NOT NULL,
@@ -8,8 +8,8 @@ CREATE TABLE tb_pnn_dm_ten_duong
     ma_huyen                       VARCHAR2(5 CHAR) NOT NULL,
     ghi_chu                        VARCHAR2(200 CHAR),
     ma_duong_off                   VARCHAR2(3 CHAR),
-    ngay_hl_tu                     DATE NOT NULL,
-    ngay_hl_den                    DATE)
+    ngay_hl_tu                     VARCHAR2(15 BYTE) NOT NULL,
+    ngay_hl_den                    VARCHAR2(15 BYTE))
   PCTFREE     10
   INITRANS    1
   MAXTRANS    255

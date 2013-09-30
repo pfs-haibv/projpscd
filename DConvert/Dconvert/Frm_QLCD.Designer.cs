@@ -29,27 +29,27 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_QLCD));
             this.bndSource = new System.Windows.Forms.BindingSource(this.components);
             this.grb_drg = new System.Windows.Forms.GroupBox();
@@ -71,7 +71,6 @@
             this.ckb_qlt_no = new System.Windows.Forms.CheckBox();
             this.ckb_qlt_ps = new System.Windows.Forms.CheckBox();
             this.tabPage1_grb_mt = new System.Windows.Forms.GroupBox();
-            this.cbk_ktra_kychot = new System.Windows.Forms.CheckBox();
             this.ckb_ddep = new System.Windows.Forms.CheckBox();
             this.ckb_ktao = new System.Windows.Forms.CheckBox();
             this.tab_vatw = new System.Windows.Forms.TabPage();
@@ -134,6 +133,17 @@
             this.ckb_kxu_loi = new System.Windows.Forms.CheckBox();
             this.ckb_kxu_ctiet = new System.Windows.Forms.CheckBox();
             this.ckb_kxu_bban = new System.Windows.Forms.CheckBox();
+            this.tab_check_dt = new System.Windows.Forms.TabPage();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.checkBox11 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkBox10 = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.checkBox7 = new System.Windows.Forms.CheckBox();
+            this.checkBox8 = new System.Windows.Forms.CheckBox();
+            this.checkBox9 = new System.Windows.Forms.CheckBox();
             this.tab_log = new System.Windows.Forms.TabPage();
             this.tabPage3_listView2 = new System.Windows.Forms.ListView();
             this.icon = new System.Windows.Forms.ColumnHeader();
@@ -174,17 +184,6 @@
             this.iconImageList = new System.Windows.Forms.ImageList(this.components);
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.tab_check_dt = new System.Windows.Forms.TabPage();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
-            this.checkBox9 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox10 = new System.Windows.Forms.CheckBox();
-            this.checkBox11 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.bndSource)).BeginInit();
             this.grb_drg.SuspendLayout();
             this.tab_action.SuspendLayout();
@@ -211,10 +210,10 @@
             this.groupBox5.SuspendLayout();
             this.tab_kxdl.SuspendLayout();
             this.tabPage1_grb_cdl.SuspendLayout();
-            this.tab_log.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgrTaxOffice)).BeginInit();
             this.tab_check_dt.SuspendLayout();
             this.groupBox8.SuspendLayout();
+            this.tab_log.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgrTaxOffice)).BeginInit();
             this.SuspendLayout();
             // 
             // grb_drg
@@ -430,7 +429,6 @@
             // tabPage1_grb_mt
             // 
             this.tabPage1_grb_mt.BackColor = System.Drawing.Color.Transparent;
-            this.tabPage1_grb_mt.Controls.Add(this.cbk_ktra_kychot);
             this.tabPage1_grb_mt.Controls.Add(this.ckb_ddep);
             this.tabPage1_grb_mt.Controls.Add(this.ckb_ktao);
             this.tabPage1_grb_mt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -440,16 +438,6 @@
             this.tabPage1_grb_mt.TabIndex = 0;
             this.tabPage1_grb_mt.TabStop = false;
             this.tabPage1_grb_mt.Text = "Môi Trường";
-            // 
-            // cbk_ktra_kychot
-            // 
-            this.cbk_ktra_kychot.AutoSize = true;
-            this.cbk_ktra_kychot.Location = new System.Drawing.Point(25, 83);
-            this.cbk_ktra_kychot.Name = "cbk_ktra_kychot";
-            this.cbk_ktra_kychot.Size = new System.Drawing.Size(188, 17);
-            this.cbk_ktra_kychot.TabIndex = 2;
-            this.cbk_ktra_kychot.Text = "[QLTQCT] Kiểm tra kỳ chốt dữ liệu";
-            this.cbk_ktra_kychot.UseVisualStyleBackColor = true;
             // 
             // ckb_ddep
             // 
@@ -1115,6 +1103,138 @@
             this.ckb_kxu_bban.Text = "Kết xuất WORD biên bản lần 1";
             this.ckb_kxu_bban.UseVisualStyleBackColor = false;
             // 
+            // tab_check_dt
+            // 
+            this.tab_check_dt.Controls.Add(this.groupBox8);
+            this.tab_check_dt.Location = new System.Drawing.Point(4, 22);
+            this.tab_check_dt.Name = "tab_check_dt";
+            this.tab_check_dt.Size = new System.Drawing.Size(978, 217);
+            this.tab_check_dt.TabIndex = 7;
+            this.tab_check_dt.Text = "Check Data";
+            this.tab_check_dt.UseVisualStyleBackColor = true;
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.checkBox11);
+            this.groupBox8.Controls.Add(this.checkBox3);
+            this.groupBox8.Controls.Add(this.checkBox10);
+            this.groupBox8.Controls.Add(this.checkBox4);
+            this.groupBox8.Controls.Add(this.checkBox5);
+            this.groupBox8.Controls.Add(this.checkBox6);
+            this.groupBox8.Controls.Add(this.checkBox7);
+            this.groupBox8.Controls.Add(this.checkBox8);
+            this.groupBox8.Controls.Add(this.checkBox9);
+            this.groupBox8.Location = new System.Drawing.Point(3, 16);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(602, 173);
+            this.groupBox8.TabIndex = 2;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Loại dữ liệu";
+            // 
+            // checkBox11
+            // 
+            this.checkBox11.AutoSize = true;
+            this.checkBox11.Checked = true;
+            this.checkBox11.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox11.Location = new System.Drawing.Point(169, 82);
+            this.checkBox11.Name = "checkBox11";
+            this.checkBox11.Size = new System.Drawing.Size(73, 17);
+            this.checkBox11.TabIndex = 13;
+            this.checkBox11.Text = "Tính phạt";
+            this.checkBox11.UseVisualStyleBackColor = true;
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(310, 57);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(177, 17);
+            this.checkBox3.TabIndex = 12;
+            this.checkBox3.Text = "[PNN] Tờ khai 02/TK-SDDPNN";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // checkBox10
+            // 
+            this.checkBox10.AutoSize = true;
+            this.checkBox10.Location = new System.Drawing.Point(310, 34);
+            this.checkBox10.Name = "checkBox10";
+            this.checkBox10.Size = new System.Drawing.Size(177, 17);
+            this.checkBox10.TabIndex = 11;
+            this.checkBox10.Text = "[PNN] Tờ khai 01/TK-SDDPNN";
+            this.checkBox10.UseVisualStyleBackColor = true;
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Checked = true;
+            this.checkBox4.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox4.Location = new System.Drawing.Point(169, 59);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(70, 17);
+            this.checkBox4.TabIndex = 1;
+            this.checkBox4.Text = "Phát sinh";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            // 
+            // checkBox5
+            // 
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.Checked = true;
+            this.checkBox5.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox5.Location = new System.Drawing.Point(24, 82);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(102, 17);
+            this.checkBox5.TabIndex = 8;
+            this.checkBox5.Text = "CCTT hộ khoán";
+            this.checkBox5.UseVisualStyleBackColor = true;
+            // 
+            // checkBox6
+            // 
+            this.checkBox6.AutoSize = true;
+            this.checkBox6.Checked = true;
+            this.checkBox6.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox6.Location = new System.Drawing.Point(169, 34);
+            this.checkBox6.Name = "checkBox6";
+            this.checkBox6.Size = new System.Drawing.Size(102, 17);
+            this.checkBox6.TabIndex = 7;
+            this.checkBox6.Text = "Số còn khấu trừ";
+            this.checkBox6.UseVisualStyleBackColor = true;
+            // 
+            // checkBox7
+            // 
+            this.checkBox7.AutoSize = true;
+            this.checkBox7.Checked = true;
+            this.checkBox7.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox7.Location = new System.Drawing.Point(24, 59);
+            this.checkBox7.Name = "checkBox7";
+            this.checkBox7.Size = new System.Drawing.Size(122, 17);
+            this.checkBox7.TabIndex = 6;
+            this.checkBox7.Text = "Đăng ký nộp tờ khai";
+            this.checkBox7.UseVisualStyleBackColor = true;
+            // 
+            // checkBox8
+            // 
+            this.checkBox8.AutoSize = true;
+            this.checkBox8.Checked = true;
+            this.checkBox8.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox8.Location = new System.Drawing.Point(24, 105);
+            this.checkBox8.Name = "checkBox8";
+            this.checkBox8.Size = new System.Drawing.Size(102, 17);
+            this.checkBox8.TabIndex = 2;
+            this.checkBox8.Text = "Tờ khai môn bài";
+            this.checkBox8.UseVisualStyleBackColor = true;
+            // 
+            // checkBox9
+            // 
+            this.checkBox9.AutoSize = true;
+            this.checkBox9.Checked = true;
+            this.checkBox9.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox9.Location = new System.Drawing.Point(24, 34);
+            this.checkBox9.Name = "checkBox9";
+            this.checkBox9.Size = new System.Drawing.Size(40, 17);
+            this.checkBox9.TabIndex = 0;
+            this.checkBox9.Text = "Nợ";
+            this.checkBox9.UseVisualStyleBackColor = true;
+            // 
             // tab_log
             // 
             this.tab_log.BackColor = System.Drawing.SystemColors.MenuBar;
@@ -1227,14 +1347,14 @@
             this.dgrTaxOffice.AllowUserToOrderColumns = true;
             this.dgrTaxOffice.AutoGenerateColumns = false;
             this.dgrTaxOffice.BackgroundColor = System.Drawing.SystemColors.ActiveCaptionText;
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgrTaxOffice.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgrTaxOffice.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgrTaxOffice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgrTaxOffice.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cl_tax_name,
@@ -1257,25 +1377,25 @@
             this.cl_vat_ddan_tu,
             this.cl_vat_ddan_den});
             this.dgrTaxOffice.DataSource = this.bndSource;
-            dataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle41.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle41.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle41.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle41.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle41.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle41.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgrTaxOffice.DefaultCellStyle = dataGridViewCellStyle41;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgrTaxOffice.DefaultCellStyle = dataGridViewCellStyle20;
             this.dgrTaxOffice.Location = new System.Drawing.Point(9, 19);
             this.dgrTaxOffice.Name = "dgrTaxOffice";
             this.dgrTaxOffice.ReadOnly = true;
-            dataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle42.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle42.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle42.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle42.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle42.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle42.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgrTaxOffice.RowHeadersDefaultCellStyle = dataGridViewCellStyle42;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgrTaxOffice.RowHeadersDefaultCellStyle = dataGridViewCellStyle21;
             this.dgrTaxOffice.Size = new System.Drawing.Size(771, 380);
             this.dgrTaxOffice.TabIndex = 9;
             this.dgrTaxOffice.BindingContextChanged += new System.EventHandler(this.dgrTaxOffice_BindingContextChanged);
@@ -1288,8 +1408,8 @@
             // cl_tax_name
             // 
             this.cl_tax_name.DataPropertyName = "tax_name";
-            dataGridViewCellStyle23.Font = new System.Drawing.Font(".VnArial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cl_tax_name.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font(".VnArial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cl_tax_name.DefaultCellStyle = dataGridViewCellStyle2;
             this.cl_tax_name.Frozen = true;
             this.cl_tax_name.HeaderText = "TAX_NAME";
             this.cl_tax_name.Name = "cl_tax_name";
@@ -1299,8 +1419,8 @@
             // cl_short_name
             // 
             this.cl_short_name.DataPropertyName = "short_name";
-            dataGridViewCellStyle24.Font = new System.Drawing.Font(".VnArial", 9F);
-            this.cl_short_name.DefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font(".VnArial", 9F);
+            this.cl_short_name.DefaultCellStyle = dataGridViewCellStyle3;
             this.cl_short_name.HeaderText = "SHORT_NAME";
             this.cl_short_name.Name = "cl_short_name";
             this.cl_short_name.ReadOnly = true;
@@ -1308,8 +1428,8 @@
             // cl_tax_model
             // 
             this.cl_tax_model.DataPropertyName = "tax_model";
-            dataGridViewCellStyle25.Font = new System.Drawing.Font(".VnArial", 9F);
-            this.cl_tax_model.DefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font(".VnArial", 9F);
+            this.cl_tax_model.DefaultCellStyle = dataGridViewCellStyle4;
             this.cl_tax_model.HeaderText = "TAX_MODEL";
             this.cl_tax_model.Name = "cl_tax_model";
             this.cl_tax_model.ReadOnly = true;
@@ -1326,8 +1446,8 @@
             // cl_province
             // 
             this.cl_province.DataPropertyName = "province";
-            dataGridViewCellStyle26.Font = new System.Drawing.Font(".VnArial", 9F);
-            this.cl_province.DefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font(".VnArial", 9F);
+            this.cl_province.DefaultCellStyle = dataGridViewCellStyle5;
             this.cl_province.HeaderText = "PROVINCE";
             this.cl_province.Name = "cl_province";
             this.cl_province.ReadOnly = true;
@@ -1336,8 +1456,8 @@
             // cl_prov_name
             // 
             this.cl_prov_name.DataPropertyName = "prov_name";
-            dataGridViewCellStyle27.Font = new System.Drawing.Font(".VnArial", 9F);
-            this.cl_prov_name.DefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font(".VnArial", 9F);
+            this.cl_prov_name.DefaultCellStyle = dataGridViewCellStyle6;
             this.cl_prov_name.HeaderText = "PROV_NAME";
             this.cl_prov_name.Name = "cl_prov_name";
             this.cl_prov_name.ReadOnly = true;
@@ -1345,10 +1465,10 @@
             // cl_ky_chot
             // 
             this.cl_ky_chot.DataPropertyName = "ky_chot";
-            dataGridViewCellStyle28.Font = new System.Drawing.Font(".VnArial", 9F);
-            dataGridViewCellStyle28.Format = "MM/yyyy";
-            dataGridViewCellStyle28.NullValue = null;
-            this.cl_ky_chot.DefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font(".VnArial", 9F);
+            dataGridViewCellStyle7.Format = "MM/yyyy";
+            dataGridViewCellStyle7.NullValue = null;
+            this.cl_ky_chot.DefaultCellStyle = dataGridViewCellStyle7;
             this.cl_ky_chot.HeaderText = "KY_CHOT";
             this.cl_ky_chot.Name = "cl_ky_chot";
             this.cl_ky_chot.ReadOnly = true;
@@ -1356,8 +1476,8 @@
             // cl_tax_code
             // 
             this.cl_tax_code.DataPropertyName = "tax_code";
-            dataGridViewCellStyle29.Font = new System.Drawing.Font(".VnArial", 9F);
-            this.cl_tax_code.DefaultCellStyle = dataGridViewCellStyle29;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font(".VnArial", 9F);
+            this.cl_tax_code.DefaultCellStyle = dataGridViewCellStyle8;
             this.cl_tax_code.HeaderText = "TAX_CODE";
             this.cl_tax_code.Name = "cl_tax_code";
             this.cl_tax_code.ReadOnly = true;
@@ -1366,8 +1486,8 @@
             // cl_ma_cqt
             // 
             this.cl_ma_cqt.DataPropertyName = "ma_cqt";
-            dataGridViewCellStyle30.Font = new System.Drawing.Font(".VnArial", 9F);
-            this.cl_ma_cqt.DefaultCellStyle = dataGridViewCellStyle30;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font(".VnArial", 9F);
+            this.cl_ma_cqt.DefaultCellStyle = dataGridViewCellStyle9;
             this.cl_ma_cqt.HeaderText = "MA_CQT";
             this.cl_ma_cqt.Name = "cl_ma_cqt";
             this.cl_ma_cqt.ReadOnly = true;
@@ -1376,8 +1496,8 @@
             // cl_dblink
             // 
             this.cl_dblink.DataPropertyName = "dblink";
-            dataGridViewCellStyle31.Font = new System.Drawing.Font(".VnArial", 9F);
-            this.cl_dblink.DefaultCellStyle = dataGridViewCellStyle31;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font(".VnArial", 9F);
+            this.cl_dblink.DefaultCellStyle = dataGridViewCellStyle10;
             this.cl_dblink.HeaderText = "DBLINK";
             this.cl_dblink.Name = "cl_dblink";
             this.cl_dblink.ReadOnly = true;
@@ -1386,8 +1506,8 @@
             // cl_status
             // 
             this.cl_status.DataPropertyName = "status";
-            dataGridViewCellStyle32.Font = new System.Drawing.Font(".VnArial", 9F);
-            this.cl_status.DefaultCellStyle = dataGridViewCellStyle32;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font(".VnArial", 9F);
+            this.cl_status.DefaultCellStyle = dataGridViewCellStyle11;
             this.cl_status.HeaderText = "STATUS";
             this.cl_status.Name = "cl_status";
             this.cl_status.ReadOnly = true;
@@ -1396,8 +1516,8 @@
             // cl_qlt_host
             // 
             this.cl_qlt_host.DataPropertyName = "qlt_host";
-            dataGridViewCellStyle33.Font = new System.Drawing.Font(".VnArial", 9F);
-            this.cl_qlt_host.DefaultCellStyle = dataGridViewCellStyle33;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font(".VnArial", 9F);
+            this.cl_qlt_host.DefaultCellStyle = dataGridViewCellStyle12;
             this.cl_qlt_host.HeaderText = "QLT_HOST";
             this.cl_qlt_host.Name = "cl_qlt_host";
             this.cl_qlt_host.ReadOnly = true;
@@ -1406,8 +1526,8 @@
             // cl_qlt_user
             // 
             this.cl_qlt_user.DataPropertyName = "qlt_user";
-            dataGridViewCellStyle34.Font = new System.Drawing.Font(".VnArial", 9F);
-            this.cl_qlt_user.DefaultCellStyle = dataGridViewCellStyle34;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font(".VnArial", 9F);
+            this.cl_qlt_user.DefaultCellStyle = dataGridViewCellStyle13;
             this.cl_qlt_user.HeaderText = "QLT_USER";
             this.cl_qlt_user.Name = "cl_qlt_user";
             this.cl_qlt_user.ReadOnly = true;
@@ -1415,8 +1535,8 @@
             // cl_qlt_pass
             // 
             this.cl_qlt_pass.DataPropertyName = "qlt_pass";
-            dataGridViewCellStyle35.Font = new System.Drawing.Font(".VnArial", 9F);
-            this.cl_qlt_pass.DefaultCellStyle = dataGridViewCellStyle35;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font(".VnArial", 9F);
+            this.cl_qlt_pass.DefaultCellStyle = dataGridViewCellStyle14;
             this.cl_qlt_pass.HeaderText = "QLT_PASS";
             this.cl_qlt_pass.Name = "cl_qlt_pass";
             this.cl_qlt_pass.ReadOnly = true;
@@ -1424,8 +1544,8 @@
             // cl_vat_host
             // 
             this.cl_vat_host.DataPropertyName = "vat_host";
-            dataGridViewCellStyle36.Font = new System.Drawing.Font(".VnArial", 9F);
-            this.cl_vat_host.DefaultCellStyle = dataGridViewCellStyle36;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font(".VnArial", 9F);
+            this.cl_vat_host.DefaultCellStyle = dataGridViewCellStyle15;
             this.cl_vat_host.HeaderText = "VAT_HOST";
             this.cl_vat_host.Name = "cl_vat_host";
             this.cl_vat_host.ReadOnly = true;
@@ -1434,8 +1554,8 @@
             // cl_vat_user
             // 
             this.cl_vat_user.DataPropertyName = "vat_user";
-            dataGridViewCellStyle37.Font = new System.Drawing.Font(".VnArial", 9F);
-            this.cl_vat_user.DefaultCellStyle = dataGridViewCellStyle37;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font(".VnArial", 9F);
+            this.cl_vat_user.DefaultCellStyle = dataGridViewCellStyle16;
             this.cl_vat_user.HeaderText = "VAT_USER";
             this.cl_vat_user.Name = "cl_vat_user";
             this.cl_vat_user.ReadOnly = true;
@@ -1443,8 +1563,8 @@
             // cl_vat_pass
             // 
             this.cl_vat_pass.DataPropertyName = "vat_pass";
-            dataGridViewCellStyle38.Font = new System.Drawing.Font(".VnArial", 9F);
-            this.cl_vat_pass.DefaultCellStyle = dataGridViewCellStyle38;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font(".VnArial", 9F);
+            this.cl_vat_pass.DefaultCellStyle = dataGridViewCellStyle17;
             this.cl_vat_pass.HeaderText = "VAT_PASS";
             this.cl_vat_pass.Name = "cl_vat_pass";
             this.cl_vat_pass.ReadOnly = true;
@@ -1452,8 +1572,8 @@
             // cl_vat_ddan_tu
             // 
             this.cl_vat_ddan_tu.DataPropertyName = "vat_ddan_tu";
-            dataGridViewCellStyle39.Font = new System.Drawing.Font(".VnArial", 9F);
-            this.cl_vat_ddan_tu.DefaultCellStyle = dataGridViewCellStyle39;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font(".VnArial", 9F);
+            this.cl_vat_ddan_tu.DefaultCellStyle = dataGridViewCellStyle18;
             this.cl_vat_ddan_tu.HeaderText = "VAT_DDAN_TU";
             this.cl_vat_ddan_tu.Name = "cl_vat_ddan_tu";
             this.cl_vat_ddan_tu.ReadOnly = true;
@@ -1461,8 +1581,8 @@
             // cl_vat_ddan_den
             // 
             this.cl_vat_ddan_den.DataPropertyName = "vat_ddan_den";
-            dataGridViewCellStyle40.Font = new System.Drawing.Font(".VnArial", 9F);
-            this.cl_vat_ddan_den.DefaultCellStyle = dataGridViewCellStyle40;
+            dataGridViewCellStyle19.Font = new System.Drawing.Font(".VnArial", 9F);
+            this.cl_vat_ddan_den.DefaultCellStyle = dataGridViewCellStyle19;
             this.cl_vat_ddan_den.HeaderText = "VAT_DDAN_DEN";
             this.cl_vat_ddan_den.Name = "cl_vat_ddan_den";
             this.cl_vat_ddan_den.ReadOnly = true;
@@ -1535,138 +1655,6 @@
             this.checkBox2.Text = "Cập nhật tính chất nợ";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
-            // tab_check_dt
-            // 
-            this.tab_check_dt.Controls.Add(this.groupBox8);
-            this.tab_check_dt.Location = new System.Drawing.Point(4, 22);
-            this.tab_check_dt.Name = "tab_check_dt";
-            this.tab_check_dt.Size = new System.Drawing.Size(978, 217);
-            this.tab_check_dt.TabIndex = 7;
-            this.tab_check_dt.Text = "Check Data";
-            this.tab_check_dt.UseVisualStyleBackColor = true;
-            // 
-            // groupBox8
-            // 
-            this.groupBox8.Controls.Add(this.checkBox11);
-            this.groupBox8.Controls.Add(this.checkBox3);
-            this.groupBox8.Controls.Add(this.checkBox10);
-            this.groupBox8.Controls.Add(this.checkBox4);
-            this.groupBox8.Controls.Add(this.checkBox5);
-            this.groupBox8.Controls.Add(this.checkBox6);
-            this.groupBox8.Controls.Add(this.checkBox7);
-            this.groupBox8.Controls.Add(this.checkBox8);
-            this.groupBox8.Controls.Add(this.checkBox9);
-            this.groupBox8.Location = new System.Drawing.Point(3, 16);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(602, 173);
-            this.groupBox8.TabIndex = 2;
-            this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "Loại dữ liệu";
-            // 
-            // checkBox4
-            // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Checked = true;
-            this.checkBox4.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox4.Location = new System.Drawing.Point(169, 59);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(70, 17);
-            this.checkBox4.TabIndex = 1;
-            this.checkBox4.Text = "Phát sinh";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            // 
-            // checkBox5
-            // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Checked = true;
-            this.checkBox5.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox5.Location = new System.Drawing.Point(24, 82);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(102, 17);
-            this.checkBox5.TabIndex = 8;
-            this.checkBox5.Text = "CCTT hộ khoán";
-            this.checkBox5.UseVisualStyleBackColor = true;
-            // 
-            // checkBox6
-            // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.Checked = true;
-            this.checkBox6.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox6.Location = new System.Drawing.Point(169, 34);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(102, 17);
-            this.checkBox6.TabIndex = 7;
-            this.checkBox6.Text = "Số còn khấu trừ";
-            this.checkBox6.UseVisualStyleBackColor = true;
-            // 
-            // checkBox7
-            // 
-            this.checkBox7.AutoSize = true;
-            this.checkBox7.Checked = true;
-            this.checkBox7.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox7.Location = new System.Drawing.Point(24, 59);
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(122, 17);
-            this.checkBox7.TabIndex = 6;
-            this.checkBox7.Text = "Đăng ký nộp tờ khai";
-            this.checkBox7.UseVisualStyleBackColor = true;
-            // 
-            // checkBox8
-            // 
-            this.checkBox8.AutoSize = true;
-            this.checkBox8.Checked = true;
-            this.checkBox8.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox8.Location = new System.Drawing.Point(24, 105);
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(102, 17);
-            this.checkBox8.TabIndex = 2;
-            this.checkBox8.Text = "Tờ khai môn bài";
-            this.checkBox8.UseVisualStyleBackColor = true;
-            // 
-            // checkBox9
-            // 
-            this.checkBox9.AutoSize = true;
-            this.checkBox9.Checked = true;
-            this.checkBox9.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox9.Location = new System.Drawing.Point(24, 34);
-            this.checkBox9.Name = "checkBox9";
-            this.checkBox9.Size = new System.Drawing.Size(40, 17);
-            this.checkBox9.TabIndex = 0;
-            this.checkBox9.Text = "Nợ";
-            this.checkBox9.UseVisualStyleBackColor = true;
-            // 
-            // checkBox3
-            // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(310, 57);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(177, 17);
-            this.checkBox3.TabIndex = 12;
-            this.checkBox3.Text = "[PNN] Tờ khai 02/TK-SDDPNN";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            // 
-            // checkBox10
-            // 
-            this.checkBox10.AutoSize = true;
-            this.checkBox10.Location = new System.Drawing.Point(310, 34);
-            this.checkBox10.Name = "checkBox10";
-            this.checkBox10.Size = new System.Drawing.Size(177, 17);
-            this.checkBox10.TabIndex = 11;
-            this.checkBox10.Text = "[PNN] Tờ khai 01/TK-SDDPNN";
-            this.checkBox10.UseVisualStyleBackColor = true;
-            // 
-            // checkBox11
-            // 
-            this.checkBox11.AutoSize = true;
-            this.checkBox11.Checked = true;
-            this.checkBox11.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox11.Location = new System.Drawing.Point(169, 82);
-            this.checkBox11.Name = "checkBox11";
-            this.checkBox11.Size = new System.Drawing.Size(73, 17);
-            this.checkBox11.TabIndex = 13;
-            this.checkBox11.Text = "Tính phạt";
-            this.checkBox11.UseVisualStyleBackColor = true;
-            // 
             // Frm_QLCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1719,11 +1707,11 @@
             this.tab_kxdl.ResumeLayout(false);
             this.tabPage1_grb_cdl.ResumeLayout(false);
             this.tabPage1_grb_cdl.PerformLayout();
-            this.tab_log.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgrTaxOffice)).EndInit();
             this.tab_check_dt.ResumeLayout(false);
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
+            this.tab_log.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgrTaxOffice)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1792,7 +1780,6 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.CheckBox ckb_kxu_bban2;
         private System.Windows.Forms.CheckBox ckb_qct_slech_no;
-        private System.Windows.Forms.CheckBox cbk_ktra_kychot;
         private System.Windows.Forms.CheckBox ckb_kxu_cdloi;
         private System.Windows.Forms.CheckBox ckb_kxu_bcao_chuan_hoa;
         private System.Windows.Forms.TabPage tab_PNN;

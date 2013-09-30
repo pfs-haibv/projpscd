@@ -45,13 +45,24 @@ namespace DC.Vatwin
                     #region Đọc dữ liệu mã danh mục
                     try
                     {
-                        _query = @"SELECT madtnt as madtnt, mabpql as mabpql, macaptren as macaptren,'" + p_short_name + "' as short_name from Dtnt2";
+                        _query = @"SELECT madtnt as madtnt, mabpql as mabpql, macaptren as macaptren,'"
+                                 + p_short_name + "' as short_name,left(allt(tengoi),75) as tendtnt from Dtnt2";
 
                         CLS_DBASE.FOX _connFoxPro = new CLS_DBASE.FOX(p_path);
 
                         DataTable _dt = _connFoxPro.exeQuery(_query);
 
-                        CLS_DBASE.WriteToServer(GlobalVar.gl_connTKTQ1, "tb_vat_dtnt", _dt);
+                          foreach (DataRow _dr in _dt.Rows)
+                        {
+                            _query = @"INSERT INTO tb_vat_dtnt (madtnt, mabpql, macaptren, short_name, tendtnt)
+                                          VALUES ('" + _dr["madtnt"].ToString().Trim() +
+                                          @"', '" + _dr["mabpql"].ToString().Trim() +
+                                          @"', '" + _dr["macaptren"].ToString().Trim() +
+                                          @"', '" + p_short_name +
+                                          @"', '" + _dr["tendtnt"].ToString().Trim() + @"')";
+                            _connOra_cndm.exeUpdate(_query);
+                        }
+                        //CLS_DBASE.WriteToServer(GlobalVar.gl_connTKTQ1, "tb_vat_dtnt", _dt);
                                                 
                         _dt.Clear();
                         _dt = null;
