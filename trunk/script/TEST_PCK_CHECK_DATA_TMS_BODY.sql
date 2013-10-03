@@ -1,5 +1,5 @@
 -- Start of DDL Script for Package Body TEST.PCK_CHECK_DATA_TMS
--- Generated 23/09/2013 10:24:09 AM from TEST@DCNC
+-- Generated 03/10/2013 2:27:39 PM from TEST@DCNC
 
 CREATE OR REPLACE 
 PACKAGE BODY pck_check_data_tms
@@ -35,7 +35,9 @@ IS
                                    table_name,
                                    err_id,
                                    field_name,
-                                   update_no) '
+                                   update_no,
+                                   ma_cqt,
+                                   check_app) '
                          || sqltext;
     EXCEPTION
         WHEN OTHERS
@@ -55,18 +57,20 @@ IS
     IS
         sqltext     VARCHAR2 (32767);
         p_ky_chot   DATE;
+        p_ma_cqt    VARCHAR2(5);
     BEGIN
         --get ky_chot
-        SELECT   ky_chot
-          INTO   p_ky_chot
+        SELECT   ky_chot, tax_code
+          INTO   p_ky_chot, p_ma_cqt
           FROM   tb_lst_taxo
          WHERE   short_name = p_short_name;
 
         --Clear data
         DELETE   tb_data_error
-         WHERE   short_name = p_short_name AND table_name = 'TB_NO';
+         WHERE   short_name = p_short_name AND table_name = 'TB_NO' AND check_app = 'ORA';
 
-        --SET CQT, KY_CHOT
+        --SET MA_CQT, SHORT_NAME, KY_CHOT
+        pck_glb_variables.set_ma_cqt (p_ma_cqt);
         pck_glb_variables.set_short_name (p_short_name);
         pck_glb_variables.set_ky_chot (p_ky_chot);
 
@@ -93,18 +97,20 @@ IS
     IS
         sqltext     VARCHAR2 (32767);
         p_ky_chot   DATE;
+        p_ma_cqt    VARCHAR2(5);
     BEGIN
         --get ky_chot
-        SELECT   ky_chot
-          INTO   p_ky_chot
+        SELECT   ky_chot, tax_code
+          INTO   p_ky_chot, p_ma_cqt
           FROM   tb_lst_taxo
          WHERE   short_name = p_short_name;
 
         --Clear data
         DELETE   tb_data_error
-         WHERE   short_name = p_short_name AND table_name = 'TB_DKNTK';
+         WHERE   short_name = p_short_name AND table_name = 'TB_DKNTK' AND check_app = 'ORA';
 
-        --SET CQT, KY_CHOT
+       --SET MA_CQT, SHORT_NAME, KY_CHOT
+        pck_glb_variables.set_ma_cqt (p_ma_cqt);
         pck_glb_variables.set_short_name (p_short_name);
         pck_glb_variables.set_ky_chot (p_ky_chot);
 
@@ -131,19 +137,21 @@ IS
     IS
         sqltext     VARCHAR2 (32767);
         p_ky_chot   DATE;
+        p_ma_cqt    VARCHAR2(5);
     BEGIN
         --Clear data
         DELETE   tb_data_error
          WHERE   short_name = p_short_name
-                 AND table_name IN ('TB_TKMB_HDR', 'TB_TKMB_DTL');
+                 AND table_name IN ('TB_TKMB_HDR', 'TB_TKMB_DTL') AND check_app = 'ORA';
 
         --get ky_chot
-        SELECT   ky_chot
-          INTO   p_ky_chot
+        SELECT   ky_chot, tax_code
+          INTO   p_ky_chot, p_ma_cqt
           FROM   tb_lst_taxo
          WHERE   short_name = p_short_name;
 
-        --SET CQT, KY_CHOT
+        --SET MA_CQT, SHORT_NAME, KY_CHOT
+        pck_glb_variables.set_ma_cqt (p_ma_cqt);
         pck_glb_variables.set_short_name (p_short_name);
         pck_glb_variables.set_ky_chot (p_ky_chot);
 
@@ -170,18 +178,20 @@ IS
     IS
         sqltext     VARCHAR2 (32767);
         p_ky_chot   DATE;
+         p_ma_cqt    VARCHAR2(5);
     BEGIN
         --get ky_chot
-        SELECT   ky_chot
-          INTO   p_ky_chot
+        SELECT   ky_chot, tax_code
+          INTO   p_ky_chot, p_ma_cqt
           FROM   tb_lst_taxo
          WHERE   short_name = p_short_name;
 
         --Clear data
         DELETE   tb_data_error
-         WHERE   short_name = p_short_name AND table_name = 'TB_PS';
+         WHERE   short_name = p_short_name AND table_name = 'TB_PS' AND check_app = 'ORA';
 
-        --SET CQT, KY_CHOT
+        --SET MA_CQT, SHORT_NAME, KY_CHOT
+        pck_glb_variables.set_ma_cqt (p_ma_cqt);
         pck_glb_variables.set_short_name (p_short_name);
         pck_glb_variables.set_ky_chot (p_ky_chot);
 
@@ -206,18 +216,20 @@ IS
     IS
         sqltext     VARCHAR2 (32767);
         p_ky_chot   DATE;
+        p_ma_cqt    VARCHAR2(5);
     BEGIN
         --get ky_chot
-        SELECT   ky_chot
-          INTO   p_ky_chot
+        SELECT   ky_chot, tax_code
+          INTO   p_ky_chot, p_ma_cqt
           FROM   tb_lst_taxo
          WHERE   short_name = p_short_name;
 
         --Clear data
         DELETE   tb_data_error
-         WHERE   short_name = p_short_name AND table_name = 'TB_CON_KT';
+         WHERE   short_name = p_short_name AND table_name = 'TB_CON_KT' AND check_app = 'ORA';
 
-        --SET CQT, KY_CHOT
+        --SET MA_CQT, SHORT_NAME, KY_CHOT
+        pck_glb_variables.set_ma_cqt (p_ma_cqt);
         pck_glb_variables.set_short_name (p_short_name);
         pck_glb_variables.set_ky_chot (p_ky_chot);
 
@@ -241,19 +253,21 @@ IS
     IS
         sqltext     VARCHAR2 (32767);
         p_ky_chot   DATE;
+        p_ma_cqt    VARCHAR2(5);
     BEGIN
         --get ky_chot
-        SELECT   ky_chot
-          INTO   p_ky_chot
+        SELECT   ky_chot, tax_code
+          INTO   p_ky_chot, p_ma_cqt
           FROM   tb_lst_taxo
          WHERE   short_name = p_short_name;
 
         --Clear data
         DELETE   tb_data_error
          WHERE   short_name = p_short_name
-                 AND table_name IN ('TB_01_THKH_HDR', 'TB_01_THKH_DTL');
+                 AND table_name IN ('TB_01_THKH_HDR', 'TB_01_THKH_DTL') AND check_app = 'ORA';
 
-        --SET CQT, KY_CHOT
+        --SET MA_CQT, SHORT_NAME, KY_CHOT
+        pck_glb_variables.set_ma_cqt (p_ma_cqt);
         pck_glb_variables.set_short_name (p_short_name);
         pck_glb_variables.set_ky_chot (p_ky_chot);
 
@@ -288,19 +302,21 @@ IS
     IS
         sqltext     VARCHAR2 (32767);
         p_ky_chot   DATE;
+        p_ma_cqt    VARCHAR2(5);
     BEGIN
         --get ky_chot
-        SELECT   ky_chot
-          INTO   p_ky_chot
+        SELECT   ky_chot, tax_code
+          INTO   p_ky_chot, p_ma_cqt
           FROM   tb_lst_taxo
          WHERE   short_name = p_short_name;
 
         --Clear data
         DELETE   tb_data_error
          WHERE   short_name = p_short_name
-                 AND table_name IN ('TB_TK_SDDPNN', 'TB_TK_SDDPNN_01_NNT');
+                 AND table_name IN ('TB_TK_SDDPNN', 'TB_TK_SDDPNN_01_NNT') AND check_app = 'ORA';
 
-        --SET CQT, KY_CHOT
+        --SET MA_CQT, SHORT_NAME, KY_CHOT
+        pck_glb_variables.set_ma_cqt (p_ma_cqt);
         pck_glb_variables.set_short_name (p_short_name);
         pck_glb_variables.set_ky_chot (p_ky_chot);
 
@@ -333,18 +349,20 @@ IS
     IS
         sqltext     VARCHAR2 (32767);
         p_ky_chot   DATE;
+        p_ma_cqt    VARCHAR2(5);
     BEGIN
         --Clear data
         DELETE   tb_data_error
-         WHERE   short_name = p_short_name AND table_name = 'TB_TINH_PHAT';
+         WHERE   short_name = p_short_name AND table_name = 'TB_TINH_PHAT' AND check_app = 'ORA';
 
-        --Get ky_chot
-        SELECT   ky_chot
-          INTO   p_ky_chot
+        --get ky_chot
+        SELECT   ky_chot, tax_code
+          INTO   p_ky_chot, p_ma_cqt
           FROM   tb_lst_taxo
          WHERE   short_name = p_short_name;
 
-        --SET CQT, KY_CHOT
+        --SET MA_CQT, SHORT_NAME, KY_CHOT
+        pck_glb_variables.set_ma_cqt (p_ma_cqt);
         pck_glb_variables.set_short_name (p_short_name);
         pck_glb_variables.set_ky_chot (p_ky_chot);
 
@@ -359,3 +377,8 @@ IS
             pck_ult.prc_finnal ('pck_check_data_tms.prc_check_tb_tinh_phat');
     END;
 END;
+/
+
+
+-- End of DDL Script for Package Body TEST.PCK_CHECK_DATA_TMS
+

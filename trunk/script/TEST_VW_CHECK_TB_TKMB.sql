@@ -1,5 +1,5 @@
 -- Start of DDL Script for View TEST.VW_CHECK_TB_TKMB
--- Generated 20-Sep-2013 16:41:40 from TEST@DCNC
+-- Generated 03/10/2013 2:29:52 PM from TEST@DCNC
 
 CREATE OR REPLACE VIEW vw_check_tb_tkmb (
    short_name,
@@ -7,14 +7,18 @@ CREATE OR REPLACE VIEW vw_check_tb_tkmb (
    table_name,
    err_id,
    field_name,
-   update_no )
+   update_no,
+   ma_cqt,
+   check_app )
 AS
 SELECT   short_name,
          ROWID rid,
          'TB_TKMB_HDR' table_name,
          '011' err_id,
          'kytt_tu_ngay' field_name,
-         0 update_no
+         0 update_no,
+         ma_cqt,
+         'ORA' check_app
   FROM   tb_tkmb_hdr
  WHERE   short_name = pck_glb_variables.get_short_name
          AND TO_DATE (kytt_tu_ngay, 'DD/MM/YYYY') <>
@@ -25,7 +29,9 @@ SELECT   short_name,
          'TB_TKMB_HDR' table_name,
          '011' err_id,
          'kytt_den_ngay' field_name,
-         0 update_no
+         0 update_no,
+         ma_cqt,
+         'ORA' check_app
   FROM   tb_tkmb_hdr
  WHERE   short_name = pck_glb_variables.get_short_name
          AND TO_DATE (kytt_den_ngay, 'DD/MM/YYYY') <>
@@ -37,7 +43,9 @@ SELECT   short_name,
          'TB_TKMB_HDR' table_name,
          '012' err_id,
          'ngay_htoan' field_name,
-         0 update_no
+         0 update_no,
+         ma_cqt,
+         'ORA' check_app
   FROM   tb_tkmb_hdr
  WHERE   short_name = pck_glb_variables.get_short_name
          AND TO_DATE (ngay_htoan, 'DD/MM/YYYY') <>
@@ -49,7 +57,9 @@ SELECT   short_name,
          'TB_TKMB_HDR' table_name,
          '012' err_id,
          'ngay_nop_tk' field_name,
-         0 update_no
+         0 update_no,
+         ma_cqt,
+         'ORA' check_app
   FROM   tb_tkmb_hdr
  WHERE   short_name = pck_glb_variables.get_short_name
          AND TRUNC (TO_DATE (ngay_nop_tk, 'DD/MM/YYYY'), 'YEAR') <>
@@ -61,7 +71,9 @@ SELECT   short_name,
          'TB_TKMB_HDR' table_name,
          '012' err_id,
          'han_nop' field_name,
-         0 update_no
+         0 update_no,
+         ma_cqt,
+         'ORA' check_app
   FROM   tb_tkmb_hdr
  WHERE   short_name = pck_glb_variables.get_short_name
          AND TRUNC (TO_DATE (ngay_nop_tk, 'DD/MM/YYYY'), 'YEAR') <>
@@ -73,7 +85,9 @@ SELECT   short_name,
          'TB_TKMB_HDR or TB_TKMB_DTL' table_name,
          '012' err_id,
          'BMB_NNT BMB_CQT' field_name,
-         0 update_no
+         0 update_no,
+         ma_cqt,
+         'ORA' check_app
   FROM   tb_tkmb_hdr a
  WHERE   a.short_name = pck_glb_variables.get_short_name
          AND (a.bmb_cqt IS NOT NULL
@@ -90,7 +104,9 @@ SELECT   short_name,
          'TB_TKMB_DTL' table_name,
          '012' err_id,
          'BMB_NNT BMB_CQT' field_name,
-         0 update_no
+         0 update_no,
+         ma_cqt,
+         'ORA' check_app
   FROM   tb_tkmb_hdr a, tb_tkmb_dtl b
  WHERE       a.id = b.hdr_id
          AND a.short_name = pck_glb_variables.get_short_name
@@ -109,7 +125,9 @@ SELECT   short_name,
          'TB_TKMB_HDR' table_name,
          '014' err_id,
          'VON_DK_NNT VON_DK_CQT ...' field_name,
-         0 update_no
+         0 update_no,
+         ma_cqt,
+         'ORA' check_app
   FROM   tb_tkmb_hdr a
  WHERE   a.short_name = pck_glb_variables.get_short_name
          AND (   a.thue_pn_nnt < 0
@@ -126,7 +144,9 @@ SELECT   short_name,
          'TB_TKMB_DTL' table_name,
          '014' err_id,
          'VON_DK_NNT VON_DK_CQT ...' field_name,
-         0 update_no
+         0 update_no,
+         ma_cqt,
+         'ORA' check_app
   FROM   tb_tkmb_hdr a, tb_tkmb_dtl b
  WHERE   a.id = b.hdr_id AND a.short_name = pck_glb_variables.get_short_name
          AND (   b.thue_pn_nnt < 0
@@ -141,7 +161,9 @@ SELECT   short_name,
          'TB_TKMB_HDR' table_name,
          '021' err_id,
          '' field_name,
-         0 update_no
+         0 update_no,
+         ma_cqt,
+         'ORA' check_app
   FROM   tb_tkmb_hdr a
  WHERE  a.short_name = pck_glb_variables.get_short_name
     and a.tkh_id not in (select tkh_id from tb_tkmb_dtl)

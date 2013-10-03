@@ -1,5 +1,5 @@
 -- Start of DDL Script for View TEST.VW_CHECK_TB_PS
--- Generated 11/09/2013 8:16:25 AM from TEST@DCNC
+-- Generated 03/10/2013 2:29:07 PM from TEST@DCNC
 
 CREATE OR REPLACE VIEW vw_check_tb_ps (
    short_name,
@@ -7,7 +7,9 @@ CREATE OR REPLACE VIEW vw_check_tb_ps (
    table_name,
    err_id,
    field_name,
-   update_no )
+   update_no,
+   ma_cqt,
+   check_app )
 AS
 (--Check ma_tk ton tai trong danh muc
 SELECT   short_name,
@@ -15,7 +17,9 @@ SELECT   short_name,
          'TB_PS' table_name,
          '010' err_id,
          'ma_tkhai' field_name,
-         0 update_no
+         0 update_no,
+          ma_cqt,
+          'ORA' check_app
   FROM   tb_ps
  WHERE   short_name = pck_glb_variables.get_short_name
          AND ma_tkhai NOT IN (SELECT   ma
@@ -28,7 +32,9 @@ SELECT   short_name,
          'TB_PS' table_name,
          '012' err_id,
          'kykk_tu_ngay kykk_den_ngay' field_name,
-         0 update_no
+         0 update_no,
+          ma_cqt,
+          'ORA' check_app
   FROM   tb_ps
  WHERE   short_name = pck_glb_variables.get_short_name
          AND ( TRUNC (TO_DATE (kykk_tu_ngay, 'DD/MM/YYYY'), 'YYYY') <>
@@ -47,7 +53,9 @@ SELECT   short_name,
          'TB_PS' table_name,
          '007' err_id,
          'tkhoan' field_name,
-         0 update_no
+         0 update_no,
+          ma_cqt,
+          'ORA' check_app
   FROM   tb_ps
  WHERE   short_name = pck_glb_variables.get_short_name AND tkhoan <> '741'
 --Check ngay_htoan
@@ -57,7 +65,9 @@ SELECT   short_name,
          'TB_PS' table_name,
          '012' err_id,
          'tkhoan' field_name,
-         0 update_no
+         0 update_no,
+          ma_cqt,
+          'ORA' check_app
   FROM   tb_ps
  WHERE   short_name = pck_glb_variables.get_short_name
          AND TO_DATE (ngay_htoan, 'DD/MM/YYYY') <>
@@ -69,7 +79,9 @@ SELECT   short_name,
          'TB_PS' table_name,
          '005' err_id,
          'ma_chuong' field_name,
-         0 update_no
+         0 update_no,
+          ma_cqt,
+          'ORA' check_app
   FROM   tb_ps
  WHERE   short_name = pck_glb_variables.get_short_name
          AND ma_chuong NOT IN (SELECT ma_chuong FROM tb_dmuc_capchuong)
@@ -80,7 +92,9 @@ SELECT   short_name,
          'TB_PS' table_name,
          '005' err_id,
          'ma_khoan' field_name,
-         0 update_no
+         0 update_no,
+          ma_cqt,
+          'ORA' check_app
   FROM   tb_ps
  WHERE   short_name = pck_glb_variables.get_short_name AND ma_khoan <> '000'
 --Check so_tien khong am
@@ -90,7 +104,9 @@ SELECT   short_name,
          'TB_PS' table_name,
          '014' err_id,
          'so_tien' field_name,
-         0 update_no
+         0 update_no,
+          ma_cqt,
+          'ORA' check_app
   FROM   tb_ps
  WHERE   short_name = pck_glb_variables.get_short_name AND so_tien < 0
 --Check tieu muc hoach toan phai dung voi loai to khai
@@ -100,7 +116,9 @@ SELECT   short_name,
          'TB_PS' table_name,
          '007' err_id,
          'ma_tmuc, ma_tkhai' field_name,
-         0 update_no
+         0 update_no,
+          ma_cqt,
+          'ORA' check_app
   FROM   tb_ps
  WHERE   short_name = pck_glb_variables.get_short_name
     OR ( ma_tkhai = '11' and ma_tmuc not in ( SELECT   tmuc_ps  FROM   tb_dmuc_tkhai a WHERE   ma = '11' AND tmuc_ps IS NOT NULL))
