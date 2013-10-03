@@ -1,5 +1,5 @@
 -- Start of DDL Script for Package Body TEST.PCK_GLB_VARIABLES
--- Generated 23/09/2013 10:25:18 AM from TEST@DCNC
+-- Generated 03/10/2013 11:11:21 AM from TEST@DCNC
 
 CREATE OR REPLACE 
 PACKAGE BODY pck_glb_variables
@@ -10,6 +10,7 @@ PACKAGE BODY pck_glb_variables
  */
 IS
     gn$short_name   VARCHAR2 (10);
+    gn$ma_cqt       VARCHAR2 (5);
     gn$ky_chot      VARCHAR2 (15);
 
     /**
@@ -38,6 +39,31 @@ IS
     END;
 
     /**
+     * Thuc hien set ma co quan thue
+     *@author Administrator
+     *@date 19/06/2013
+     *@param in_short_name
+     */
+    PROCEDURE set_ma_cqt (in_ma_cqt VARCHAR2)
+    IS
+    BEGIN
+        gn$ma_cqt := in_ma_cqt;
+    END;
+
+    /**
+     * Thuc hien get ma co quan thue
+     *@author Administrator
+     *@date 19/06/2013
+     *@return short_name
+     */
+    FUNCTION get_ma_cqt
+        RETURN VARCHAR2
+    IS
+    BEGIN
+        RETURN gn$ma_cqt;
+    END;
+
+    /**
      * Thuc hien set ky_chot
      *@author Administrator
      *@date 19/06/2013
@@ -62,3 +88,8 @@ IS
         RETURN gn$ky_chot;
     END;
 END;
+/
+
+
+-- End of DDL Script for Package Body TEST.PCK_GLB_VARIABLES
+

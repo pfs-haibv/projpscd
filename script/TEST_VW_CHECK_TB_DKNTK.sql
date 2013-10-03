@@ -1,5 +1,5 @@
 -- Start of DDL Script for View TEST.VW_CHECK_TB_DKNTK
--- Generated 11/09/2013 8:16:48 AM from TEST@DCNC
+-- Generated 03/10/2013 2:28:42 PM from TEST@DCNC
 
 CREATE OR REPLACE VIEW vw_check_tb_dkntk (
    short_name,
@@ -7,7 +7,9 @@ CREATE OR REPLACE VIEW vw_check_tb_dkntk (
    table_name,
    err_id,
    field_name,
-   update_no )
+   update_no,
+   ma_cqt,
+   check_app )
 AS
 (--Check loai tk ton tai
  SELECT   short_name,
@@ -15,7 +17,9 @@ AS
           'TB_DKNTK' table_name,
           '010' err_id,
           'MA_TKHAI' field_name,
-          0 update_no
+          0 update_no,
+          ma_cqt,
+          'ORA' check_app
    FROM   tb_dkntk
   WHERE   short_name = pck_glb_variables.get_short_name
           AND ma_tkhai NOT IN
@@ -30,7 +34,9 @@ AS
           'TB_DKNTK' table_name,
           '011' err_id,
           'ky_bd_hthong_cu' field_name,
-          0 update_no
+          0 update_no,
+          ma_cqt,
+          'ORA' check_app
    FROM   tb_dkntk
   WHERE   short_name = pck_glb_variables.get_short_name
           AND substr(ky_bd_hthong_cu, -4)  <>

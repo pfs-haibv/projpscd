@@ -1034,9 +1034,7 @@ namespace DC.Utl
              * Content: Điều kiện kết xuất phụ lục
              * */
             int iRow = 0;
-            if (p_sheet.Name.Equals("Phuluc01")
-                || p_sheet.Name.Equals("Phuluc02")
-                || p_sheet.Name.Equals("Phuluc03"))
+            if (p_sheet.Name.Substring(0,6).Equals("Phuluc"))                
                 iRow = 3;
             /*
              * Modify by ManhTV3 on 1/5/2012

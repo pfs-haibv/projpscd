@@ -727,7 +727,8 @@ namespace DC.Lib
                                        )
         {
             using (CLS_DBASE.ORA _ora = new CLS_DBASE.ORA(GlobalVar.gl_connTKTQ))
-            {   
+            {
+                #region HEADER
                 string _query_ps = "SELECT stt, tax_model, ten_tkhai, sotien FROM vw_bc_ps";
                 string _query_no = "SELECT stt, tax_model, tmt_ma_tmuc, so_no, so_pnop FROM vw_bc_no";
                 string _query_tcno = "SELECT STT, TAX_MODEL, TEN_TCNO, SO_NO FROM VW_BC_TCNO";
@@ -780,7 +781,9 @@ namespace DC.Lib
                                                         ref _objNULL,   //DocumentType 
                                                         ref _objFALSE   //Visible
                                                         );
-                                
+                #endregion
+
+                #region IN DU LIEU
                 #region In bảng phát sinh
                 _k = 4;
                 _dt = _ora.TransExecute_DataTable(_query_ps);
@@ -954,8 +957,7 @@ namespace DC.Lib
                 if (_dt.Rows.Count == 0) _arr_delTable.Add(_k);
                 _dt.Reset();
 
-                #endregion
-
+                 #endregion
                 // Xóa table không cần thiết của _Document
                 foreach (int i in _arr_delTable)
                 {
@@ -963,6 +965,9 @@ namespace DC.Lib
                     _z++;
                 }
 
+                #endregion
+
+                #region END
                 // Tính số trang của biên bản
                 Microsoft.Office.Interop.Word.WdStatistic _stat = Microsoft.Office.Interop.Word.WdStatistic.wdStatisticPages;
                 int _countPage = _doc.ComputeStatistics(_stat, ref _objNULL);
@@ -1035,6 +1040,7 @@ namespace DC.Lib
                 // Đóng phiên làm việc Database
                 _ora.TransCommit();
             }
+            #endregion
         }
 
         // Gen biên bản đối chiếu dữ liệu lần 2
@@ -1045,6 +1051,7 @@ namespace DC.Lib
         {
             using (CLS_DBASE.ORA _ora = new CLS_DBASE.ORA(GlobalVar.gl_connTKTQ))
             {
+                #region HEADER
                 string _query_ps = "SELECT stt, tax_model, ten_tkhai, sotien FROM vw_bc_ps";
                 string _query_no = "SELECT stt, tax_model, tmt_ma_tmuc, so_no, so_pnop FROM vw_bc_no";
                 string _query_tcno = "SELECT STT, TAX_MODEL, TEN_TCNO, SO_NO FROM VW_BC_TCNO";
@@ -1061,9 +1068,25 @@ namespace DC.Lib
                 string _query_02pnn = "SELECT stt, TAX_MODEL, ma_tmuc, SL, SOTIEN FROM VW_BC_02PNN";
                 string _query_02pnn_1 = "SELECT stt, TAX_MODEL, ma_tmuc FROM VW_BC_02PNN";
 
-                string _query_pluc01 = "SELECT a.tax_model, a.ma_tkhai, a.tin, a.KY_PSINH_TU, a.KY_PSINH_DEN, a.so_tien, a.err_name FROM vw_cd_ps a";
-                string _query_pluc02 = "SELECT a.tax_model, a.tmt_ma_tmuc, a.tin, a.kykk_tu_ngay, a.kykk_den_ngay, a.han_nop, a.so_duong, a.so_am, a.err_name FROM vw_cd_no a";
-
+                string _query_pluc01 = "SELECT a.tax_model, a.ma_tkhai, a.tin, a.KY_PSINH_TU, " +
+                        "a.KY_PSINH_DEN, a.so_tien, a.err_name FROM vw_cd_ps a";
+                string _query_pluc02 = "SELECT a.tax_model, a.tmt_ma_tmuc, a.tin, a.kykk_tu_ngay, " +
+                        "a.kykk_den_ngay, a.han_nop, a.so_duong, a.so_am, a.err_name FROM vw_cd_no a";
+                string _query_pluc03 = "SELECT a.tax_model, a.tmt_ma_tmuc, a.tin, a.kykk_tu_ngay, " +
+                        "a.kykk_den_ngay, a.han_nop, a.ten_tc, a.so_tien, a.err_name FROM vw_cd_tc_no a";
+                string _query_pluc04 = "SELECT a.tax_model, a.tin, a.han_nop, a.so_tien, a.err_name FROM vw_cd_tphat a";
+                string _query_pluc05 = "SELECT a.tax_model, a.tin, a.kytt_tu_ngay, " +
+                        "a.kytt_den_ngay, a.doanh_thu, a.gt_tinh_thue, a.thue_pn, a.err_name FROM vw_cd_cctt a";
+                string _query_pluc06 = "SELECT a.tax_model, a.tin, a.ma_tkhai, a.err_name FROM vw_cd_dkntk a";
+                string _query_pluc07 = "SELECT a.tax_model, a.tin, a.kykk_tu_ngay, " +
+                        "a.kykk_den_ngay, a.so_tien, a.err_name FROM vw_cd_ckt a";
+                string _query_pluc08 = "SELECT a.tax_model, bmb_nnt_tms, a.tin, a.kytt_tu_ngay, " +
+                        "a.kytt_den_ngay, a.han_nop, a.so_tien, a.err_name FROM vw_cd_tkmb a";
+                string _query_pluc09 = "SELECT a.tax_model, a.ma_tmuc, a.tin, a.kytt_tu_ngay, a.kytt_den_ngay," +
+                        "a.ma_tkhai, a.ngay_nop_tk, a.sthue_pnop, a.err_name FROM vw_cd_01pnn a";
+                string _query_pluc10 = "SELECT a.tax_model, a.ma_tmuc, a.tin, a.kytt_tu_ngay, a.kytt_den_ngay," +
+                        "a.ma_tkhai, a.ngay_nop_tk, a.sthue_pnop, a.err_name FROM vw_cd_02pnn a";
+                
                 const int _row_start_1 = 4;
 
                 Object _objNULL = System.Reflection.Missing.Value;
@@ -1100,7 +1123,9 @@ namespace DC.Lib
                                                         ref _objNULL,   //DocumentType 
                                                         ref _objFALSE   //Visible
                                                         );
+                #endregion
 
+                #region IN DU LIEU CD
                 #region In bảng phát sinh
                 _k = 4;
                 _dt = _ora.TransExecute_DataTable(_query_ps);
@@ -1275,12 +1300,14 @@ namespace DC.Lib
                 _dt.Reset();
 
                 #endregion
-                                
+                #endregion
+
+                #region IN PHU LUC
                 // Tạo bảng phụ lục 01
                 #region ADD ROW PHU_LUC01                
                 _k = _k + 2;
                 _dt = _ora.TransExecute_DataTable(_query_pluc01);                
-                Prc_fill_tbBienBan(_k, _doc, _dt, 4);
+                Prc_fill_tbBienBan(_k, _doc, _dt, 2);
 
                 // Add các index của table cần xóa
                 if (_dt.Rows.Count == 0)
@@ -1307,6 +1334,137 @@ namespace DC.Lib
                 _dt.Reset();
                 #endregion
 
+                // Tạo bảng phụ lục 03
+                #region ADD ROW PHU_LUC03
+                _k = _k + 2;
+                _dt = _ora.TransExecute_DataTable(_query_pluc03);
+
+                Prc_fill_tbBienBan(_k, _doc, _dt, 2);
+
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0)
+                {
+                    _arr_delTable.Add(_k - 1);
+                    _arr_delTable.Add(_k);
+                }
+                _dt.Reset();
+                #endregion
+
+                // Tạo bảng phụ lục 04
+                #region ADD ROW PHU_LUC04
+                _k = _k + 2;
+                _dt = _ora.TransExecute_DataTable(_query_pluc04);
+
+                Prc_fill_tbBienBan(_k, _doc, _dt, 2);
+
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0)
+                {
+                    _arr_delTable.Add(_k - 1);
+                    _arr_delTable.Add(_k);
+                }
+                _dt.Reset();
+                #endregion
+
+                // Tạo bảng phụ lục 05
+                #region ADD ROW PHU_LUC05
+                _k = _k + 2;
+                _dt = _ora.TransExecute_DataTable(_query_pluc05);
+
+                Prc_fill_tbBienBan(_k, _doc, _dt, 2);
+
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0)
+                {
+                    _arr_delTable.Add(_k - 1);
+                    _arr_delTable.Add(_k);
+                }
+                _dt.Reset();
+                #endregion
+
+                // Tạo bảng phụ lục 06
+                #region ADD ROW PHU_LUC06
+                _k = _k + 2;
+                _dt = _ora.TransExecute_DataTable(_query_pluc06);
+
+                Prc_fill_tbBienBan(_k, _doc, _dt, 2);
+
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0)
+                {
+                    _arr_delTable.Add(_k - 1);
+                    _arr_delTable.Add(_k);
+                }
+                _dt.Reset();
+                #endregion
+
+                // Tạo bảng phụ lục 07
+                #region ADD ROW PHU_LUC07
+                _k = _k + 2;
+                _dt = _ora.TransExecute_DataTable(_query_pluc07);
+
+                Prc_fill_tbBienBan(_k, _doc, _dt, 2);
+
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0)
+                {
+                    _arr_delTable.Add(_k - 1);
+                    _arr_delTable.Add(_k);
+                }
+                _dt.Reset();
+                #endregion
+
+                // Tạo bảng phụ lục 08
+                #region ADD ROW PHU_LUC08
+                _k = _k + 2;
+                _dt = _ora.TransExecute_DataTable(_query_pluc08);
+
+                Prc_fill_tbBienBan(_k, _doc, _dt, 2);
+
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0)
+                {
+                    _arr_delTable.Add(_k - 1);
+                    _arr_delTable.Add(_k);
+                }
+                _dt.Reset();
+                #endregion
+
+                // Tạo bảng phụ lục 09
+                #region ADD ROW PHU_LUC09
+                _k = _k + 2;
+                _dt = _ora.TransExecute_DataTable(_query_pluc09);
+
+                Prc_fill_tbBienBan(_k, _doc, _dt, 2);
+
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0)
+                {
+                    _arr_delTable.Add(_k - 1);
+                    _arr_delTable.Add(_k);
+                }
+                _dt.Reset();
+                #endregion
+
+                // Tạo bảng phụ lục 10
+                #region ADD ROW PHU_LUC10
+                _k = _k + 2;
+                _dt = _ora.TransExecute_DataTable(_query_pluc10);
+
+                Prc_fill_tbBienBan(_k, _doc, _dt, 2);
+
+                // Add các index của table cần xóa
+                if (_dt.Rows.Count == 0)
+                {
+                    _arr_delTable.Add(_k - 1);
+                    _arr_delTable.Add(_k);
+                }
+                _dt.Reset();
+                #endregion
+
+                #endregion
+
+                #region END
                 // Xóa table không cần thiết của _Document
                 foreach (int i in _arr_delTable)
                 {
@@ -1384,6 +1542,7 @@ namespace DC.Lib
 
                 // Đóng phiên làm việc Database
                 _ora.TransCommit();
+                #endregion
             }
         }
 
@@ -1734,6 +1893,12 @@ namespace DC.Lib
                     if (_dt.Rows.Count > 0) CLS_EXCEL.Prc_Add_Sheets(workBook, "DuLieu_TKH", _dt);
                     _dt.Clear();
 
+                    // Kết xuất chi tiết tờ khai khoán
+                    _sql = "SELECT * FROM VW_CT_CKT";
+                    _dt = _ora.TransExecute_DataTable(_sql);
+                    if (_dt.Rows.Count > 0) CLS_EXCEL.Prc_Add_Sheets(workBook, "DuLieu_CKT", _dt);
+                    _dt.Clear();
+
                     // Kết xuất đkntk
                     _sql = "SELECT * FROM VW_CT_DKNTK";
                     _dt = _ora.TransExecute_DataTable(_sql);
@@ -1780,10 +1945,38 @@ namespace DC.Lib
         //Prc_ChuyenDoiLoi
         public static void Prc_ChuyenDoiLoi(string p_sourcePath,
                                             string p_destinPath,
-                                            string p_short_name,
-                                            string p_query,
-                                            string p_sheet_name)
+                                            string p_short_name)
         {
+            string _query_pluc01 = "SELECT a.tax_model, a.ma_tkhai, a.tin, a.KY_PSINH_TU, " +
+                        "a.KY_PSINH_DEN, a.so_tien, a.err_name FROM vw_cd_ps a";
+            string _query_pluc02 = "SELECT a.tax_model, a.tmt_ma_tmuc, a.tin, a.kykk_tu_ngay, " +
+                    "a.kykk_den_ngay, a.han_nop, a.so_duong, a.so_am, a.err_name FROM vw_cd_no a";
+            string _query_pluc03 = "SELECT a.tax_model, a.tmt_ma_tmuc, a.tin, a.kykk_tu_ngay, " +
+                    "a.kykk_den_ngay, a.han_nop, a.ten_tc, a.so_tien, a.err_name FROM vw_cd_tc_no a";
+            string _query_pluc04 = "SELECT a.tax_model, a.tin, a.han_nop, a.so_tien, a.err_name FROM vw_cd_tphat a";
+            string _query_pluc05 = "SELECT a.tax_model, a.tin, a.kytt_tu_ngay, " +
+                    "a.kytt_den_ngay, a.doanh_thu, a.gt_tinh_thue, a.thue_pn, a.err_name FROM vw_cd_cctt a";
+            string _query_pluc06 = "SELECT a.tax_model, a.tin, a.ma_tkhai, a.err_name FROM vw_cd_dkntk a";
+            string _query_pluc07 = "SELECT a.tax_model, a.tin, a.kykk_tu_ngay, " +
+                    "a.kykk_den_ngay, a.so_tien, a.err_name FROM vw_cd_ckt a";
+            string _query_pluc08 = "SELECT a.tax_model, bmb_nnt_tms, a.tin, a.kytt_tu_ngay, " +
+                    "a.kytt_den_ngay, a.han_nop, a.so_tien, a.err_name FROM vw_cd_tkmb a";
+            string _query_pluc09 = "SELECT a.tax_model, a.ma_tmuc, a.tin, a.kytt_tu_ngay, a.kytt_den_ngay," +
+                    "a.ma_tkhai, a.ngay_nop_tk, a.sthue_pnop, a.err_name FROM vw_cd_01pnn a";
+            string _query_pluc10 = "SELECT a.tax_model, a.ma_tmuc, a.tin, a.kytt_tu_ngay, a.kytt_den_ngay," +
+                    "a.ma_tkhai, a.ngay_nop_tk, a.sthue_pnop, a.err_name FROM vw_cd_02pnn a";
+
+            string _sheet_name_pl01 = "Phuluc01";
+            string _sheet_name_pl02 = "Phuluc02";
+            string _sheet_name_pl03 = "Phuluc03";
+            string _sheet_name_pl04 = "Phuluc04";
+            string _sheet_name_pl05 = "Phuluc05";
+            string _sheet_name_pl06 = "Phuluc06";
+            string _sheet_name_pl07 = "Phuluc07";
+            string _sheet_name_pl08 = "Phuluc08";
+            string _sheet_name_pl09 = "Phuluc09";
+            string _sheet_name_pl10 = "Phuluc10";
+
             Microsoft.Office.Interop.Excel.Application _excelApp;
             _excelApp = new Microsoft.Office.Interop.Excel.Application();
 
@@ -1808,23 +2001,91 @@ namespace DC.Lib
             using (CLS_DBASE.ORA _ora = new CLS_DBASE.ORA(GlobalVar.gl_connTKTQ))
             {
                 System.Data.DataTable _dt = null;
-
+                int _kt1 = 0; 
                 try
                 {
                     _ora.TransStart();
                     _ora.TransExecute("call PCK_MOI_TRUONG.Prc_Set_glView('" + p_short_name + "')");
-
+                    
                     // Kết xuất phụ lục
-                    _dt = _ora.TransExecute_DataTable(p_query);
+                    _dt = _ora.TransExecute_DataTable(_query_pluc01);
                     if (_dt.Rows.Count > 0)
                     {
-                        CLS_EXCEL.Prc_Add_Sheets(workBook, p_sheet_name, _dt);
+                        _kt1 = 1;
+                        CLS_EXCEL.Prc_Add_Sheets(workBook, _sheet_name_pl01, _dt);                        
+                    }
+
+                    _dt = _ora.TransExecute_DataTable(_query_pluc02);
+                    if (_dt.Rows.Count > 0)
+                    {
+                        _kt1 = 1;
+                        CLS_EXCEL.Prc_Add_Sheets(workBook, _sheet_name_pl02, _dt);
+                    }
+
+                    _dt = _ora.TransExecute_DataTable(_query_pluc03);
+                    if (_dt.Rows.Count > 0)
+                    {
+                        _kt1 = 1;
+                        CLS_EXCEL.Prc_Add_Sheets(workBook, _sheet_name_pl03, _dt);
+                    }
+
+                    _dt = _ora.TransExecute_DataTable(_query_pluc04);
+                    if (_dt.Rows.Count > 0)
+                    {
+                        _kt1 = 1;
+                        CLS_EXCEL.Prc_Add_Sheets(workBook, _sheet_name_pl04, _dt);
+                    }
+
+                    _dt = _ora.TransExecute_DataTable(_query_pluc05);
+                    if (_dt.Rows.Count > 0)
+                    {
+                        _kt1 = 1;
+                        CLS_EXCEL.Prc_Add_Sheets(workBook, _sheet_name_pl05, _dt);
+                    }
+
+                    _dt = _ora.TransExecute_DataTable(_query_pluc06);
+                    if (_dt.Rows.Count > 0)
+                    {
+                        _kt1 = 1;
+                        CLS_EXCEL.Prc_Add_Sheets(workBook, _sheet_name_pl06, _dt);
+                    }
+
+                    _dt = _ora.TransExecute_DataTable(_query_pluc07);
+                    if (_dt.Rows.Count > 0)
+                    {
+                        _kt1 = 1;
+                        CLS_EXCEL.Prc_Add_Sheets(workBook, _sheet_name_pl07, _dt);
+                    }
+
+                    _dt = _ora.TransExecute_DataTable(_query_pluc08);
+                    if (_dt.Rows.Count > 0)
+                    {
+                        _kt1 = 1;
+                        CLS_EXCEL.Prc_Add_Sheets(workBook, _sheet_name_pl08, _dt);
+                    }
+
+                    _dt = _ora.TransExecute_DataTable(_query_pluc09);
+                    if (_dt.Rows.Count > 0)
+                    {
+                        _kt1 = 1;
+                        CLS_EXCEL.Prc_Add_Sheets(workBook, _sheet_name_pl09, _dt);
+                    }
+
+                    _dt = _ora.TransExecute_DataTable(_query_pluc10);
+                    if (_dt.Rows.Count > 0)
+                    {
+                        _kt1 = 1;
+                        CLS_EXCEL.Prc_Add_Sheets(workBook, _sheet_name_pl10, _dt);
+                    }
+
+                    if (_kt1 == 1)
+                    {
                         workBook.SaveAs(p_destinPath,
                                             Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookNormal,
                                             Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                                             Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive,
                                             Type.Missing, Type.Missing, Type.Missing,
-                                            Type.Missing, Type.Missing);                    
+                                            Type.Missing, Type.Missing);
                     }
 
                     _dt.Clear();

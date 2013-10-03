@@ -1,5 +1,5 @@
 -- Start of DDL Script for View TEST.VW_CHECK_TB_NO
--- Generated 11/09/2013 8:16:37 AM from TEST@DCNC
+-- Generated 03/10/2013 2:28:54 PM from TEST@DCNC
 
 CREATE OR REPLACE VIEW vw_check_tb_no (
    short_name,
@@ -7,7 +7,9 @@ CREATE OR REPLACE VIEW vw_check_tb_no (
    table_name,
    err_id,
    field_name,
-   update_no )
+   update_no,
+   ma_cqt,
+   check_app )
 AS
 (--Check han_Nop khong null
 SELECT   short_name,
@@ -15,7 +17,9 @@ SELECT   short_name,
          'TB_NO' table_name,
          '013' err_id,
          'HAN_NOP' field_name,
-         0 update_no
+         0 update_no,
+          ma_cqt,
+          'ORA' check_app
   FROM   tb_no
  WHERE  short_name = pck_glb_variables.get_short_name
     and han_nop IS NULL
@@ -26,7 +30,9 @@ SELECT   short_name,
          'TB_NO' table_name,
          '013' err_id,
          'NGUON_GOC' field_name,
-         0 update_no
+         0 update_no,
+          ma_cqt,
+          'ORA' check_app
   FROM   tb_no
  WHERE   short_name = pck_glb_variables.get_short_name
      and nguon_goc IS NULL
@@ -37,7 +43,9 @@ SELECT   short_name,
          'TB_NO' table_name,
          '008' err_id,
          'TKHOAN' field_name,
-         0 update_no
+         0 update_no,
+          ma_cqt,
+          'ORA' check_app
   FROM   tb_no
  WHERE  short_name = pck_glb_variables.get_short_name
     and tkhoan NOT IN ('TK_NGAN_SACH', 'TK_TH_HOAN', 'TK_STC')
@@ -48,7 +56,9 @@ SELECT   short_name,
          'TB_NO' table_name,
          '005' err_id,
          'ma_chuong' field_name,
-         0 update_no
+         0 update_no,
+          ma_cqt,
+          'ORA' check_app
   FROM   tb_no
  WHERE   short_name = pck_glb_variables.get_short_name
     and ma_chuong NOT IN (SELECT   ma_chuong FROM tb_dmuc_capchuong)
@@ -59,7 +69,9 @@ SELECT   short_name,
          'TB_NO' table_name,
          '008' err_id,
          'MA_KHOAN' field_name,
-         0 update_no
+         0 update_no,
+          ma_cqt,
+          'ORA' check_app
   FROM   tb_no
  WHERE   short_name = pck_glb_variables.get_short_name
     and ma_khoan <> '000'
@@ -70,7 +82,9 @@ SELECT   short_name,
          'TB_NO' table_name,
          '006' err_id,
          'TMT_MA_TMUC' field_name,
-         0 update_no
+         0 update_no,
+          ma_cqt,
+          'ORA' check_app
   FROM   tb_no
  WHERE   short_name = pck_glb_variables.get_short_name
     and tmt_ma_tmuc NOT IN (SELECT ma_tmuc FROM tb_dmuc_mtmuc)
@@ -81,7 +95,9 @@ SELECT   short_name,
          'TB_NO' table_name,
          '011' err_id,
          'KYKK_TU_NGAY' field_name,
-         0 update_no
+         0 update_no,
+          ma_cqt,
+          'ORA' check_app
   FROM   tb_no a
  WHERE   short_name = pck_glb_variables.get_short_name
     and TO_DATE (a.kykk_tu_ngay, 'DD/MM/YYYY') <>
@@ -93,7 +109,9 @@ SELECT   short_name,
          'TB_NO' table_name,
          '011' err_id,
          'KYKK_DEN_NGAY' field_name,
-         0 update_no
+         0 update_no,
+          ma_cqt,
+          'ORA' check_app
   FROM   tb_no a
  WHERE   short_name = pck_glb_variables.get_short_name
     and TO_DATE (a.kykk_den_ngay, 'DD/MM/YYYY') <>
@@ -108,7 +126,9 @@ SELECT   a.short_name,
          'TB_NO' table_name,
          '012' err_id,
          'NGAY_HTOAN' field_name,
-         0 update_no
+         0 update_no,
+          ma_cqt,
+          'ORA' check_app
   FROM   tb_no a
  WHERE  a.short_name = pck_glb_variables.get_short_name
     and (TO_DATE (a.ngay_htoan, 'DD/MM/YYYY') <> last_day(to_date(pck_glb_variables.get_ky_chot, 'DD/MM/YYYY'))
@@ -123,7 +143,9 @@ UNION
          'TB_NO' table_name,
          '012' err_id,
          'NGAY_QD' field_name,
-         0 update_no
+         0 update_no,
+          ma_cqt,
+          'ORA' check_app
   FROM   tb_no a
  WHERE  short_name = pck_glb_variables.get_short_name
     and TO_DATE (a.ngay_qd, 'DD/MM/YYYY') > to_date (pck_glb_variables.get_ky_chot, 'DD/MM/YYYY')
@@ -135,7 +157,9 @@ UNION
          'TB_NO' table_name,
          '012' err_id,
          'TPHAT_DEN_NGAY' field_name,
-         0 update_no
+         0 update_no,
+          ma_cqt,
+          'ORA' check_app
   FROM   tb_no a
  WHERE  short_name = pck_glb_variables.get_short_name
     and TO_DATE (a.tphat_den_ngay, 'DD/MM/YYYY') > to_date(pck_glb_variables.get_ky_chot, 'DD/MM/YYYY')
@@ -146,7 +170,9 @@ SELECT   short_name,
          'TB_NO' table_name,
          '001' err_id,
          'LOAI' field_name,
-         0 update_no
+         0 update_no,
+          ma_cqt,
+          'ORA' check_app
   FROM   tb_no
  WHERE   short_name = pck_glb_variables.get_short_name
     and loai <> 'CD'
@@ -156,7 +182,9 @@ SELECT   short_name,
          'TB_NO' table_name,
          '016' err_id,
          'TINH_CHAT' field_name,
-         0 update_no
+         0 update_no,
+          ma_cqt,
+          'ORA' check_app
   FROM   tb_no
  WHERE   short_name = pck_glb_variables.get_short_name
     and tinh_chat IS NOT NULL
@@ -168,7 +196,9 @@ SELECT   short_name,
          'TB_NO' table_name,
          '014' err_id,
          'SO_TIEN' field_name,
-         0 update_no
+         0 update_no,
+          ma_cqt,
+          'ORA' check_app
   FROM   tb_no
  WHERE   short_name = pck_glb_variables.get_short_name
     and NOT REGEXP_LIKE (so_tien, '^-?[[:digit:],.]*$')
