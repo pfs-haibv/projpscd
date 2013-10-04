@@ -1,5 +1,5 @@
 -- Start of DDL Script for Table TEST.TB_01_THKH_HDR
--- Generated 18/09/2013 1:50:02 PM from TEST@DCNC
+-- Generated 04/10/2013 8:49:23 AM from TEST@DCNC
 
 CREATE TABLE tb_01_thkh_hdr
     (id                             NUMBER(20,0) ,
@@ -38,7 +38,8 @@ CREATE TABLE tb_01_thkh_hdr
     doanh_thu_ts_10                NUMBER(20,0),
     gtgt_chiu_thue_ts_10           NUMBER(20,0),
     thue_gtgt_ts_10                NUMBER(20,0),
-    tsgtgt                         NUMBER(5,0))
+    tsgtgt                         NUMBER(5,0),
+    tlgtgt                         NUMBER(5,0))
   PCTFREE     10
   INITRANS    1
   MAXTRANS    255
@@ -60,6 +61,57 @@ CREATE TABLE tb_01_thkh_hdr
 CREATE INDEX idx_tb_cctt_hdr_id ON tb_01_thkh_hdr
   (
     id                              ASC
+  )
+  PCTFREE     10
+  INITRANS    2
+  MAXTRANS    255
+  TABLESPACE  users
+  STORAGE   (
+    INITIAL     65536
+    MINEXTENTS  1
+    MAXEXTENTS  2147483645
+  )
+NOPARALLEL
+LOGGING
+/
+
+CREATE INDEX ind_tkh_tin ON tb_01_thkh_hdr
+  (
+    tin                             ASC
+  )
+  PCTFREE     10
+  INITRANS    2
+  MAXTRANS    255
+  TABLESPACE  users
+  STORAGE   (
+    INITIAL     65536
+    MINEXTENTS  1
+    MAXEXTENTS  2147483645
+  )
+NOPARALLEL
+LOGGING
+/
+
+CREATE INDEX ind_tkh_tax_model ON tb_01_thkh_hdr
+  (
+    tax_model                       ASC
+  )
+  PCTFREE     10
+  INITRANS    2
+  MAXTRANS    255
+  TABLESPACE  users
+  STORAGE   (
+    INITIAL     65536
+    MINEXTENTS  1
+    MAXEXTENTS  2147483645
+  )
+NOPARALLEL
+LOGGING
+/
+
+CREATE INDEX ind_tkh_short_name ON tb_01_thkh_hdr
+  (
+    short_name                      ASC
   )
   PCTFREE     10
   INITRANS    2

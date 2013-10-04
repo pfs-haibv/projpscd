@@ -370,11 +370,3 @@ IS
         Prc_THop_No_Thue(p_ky_no);
     END;
 END;
-
-
--- End of DDL Script for Package Body QLT_OWNER.EXT_PCK_QCT_XL_NO
-/
-
-
--- End of DDL Script for Package Body QLT_OWNER.EXT_PCK_QCT_XL_NO
-

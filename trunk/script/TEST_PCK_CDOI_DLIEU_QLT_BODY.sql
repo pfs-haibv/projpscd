@@ -1,5 +1,5 @@
 -- Start of DDL Script for Package Body TEST.PCK_CDOI_DLIEU_QLT
--- Generated 23/09/2013 9:55:15 AM from TEST@DCNC
+-- Generated 04/10/2013 2:41:53 PM from TEST@DCNC
 
 CREATE OR REPLACE 
 PACKAGE BODY pck_cdoi_dlieu_qlt
@@ -131,7 +131,7 @@ IS
         EXECUTE IMMEDIATE 'ALTER SESSION SET remote_dependencies_mode = SIGNATURE';
 
         EXECUTE IMMEDIATE 'BEGIN
-                                ext_pck_qlt_tkhai.Prc_Job_Qlt_Slech_No@QLT_'
+                                ext_pck_qlt_chk_stn.Prc_Job_Qlt_Slech_No@QLT_'
                                          || p_short_name
                                          || ';
                            END;'
@@ -851,3 +851,8 @@ IS
                                        pck_trace_log.fnc_whocalledme);
     END;
 END;
+/
+
+
+-- End of DDL Script for Package Body TEST.PCK_CDOI_DLIEU_QLT
+

@@ -91,6 +91,8 @@ VALUES(1621,8,'ma_cqt','varchar2(5)');
 INSERT INTO tb_columns 
 VALUES(1701,6,'tsgtgt','NUMBER(5)');
 INSERT INTO tb_columns 
+VALUES(1721,6,'tlgtgt','number(5)');
+INSERT INTO tb_columns 
 VALUES(161,5,'ID','number(20,0)');
 INSERT INTO tb_columns 
 VALUES(162,5,'MA','varchar2(20)');

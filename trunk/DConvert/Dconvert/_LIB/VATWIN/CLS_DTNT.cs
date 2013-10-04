@@ -161,7 +161,7 @@ namespace DC.Vatwin
                                            Forms.Frm_QLCD p_frm_qlcd,
                                            ref DateTime p_ky_chot
                                            )
-        {            
+        {
             using (CLS_DBASE.ORA _connOra_cndm = new CLS_DBASE.ORA(GlobalVar.gl_connTKTQVATW))
             {
                 string _query = "";
@@ -169,69 +169,39 @@ namespace DC.Vatwin
                 //Biến lưu trữ tên của hàm hoặc thủ tục
                 string v_pck = "Prc_kiem_tra_dieu_kien_khoa_so";
                 string lcKy_Chot;
-                // Biến lưu số bản ghi dữ liệu phát sinh tháng                    
-                //int _rowsnum = 0;
-
-                #region Khoaso
-                try
+              
+                string _search_pattern = "KHOASO.DBF";
+                // Đối tượng lưu trữ các file dữ liệu
+                ArrayList _listFile_no = new ArrayList();
+                // Lấy danh sách các file dữ liệu
+                _listFile_no.AddRange(p_dir_source.GetFiles(_search_pattern));
+                string khoaso = "N";
+                foreach (FileInfo _file in _listFile_no)
                 {
-
-                    // File NOYYYY.DBF
-                    string _search_pattern = "KHOASO.DBF";
-                    // Đối tượng lưu trữ các file dữ liệu
-                    ArrayList _listFile_no = new ArrayList();
-                    // Lấy danh sách các file dữ liệu
-                    _listFile_no.AddRange(p_dir_source.GetFiles(_search_pattern));
-                    int khoaso = 0;
-                    foreach (FileInfo _file in _listFile_no)
+                    lcKy_Chot = p_ky_chot.ToString("MM/yyyy");
+                    try
                     {
-                        lcKy_Chot = p_ky_chot.ToString("MM/yyyy");
-                        try
-                        {
-                            _query = @"Select kylbo from khoaso where not delete() and kylbo = '" + lcKy_Chot + "'";
+                        _query = @"Select kylbo from khoaso where not delete() and kylbo = '" + lcKy_Chot + "'";
 
-                            CLS_DBASE.FOX _connFoxPro = new CLS_DBASE.FOX(p_path);
+                        CLS_DBASE.FOX _connFoxPro = new CLS_DBASE.FOX(p_path);
 
-                            // Chứa dữ liệu
-                            DataTable _dt = _connFoxPro.exeQuery(_query);
-                            if (_dt.Rows.Count > 0)
-                            {
-                                khoaso = 1;
-                                break;
-                            }
-                        }
-                        catch (Exception e)
+                        // Chứa dữ liệu
+                        DataTable _dt = _connFoxPro.exeQuery(_query);
+                        if (_dt.Rows.Count > 0)
                         {
-                            p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
+                            khoaso = "Y";
+                            break;
                         }
                     }
-                    if (khoaso == 0)
+                    catch (Exception e)
                     {
-                        string e = "Ứng dụng VAT chưa khóa sổ kỳ " + p_ky_chot.ToString().Trim().Substring(3, 7);
-
-                        p_frm_qlcd.AddToListView(0, "   + " + p_short_name + ": " + e);
-
-                        // Ghi log
-                        _connOra_cndm.TransStart();
-                        _query = null;
-                        _query += "call PCK_TRACE_LOG.prc_ins_log_vs('" + p_short_name + "', '" + v_pck + "', 'N', '";
-
-                        _query += "øng dông VAT ch­a kho¸ sæ kú " + p_ky_chot.ToString().Trim().Substring(3, 7) + "')";
-                        _connOra_cndm.TransExecute(_query);
-
-                        _listFile_no.Clear();
-                        _listFile_no = null;
-                        return "N";
+                        p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
                     }
                 }
-                catch (Exception e)
-                {
-                    return "N";
-                }
-                #endregion
-                return "Y";
+                return khoaso;
             }
         }
+
         //test check out
         //TienTM2 : Get parameter of Target Server
         public static void Prc_Targetes_Server_Parameter(ref string target_username, ref string target_password)

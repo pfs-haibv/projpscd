@@ -1,5 +1,5 @@
 -- Start of DDL Script for Package Body TEST.PCK_CDOI_DLIEU_QCT
--- Generated 23/09/2013 9:51:21 AM from TEST@DCNC
+-- Generated 04/10/2013 2:41:18 PM from TEST@DCNC
 
 CREATE OR REPLACE 
 PACKAGE BODY pck_cdoi_dlieu_qct
@@ -350,7 +350,7 @@ IS
                            END;';
 */
         EXECUTE IMMEDIATE 'BEGIN
-                                ext_pck_qct_tkhai.Prc_Job_Qct_Slech_No@QLT_'|| p_short_name|| ';
+                                ext_pck_qct_chk_stn.Prc_Job_Qct_Slech_No@QLT_'|| p_short_name|| ';
                             END;';
 
         -- Ghi log
@@ -677,7 +677,8 @@ IS
                                             doanh_thu_ts_10,
                                             gtgt_chiu_thue_ts_10,
                                             thue_gtgt_ts_10,
-                                            tsgtgt
+                                            tsgtgt,
+                                            tlgtgt
                                             )
                     SELECT seq_data_cdoi.NEXTVAL id,
                                                 id tkh_id,
@@ -702,7 +703,8 @@ IS
                                                 doanh_thu_ts_10,
                                                 gtgt_chiu_thue_ts_10,
                                                 thue_gtgt_ts_10,
-                                                tsgtgt
+                                                tsgtgt,
+                                                tlgtgt
                     FROM   ext_cctt_hdr@qlt_' || p_short_name || ''
                             ;
         -- Ghi log
