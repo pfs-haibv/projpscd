@@ -1,5 +1,5 @@
 -- Start of DDL Script for Package Body TEST.PCK_CDOI_DLIEU_PNN
--- Generated 28/09/2013 9:09:47 AM from TEST@DCNC
+-- Generated 10/10/2013 8:44:25 AM from TEST@DCNC
 
 CREATE OR REPLACE 
 PACKAGE BODY pck_cdoi_dlieu_pnn
@@ -278,6 +278,7 @@ IS
                                   ccu_he_so,
                                   sthue_pnop,
                                   kytt_tu_ngay,
+                                  kytt_den_ngay,
                                   ngay_htoan,
                                   short_name)
             SELECT   a.ma_cqt_par,
@@ -389,6 +390,9 @@ IS
                      a.ccu_he_so,
                      a.nothue_nhadat sthue_pnop,
                      TO_CHAR (a.ky_tthue, 'DD/MM/YYYY') kytt_tu_ngay,
+                     LAST_DAY(ADD_MONTHS (
+                              TRUNC (TO_DATE (a.ky_kkhai, 'DD/MM/RRRR'), 'Year'),
+                              11)) kytt_den_ngay,
                      v_ky_chot ngay_htoan,
                      p_short_name short_name
               FROM   pnn_can_cu_tt@pnn a
@@ -555,6 +559,7 @@ IS
                                   ccu_he_so,
                                   sthue_pnop,
                                   kytt_tu_ngay,
+                                  kytt_den_ngay,
                                   ngay_htoan,
                                   short_name)
             SELECT   a.ma_cqt_par,
@@ -665,7 +670,10 @@ IS
                      a.mgi_ty_le,
                      a.ccu_he_so,
                      a.nothue_nhadat sthue_pnop,
-                     TO_CHAR (a.ky_kkhai, 'DD/MM/YYYY') ky_kkhai_tu_ngay,
+                     TO_CHAR (a.ky_kkhai, 'DD/MM/YYYY') kytt_tu_ngay,
+                     LAST_DAY(ADD_MONTHS (
+                              TRUNC (TO_DATE (a.ky_kkhai, 'DD/MM/RRRR'), 'Year'),
+                              11)) kytt_den_ngay,
                      v_ky_chot ngay_htoan,
                      p_short_name short_name
               FROM   pnn_can_cu_tt@pnn a
@@ -1102,8 +1110,3 @@ IS
      END;
 
 END;
-/
-
-
--- End of DDL Script for Package Body TEST.PCK_CDOI_DLIEU_PNN
-

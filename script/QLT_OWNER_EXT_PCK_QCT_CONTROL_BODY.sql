@@ -173,7 +173,9 @@ IS
                         so_qd,
                         ngay_qd,
                         so_tien,
-                        id
+                        id,
+                        MA_GDICH,
+                        KIEU_GDICH  
                         )
             VALUES      (
                         vPNOP.TIN
@@ -191,6 +193,8 @@ IS
                         ,v_ngay_qd
                         ,vPNOP.PHAI_NOP
                         ,ext_seq.NEXTVAL
+                        ,vPNOP.MA_GDICH
+                        ,vPNOP.KIEU_GDICH
                         );
         END LOOP;
 

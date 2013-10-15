@@ -32,7 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_QLCD));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -51,6 +50,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_QLCD));
             this.bndSource = new System.Windows.Forms.BindingSource(this.components);
             this.grb_drg = new System.Windows.Forms.GroupBox();
             this.lb_dgr_status = new System.Windows.Forms.Label();
@@ -157,13 +157,6 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.Thuc_hien = new System.Windows.Forms.Button();
             this.dgrTaxOffice = new System.Windows.Forms.DataGridView();
-            this.status_listView = new System.Windows.Forms.ListView();
-            this.cl_action = new System.Windows.Forms.ColumnHeader();
-            this.cl_value = new System.Windows.Forms.ColumnHeader();
-            this.lb_Drg_Loc = new System.Windows.Forms.Label();
-            this.iconImageList = new System.Windows.Forms.ImageList(this.components);
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.cl_tax_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cl_short_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cl_tax_model = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -185,6 +178,15 @@
             this.cl_vat_pass = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cl_vat_ddan_tu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cl_vat_ddan_den = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.status_listView = new System.Windows.Forms.ListView();
+            this.cl_action = new System.Windows.Forms.ColumnHeader();
+            this.cl_value = new System.Windows.Forms.ColumnHeader();
+            this.lb_Drg_Loc = new System.Windows.Forms.Label();
+            this.iconImageList = new System.Windows.Forms.ImageList(this.components);
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.ckb_nhap_ngoai_ps = new System.Windows.Forms.CheckBox();
+            this.ckb_nhap_ngoai_ckt = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.bndSource)).BeginInit();
             this.grb_drg.SuspendLayout();
             this.tab_action.SuspendLayout();
@@ -997,6 +999,8 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.ckb_nhap_ngoai_ckt);
+            this.groupBox5.Controls.Add(this.ckb_nhap_ngoai_ps);
             this.groupBox5.Controls.Add(this.ckb_nhap_ngoai_no);
             this.groupBox5.Location = new System.Drawing.Point(20, 23);
             this.groupBox5.Name = "groupBox5";
@@ -1397,74 +1401,6 @@
             this.dgrTaxOffice.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgrTaxOffice_DataBindingComplete);
             this.dgrTaxOffice.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrTaxOffice_CellContentClick);
             // 
-            // status_listView
-            // 
-            this.status_listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.cl_action,
-            this.cl_value});
-            this.status_listView.Font = new System.Drawing.Font(".VnArial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.status_listView.GridLines = true;
-            this.status_listView.Location = new System.Drawing.Point(789, 19);
-            this.status_listView.Name = "status_listView";
-            this.status_listView.Size = new System.Drawing.Size(206, 380);
-            this.status_listView.TabIndex = 8;
-            this.status_listView.UseCompatibleStateImageBehavior = false;
-            this.status_listView.View = System.Windows.Forms.View.Details;
-            // 
-            // cl_action
-            // 
-            this.cl_action.Text = "Action";
-            this.cl_action.Width = 161;
-            // 
-            // cl_value
-            // 
-            this.cl_value.Text = "S";
-            this.cl_value.Width = 23;
-            // 
-            // lb_Drg_Loc
-            // 
-            this.lb_Drg_Loc.AutoSize = true;
-            this.lb_Drg_Loc.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_Drg_Loc.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.lb_Drg_Loc.Location = new System.Drawing.Point(10, 401);
-            this.lb_Drg_Loc.Name = "lb_Drg_Loc";
-            this.lb_Drg_Loc.Size = new System.Drawing.Size(62, 13);
-            this.lb_Drg_Loc.TabIndex = 5;
-            this.lb_Drg_Loc.Text = "Lọc tất cả";
-            this.lb_Drg_Loc.Click += new System.EventHandler(this.lb_Drg_Loc_Click);
-            // 
-            // iconImageList
-            // 
-            this.iconImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("iconImageList.ImageStream")));
-            this.iconImageList.TransparentColor = System.Drawing.Color.Transparent;
-            this.iconImageList.Images.SetKeyName(0, "Windows%20Event%20log%20-%20error%20icon.png");
-            this.iconImageList.Images.SetKeyName(1, "Windows%20Event%20log%20-%20warning%20icon.png");
-            this.iconImageList.Images.SetKeyName(2, "Windows%20Event%20log%20-%20information%20icon.png");
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(25, 28);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(122, 17);
-            this.checkBox1.TabIndex = 11;
-            this.checkBox1.Text = "Chuyển dữ liệu QTN";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Checked = true;
-            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.Location = new System.Drawing.Point(25, 54);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(130, 17);
-            this.checkBox2.TabIndex = 10;
-            this.checkBox2.Text = "Cập nhật tính chất nợ";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
             // cl_tax_name
             // 
             this.cl_tax_name.DataPropertyName = "tax_name";
@@ -1660,6 +1596,98 @@
             this.cl_vat_ddan_den.HeaderText = "Thư mục TMP VAT";
             this.cl_vat_ddan_den.Name = "cl_vat_ddan_den";
             this.cl_vat_ddan_den.ReadOnly = true;
+            // 
+            // status_listView
+            // 
+            this.status_listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.cl_action,
+            this.cl_value});
+            this.status_listView.Font = new System.Drawing.Font(".VnArial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.status_listView.GridLines = true;
+            this.status_listView.Location = new System.Drawing.Point(789, 19);
+            this.status_listView.Name = "status_listView";
+            this.status_listView.Size = new System.Drawing.Size(206, 380);
+            this.status_listView.TabIndex = 8;
+            this.status_listView.UseCompatibleStateImageBehavior = false;
+            this.status_listView.View = System.Windows.Forms.View.Details;
+            // 
+            // cl_action
+            // 
+            this.cl_action.Text = "Action";
+            this.cl_action.Width = 161;
+            // 
+            // cl_value
+            // 
+            this.cl_value.Text = "S";
+            this.cl_value.Width = 23;
+            // 
+            // lb_Drg_Loc
+            // 
+            this.lb_Drg_Loc.AutoSize = true;
+            this.lb_Drg_Loc.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_Drg_Loc.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lb_Drg_Loc.Location = new System.Drawing.Point(10, 401);
+            this.lb_Drg_Loc.Name = "lb_Drg_Loc";
+            this.lb_Drg_Loc.Size = new System.Drawing.Size(62, 13);
+            this.lb_Drg_Loc.TabIndex = 5;
+            this.lb_Drg_Loc.Text = "Lọc tất cả";
+            this.lb_Drg_Loc.Click += new System.EventHandler(this.lb_Drg_Loc_Click);
+            // 
+            // iconImageList
+            // 
+            this.iconImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("iconImageList.ImageStream")));
+            this.iconImageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.iconImageList.Images.SetKeyName(0, "Windows%20Event%20log%20-%20error%20icon.png");
+            this.iconImageList.Images.SetKeyName(1, "Windows%20Event%20log%20-%20warning%20icon.png");
+            this.iconImageList.Images.SetKeyName(2, "Windows%20Event%20log%20-%20information%20icon.png");
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Location = new System.Drawing.Point(25, 28);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(122, 17);
+            this.checkBox1.TabIndex = 11;
+            this.checkBox1.Text = "Chuyển dữ liệu QTN";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Checked = true;
+            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox2.Location = new System.Drawing.Point(25, 54);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(130, 17);
+            this.checkBox2.TabIndex = 10;
+            this.checkBox2.Text = "Cập nhật tính chất nợ";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // ckb_nhap_ngoai_ps
+            // 
+            this.ckb_nhap_ngoai_ps.AutoSize = true;
+            this.ckb_nhap_ngoai_ps.Checked = true;
+            this.ckb_nhap_ngoai_ps.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckb_nhap_ngoai_ps.Location = new System.Drawing.Point(25, 51);
+            this.ckb_nhap_ngoai_ps.Name = "ckb_nhap_ngoai_ps";
+            this.ckb_nhap_ngoai_ps.Size = new System.Drawing.Size(182, 17);
+            this.ckb_nhap_ngoai_ps.TabIndex = 12;
+            this.ckb_nhap_ngoai_ps.Text = "Đọc dữ liệu phát sinh nhập ngoài";
+            this.ckb_nhap_ngoai_ps.UseVisualStyleBackColor = true;
+            // 
+            // ckb_nhap_ngoai_ckt
+            // 
+            this.ckb_nhap_ngoai_ckt.AutoSize = true;
+            this.ckb_nhap_ngoai_ckt.Checked = true;
+            this.ckb_nhap_ngoai_ckt.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckb_nhap_ngoai_ckt.Location = new System.Drawing.Point(25, 74);
+            this.ckb_nhap_ngoai_ckt.Name = "ckb_nhap_ngoai_ckt";
+            this.ckb_nhap_ngoai_ckt.Size = new System.Drawing.Size(199, 17);
+            this.ckb_nhap_ngoai_ckt.TabIndex = 13;
+            this.ckb_nhap_ngoai_ckt.Text = "Đọc dữ liệu còn khấu trừ nhập ngoài";
+            this.ckb_nhap_ngoai_ckt.UseVisualStyleBackColor = true;
             // 
             // Frm_QLCD
             // 
@@ -1858,5 +1886,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cl_vat_pass;
         private System.Windows.Forms.DataGridViewTextBoxColumn cl_vat_ddan_tu;
         private System.Windows.Forms.DataGridViewTextBoxColumn cl_vat_ddan_den;
+        private System.Windows.Forms.CheckBox ckb_nhap_ngoai_ps;
+        private System.Windows.Forms.CheckBox ckb_nhap_ngoai_ckt;
     }
 }
