@@ -555,7 +555,7 @@ namespace DC.Lib
 
     class TKTQ_PCK_ORA_NHAP_NGOAI
     {
-        // Đọc dữ liệu nợ
+        #region Đọc dữ liệu nợ
         public static void Fnc_read_no(string p_short_name)
         {
             string _path = GlobalVar.gl_dirNhap_Ngoai;
@@ -644,6 +644,183 @@ namespace DC.Lib
                 _ora.TransCommit();
             }
         }
+        #endregion
+
+        #region Đọc dữ liệu phát sinh
+        public static void Fnc_read_ps(string p_short_name)
+        {
+            string _path = GlobalVar.gl_dirNhap_Ngoai;
+            string file_name = _path + @"\" + p_short_name.Substring(0, 3) + @"\" + p_short_name + @"\DLV_DC_NhapNgoaiUD.xls";
+
+            string _strConn = GlobalVar.get_connExcel(file_name);
+            string _query;
+
+            OleDbConnection conn = new OleDbConnection(_strConn);
+            OleDbCommand cmd = new OleDbCommand("SELECT * FROM [PS$]", conn);
+            cmd.CommandType = CommandType.Text;
+
+            DataTable _dtCD_Sheet = new DataTable("PS");
+            new OleDbDataAdapter(cmd).Fill(_dtCD_Sheet);
+
+            CLS_DBASE.ORA _ora = new CLS_DBASE.ORA(GlobalVar.gl_connTKTQ);
+            //Xóa dữ liệu cũ
+            _query = "DELETE FROM TB_PS_NHAP_NGOAI a WHERE a.SHORT_NAME = '" + p_short_name + "'";
+            _ora.exeUpdate(_query);
+
+            int i = 0;
+            foreach (DataRow _dr in _dtCD_Sheet.Rows)
+            {
+                // 3 dòng đầu là ghi chú
+                if (i < 4)
+                {
+                    i++;
+                    continue;
+                }
+                //Dòng thứ 4 là header
+                if (i == 4)
+                {
+                    if (_dr[0].ToString().Trim().ToLower().Equals("mã số thuế"))
+                        throw new System.ArgumentException("Sai tên cột mã số thuế");
+                    if (_dr[1].ToString().Trim().ToLower().Equals("tiểu mục"))
+                        throw new System.ArgumentException("Sai tên cột tiểu mục");
+                    if (_dr[2].ToString().Trim().ToLower().Equals("mã tờ khai"))
+                        throw new System.ArgumentException("Sai tên cột mã tờ khai");
+                    if (_dr[3].ToString().Trim().ToLower().Equals("kỳ kê khai"))
+                        throw new System.ArgumentException("Sai tên cột kỳ kê khai");
+                    if (_dr[4].ToString().Trim().ToLower().Equals("hạn nộp"))
+                        throw new System.ArgumentException("Sai tên cột hạn nộp");
+                    if (_dr[5].ToString().Trim().ToLower().Equals("số tiền"))
+                        throw new System.ArgumentException("Sai tên cột số tiền");                    
+                    i++;
+                    continue;
+                }
+                //Dòng thứ 5 là mẫu
+                if (i == 5)
+                {
+                    i++;
+                    continue;
+                }
+
+                //Nếu trống cột mã số thuế thì không đọc tiếp
+                if (_dr[0].ToString().Trim() == "")
+                    break;
+
+                //Bắt đầu đọc dữ liệu từ dòng thứ 6                
+                _query = "INSERT INTO  TB_PS_NHAP_NGOAI (TIN, TMT_MA_TMUC, ma_tkhai, KY_KE_KHAI, HAN_NOP, SO_TIEN, SHORT_NAME) " +
+                                "Values ('{0}','{1}','{2}','{3}','{4}',{5},'{6}')";
+
+                _query = _query.Replace("{0}", _dr[0].ToString().Trim());
+                _query = _query.Replace("{1}", _dr[1].ToString().Trim());
+                _query = _query.Replace("{2}", _dr[2].ToString().Trim());
+                _query = _query.Replace("{3}", _dr[3].ToString().Trim());
+                _query = _query.Replace("{4}", _dr[4].ToString().Trim());
+                _query = _query.Replace("{5}", _dr[5].ToString().Trim());                
+                _query = _query.Replace("{6}", p_short_name);
+
+                _ora.exeUpdate(_query);
+            }
+        }
+        // Tổng hợp dữ liệu vào bảng TB_PS
+        public static void Fnc_tong_hop_ps(string p_short_name)
+        {
+            string _query = null;
+            using (CLS_DBASE.ORA _ora = new CLS_DBASE.ORA(GlobalVar.gl_connTKTQ))
+            {
+                _ora.TransStart();
+                _query = "call PCK_CDOI_DLIEU_NHAP_NGOAI.prc_tong_hop_ps('" + p_short_name + "')";
+                _ora.TransExecute(_query);
+                _ora.TransCommit();
+            }
+        }
+        #endregion
+
+        #region Đọc dữ còn khấu trừ
+        public static void Fnc_read_ckt(string p_short_name)
+        {
+            string _path = GlobalVar.gl_dirNhap_Ngoai;
+            string file_name = _path + @"\" + p_short_name.Substring(0, 3) + @"\" + p_short_name + @"\DLV_DC_NhapNgoaiUD.xls";
+
+            string _strConn = GlobalVar.get_connExcel(file_name);
+            string _query;
+
+            OleDbConnection conn = new OleDbConnection(_strConn);
+            OleDbCommand cmd = new OleDbCommand("SELECT * FROM [CKT$]", conn);
+            cmd.CommandType = CommandType.Text;
+
+            DataTable _dtCD_Sheet = new DataTable("CKT");
+            new OleDbDataAdapter(cmd).Fill(_dtCD_Sheet);
+
+            CLS_DBASE.ORA _ora = new CLS_DBASE.ORA(GlobalVar.gl_connTKTQ);
+            //Xóa dữ liệu cũ
+            _query = "DELETE FROM TB_CKT_NHAP_NGOAI a WHERE a.SHORT_NAME = '" + p_short_name + "'";
+            _ora.exeUpdate(_query);
+
+            int i = 0;
+            foreach (DataRow _dr in _dtCD_Sheet.Rows)
+            {
+                // 3 dòng đầu là ghi chú
+                if (i < 4)
+                {
+                    i++;
+                    continue;
+                }
+                //Dòng thứ 4 là header
+                if (i == 4)
+                {
+                    if (_dr[0].ToString().Trim().ToLower().Equals("mã số thuế"))
+                        throw new System.ArgumentException("Sai tên cột mã số thuế");
+                    if (_dr[1].ToString().Trim().ToLower().Equals("tiểu mục"))
+                        throw new System.ArgumentException("Sai tên cột tiểu mục");
+                    if (_dr[2].ToString().Trim().ToLower().Equals("mã tờ khai"))
+                        throw new System.ArgumentException("Sai tên cột mã tờ khai");
+                    if (_dr[3].ToString().Trim().ToLower().Equals("kỳ kê khai"))
+                        throw new System.ArgumentException("Sai tên cột kỳ kê khai");
+                    if (_dr[4].ToString().Trim().ToLower().Equals("hạn nộp"))
+                        throw new System.ArgumentException("Sai tên cột hạn nộp");
+                    if (_dr[5].ToString().Trim().ToLower().Equals("số tiền"))
+                        throw new System.ArgumentException("Sai tên cột số tiền");
+                    i++;
+                    continue;
+                }
+                //Dòng thứ 5 là mẫu
+                if (i == 5)
+                {
+                    i++;
+                    continue;
+                }
+
+                //Nếu trống cột mã số thuế thì không đọc tiếp
+                if (_dr[0].ToString().Trim() == "")
+                    break;
+
+                //Bắt đầu đọc dữ liệu từ dòng thứ 6                
+                _query = "INSERT INTO  TB_CKT_NHAP_NGOAI (TIN, TMT_MA_TMUC, ma_tkhai, KY_KE_KHAI, HAN_NOP, SO_TIEN, SHORT_NAME) " +
+                                "Values ('{0}','{1}','{2}','{3}','{4}',{5},'{6}')";
+
+                _query = _query.Replace("{0}", _dr[0].ToString().Trim());
+                _query = _query.Replace("{1}", _dr[1].ToString().Trim());
+                _query = _query.Replace("{2}", _dr[2].ToString().Trim());
+                _query = _query.Replace("{3}", _dr[3].ToString().Trim());
+                _query = _query.Replace("{4}", _dr[4].ToString().Trim());
+                _query = _query.Replace("{5}", _dr[5].ToString().Trim());
+                _query = _query.Replace("{6}", p_short_name);
+
+                _ora.exeUpdate(_query);
+            }
+        }
+        // Tổng hợp dữ liệu vào bảng TB_NO
+        public static void Fnc_tong_hop_ckt(string p_short_name)
+        {
+            string _query = null;
+            using (CLS_DBASE.ORA _ora = new CLS_DBASE.ORA(GlobalVar.gl_connTKTQ))
+            {
+                _ora.TransStart();
+                _query = "call PCK_CDOI_DLIEU_NHAP_NGOAI.prc_tong_hop_ckt('" + p_short_name + "')";
+                _ora.TransExecute(_query);
+                _ora.TransCommit();
+            }
+        }
+        #endregion
     }
 
     class TKTQ_PCK_ORA_PNN

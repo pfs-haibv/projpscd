@@ -187,7 +187,9 @@ IS
                         so_tien,
                         no_nte,
                         don_vi_tien,
-                        id
+                        id,
+                        MA_GDICH,
+                        KIEU_GDICH                        
                         )
             VALUES      (
                         vPNOP.TIN
@@ -207,6 +209,8 @@ IS
                         ,vPNOP.NO_NTE
                         ,vPNOP.DON_VI_TIEN
                         ,ext_seq.NEXTVAL
+                        ,vPNOP.MA_GDICH
+                        ,vPNOP.KIEU_GDICH
                         );
         END LOOP;
 
