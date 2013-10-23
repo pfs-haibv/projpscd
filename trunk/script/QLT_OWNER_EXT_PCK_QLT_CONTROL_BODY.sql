@@ -241,13 +241,13 @@ IS
     /***************************************************************************
     EXT_PCK_QLT_CONTROL.Prc_Qlt_Thop_Ps
     ***************************************************************************/
-    PROCEDURE Prc_Qlt_Thop_Ps(p_chot date) IS
+    PROCEDURE Prc_Qlt_Thop_Ps(p_ky_ps_tu date, p_ky_ps_den date) IS
 
     v_Alert_button NUMBER;
     v_pro_name CONSTANT VARCHAR2(30) := 'PRC_QLT_THOP_PS';
 
-    v_tu_ky date := trunc(p_chot,'Year');
-    v_den_ky date := p_chot;
+    v_tu_ky date := trunc(p_ky_ps_tu,'month');
+    v_den_ky date := last_day(p_ky_ps_den);
 
     CURSOR cLoop IS
     /* TO KHAI PHAT SINH */
@@ -266,6 +266,31 @@ IS
         AND (tkha.kylb_tu_ngay <= v_den_ky)
         AND (tkha.dtk_ma_loai_tkhai IN  (SELECT a.ma FROM ext_dmuc_tkhai a where a.flg_ps = 'Y') )
         AND (psin.thue_psinh<>0)
+        UNION ALL
+    /*Chuyen nghia vu thue*/
+    SELECT   DTL.TIN           TIN
+       , MAP_TMUC.dct_ma       dtk_ma
+       , nnt.ma_chuong         ma_chuong
+       , nnt.ma_khoan          ma_khoan
+       , DTL.TMT_MA_TMUC       tmt_ma_tmuc
+       , HDR.KYKK_TU_NGAY      KYKK_TU_NGAY
+       , HDR.KYKK_DEN_NGAY     KYKK_DEN_NGAY
+       , DTL.SO_TIEN           SO_TIEN
+       , to_date(NULL)         han_nop
+       , HDR.KYLB_TU_NGAY      KYLB_TU_NGAY
+       , HDR.KYLB_DEN_NGAY     KYLB_DEN_NGAY
+        FROM  QLT_QD_CNVT_HDR HDR
+             ,QLT_XLTK_GDICH  DTL
+             ,qlt_nsd_dtnt nnt
+             ,QLT_MAP_TMUC_CNVT MAP_TMUC
+        WHERE HDR.ID = DTL.HDR_ID
+        AND (nnt.tin=HDR.tin)
+        AND (MAP_TMUC.TMUC=DTL.TMT_MA_TMUC)
+        AND (HDR.kykk_tu_ngay >= v_tu_ky)
+        AND (HDR.kylb_tu_ngay <= v_den_ky)
+        AND DTL.DGD_MA_GDICH IN ('94')
+        AND DTL.DGD_KIEU_GDICH IN ('25')
+        AND DTL.SO_TIEN <> 0    
         UNION ALL
     /* AN DINH TO KHAI */
         SELECT hdr.tin, hdr.dtk_ma, nnt.ma_chuong, nnt.ma_khoan, dtl.tmt_ma_tmuc,
@@ -464,12 +489,12 @@ IS
    /***************************************************************************
     EXT_PCK_QLT_CONTROL.Prc_Job_Qlt_Thop_Ps
     ***************************************************************************/
-    PROCEDURE Prc_Job_Qlt_Thop_Ps(p_chot DATE) IS
+    PROCEDURE Prc_Job_Qlt_Thop_Ps(p_ky_ps_tu DATE, p_ky_ps_den DATE) IS
     BEGIN
         Prc_Del_Log('PRC_QLT_THOP_PS');
         COMMIT;
         Prc_Create_Job('BEGIN
-                            EXT_PCK_QLT_CONTROL.Prc_Qlt_Thop_Ps('''||p_chot||''');
+                            EXT_PCK_QLT_CONTROL.Prc_Qlt_Thop_Ps('''||p_ky_ps_tu||''', ''' || p_ky_ps_den ||''');
                         END;');
     END;
 

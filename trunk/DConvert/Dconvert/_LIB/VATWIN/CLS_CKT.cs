@@ -33,41 +33,18 @@ namespace DC.Vatwin
                 // Hàm lưu số bản ghi đã được xóa
                 int _rowsnum = 0;
 
-                try
-                {
-                    _query = @"DELETE FROM tb_vat_con_kt_02
+
+                _query = @"DELETE FROM tb_vat_con_kt_02
                                 WHERE short_name = '" + p_short_name + @"'
                                   AND tax_model = 'VAT-APP'";
-                    _rowsnum = _ora.exeUpdate(_query);
+                _rowsnum = _ora.exeUpdate(_query);
 
-                    _query = @"DELETE FROM tb_con_kt
+                _query = @"DELETE FROM tb_con_kt
                                 WHERE short_name = '" + p_short_name + @"'
                                   AND tax_model = 'VAT-APP'";
-                    _rowsnum = _ora.exeUpdate(_query);
+                _rowsnum = _ora.exeUpdate(_query);
 
-                    // Ghi log
-                    _ora.TransStart();
-                    _query = null;
-                    _query = "call PCK_TRACE_LOG.prc_ins_log_vs('" + p_short_name + "', '" + v_pck + "', 'Y', null)";
-                    _ora.TransExecute(_query);
-                    _ora.TransCommit();
-                }
-                catch (Exception e)
-                {
-                    p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
 
-                    // Ghi log
-                    _ora.TransStart();
-                    _query = null;
-                    _query +=
-                        "call PCK_TRACE_LOG.prc_ins_log_vs('" + p_short_name + "', '"
-                                                            + v_pck + "', 'N', '";
-                    _query += e.Message.ToString().Replace("'", "\"") + "')";
-                    _ora.TransExecute(_query);
-                    _ora.TransRollBack();
-
-                    return -1;
-                }
                 return _rowsnum;
             }
         }
@@ -90,7 +67,7 @@ namespace DC.Vatwin
 
                 // Biến lưu trữ tên của hàm hoặc thủ tục
                 string v_pck = "FNC_DOC_FILE_CKT_01";
-                
+
                 // Biến lưu số bản ghi đã được bổ sung vào bảng TB_NO
                 int _rowsnum = 0;
                 string _File_Nghi = "Nghi" + p_ky_chot.ToString("yyyy") + ".DBF";
@@ -99,22 +76,20 @@ namespace DC.Vatwin
                 string _error_message = "";
 
                 #region Docfile ckt_01/GTGT
-                try
-                {
-                    // File 
-                    string _search_pattern = "ST" + p_ky_chot.ToString("MMyyyy") + ".DBF";
-                    // Đối tượng lưu trữ các file dữ liệu
-                    ArrayList _listFile = new ArrayList();
-                    // Lấy danh sách các file dữ liệu
-                    _listFile.AddRange(p_dir_source.GetFiles(_search_pattern));
 
-                    foreach (FileInfo _file in _listFile)
-                    {
-                        if (_file.Name.Length != 12)
-                            continue;
-                        try
-                        {
-                            _query = @"SELECT a.madtnt as tin,
+                // File 
+                string _search_pattern = "ST" + p_ky_chot.ToString("MMyyyy") + ".DBF";
+                // Đối tượng lưu trữ các file dữ liệu
+                ArrayList _listFile = new ArrayList();
+                // Lấy danh sách các file dữ liệu
+                _listFile.AddRange(p_dir_source.GetFiles(_search_pattern));
+
+                foreach (FileInfo _file in _listFile)
+                {
+                    if (_file.Name.Length != 12)
+                        continue;
+
+                    _query = @"SELECT a.madtnt as tin,
                                               max(c.machuong) as machuong,  
                                               max(c.makhoan) as makhoan,                                     
                                               max(a.KyKKhai) as KyKKhai,
@@ -130,74 +105,74 @@ namespace DC.Vatwin
                                        GROUP BY a.madtnt, a.MaTM
                                              ";
 
-                            _query = _query.Replace("{0}", _file.Name);
-                            _query = _query.Replace("{3}", _File_Nghi);
+                    _query = _query.Replace("{0}", _file.Name);
+                    _query = _query.Replace("{3}", _File_Nghi);
 
-                            CLS_DBASE.FOX _connFoxPro = new CLS_DBASE.FOX(p_path);
+                    CLS_DBASE.FOX _connFoxPro = new CLS_DBASE.FOX(p_path);
 
-                            // Chứa dữ liệu
-                            DataTable _dt = _connFoxPro.exeQuery(_query);
-                            //                            int countf = 0;
+                    // Chứa dữ liệu
+                    DataTable _dt = _connFoxPro.exeQuery(_query);
+                    //                            int countf = 0;
 
-                            foreach (DataRow _dr in _dt.Rows)
-                            {
-                                #region Xác định kỳ phát sinh của đối tượng nộp thuế
-                                // Biến lưu trữ kỳ kê khai lấy từ file dữ liệu                            
-                                string _ky_kkhai = _dr["KyKKhai"].ToString().Replace("/", "").Trim();                                    
-                                if (_ky_kkhai.Length < 6)
-                                    _ky_kkhai = p_ky_chot.ToString("MMyyyy");
-                                
-                                //Nếu kỳ kê khai trước tháng 1/2005 thì chuyển thành 1/2005
-                                try
-                                {
-                                    if (Int32.Parse(_ky_kkhai.Substring(2, 4)) < 2005)
-                                        _ky_kkhai = "012005";
-                                }
-                                catch (FormatException e)
-                                {
-                                    p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
-                                    _error_message += e.Message + "(" + _file.Name + ");";
-                                    continue;
-                                }
-                                catch (Exception e)
-                                {
-                                    p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
-                                    _error_message += e.Message + "(" + _file.Name + ");";
-                                    continue;
-                                }
+                    foreach (DataRow _dr in _dt.Rows)
+                    {
+                        #region Xác định kỳ phát sinh của đối tượng nộp thuế
+                        // Biến lưu trữ kỳ kê khai lấy từ file dữ liệu                            
+                        string _ky_kkhai = _dr["KyKKhai"].ToString().Replace("/", "").Trim();
+                        if (_ky_kkhai.Length < 6)
+                            _ky_kkhai = p_ky_chot.ToString("MMyyyy");
 
-                                // Ngày bắt đầu kỳ phát sinh
-                                DateTime _kykk_tu_ngay;
-                                // Ngày kết thúc kỳ phát sinh
-                                DateTime _kykk_den_ngay;
-                                try
-                                {
-                                    _kykk_tu_ngay = new DateTime(Int32.Parse(_ky_kkhai.Substring(2, 4)), Int32.Parse(_ky_kkhai.Substring(0, 2)), 1);
-                                    _kykk_den_ngay =
-                                        new DateTime(Int32.Parse(_ky_kkhai.Substring(2, 4)), Int32.Parse(_ky_kkhai.Substring(0, 2)), 1);
-                                    _kykk_den_ngay = _kykk_den_ngay.AddMonths(1).AddDays(-1);
-                                }
-                                catch (FormatException e)
-                                {
-                                    p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
-                                    _error_message += e.Message + "(" + _file.Name + ");";
-                                    continue;
-                                }
-                                catch (Exception e)
-                                {
-                                    p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
-                                    _error_message += e.Message + "(" + _file.Name + ");";
-                                    continue;
-                                }
-                                #endregion
+                        //Nếu kỳ kê khai trước tháng 1/2005 thì chuyển thành 1/2005
+                        try
+                        {
+                            if (Int32.Parse(_ky_kkhai.Substring(2, 4)) < 2005)
+                                _ky_kkhai = "012005";
+                        }
+                        catch (FormatException e)
+                        {
+                            p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
+                            _error_message += e.Message + "(" + _file.Name + ");";
+                            continue;
+                        }
+                        catch (Exception e)
+                        {
+                            p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
+                            _error_message += e.Message + "(" + _file.Name + ");";
+                            continue;
+                        }
 
-                                string matin = _dr["tin"].ToString().Trim();
-                                if (matin.Length > 10)
-                                {
-                                    matin = matin.Insert(10, "-");
-                                }
+                        // Ngày bắt đầu kỳ phát sinh
+                        DateTime _kykk_tu_ngay;
+                        // Ngày kết thúc kỳ phát sinh
+                        DateTime _kykk_den_ngay;
+                        try
+                        {
+                            _kykk_tu_ngay = new DateTime(Int32.Parse(_ky_kkhai.Substring(2, 4)), Int32.Parse(_ky_kkhai.Substring(0, 2)), 1);
+                            _kykk_den_ngay =
+                                new DateTime(Int32.Parse(_ky_kkhai.Substring(2, 4)), Int32.Parse(_ky_kkhai.Substring(0, 2)), 1);
+                            _kykk_den_ngay = _kykk_den_ngay.AddMonths(1).AddDays(-1);
+                        }
+                        catch (FormatException e)
+                        {
+                            p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
+                            _error_message += e.Message + "(" + _file.Name + ");";
+                            continue;
+                        }
+                        catch (Exception e)
+                        {
+                            p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
+                            _error_message += e.Message + "(" + _file.Name + ");";
+                            continue;
+                        }
+                        #endregion
 
-                                _query = @"INSERT INTO tb_con_kt
+                        string matin = _dr["tin"].ToString().Trim();
+                        if (matin.Length > 10)
+                        {
+                            matin = matin.Insert(10, "-");
+                        }
+
+                        _query = @"INSERT INTO tb_con_kt
                                                (STT,
                                                 TIN,
                                                 tax_model,
@@ -218,76 +193,55 @@ namespace DC.Vatwin
                                         VALUES ({0}, '{1}', '{2}', '{3}', '{4}','{5}','{6}','{7}',
                                                 '{8}','{9}','{10}','{11}','{12}','{13}',{14},'{15}')";
 
-                                _query = _query.Replace("{0}", _rowsnum.ToString());
-                                _query = _query.Replace("{1}", matin);
-                                _query = _query.Replace("{2}", "VAT-APP");
-                                _query = _query.Replace("{3}", p_tax_code);
-                                _query = _query.Replace("{4}", "01/GTGT");
-                                _query = _query.Replace("{5}", "0026");
-                                _query = _query.Replace("{6}", p_short_name);
-                                _query = _query.Replace("{7}", _dr["machuong"].ToString().Trim());
-                                _query = _query.Replace("{8}", _dr["makhoan"].ToString().Trim());
-                                _query = _query.Replace("{9}", _dr["MaTMuc"].ToString().Trim());
-                                _query = _query.Replace("{10}", _kykk_tu_ngay.ToString("dd/MM/yyyy"));
-                                _query = _query.Replace("{11}", _kykk_den_ngay.ToString("dd/MM/yyyy"));
-                                _query = _query.Replace("{12}", ((DateTime) _dr["HanNop"]).ToString("dd/MM/yyyy").Trim());
-                                _query = _query.Replace("{13}", p_ky_chot.ToString("dd/MM/yyyy"));
-                                _query = _query.Replace("{14}", _dr["SoTien"].ToString().Trim());
-                                _query = _query.Replace("{15}", "TKNS");
+                        _query = _query.Replace("{0}", _rowsnum.ToString());
+                        _query = _query.Replace("{1}", matin);
+                        _query = _query.Replace("{2}", "VAT-APP");
+                        _query = _query.Replace("{3}", p_tax_code);
+                        _query = _query.Replace("{4}", "01/GTGT");
+                        _query = _query.Replace("{5}", "0026");
+                        _query = _query.Replace("{6}", p_short_name);
+                        _query = _query.Replace("{7}", _dr["machuong"].ToString().Trim());
+                        _query = _query.Replace("{8}", _dr["makhoan"].ToString().Trim());
+                        _query = _query.Replace("{9}", _dr["MaTMuc"].ToString().Trim());
+                        _query = _query.Replace("{10}", _kykk_tu_ngay.ToString("dd/MM/yyyy"));
+                        _query = _query.Replace("{11}", _kykk_den_ngay.ToString("dd/MM/yyyy"));
+                        _query = _query.Replace("{12}", ((DateTime)_dr["HanNop"]).ToString("dd/MM/yyyy").Trim());
+                        _query = _query.Replace("{13}", p_ky_chot.ToString("dd/MM/yyyy"));
+                        _query = _query.Replace("{14}", _dr["SoTien"].ToString().Trim());
+                        _query = _query.Replace("{15}", "TKNS");
 
-                                if (_connOra_no.exeUpdate(_query) != 0)
-                                    _rowsnum++;
-                            }
-
-                            _connFoxPro.close();
-                            _dt.Clear();
-                            _dt = null;
-                        }
-                        catch (Exception e)
-                        {
-                            p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
-                            _error_message += e.Message + "(" + _file.Name + ");";
-                        }                       
+                        if (_connOra_no.exeUpdate(_query) != 0)
+                            _rowsnum++;
                     }
-                    _listFile.Clear();
-                    _listFile = null;
-                    if (flages != "No")
-                    {
-                        // Ghi log
-                        _connOra_no.TransStart();
-                        _query = null;
 
-                        // Modify by ManhTV3 on 30.05.2012
-                        if (_error_message.Length == 0)
-                        {
-                            _query = "call PCK_TRACE_LOG.prc_ins_log_vs('" + p_short_name + "', '"
-                                                                        + v_pck + "', 'Y', null)";
-                            _connOra_no.TransExecute(_query);
-                            _connOra_no.TransCommit();
-                        }
-                        else
-                        {
-                            _query = "call PCK_TRACE_LOG.prc_ins_log_vs('" + p_short_name + "', '"
-                                                                        + v_pck + "', 'N', '" + _error_message + "')";
-                            _connOra_no.TransExecute(_query);
-                            _connOra_no.TransRollBack();
-                        }
-                    }
+                    _connFoxPro.close();
+                    _dt.Clear();
+                    _dt = null;
+
                 }
-                catch (Exception e)
+                _listFile.Clear();
+                _listFile = null;
+                if (flages != "No")
                 {
-                    p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
-
                     // Ghi log
                     _connOra_no.TransStart();
                     _query = null;
-                    _query += "call PCK_TRACE_LOG.prc_ins_log_vs('" + p_short_name + "', '"
-                                                                    + v_pck + "', 'N', '";
-                    _query += e.Message.ToString().Replace("'", "\"") + "')";
-                    _connOra_no.TransExecute(_query);
-                    _connOra_no.TransRollBack();
 
-                    return -1;
+                    // Modify by ManhTV3 on 30.05.2012
+                    if (_error_message.Length == 0)
+                    {
+                        _query = "call PCK_TRACE_LOG.prc_ins_log_vs('" + p_short_name + "', '"
+                                                                    + v_pck + "', 'Y', null)";
+                        _connOra_no.TransExecute(_query);
+                        _connOra_no.TransCommit();
+                    }
+                    else
+                    {
+                        _query = "call PCK_TRACE_LOG.prc_ins_log_vs('" + p_short_name + "', '"
+                                                                    + v_pck + "', 'N', '" + _error_message + "')";
+                        _connOra_no.TransExecute(_query);
+                        _connOra_no.TransRollBack();
+                    }
                 }
                 #endregion
                 return _rowsnum;
@@ -354,16 +308,14 @@ namespace DC.Vatwin
                 string _error_message = "";
 
                 #region Docfile ckt_02/GTGT
-                try
-                {                    
-                    // File 
-                    string _file_master = "TK" + p_ky.ToString("MMyyyy") + ".DBF";
-                    string _file_dtl = "DA" + p_ky.ToString("MMyyyy") + ".DBF";
-                    if ((p_dir_source.GetFiles(_file_master).Count()>0) && (p_dir_source.GetFiles(_file_dtl).Count()>0))
-                    {
-                        try
-                        {
-                            _query = @"SELECT a.madtnt as tin,
+
+                // File 
+                string _file_master = "TK" + p_ky.ToString("MMyyyy") + ".DBF";
+                string _file_dtl = "DA" + p_ky.ToString("MMyyyy") + ".DBF";
+                if ((p_dir_source.GetFiles(_file_master).Count() > 0) && (p_dir_source.GetFiles(_file_dtl).Count() > 0))
+                {
+
+                    _query = @"SELECT a.madtnt as tin,
                                               max(c.machuong) as machuong,                                              
                                               a.KyKKhai as KyKKhai,
                                               max(a.HanNop) as HanNop,                                              
@@ -383,75 +335,75 @@ namespace DC.Vatwin
                                        GROUP BY a.madtnt, a.MaTM, a.KyKKhai
                                              ";
 
-                            _query = _query.Replace("{0}", _file_master);
-                            _query = _query.Replace("{1}", _file_dtl);
-                            _query = _query.Replace("{3}", _File_Nghi);
+                    _query = _query.Replace("{0}", _file_master);
+                    _query = _query.Replace("{1}", _file_dtl);
+                    _query = _query.Replace("{3}", _File_Nghi);
 
-                            CLS_DBASE.FOX _connFoxPro = new CLS_DBASE.FOX(p_path);
+                    CLS_DBASE.FOX _connFoxPro = new CLS_DBASE.FOX(p_path);
 
-                            // Chứa dữ liệu
-                            DataTable _dt = _connFoxPro.exeQuery(_query);
-                            //                            int countf = 0;
+                    // Chứa dữ liệu
+                    DataTable _dt = _connFoxPro.exeQuery(_query);
+                    //                            int countf = 0;
 
-                            foreach (DataRow _dr in _dt.Rows)
-                            {
-                                #region Xác định kỳ phát sinh của đối tượng nộp thuế
-                                // Biến lưu trữ kỳ kê khai lấy từ file dữ liệu                            
-                                string _ky_kkhai = _dr["KyKKhai"].ToString().Replace("/", "").Trim();
-                                if (_ky_kkhai.Length < 6)
-                                    _ky_kkhai = p_ky.ToString("MMyyyy");
+                    foreach (DataRow _dr in _dt.Rows)
+                    {
+                        #region Xác định kỳ phát sinh của đối tượng nộp thuế
+                        // Biến lưu trữ kỳ kê khai lấy từ file dữ liệu                            
+                        string _ky_kkhai = _dr["KyKKhai"].ToString().Replace("/", "").Trim();
+                        if (_ky_kkhai.Length < 6)
+                            _ky_kkhai = p_ky.ToString("MMyyyy");
 
-                                //Nếu kỳ kê khai trước tháng 1/2005 thì chuyển thành 1/2005
-                                try
-                                {
-                                    if (Int32.Parse(_ky_kkhai.Substring(2, 4)) < 2005)
-                                        _ky_kkhai = "012005";
-                                }
-                                catch (FormatException e)
-                                {
-                                    p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
-                                    _error_message += e.Message + "(" + _file_master + ");";
-                                    continue;
-                                }
-                                catch (Exception e)
-                                {
-                                    p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
-                                    _error_message += e.Message + "(" + _file_master + ");";
-                                    continue;
-                                }
+                        //Nếu kỳ kê khai trước tháng 1/2005 thì chuyển thành 1/2005
+                        try
+                        {
+                            if (Int32.Parse(_ky_kkhai.Substring(2, 4)) < 2005)
+                                _ky_kkhai = "012005";
+                        }
+                        catch (FormatException e)
+                        {
+                            p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
+                            _error_message += e.Message + "(" + _file_master + ");";
+                            continue;
+                        }
+                        catch (Exception e)
+                        {
+                            p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
+                            _error_message += e.Message + "(" + _file_master + ");";
+                            continue;
+                        }
 
-                                // Ngày bắt đầu kỳ phát sinh
-                                DateTime _kykk_tu_ngay;
-                                // Ngày kết thúc kỳ phát sinh
-                                DateTime _kykk_den_ngay;
-                                try
-                                {
-                                    _kykk_tu_ngay = new DateTime(Int32.Parse(_ky_kkhai.Substring(2, 4)), Int32.Parse(_ky_kkhai.Substring(0, 2)), 1);
-                                    _kykk_den_ngay =
-                                        new DateTime(Int32.Parse(_ky_kkhai.Substring(2, 4)), Int32.Parse(_ky_kkhai.Substring(0, 2)), 1);
-                                    _kykk_den_ngay = _kykk_den_ngay.AddMonths(1).AddDays(-1);
-                                }
-                                catch (FormatException e)
-                                {
-                                    p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
-                                    _error_message += e.Message + "(" + _file_master + ");";
-                                    continue;
-                                }
-                                catch (Exception e)
-                                {
-                                    p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
-                                    _error_message += e.Message + "(" + _file_master + ");";
-                                    continue;
-                                }
-                                #endregion
+                        // Ngày bắt đầu kỳ phát sinh
+                        DateTime _kykk_tu_ngay;
+                        // Ngày kết thúc kỳ phát sinh
+                        DateTime _kykk_den_ngay;
+                        try
+                        {
+                            _kykk_tu_ngay = new DateTime(Int32.Parse(_ky_kkhai.Substring(2, 4)), Int32.Parse(_ky_kkhai.Substring(0, 2)), 1);
+                            _kykk_den_ngay =
+                                new DateTime(Int32.Parse(_ky_kkhai.Substring(2, 4)), Int32.Parse(_ky_kkhai.Substring(0, 2)), 1);
+                            _kykk_den_ngay = _kykk_den_ngay.AddMonths(1).AddDays(-1);
+                        }
+                        catch (FormatException e)
+                        {
+                            p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
+                            _error_message += e.Message + "(" + _file_master + ");";
+                            continue;
+                        }
+                        catch (Exception e)
+                        {
+                            p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
+                            _error_message += e.Message + "(" + _file_master + ");";
+                            continue;
+                        }
+                        #endregion
 
-                                string matin = _dr["tin"].ToString().Trim();
-                                if (matin.Length > 10)
-                                {
-                                    matin = matin.Insert(10, "-");
-                                }
+                        string matin = _dr["tin"].ToString().Trim();
+                        if (matin.Length > 10)
+                        {
+                            matin = matin.Insert(10, "-");
+                        }
 
-                                _query = @"INSERT INTO tb_vat_con_kt_02
+                        _query = @"INSERT INTO tb_vat_con_kt_02
                                                (STT,
                                                 TIN,
                                                 tax_model,
@@ -472,76 +424,32 @@ namespace DC.Vatwin
                                         VALUES ({0}, '{1}', '{2}', '{3}', '{4}','{5}','{6}','{7}',
                                                 '{8}','{9}','{10}','{11}','{12}','{13}',{14},'{15}')";
 
-                                _query = _query.Replace("{0}", _rowsnum.ToString());
-                                _query = _query.Replace("{1}", matin);
-                                _query = _query.Replace("{2}", "VAT-APP");
-                                _query = _query.Replace("{3}", p_tax_code);
-                                _query = _query.Replace("{4}", "02/GTGT");
-                                _query = _query.Replace("{5}", "0027");
-                                _query = _query.Replace("{6}", p_short_name);
-                                _query = _query.Replace("{7}", _dr["machuong"].ToString().Trim());
-                                _query = _query.Replace("{8}", "000");
-                                _query = _query.Replace("{9}", _dr["MaTMuc"].ToString().Trim());
-                                _query = _query.Replace("{10}", _kykk_tu_ngay.ToString("dd/MM/yyyy"));
-                                _query = _query.Replace("{11}", _kykk_den_ngay.ToString("dd/MM/yyyy"));
-                                _query = _query.Replace("{12}", ((DateTime)_dr["HanNop"]).ToString("dd/MM/yyyy").Trim());
-                                _query = _query.Replace("{13}", p_ky.ToString("dd/MM/yyyy"));
-                                _query = _query.Replace("{14}", _dr["SoTien"].ToString().Trim());
-                                _query = _query.Replace("{15}", "TKNS");
+                        _query = _query.Replace("{0}", _rowsnum.ToString());
+                        _query = _query.Replace("{1}", matin);
+                        _query = _query.Replace("{2}", "VAT-APP");
+                        _query = _query.Replace("{3}", p_tax_code);
+                        _query = _query.Replace("{4}", "02/GTGT");
+                        _query = _query.Replace("{5}", "0027");
+                        _query = _query.Replace("{6}", p_short_name);
+                        _query = _query.Replace("{7}", _dr["machuong"].ToString().Trim());
+                        _query = _query.Replace("{8}", "000");
+                        _query = _query.Replace("{9}", _dr["MaTMuc"].ToString().Trim());
+                        _query = _query.Replace("{10}", _kykk_tu_ngay.ToString("dd/MM/yyyy"));
+                        _query = _query.Replace("{11}", _kykk_den_ngay.ToString("dd/MM/yyyy"));
+                        _query = _query.Replace("{12}", ((DateTime)_dr["HanNop"]).ToString("dd/MM/yyyy").Trim());
+                        _query = _query.Replace("{13}", p_ky.ToString("dd/MM/yyyy"));
+                        _query = _query.Replace("{14}", _dr["SoTien"].ToString().Trim());
+                        _query = _query.Replace("{15}", "TKNS");
 
-                                if (_connOra_no.exeUpdate(_query) != 0)
-                                    _rowsnum++;
-                            }
-
-                            _connFoxPro.close();
-                            _dt.Clear();
-                            _dt = null;
-                        }
-                        catch (Exception e)
-                        {
-                            p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
-                            _error_message += e.Message + "(" + _file_master + ");";
-                        }                        
+                        if (_connOra_no.exeUpdate(_query) != 0)
+                            _rowsnum++;
                     }
-                   
-                    if (flages != "No")
-                    {
-                        // Ghi log
-                        _connOra_no.TransStart();
-                        _query = null;
 
-                        // Modify by ManhTV3 on 30.05.2012
-                        if (_error_message.Length == 0)
-                        {
-                            _query = "call PCK_TRACE_LOG.prc_ins_log_vs('" + p_short_name + "', '"
-                                                                        + v_pck + "', 'Y', null)";
-                            _connOra_no.TransExecute(_query);
-                            _connOra_no.TransCommit();
-                        }
-                        else
-                        {
-                            _query = "call PCK_TRACE_LOG.prc_ins_log_vs('" + p_short_name + "', '"
-                                                                        + v_pck + "', 'N', '" + _error_message + "')";
-                            _connOra_no.TransExecute(_query);
-                            _connOra_no.TransRollBack();
-                        }
-                    }
+                    _connFoxPro.close();
+                    _dt.Clear();
+                    _dt = null;
                 }
-                catch (Exception e)
-                {
-                    p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
 
-                    // Ghi log
-                    _connOra_no.TransStart();
-                    _query = null;
-                    _query += "call PCK_TRACE_LOG.prc_ins_log_vs('" + p_short_name + "', '"
-                                                                    + v_pck + "', 'N', '";
-                    _query += e.Message.ToString().Replace("'", "\"") + "')";
-                    _connOra_no.TransExecute(_query);
-                    _connOra_no.TransRollBack();
-
-                    return -1;
-                }
                 #endregion
                 return _rowsnum;
             }

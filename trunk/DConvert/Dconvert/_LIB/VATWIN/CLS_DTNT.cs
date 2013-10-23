@@ -17,7 +17,7 @@ namespace DC.Vatwin
         public CLS_DTNT()
         { }
         ~CLS_DTNT()
-        { }        
+        { }
 
         public static void Prc_doc_danh_muc(string p_short_name,
                                         string p_tax_name,
@@ -28,126 +28,89 @@ namespace DC.Vatwin
         {
             string _query = "";
             //Biến lưu trữ tên của hàm hoặc thủ tục
-            string v_pck = "PRC_CAP_NHAT_DANH_MUC";
+            
+            CLS_DBASE.FOX _connFoxPro = new CLS_DBASE.FOX(p_path);
+
+            
 
             // Biến lưu mô tả lỗi, ngoại lệ trong quá trình đọc file dữ liệu
-            string _error_message = "";
-
+            
             using (CLS_DBASE.ORA _connOra_cndm = new CLS_DBASE.ORA(GlobalVar.gl_connTKTQVATW))
             {
-                try
+
+                #region Xoá dữ liệu danh mục cũ
+                _query = @"Delete tb_vat_dtnt Where short_name= '" + p_short_name + "'";
+                _connOra_cndm.exeUpdate(_query);
+                #endregion
+
+                #region Đọc dữ liệu mã danh mục
+
+                _query = @"SELECT madtnt as madtnt, mabpql as mabpql, macaptren as macaptren,'"
+                         + p_short_name + "' as short_name,left(allt(tengoi),75) as tendtnt from Dtnt2";
+
+                DataTable _dt = _connFoxPro.exeQuery(_query);
+                foreach (DataRow _dr in _dt.Rows)
                 {
-                    #region Xoá dữ liệu danh mục cũ
-                    _query = @"Delete tb_vat_dtnt Where short_name= '" + p_short_name + "'";
-                    _connOra_cndm.exeUpdate(_query);
-                    #endregion
-
-                    #region Đọc dữ liệu mã danh mục
-                    try
-                    {
-                        _query = @"SELECT madtnt as madtnt, mabpql as mabpql, macaptren as macaptren,'"
-                                 + p_short_name + "' as short_name,left(allt(tengoi),75) as tendtnt from Dtnt2";
-
-                        CLS_DBASE.FOX _connFoxPro = new CLS_DBASE.FOX(p_path);
-
-                        DataTable _dt = _connFoxPro.exeQuery(_query);
-
-                          foreach (DataRow _dr in _dt.Rows)
-                        {
-                            _query = @"INSERT INTO tb_vat_dtnt (madtnt, mabpql, macaptren, short_name, tendtnt)
+                    _query = @"INSERT INTO tb_vat_dtnt (madtnt, mabpql, macaptren, short_name, tendtnt)
                                           VALUES ('" + _dr["madtnt"].ToString().Trim() +
-                                          @"', '" + _dr["mabpql"].ToString().Trim() +
-                                          @"', '" + _dr["macaptren"].ToString().Trim() +
-                                          @"', '" + p_short_name +
-                                          @"', '" + _dr["tendtnt"].ToString().Trim() + @"')";
-                            _connOra_cndm.exeUpdate(_query);
-                        }
-                        //CLS_DBASE.WriteToServer(GlobalVar.gl_connTKTQ1, "tb_vat_dtnt", _dt);
-                                                
-                        _dt.Clear();
-                        _dt = null;
-                        _connFoxPro.close();
-                    }
-                    catch (Exception e)
-                    {
-                        p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
-                        _error_message += e.Message + "(Đọc dữ liệu mã danh mục);";
-                    }
-                    #endregion
+                                  @"', '" + _dr["mabpql"].ToString().Trim() +
+                                  @"', '" + _dr["macaptren"].ToString().Trim() +
+                                  @"', '" + p_short_name +
+                                  @"', '" + _dr["tendtnt"].ToString().Trim() + @"')";
+                    _connOra_cndm.exeUpdate(_query);
+                }
+                //CLS_DBASE.WriteToServer(GlobalVar.gl_connTKTQ1, "tb_vat_dtnt", _dt);
 
-                    #region Cập nhật MaDTNT 13 số
-                    try
-                    {
-                        _query = @"UPDATE tb_vat_dtnt
+                _dt.Clear();
+                _dt = null;
+                _connFoxPro.close();
+
+                #endregion
+
+                #region Cập nhật MaDTNT 13 số
+
+                _query = @"UPDATE tb_vat_dtnt
                                     SET madtnt = SUBSTR(trim(madtnt),1,10) || '-' || SUBSTR(trim(madtnt),11,3)
                                     WHERE length(trim(madtnt))>10
                                     AND short_name= '" + p_short_name + "'";
-                        _connOra_cndm.exeUpdate(_query);
-                    }
-                    catch (Exception e)
+                _connOra_cndm.exeUpdate(_query);
+
+                #endregion
+
+                #region Đọc dữ liệu tên phòng ban, cán bộ
+
+                _query = @"SELECT mabpql, tengoi, macaptren from dmbpql";
+
+                _dt = _connFoxPro.exeQuery(_query);
+                string name;
+                string code;
+                string macaptren;
+
+                foreach (DataRow _dr in _dt.Rows)
+                {
+                    macaptren = _dr["macaptren"].ToString().Trim();
+                    if (macaptren == "")
                     {
-                        p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
-                        _error_message += e.Message + "(Đọc dữ liệu mã danh mục);";
+                        name = "TENCAPTRENQUANLY";
+                        code = "MACAPTREN";
                     }
-                    #endregion
-
-                    #region Đọc dữ liệu tên phòng ban, cán bộ
-                    try
+                    else
                     {
-                        _query = @"SELECT mabpql, tengoi, macaptren from dmbpql";
-
-                        CLS_DBASE.FOX _connFoxPro = new CLS_DBASE.FOX(p_path);
-
-                        DataTable _dt = _connFoxPro.exeQuery(_query);
-
-                        string name;
-                        string code;
-                        string macaptren;
-
-                        foreach (DataRow _dr in _dt.Rows)
-                        {
-                            macaptren = _dr["macaptren"].ToString().Trim();
-                            if (macaptren == "")
-                            {
-                                name = "TENCAPTRENQUANLY";
-                                code = "MACAPTREN";
-                            }
-                            else
-                            {
-                                name = "TENBOPHANQUANLY";
-                                code = "MABPQL";
-                            }
-                            _query = @"UPDATE tb_vat_dtnt
+                        name = "TENBOPHANQUANLY";
+                        code = "MABPQL";
+                    }
+                    _query = @"UPDATE tb_vat_dtnt
                                           SET " + name + @" = '" + _dr["tengoi"].ToString().Trim() + @"'
                                         WHERE trim(" + code + ") = '" + _dr["mabpql"].ToString().Trim() + @"'
                                           AND short_name= '" + p_short_name + "'";
-                            _connOra_cndm.exeUpdate(_query);
-                        }
-                        _dt.Clear();
-                        _dt = null;
-                        _connFoxPro.close();
-                    }
-                    catch (Exception e)
-                    {
-                        p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
-                        _error_message += e.Message + "(Đọc dữ liệu tên danh mục);";
-
-                    }
-                    #endregion                    
-
+                    _connOra_cndm.exeUpdate(_query);
                 }
-                catch (Exception e)
-                {
-                    p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
+                _dt.Clear();
+                _dt = null;
+                _connFoxPro.close();
 
-                    // Ghi log
-                    _connOra_cndm.TransStart();
-                    _query = null;
-                    _query += "call PCK_TRACE_LOG.prc_ins_log_vs('" + p_short_name + "', '" + v_pck + "', 'N', '";
-                    _query += e.Message.ToString().Replace("'", "\"") + "')";
-                    _connOra_cndm.TransExecute(_query);
-                    _connOra_cndm.TransRollBack();
-                }
+                #endregion
+
             }
         }
 

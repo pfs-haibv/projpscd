@@ -163,7 +163,7 @@ namespace DC.Utl
             }
 
             public void TransExecute(String strSQL)
-            {
+            {                
                 this._command.Transaction = this._trans;
                 _command.CommandType = CommandType.Text;
                 _command.CommandText = strSQL;

@@ -5,11 +5,11 @@ CREATE OR REPLACE
 PACKAGE ext_pck_qlt_control IS
 
                             PROCEDURE Prc_Qlt_Thop_No(p_chot DATE);
-                            PROCEDURE Prc_Qlt_Thop_PS(p_chot DATE);
+                            PROCEDURE Prc_Qlt_Thop_PS(p_ky_ps_tu DATE, p_ky_ps_den DATE);
                             PROCEDURE Prc_Qlt_Thop_Ckt(p_chot DATE);
 
                             PROCEDURE Prc_Job_Qlt_Thop_No(p_chot DATE);
-                            PROCEDURE Prc_Job_Qlt_Thop_PS(p_chot DATE);
+                            PROCEDURE Prc_Job_Qlt_Thop_PS(p_ky_ps_tu DATE, p_ky_ps_den DATE);
                             PROCEDURE Prc_Job_Qlt_Thop_Ckt(p_chot DATE);
 
                             PROCEDURE Prc_Remove_Job(p_pro_name VARCHAR2);
