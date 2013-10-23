@@ -853,7 +853,7 @@ namespace DC.Vatwin
                             }
                             catch (Exception e)
                             {
-                                p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
+                                //p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
                             }
                         }
                     }

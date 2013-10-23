@@ -33,8 +33,7 @@ namespace DC.Vatwin
                 // Hàm lưu số bản ghi đã được xóa
                 int _rowsnum = 0;
 
-                try
-                {
+               
                     _query = @"DELETE FROM tb_vat_dkntk
                                 WHERE short_name = '" + p_short_name + @"'
                                ";
@@ -44,30 +43,8 @@ namespace DC.Vatwin
                                 WHERE short_name = '" + p_short_name + @"'
                                   AND tax_model = 'VAT-APP'";
                     _rowsnum = _ora.exeUpdate(_query);
-
-                    // Ghi log
-                    _ora.TransStart();
-                    _query = null;
-                    _query = "call PCK_TRACE_LOG.prc_ins_log_vs('" + p_short_name + "', '" + v_pck + "', 'Y', null)";
-                    _ora.TransExecute(_query);
-                    _ora.TransCommit();
-                }
-                catch (Exception e)
-                {
-                    p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
-
-                    // Ghi log
-                    _ora.TransStart();
-                    _query = null;
-                    _query +=
-                        "call PCK_TRACE_LOG.prc_ins_log_vs('" + p_short_name + "', '"
-                                                            + v_pck + "', 'N', '";
-                    _query += e.Message.ToString().Replace("'", "\"") + "')";
-                    _ora.TransExecute(_query);
-                    _ora.TransRollBack();
-                    
-                    return -1;
-                }
+                   
+                
                 return _rowsnum;
             }
         }
@@ -91,7 +68,7 @@ namespace DC.Vatwin
                 // Biến lưu trữ tên của hàm hoặc thủ tục
                 string v_pck = "FNC_DOC_FILE_DKNTK";
                 string _ky_chot = p_ky_chot.ToString("MM/yyyy");
-                DateTime _ngay_dau_nam = new DateTime(p_ky_chot.Year,1,1);
+                DateTime _ngay_dau_nam = new DateTime(p_ky_chot.Year, 1, 1);
 
                 string _File_Nghi = "Nghi" + p_ky_chot.ToString("yyyy") + ".DBF";
                 // Biến lưu số bản ghi đã được bổ sung vào bảng TB_NO
@@ -101,22 +78,20 @@ namespace DC.Vatwin
                 string _error_message = "";
 
                 #region Docfile dkntk
-                try
-                {
-                    // File 
-                    string _search_pattern = "DTNT_LT2.DBF";
-                    // Đối tượng lưu trữ các file dữ liệu
-                    ArrayList _listFile = new ArrayList();
-                    // Lấy danh sách các file dữ liệu
-                    _listFile.AddRange(p_dir_source.GetFiles(_search_pattern));
 
-                    foreach (FileInfo _file in _listFile)
-                    {
-                        if (_file.Name.Length != 12)
-                            continue;
-                        try
-                        {
-                            _query = @"SELECT a.madtnt as tin,
+                // File 
+                string _search_pattern = "DTNT_LT2.DBF";
+                // Đối tượng lưu trữ các file dữ liệu
+                ArrayList _listFile = new ArrayList();
+                // Lấy danh sách các file dữ liệu
+                _listFile.AddRange(p_dir_source.GetFiles(_search_pattern));
+
+                foreach (FileInfo _file in _listFile)
+                {
+                    if (_file.Name.Length != 12)
+                        continue;
+
+                    _query = @"SELECT a.madtnt as tin,
                                               a.tuky as ky_bat_dau,
                                               a.denky as ky_ket_thuc,
                                               a.matkhai as ma_tkhai,
@@ -131,71 +106,55 @@ namespace DC.Vatwin
                                               and Allt(matkhai) in (select Allt(matkhai) from dmtokhai.dbf)
                                               and Allt(a.madtnt) not in (select Allt(MaDTNT) from {3} where empty(denngay))
                                              ";
-                            
-                            _query = _query.Replace("{0}", _file.Name);
-                            _query = _query.Replace("{1}", _ky_chot);
-                            _query = _query.Replace("{2}", p_short_name);
-                            _query = _query.Replace("{3}", _File_Nghi);
-                                                                                    
-                            CLS_DBASE.FOX _connFoxPro = new CLS_DBASE.FOX(p_path);
-                            
-                            // Chứa dữ liệu
-                            DataTable _dt = _connFoxPro.exeQuery(_query);                            
-                            CLS_DBASE.WriteToServer(GlobalVar.gl_connTKTQ1, "TB_VAT_DKNTK", _dt);                            
-                            
-                            _connFoxPro.close();
-                            _dt.Clear();
-                            _dt = null;
-                        }
-                        catch (Exception e)
-                        {
-                            p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
-                            _error_message += e.Message + "(" + _file.Name + ");";
-                        }
-                        
-                    }
-                    _listFile.Clear();
-                    _listFile = null;
-                    if (flages != "No")
+
+                    _query = _query.Replace("{0}", _file.Name);
+                    _query = _query.Replace("{1}", _ky_chot);
+                    _query = _query.Replace("{2}", p_short_name);
+                    _query = _query.Replace("{3}", _File_Nghi);
+
+                    CLS_DBASE.FOX _connFoxPro = new CLS_DBASE.FOX(p_path);
+
+                    // Chứa dữ liệu
+                    DataTable _dt = _connFoxPro.exeQuery(_query);
+                    //CLS_DBASE.WriteToServer(GlobalVar.gl_connTKTQ1, "TB_VAT_DKNTK", _dt);
+
+                    foreach (DataRow _dr in _dt.Rows)
                     {
-                        // Ghi log
-                        _connOra_no.TransStart();
-                        _query = null;
+                        string matin = _dr["tin"].ToString().Trim();
+                        //if (matin.Length > 10)
+                        //{
+                        //    matin = matin.Insert(10, "-");
+                        //}
+                      
+                        _query = @"INSERT INTO TB_VAT_DKNTK
+                                               (TIN,
+                                                ky_bat_dau,
+                                                ky_ket_thuc,
+                                                ma_tkhai,                                                
+                                                short_name
+                                                )
+                                        VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')";
 
-                        // Modify by ManhTV3 on 30.05.2012
-                        if (_error_message.Length == 0)
-                        {
-                            _query = "call PCK_TRACE_LOG.prc_ins_log_vs('" + p_short_name + "', '"
-                                                                        + v_pck + "', 'Y', null)";
-                            _connOra_no.TransExecute(_query);
-                            _connOra_no.TransCommit();
-                        }
-                        else
-                        {
-                            _query = "call PCK_TRACE_LOG.prc_ins_log_vs('" + p_short_name + "', '"
-                                                                        + v_pck + "', 'N', '" + _error_message + "')";
-                            _connOra_no.TransExecute(_query);
-                            _connOra_no.TransRollBack();
-                        }
+                        _query = _query.Replace("{0}", _dr["TIN"].ToString().Trim());
+                        _query = _query.Replace("{1}", _dr["ky_bat_dau"].ToString().Trim());
+                        _query = _query.Replace("{2}", _dr["ky_ket_thuc"].ToString().Trim());
+                        _query = _query.Replace("{3}", _dr["ma_tkhai"].ToString().Trim());
+                        _query = _query.Replace("{4}", _dr["short_name"].ToString().Trim());
+                        
+                        if (_connOra_no.exeUpdate(_query) != 0)
+                            _rowsnum++;
                     }
-                }
-                catch (Exception e)
-                {
-                    p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
 
-                    // Ghi log
-                    _connOra_no.TransStart();
-                    _query = null;
-                    _query += "call PCK_TRACE_LOG.prc_ins_log_vs('" + p_short_name + "', '"
-                                                                    + v_pck + "', 'N', '";
-                    _query += e.Message.ToString().Replace("'", "\"") + "')";
-                    _connOra_no.TransExecute(_query);
-                    _connOra_no.TransRollBack();
-
-                    return -1;
+                    _connFoxPro.close();
+                    _dt.Clear();
+                    _dt = null;               
                 }
+                _listFile.Clear();
+                _listFile = null;
+
+
                 #endregion
-                return _rowsnum;                
+                return _rowsnum;
             }
         }
 
@@ -209,16 +168,16 @@ namespace DC.Vatwin
 
             string _query = null;
             using (CLS_DBASE.ORA _ora = new CLS_DBASE.ORA(GlobalVar.gl_connTKTQ))
-            {
-                _ora.TransStart();
-                _query = "call PCK_CHUYENDOI_VAT.prc_capnhat_dkntk('" + p_short_name + "')";
-                _ora.TransExecute(_query);
-                _ora.TransCommit();  
+            { 
+                    _ora.TransStart();
+                    _query = "call PCK_CHUYENDOI_VAT.prc_capnhat_dkntk('" + p_short_name + "')";
+                    _ora.TransExecute(_query);
+                    _ora.TransCommit();
 
-                _ora.TransStart();
-                _query = "call PCK_CHUYENDOI_VAT.prc_ghi_dkntk('" + p_short_name + "')";
-                _ora.TransExecute(_query);
-                _ora.TransCommit();              
+                    _ora.TransStart();
+                    _query = "call PCK_CHUYENDOI_VAT.prc_ghi_dkntk('" + p_short_name + "')";
+                    _ora.TransExecute(_query);
+                    _ora.TransCommit();             
             }
 
             return _rowsnum;

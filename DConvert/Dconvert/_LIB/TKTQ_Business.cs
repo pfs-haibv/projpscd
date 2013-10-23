@@ -280,7 +280,7 @@ namespace DC.Lib
                 _ora.TransStart();
                 _query = "call PCK_CDOI_DLIEU_QLT.Prc_Qlt_Get_TKTMB('" + p_short_name + "')";
                 _ora.TransExecute(_query);
-                _query = "call PCK_MAP_TMS.Prc_Update_bac_mbai";
+                _query = "call PCK_MAP_TMS.Prc_Update_bac_mbai()";
                 _ora.TransExecute(_query);
                 _ora.TransCommit();
             }
@@ -351,6 +351,8 @@ namespace DC.Lib
             {
                 _ora.TransStart();
                 _query = "call PCK_CDOI_DLIEU_QCT.Prc_Qct_Get_TKTMB('" + p_short_name + "')";
+                _ora.TransExecute(_query);
+                _query = "call PCK_MAP_TMS.Prc_Update_bac_mbai()";
                 _ora.TransExecute(_query);
                 _ora.TransCommit();
             }
@@ -2277,6 +2279,105 @@ namespace DC.Lib
                     CLS_EXCEL.Prc_releaseObject(workBook);
                     CLS_EXCEL.Prc_releaseObject(_excelApp);
                 }
+            }
+        }
+    }
+
+    class TKTQ_PCK_ORA_CHECKDATA
+    {
+        public static void Prc_CHECK_NO(string p_short_name)
+        {
+            string _query = null;
+            using (CLS_DBASE.ORA _ora = new CLS_DBASE.ORA(GlobalVar.gl_connTKTQ))
+            {
+                _ora.TransStart();
+                _query = "call pck_check_data_tms.prc_check_no('" + p_short_name + "')";
+                _ora.TransExecute(_query);
+                _ora.TransCommit();
+            }
+        }
+        public static void Prc_CHECK_DKNTK(string p_short_name)
+        {
+            string _query = null;
+            using (CLS_DBASE.ORA _ora = new CLS_DBASE.ORA(GlobalVar.gl_connTKTQ))
+            {
+                _ora.TransStart();
+                _query = "call pck_check_data_tms.prc_check_dkntk('" + p_short_name + "')";
+                _ora.TransExecute(_query);
+                _ora.TransCommit();
+            }
+        }
+
+        public static void Prc_CHECK_TKMB(string p_short_name)
+        {
+            string _query = null;
+            using (CLS_DBASE.ORA _ora = new CLS_DBASE.ORA(GlobalVar.gl_connTKTQ))
+            {
+                _ora.TransStart();
+                _query = "call pck_check_data_tms.prc_check_tkmb('" + p_short_name + "')";
+                _ora.TransExecute(_query);
+                _ora.TransCommit();
+            }
+        }
+
+        public static void Prc_CHECK_PS(string p_short_name)
+        {
+            string _query = null;
+            using (CLS_DBASE.ORA _ora = new CLS_DBASE.ORA(GlobalVar.gl_connTKTQ))
+            {
+                _ora.TransStart();
+                _query = "call pck_check_data_tms.prc_check_ps('" + p_short_name + "')";
+                _ora.TransExecute(_query);
+                _ora.TransCommit();
+            }
+        }
+
+
+        public static void Prc_CHECK_CKT(string p_short_name)
+        {
+            string _query = null;
+            using (CLS_DBASE.ORA _ora = new CLS_DBASE.ORA(GlobalVar.gl_connTKTQ))
+            {
+                _ora.TransStart();
+                _query = "call pck_check_data_tms.prc_check_con_kt('" + p_short_name + "')";
+                _ora.TransExecute(_query);
+                _ora.TransCommit();
+            }
+        }
+
+        public static void Prc_CHECK_TKKH(string p_short_name)
+        {
+            string _query = null;
+            using (CLS_DBASE.ORA _ora = new CLS_DBASE.ORA(GlobalVar.gl_connTKTQ))
+            {
+                _ora.TransStart();
+                _query = "call pck_check_data_tms.prc_check_01_tkh('" + p_short_name + "')";
+                _ora.TransExecute(_query);
+                _ora.TransCommit();
+            }
+        }
+
+        public static void Prc_CHECK_TK_PNN(string p_short_name)
+        {
+            string _query = null;
+            using (CLS_DBASE.ORA _ora = new CLS_DBASE.ORA(GlobalVar.gl_connTKTQ))
+            {
+                _ora.TransStart();
+                _query = "call pck_check_data_tms.prc_check_tk_sddpnn('" + p_short_name + "')";
+                _ora.TransExecute(_query);
+                _ora.TransCommit();
+            }
+        }
+
+        public static void Prc_CHECK_TPH(string p_short_name)
+        {
+            string _query = null;
+            using (CLS_DBASE.ORA _ora = new CLS_DBASE.ORA(GlobalVar.gl_connTKTQ))
+            {
+                _ora.TransStart();
+                _query = "call pck_check_data_tms.prc_check_tphat('" + p_short_name + "')";
+                _ora.TransExecute(_query);
+                _ora.TransCommit();
             }
         }
     }
