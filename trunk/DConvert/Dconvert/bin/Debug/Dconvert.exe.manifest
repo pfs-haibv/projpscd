@@ -94,14 +94,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Dconvert.exe" size="285696">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Dconvert.exe" size="288256">
       <assemblyIdentity name="Dconvert" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>K6hU36/cfp/lwcI/OucQqliyi7o=</dsig:DigestValue>
+        <dsig:DigestValue>Q9nODUsO+SFlQOzjKOycF/Vx9fA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -160,42 +160,6 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
       <dsig:DigestValue>VI0Qj42jIkTyHco+jl/uxQ45Ph4=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="_LIB\SAP_DotNetConnector3_x86\libicudecnumber.dll" size="65536">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>ZfbdBnVDBz6irixh8o0f8EXPCjE=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="_LIB\SAP_DotNetConnector3_x86\rscp4n.dll" size="2904064">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>LbNmJvXqMVvqe9X64gfH+Q7Y69I=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="_LIB\SAP_DotNetConnector3_x86\sapnco.dll" size="389120">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>54BPopPT/nL3PnL/6jyAUDAEzu8=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="_LIB\SAP_DotNetConnector3_x86\sapnco_utils.dll" size="4431872">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>2kNq2nfs5gYn3OWdyEs8G0zVBUs=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

@@ -1,3 +1,6 @@
+-- Start of DDL Script for Package PNN_OWNER.EXT_PCK_PNN
+-- Generated 30-Oct-2013 15:08:16 from PNN_OWNER@PNN_BRV_VTA
+
 CREATE OR REPLACE 
 PACKAGE ext_pck_pnn
   IS
@@ -12,16 +15,13 @@ PACKAGE ext_pck_pnn
         --Chuyen doi so con phai nop, nop thua
         PROCEDURE prc_job_pnn_thop_no (p_chot DATE, tax_code varchar2);
         PROCEDURE prc_pnn_thop_no (p_chot DATE, tax_code varchar2);
-
-        --Chuyen doi chi tiet to khai 01/TK-SDDPNN
-        PROCEDURE prc_job_pnn_thop_01_tk_sddpnn (p_chot DATE);
-        PROCEDURE prc_pnn_thop_01_tk_sddpnn (p_chot DATE);
-
-        --Chuyen doi chi tiet to khai 02/TK-SDDPNN
-        PROCEDURE prc_job_pnn_thop_02_tk_sddpnn (p_chot DATE);
-        PROCEDURE prc_pnn_thop_02_tk_sddpnn (p_chot DATE);
+       
+        FUNCTION Fnc_encode_unicode(P_instring VARCHAR2)
+            RETURN VARCHAR2;
 
 END; -- Package spec
-/
 
+
+
+-- End of DDL Script for Package PNN_OWNER.EXT_PCK_PNN
 

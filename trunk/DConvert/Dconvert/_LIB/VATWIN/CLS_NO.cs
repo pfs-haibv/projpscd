@@ -61,7 +61,7 @@ namespace DC.Vatwin
 
                 // Biến lưu trữ tên của hàm hoặc thủ tục
                 string v_pck = "FNC_DOC_FILE_NO";
-                string _ky_chot_1 = p_ky_chot.AddMonths(1).ToString().Trim().Substring(3, 7);
+                string _ky_chot_1 = p_ky_chot.AddMonths(1).ToString("MM/yyyy").Trim();
                 string _File_Nghi = "Nghi" + p_ky_chot.ToString("yyyy") + ".DBF";
 
                 // Biến lưu số bản ghi đã được bổ sung vào bảng TB_NO
@@ -88,9 +88,9 @@ namespace DC.Vatwin
                                              a.matm as tmt_ma_tmuc,
                                              a.matk as ma_tkhoan,
                                              a.KyKKhai,
-                                             a.hannop as han_nop,
+                                             DTOC(a.hannop,1) as han_nop,
                                              a.SoQD as SoQD,
-                                             a.NgayQD as NgayQD,
+                                             DTOC(a.NgayQD,1) as NgayQD,
                                              a.KyLBo,
                                              MAX(a.KyLSo) as KyLSo,
                                              MAX(c.MaChuong) as machuong,
@@ -117,8 +117,7 @@ namespace DC.Vatwin
 
                     // Chứa dữ liệu
                     DataTable _dt = _connFoxPro.exeQuery(_query);
-                    //                            int countf = 0;
-                    int chot;
+                    
                     foreach (DataRow _dr in _dt.Rows)
                     {
                         #region Xác định kỳ phát sinh của đối tượng nộp thuế
@@ -177,13 +176,46 @@ namespace DC.Vatwin
                             continue;
                         }
                         #endregion
-
+                        
                         string _KyLSo = _dr["KyLSo"].ToString().Trim();
                         if (_KyLSo.Length != 7)
                             _KyLSo = p_ky_chot.ToString("MM/yyyy");
 
                         int _nam_LSo = Int32.Parse(_KyLSo.Substring(3, 4));
+                        
+                        //Lấy tài khoản
+                        string _matk = _dr["ma_tkhoan"].ToString().Trim();
+                        if (_matk == "TKGT" || _matk == "TKNS" || _matk == "TKCH")
+                            _matk = "TK_NGAN_SACH";
+                        if (_matk == "TGTC")
+                            _matk = "TK_STC";
+                        if (_matk == "TKTH")
+                            _matk = "TK_TH_HOAN";
+                        
+                        //Lấy ngày quyết định
+                        string _cNgayQD = _dr["NgayQD"].ToString().Trim();
+                        if (_cNgayQD.Length != 8)
+                            _cNgayQD = "";
+                        else
+                            _cNgayQD = _cNgayQD.Substring(6,2) + 
+                                @"/" + _cNgayQD.Substring(4,2) +
+                                @"/" + _cNgayQD.Substring(0,4);
 
+                        //Lấy han nop
+                        string _cHanNop = _dr["HanNop"].ToString().Trim();
+                        DateTime _dHanNop;
+                        if (_cHanNop.Length != 8)
+                            _dHanNop = p_ky_chot;
+                        else
+                            _dHanNop = new DateTime (Int32.Parse(_cHanNop.Substring(6, 2)),
+                                       Int32.Parse(_cHanNop.Substring(4, 2)),
+                                       Int32.Parse(_cHanNop.Substring(0, 4))); 
+
+                        int _SoTien = Int32.Parse(_dr["no_cuoi_ky"].ToString().Trim());
+                        string _Ngay_TPhat = "";
+                        if ((_dHanNop > p_ky_chot) && (_SoTien > 0))
+                            _Ngay_TPhat = p_ky_chot.ToString("dd/MM/yyyy");
+ 
                         DateTime _ngay_htoan;
                         DateTime _ngay_dau_nam = new DateTime(p_ky_chot.Year, 1, 1);
                         if (_nam_LSo < p_ky_chot.Year)
@@ -196,11 +228,11 @@ namespace DC.Vatwin
                                                 tin, ma_chuong, ma_khoan, tmt_ma_tmuc,
                                                 tkhoan, ngay_htoan, kykk_tu_ngay,
                                                 kykk_den_ngay, han_nop,
-                                                so_tien, tax_model, status, id, So_QD, Ngay_QD)
+                                                so_tien, tax_model, status, id, So_QD, Ngay_QD, tphat_den_ngay)
                                         VALUES ('{0}', {1}, '{2}', '{3}', '{4}',
                                                 '{5}', '{6}', '{7}', '{8}', '{9}',
                                                 '{10}', '{11}', '{12}', '{14}',
-                                                '{15}', '{16}', {17}, '{18}', '{19}')";
+                                                '{15}', '{16}', {17}, '{18}', '{19}', '{20}')";
 
                         _query = _query.Replace("{0}", p_short_name);
                         _query = _query.Replace("{1}", (_rowsnum + 1).ToString());
@@ -217,17 +249,18 @@ namespace DC.Vatwin
                         _query = _query.Replace("{5}", _dr["machuong"].ToString().Trim());
                         _query = _query.Replace("{6}", "000");
                         _query = _query.Replace("{7}", _dr["tmt_ma_tmuc"].ToString().Trim());
-                        _query = _query.Replace("{8}", _dr["ma_tkhoan"].ToString().Trim());
+                        _query = _query.Replace("{8}", _matk);
                         _query = _query.Replace("{9}", _ngay_htoan.ToString("dd/MM/yyyy"));
                         _query = _query.Replace("{10}", _kykk_tu_ngay.ToString("dd/MM/yyyy"));
                         _query = _query.Replace("{11}", _kykk_den_ngay.ToString("dd/MM/yyyy"));
-                        _query = _query.Replace("{12}", ((DateTime)_dr["han_nop"]).ToString("dd/MM/yyyy"));
+                        _query = _query.Replace("{12}", (_dHanNop.ToString("dd/MM/yyyy")));
                         _query = _query.Replace("{14}", _dr["no_cuoi_ky"].ToString().Trim());
                         _query = _query.Replace("{15}", "VAT-APP");
                         _query = _query.Replace("{16}", "");
                         _query = _query.Replace("{17}", "seq_id_csv.nextval");
                         _query = _query.Replace("{18}", _dr["SoQD"].ToString().Trim());
-                        _query = _query.Replace("{19}", ((DateTime)_dr["NgayQD"]).ToString("dd/MM/yyyy"));
+                        _query = _query.Replace("{19}", _cNgayQD);
+                        _query = _query.Replace("{19}", _Ngay_TPhat);
 
                         if (_connOra_no.exeUpdate(_query) != 0)
                             _rowsnum++;

@@ -29,25 +29,23 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_QLCD));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle43 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle44 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle45 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bndSource = new System.Windows.Forms.BindingSource(this.components);
             this.grb_drg = new System.Windows.Forms.GroupBox();
             this.ckb_reset_log = new System.Windows.Forms.CheckBox();
@@ -96,6 +94,7 @@
             this.tb_folder = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ckb_kt_khoa_so = new System.Windows.Forms.CheckBox();
             this.ckb_doc_file_danh_muc = new System.Windows.Forms.CheckBox();
             this.ckb_doc_file_ps = new System.Windows.Forms.CheckBox();
             this.ckb_doc_file_cctt = new System.Windows.Forms.CheckBox();
@@ -105,6 +104,7 @@
             this.ckb_doc_file_no = new System.Windows.Forms.CheckBox();
             this.tab_PNN = new System.Windows.Forms.TabPage();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.ckb_pnn_dmuc = new System.Windows.Forms.CheckBox();
             this.ckb_get_log_pnn = new System.Windows.Forms.CheckBox();
             this.ckb_pnn_tk02 = new System.Windows.Forms.CheckBox();
             this.ckb_pnn_tk01 = new System.Windows.Forms.CheckBox();
@@ -155,6 +155,13 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.Thuc_hien = new System.Windows.Forms.Button();
             this.dgrTaxOffice = new System.Windows.Forms.DataGridView();
+            this.status_listView = new System.Windows.Forms.ListView();
+            this.cl_action = new System.Windows.Forms.ColumnHeader();
+            this.cl_value = new System.Windows.Forms.ColumnHeader();
+            this.lb_Drg_Loc = new System.Windows.Forms.Label();
+            this.iconImageList = new System.Windows.Forms.ImageList(this.components);
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.cl_tax_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cl_short_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cl_tax_model = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -163,24 +170,14 @@
             this.cl_prov_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cl_ky_chot = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cl_ky_ps_tu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cl_ky_ps_den = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cl_tax_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cl_ma_cqt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cl_dblink = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cl_qlt_user = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cl_qlt_pass = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cl_vat_user = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cl_vat_pass = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cl_vat_ddan_tu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cl_vat_ddan_den = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.status_listView = new System.Windows.Forms.ListView();
-            this.cl_action = new System.Windows.Forms.ColumnHeader();
-            this.cl_value = new System.Windows.Forms.ColumnHeader();
-            this.lb_Drg_Loc = new System.Windows.Forms.Label();
-            this.iconImageList = new System.Windows.Forms.ImageList(this.components);
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.ckb_kt_khoa_so = new System.Windows.Forms.CheckBox();
+            this.cl_nhap_ngoai = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bndSource)).BeginInit();
             this.grb_drg.SuspendLayout();
             this.tab_action.SuspendLayout();
@@ -369,9 +366,9 @@
             this.ckb_qlt_slech_no.AutoSize = true;
             this.ckb_qlt_slech_no.Location = new System.Drawing.Point(16, 180);
             this.ckb_qlt_slech_no.Name = "ckb_qlt_slech_no";
-            this.ckb_qlt_slech_no.Size = new System.Drawing.Size(109, 17);
+            this.ckb_qlt_slech_no.Size = new System.Drawing.Size(191, 17);
             this.ckb_qlt_slech_no.TabIndex = 8;
-            this.ckb_qlt_slech_no.Text = "[QLT] Sai lệch nợ";
+            this.ckb_qlt_slech_no.Text = "[QLT] Sai lệch sổ nợ và sổ thu nôp";
             this.ckb_qlt_slech_no.UseVisualStyleBackColor = true;
             // 
             // ckb_qct_slech_no
@@ -379,9 +376,9 @@
             this.ckb_qct_slech_no.AutoSize = true;
             this.ckb_qct_slech_no.Location = new System.Drawing.Point(228, 158);
             this.ckb_qct_slech_no.Name = "ckb_qct_slech_no";
-            this.ckb_qct_slech_no.Size = new System.Drawing.Size(110, 17);
+            this.ckb_qct_slech_no.Size = new System.Drawing.Size(192, 17);
             this.ckb_qct_slech_no.TabIndex = 7;
-            this.ckb_qct_slech_no.Text = "[QCT] Sai lệch nợ";
+            this.ckb_qct_slech_no.Text = "[QCT] Sai lệch sổ nợ và sổ thu nộp";
             this.ckb_qct_slech_no.UseVisualStyleBackColor = true;
             // 
             // tabPage1_comboBox1
@@ -408,9 +405,9 @@
             this.ckb_qct_no.AutoSize = true;
             this.ckb_qct_no.Location = new System.Drawing.Point(228, 65);
             this.ckb_qct_no.Name = "ckb_qct_no";
-            this.ckb_qct_no.Size = new System.Drawing.Size(69, 17);
+            this.ckb_qct_no.Size = new System.Drawing.Size(167, 17);
             this.ckb_qct_no.TabIndex = 3;
-            this.ckb_qct_no.Text = "[QCT] nợ";
+            this.ckb_qct_no.Text = "[QCT] Còn phải nộp/nộp thừa";
             this.ckb_qct_no.UseVisualStyleBackColor = true;
             // 
             // ckb_qlt_no
@@ -418,9 +415,9 @@
             this.ckb_qlt_no.AutoSize = true;
             this.ckb_qlt_no.Location = new System.Drawing.Point(16, 60);
             this.ckb_qlt_no.Name = "ckb_qlt_no";
-            this.ckb_qlt_no.Size = new System.Drawing.Size(68, 17);
+            this.ckb_qlt_no.Size = new System.Drawing.Size(166, 17);
             this.ckb_qlt_no.TabIndex = 1;
-            this.ckb_qlt_no.Text = "[QLT] nợ";
+            this.ckb_qlt_no.Text = "[QLT] Còn phải nộp/nộp thừa";
             this.ckb_qlt_no.UseVisualStyleBackColor = true;
             // 
             // ckb_qlt_ps
@@ -721,6 +718,18 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Loại dữ liệu";
             // 
+            // ckb_kt_khoa_so
+            // 
+            this.ckb_kt_khoa_so.AutoSize = true;
+            this.ckb_kt_khoa_so.Checked = true;
+            this.ckb_kt_khoa_so.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckb_kt_khoa_so.Location = new System.Drawing.Point(24, 30);
+            this.ckb_kt_khoa_so.Name = "ckb_kt_khoa_so";
+            this.ckb_kt_khoa_so.Size = new System.Drawing.Size(105, 17);
+            this.ckb_kt_khoa_so.TabIndex = 10;
+            this.ckb_kt_khoa_so.Text = "Kiểm tra khóa sổ";
+            this.ckb_kt_khoa_so.UseVisualStyleBackColor = true;
+            // 
             // ckb_doc_file_danh_muc
             // 
             this.ckb_doc_file_danh_muc.AutoSize = true;
@@ -800,9 +809,9 @@
             this.ckb_doc_file_no.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckb_doc_file_no.Location = new System.Drawing.Point(24, 81);
             this.ckb_doc_file_no.Name = "ckb_doc_file_no";
-            this.ckb_doc_file_no.Size = new System.Drawing.Size(40, 17);
+            this.ckb_doc_file_no.Size = new System.Drawing.Size(136, 17);
             this.ckb_doc_file_no.TabIndex = 0;
-            this.ckb_doc_file_no.Text = "Nợ";
+            this.ckb_doc_file_no.Text = "Còn phải nộp/nộp thừa";
             this.ckb_doc_file_no.UseVisualStyleBackColor = true;
             // 
             // tab_PNN
@@ -820,6 +829,7 @@
             // groupBox6
             // 
             this.groupBox6.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox6.Controls.Add(this.ckb_pnn_dmuc);
             this.groupBox6.Controls.Add(this.ckb_get_log_pnn);
             this.groupBox6.Controls.Add(this.ckb_pnn_tk02);
             this.groupBox6.Controls.Add(this.ckb_pnn_tk01);
@@ -831,6 +841,16 @@
             this.groupBox6.TabIndex = 3;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Tổng hợp và chuyển dữ liệu";
+            // 
+            // ckb_pnn_dmuc
+            // 
+            this.ckb_pnn_dmuc.AutoSize = true;
+            this.ckb_pnn_dmuc.Location = new System.Drawing.Point(27, 140);
+            this.ckb_pnn_dmuc.Name = "ckb_pnn_dmuc";
+            this.ckb_pnn_dmuc.Size = new System.Drawing.Size(107, 17);
+            this.ckb_pnn_dmuc.TabIndex = 15;
+            this.ckb_pnn_dmuc.Text = "[PNN] Danh mục";
+            this.ckb_pnn_dmuc.UseVisualStyleBackColor = true;
             // 
             // ckb_get_log_pnn
             // 
@@ -874,9 +894,9 @@
             this.ckb_pnn_no.AutoSize = true;
             this.ckb_pnn_no.Location = new System.Drawing.Point(27, 70);
             this.ckb_pnn_no.Name = "ckb_pnn_no";
-            this.ckb_pnn_no.Size = new System.Drawing.Size(70, 17);
+            this.ckb_pnn_no.Size = new System.Drawing.Size(168, 17);
             this.ckb_pnn_no.TabIndex = 1;
-            this.ckb_pnn_no.Text = "[PNN] nợ";
+            this.ckb_pnn_no.Text = "[PNN] Còn phải nộp/nộp thừa";
             this.ckb_pnn_no.UseVisualStyleBackColor = true;
             // 
             // groupBox7
@@ -1349,14 +1369,14 @@
             this.dgrTaxOffice.AllowUserToOrderColumns = true;
             this.dgrTaxOffice.AutoGenerateColumns = false;
             this.dgrTaxOffice.BackgroundColor = System.Drawing.SystemColors.ActiveCaptionText;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgrTaxOffice.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle33.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle33.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle33.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle33.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle33.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgrTaxOffice.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle33;
             this.dgrTaxOffice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgrTaxOffice.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cl_tax_name,
@@ -1367,36 +1387,34 @@
             this.cl_prov_name,
             this.cl_ky_chot,
             this.cl_ky_ps_tu,
-            this.cl_ky_ps_den,
             this.cl_tax_code,
             this.cl_ma_cqt,
             this.cl_dblink,
             this.cl_qlt_user,
             this.cl_qlt_pass,
-            this.cl_vat_user,
-            this.cl_vat_pass,
             this.cl_vat_ddan_tu,
-            this.cl_vat_ddan_den});
+            this.cl_vat_ddan_den,
+            this.cl_nhap_ngoai});
             this.dgrTaxOffice.DataSource = this.bndSource;
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgrTaxOffice.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle47.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle47.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle47.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle47.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle47.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle47.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgrTaxOffice.DefaultCellStyle = dataGridViewCellStyle47;
             this.dgrTaxOffice.Location = new System.Drawing.Point(9, 19);
             this.dgrTaxOffice.Name = "dgrTaxOffice";
             this.dgrTaxOffice.ReadOnly = true;
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgrTaxOffice.RowHeadersDefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle48.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle48.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle48.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle48.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle48.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle48.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgrTaxOffice.RowHeadersDefaultCellStyle = dataGridViewCellStyle48;
             this.dgrTaxOffice.Size = new System.Drawing.Size(771, 380);
             this.dgrTaxOffice.TabIndex = 9;
             this.dgrTaxOffice.BindingContextChanged += new System.EventHandler(this.dgrTaxOffice_BindingContextChanged);
@@ -1405,172 +1423,6 @@
             this.dgrTaxOffice.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgrTaxOffice_KeyDown);
             this.dgrTaxOffice.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgrTaxOffice_DataBindingComplete);
             this.dgrTaxOffice.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgrTaxOffice_CellContentClick);
-            // 
-            // cl_tax_name
-            // 
-            this.cl_tax_name.DataPropertyName = "tax_name";
-            dataGridViewCellStyle2.Font = new System.Drawing.Font(".VnArial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cl_tax_name.DefaultCellStyle = dataGridViewCellStyle2;
-            this.cl_tax_name.Frozen = true;
-            this.cl_tax_name.HeaderText = "Tên CQT";
-            this.cl_tax_name.Name = "cl_tax_name";
-            this.cl_tax_name.ReadOnly = true;
-            this.cl_tax_name.Width = 200;
-            // 
-            // cl_short_name
-            // 
-            this.cl_short_name.DataPropertyName = "short_name";
-            dataGridViewCellStyle3.Font = new System.Drawing.Font(".VnArial", 9F);
-            this.cl_short_name.DefaultCellStyle = dataGridViewCellStyle3;
-            this.cl_short_name.HeaderText = "Tên CQT (viết tắt)";
-            this.cl_short_name.Name = "cl_short_name";
-            this.cl_short_name.ReadOnly = true;
-            // 
-            // cl_tax_model
-            // 
-            this.cl_tax_model.DataPropertyName = "tax_model";
-            dataGridViewCellStyle4.Font = new System.Drawing.Font(".VnArial", 9F);
-            this.cl_tax_model.DefaultCellStyle = dataGridViewCellStyle4;
-            this.cl_tax_model.HeaderText = "Mô hình ƯD";
-            this.cl_tax_model.Name = "cl_tax_model";
-            this.cl_tax_model.ReadOnly = true;
-            this.cl_tax_model.Width = 60;
-            // 
-            // cl_giai_doan
-            // 
-            this.cl_giai_doan.DataPropertyName = "giai_doan";
-            this.cl_giai_doan.HeaderText = "Đợt";
-            this.cl_giai_doan.Name = "cl_giai_doan";
-            this.cl_giai_doan.ReadOnly = true;
-            this.cl_giai_doan.Width = 60;
-            // 
-            // cl_province
-            // 
-            this.cl_province.DataPropertyName = "province";
-            dataGridViewCellStyle5.Font = new System.Drawing.Font(".VnArial", 9F);
-            this.cl_province.DefaultCellStyle = dataGridViewCellStyle5;
-            this.cl_province.HeaderText = "Mã tỉnh";
-            this.cl_province.Name = "cl_province";
-            this.cl_province.ReadOnly = true;
-            this.cl_province.Width = 60;
-            // 
-            // cl_prov_name
-            // 
-            this.cl_prov_name.DataPropertyName = "prov_name";
-            dataGridViewCellStyle6.Font = new System.Drawing.Font(".VnArial", 9F);
-            this.cl_prov_name.DefaultCellStyle = dataGridViewCellStyle6;
-            this.cl_prov_name.HeaderText = "Tên tỉnh";
-            this.cl_prov_name.Name = "cl_prov_name";
-            this.cl_prov_name.ReadOnly = true;
-            // 
-            // cl_ky_chot
-            // 
-            this.cl_ky_chot.DataPropertyName = "ky_chot";
-            dataGridViewCellStyle7.Font = new System.Drawing.Font(".VnArial", 9F);
-            dataGridViewCellStyle7.Format = "MM/yyyy";
-            dataGridViewCellStyle7.NullValue = null;
-            this.cl_ky_chot.DefaultCellStyle = dataGridViewCellStyle7;
-            this.cl_ky_chot.HeaderText = "Kỳ chốt";
-            this.cl_ky_chot.Name = "cl_ky_chot";
-            this.cl_ky_chot.ReadOnly = true;
-            // 
-            // cl_ky_ps_tu
-            // 
-            this.cl_ky_ps_tu.DataPropertyName = "ky_ps_tu";
-            this.cl_ky_ps_tu.HeaderText = "Kỳ PS từ";
-            this.cl_ky_ps_tu.Name = "cl_ky_ps_tu";
-            this.cl_ky_ps_tu.ReadOnly = true;
-            // 
-            // cl_ky_ps_den
-            // 
-            this.cl_ky_ps_den.DataPropertyName = "ky_ps_den";
-            this.cl_ky_ps_den.HeaderText = "Kỳ PS đến";
-            this.cl_ky_ps_den.Name = "cl_ky_ps_den";
-            this.cl_ky_ps_den.ReadOnly = true;
-            // 
-            // cl_tax_code
-            // 
-            this.cl_tax_code.DataPropertyName = "tax_code";
-            dataGridViewCellStyle8.Font = new System.Drawing.Font(".VnArial", 9F);
-            this.cl_tax_code.DefaultCellStyle = dataGridViewCellStyle8;
-            this.cl_tax_code.HeaderText = "Mã CQT (TMS)";
-            this.cl_tax_code.Name = "cl_tax_code";
-            this.cl_tax_code.ReadOnly = true;
-            this.cl_tax_code.Width = 60;
-            // 
-            // cl_ma_cqt
-            // 
-            this.cl_ma_cqt.DataPropertyName = "ma_cqt";
-            dataGridViewCellStyle9.Font = new System.Drawing.Font(".VnArial", 9F);
-            this.cl_ma_cqt.DefaultCellStyle = dataGridViewCellStyle9;
-            this.cl_ma_cqt.HeaderText = "Mã CQT cũ";
-            this.cl_ma_cqt.Name = "cl_ma_cqt";
-            this.cl_ma_cqt.ReadOnly = true;
-            this.cl_ma_cqt.Width = 60;
-            // 
-            // cl_dblink
-            // 
-            this.cl_dblink.DataPropertyName = "dblink";
-            dataGridViewCellStyle10.Font = new System.Drawing.Font(".VnArial", 9F);
-            this.cl_dblink.DefaultCellStyle = dataGridViewCellStyle10;
-            this.cl_dblink.HeaderText = "DBLINK";
-            this.cl_dblink.Name = "cl_dblink";
-            this.cl_dblink.ReadOnly = true;
-            this.cl_dblink.Width = 60;
-            // 
-            // cl_qlt_user
-            // 
-            this.cl_qlt_user.DataPropertyName = "qlt_user";
-            dataGridViewCellStyle11.Font = new System.Drawing.Font(".VnArial", 9F);
-            this.cl_qlt_user.DefaultCellStyle = dataGridViewCellStyle11;
-            this.cl_qlt_user.HeaderText = "QLT_USER";
-            this.cl_qlt_user.Name = "cl_qlt_user";
-            this.cl_qlt_user.ReadOnly = true;
-            // 
-            // cl_qlt_pass
-            // 
-            this.cl_qlt_pass.DataPropertyName = "qlt_pass";
-            dataGridViewCellStyle12.Font = new System.Drawing.Font(".VnArial", 9F);
-            this.cl_qlt_pass.DefaultCellStyle = dataGridViewCellStyle12;
-            this.cl_qlt_pass.HeaderText = "QLT_PASS";
-            this.cl_qlt_pass.Name = "cl_qlt_pass";
-            this.cl_qlt_pass.ReadOnly = true;
-            // 
-            // cl_vat_user
-            // 
-            this.cl_vat_user.DataPropertyName = "vat_user";
-            dataGridViewCellStyle13.Font = new System.Drawing.Font(".VnArial", 9F);
-            this.cl_vat_user.DefaultCellStyle = dataGridViewCellStyle13;
-            this.cl_vat_user.HeaderText = "VAT_USER";
-            this.cl_vat_user.Name = "cl_vat_user";
-            this.cl_vat_user.ReadOnly = true;
-            // 
-            // cl_vat_pass
-            // 
-            this.cl_vat_pass.DataPropertyName = "vat_pass";
-            dataGridViewCellStyle14.Font = new System.Drawing.Font(".VnArial", 9F);
-            this.cl_vat_pass.DefaultCellStyle = dataGridViewCellStyle14;
-            this.cl_vat_pass.HeaderText = "VAT_PASS";
-            this.cl_vat_pass.Name = "cl_vat_pass";
-            this.cl_vat_pass.ReadOnly = true;
-            // 
-            // cl_vat_ddan_tu
-            // 
-            this.cl_vat_ddan_tu.DataPropertyName = "vat_ddan_tu";
-            dataGridViewCellStyle15.Font = new System.Drawing.Font(".VnArial", 9F);
-            this.cl_vat_ddan_tu.DefaultCellStyle = dataGridViewCellStyle15;
-            this.cl_vat_ddan_tu.HeaderText = "Thư mục DBVAT";
-            this.cl_vat_ddan_tu.Name = "cl_vat_ddan_tu";
-            this.cl_vat_ddan_tu.ReadOnly = true;
-            // 
-            // cl_vat_ddan_den
-            // 
-            this.cl_vat_ddan_den.DataPropertyName = "vat_ddan_den";
-            dataGridViewCellStyle16.Font = new System.Drawing.Font(".VnArial", 9F);
-            this.cl_vat_ddan_den.DefaultCellStyle = dataGridViewCellStyle16;
-            this.cl_vat_ddan_den.HeaderText = "Thư mục TMP VAT";
-            this.cl_vat_ddan_den.Name = "cl_vat_ddan_den";
-            this.cl_vat_ddan_den.ReadOnly = true;
             // 
             // status_listView
             // 
@@ -1640,17 +1492,153 @@
             this.checkBox2.Text = "Cập nhật tính chất nợ";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
-            // ckb_kt_khoa_so
+            // cl_tax_name
             // 
-            this.ckb_kt_khoa_so.AutoSize = true;
-            this.ckb_kt_khoa_so.Checked = true;
-            this.ckb_kt_khoa_so.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckb_kt_khoa_so.Location = new System.Drawing.Point(24, 30);
-            this.ckb_kt_khoa_so.Name = "ckb_kt_khoa_so";
-            this.ckb_kt_khoa_so.Size = new System.Drawing.Size(105, 17);
-            this.ckb_kt_khoa_so.TabIndex = 10;
-            this.ckb_kt_khoa_so.Text = "Kiểm tra khóa sổ";
-            this.ckb_kt_khoa_so.UseVisualStyleBackColor = true;
+            this.cl_tax_name.DataPropertyName = "tax_name";
+            dataGridViewCellStyle34.Font = new System.Drawing.Font(".VnArial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cl_tax_name.DefaultCellStyle = dataGridViewCellStyle34;
+            this.cl_tax_name.Frozen = true;
+            this.cl_tax_name.HeaderText = "Tên CQT";
+            this.cl_tax_name.Name = "cl_tax_name";
+            this.cl_tax_name.ReadOnly = true;
+            this.cl_tax_name.Width = 200;
+            // 
+            // cl_short_name
+            // 
+            this.cl_short_name.DataPropertyName = "short_name";
+            dataGridViewCellStyle35.Font = new System.Drawing.Font(".VnArial", 9F);
+            this.cl_short_name.DefaultCellStyle = dataGridViewCellStyle35;
+            this.cl_short_name.HeaderText = "Tên CQT (viết tắt)";
+            this.cl_short_name.Name = "cl_short_name";
+            this.cl_short_name.ReadOnly = true;
+            // 
+            // cl_tax_model
+            // 
+            this.cl_tax_model.DataPropertyName = "tax_model";
+            dataGridViewCellStyle36.Font = new System.Drawing.Font(".VnArial", 9F);
+            this.cl_tax_model.DefaultCellStyle = dataGridViewCellStyle36;
+            this.cl_tax_model.HeaderText = "Mô hình ƯD";
+            this.cl_tax_model.Name = "cl_tax_model";
+            this.cl_tax_model.ReadOnly = true;
+            this.cl_tax_model.Width = 60;
+            // 
+            // cl_giai_doan
+            // 
+            this.cl_giai_doan.DataPropertyName = "giai_doan";
+            this.cl_giai_doan.HeaderText = "Đợt";
+            this.cl_giai_doan.Name = "cl_giai_doan";
+            this.cl_giai_doan.ReadOnly = true;
+            this.cl_giai_doan.Width = 60;
+            // 
+            // cl_province
+            // 
+            this.cl_province.DataPropertyName = "province";
+            dataGridViewCellStyle37.Font = new System.Drawing.Font(".VnArial", 9F);
+            this.cl_province.DefaultCellStyle = dataGridViewCellStyle37;
+            this.cl_province.HeaderText = "Mã tỉnh";
+            this.cl_province.Name = "cl_province";
+            this.cl_province.ReadOnly = true;
+            this.cl_province.Width = 60;
+            // 
+            // cl_prov_name
+            // 
+            this.cl_prov_name.DataPropertyName = "prov_name";
+            dataGridViewCellStyle38.Font = new System.Drawing.Font(".VnArial", 9F);
+            this.cl_prov_name.DefaultCellStyle = dataGridViewCellStyle38;
+            this.cl_prov_name.HeaderText = "Tên tỉnh";
+            this.cl_prov_name.Name = "cl_prov_name";
+            this.cl_prov_name.ReadOnly = true;
+            // 
+            // cl_ky_chot
+            // 
+            this.cl_ky_chot.DataPropertyName = "ky_chot";
+            dataGridViewCellStyle39.Font = new System.Drawing.Font(".VnArial", 9F);
+            dataGridViewCellStyle39.Format = "MM/yyyy";
+            dataGridViewCellStyle39.NullValue = null;
+            this.cl_ky_chot.DefaultCellStyle = dataGridViewCellStyle39;
+            this.cl_ky_chot.HeaderText = "Kỳ chốt";
+            this.cl_ky_chot.Name = "cl_ky_chot";
+            this.cl_ky_chot.ReadOnly = true;
+            // 
+            // cl_ky_ps_tu
+            // 
+            this.cl_ky_ps_tu.DataPropertyName = "ky_ps_tu";
+            this.cl_ky_ps_tu.HeaderText = "Kỳ PS từ";
+            this.cl_ky_ps_tu.Name = "cl_ky_ps_tu";
+            this.cl_ky_ps_tu.ReadOnly = true;
+            // 
+            // cl_tax_code
+            // 
+            this.cl_tax_code.DataPropertyName = "tax_code";
+            dataGridViewCellStyle40.Font = new System.Drawing.Font(".VnArial", 9F);
+            this.cl_tax_code.DefaultCellStyle = dataGridViewCellStyle40;
+            this.cl_tax_code.HeaderText = "Mã CQT cũ";
+            this.cl_tax_code.Name = "cl_tax_code";
+            this.cl_tax_code.ReadOnly = true;
+            this.cl_tax_code.Width = 60;
+            // 
+            // cl_ma_cqt
+            // 
+            this.cl_ma_cqt.DataPropertyName = "ma_cqt";
+            dataGridViewCellStyle41.Font = new System.Drawing.Font(".VnArial", 9F);
+            this.cl_ma_cqt.DefaultCellStyle = dataGridViewCellStyle41;
+            this.cl_ma_cqt.HeaderText = "Mã CQT (TMS)";
+            this.cl_ma_cqt.Name = "cl_ma_cqt";
+            this.cl_ma_cqt.ReadOnly = true;
+            this.cl_ma_cqt.Width = 60;
+            // 
+            // cl_dblink
+            // 
+            this.cl_dblink.DataPropertyName = "dblink";
+            dataGridViewCellStyle42.Font = new System.Drawing.Font(".VnArial", 9F);
+            this.cl_dblink.DefaultCellStyle = dataGridViewCellStyle42;
+            this.cl_dblink.HeaderText = "DBLINK";
+            this.cl_dblink.Name = "cl_dblink";
+            this.cl_dblink.ReadOnly = true;
+            this.cl_dblink.Width = 60;
+            // 
+            // cl_qlt_user
+            // 
+            this.cl_qlt_user.DataPropertyName = "qlt_user";
+            dataGridViewCellStyle43.Font = new System.Drawing.Font(".VnArial", 9F);
+            this.cl_qlt_user.DefaultCellStyle = dataGridViewCellStyle43;
+            this.cl_qlt_user.HeaderText = "QLT_USER";
+            this.cl_qlt_user.Name = "cl_qlt_user";
+            this.cl_qlt_user.ReadOnly = true;
+            // 
+            // cl_qlt_pass
+            // 
+            this.cl_qlt_pass.DataPropertyName = "qlt_pass";
+            dataGridViewCellStyle44.Font = new System.Drawing.Font(".VnArial", 9F);
+            this.cl_qlt_pass.DefaultCellStyle = dataGridViewCellStyle44;
+            this.cl_qlt_pass.HeaderText = "QLT_PASS";
+            this.cl_qlt_pass.Name = "cl_qlt_pass";
+            this.cl_qlt_pass.ReadOnly = true;
+            // 
+            // cl_vat_ddan_tu
+            // 
+            this.cl_vat_ddan_tu.DataPropertyName = "vat_ddan_tu";
+            dataGridViewCellStyle45.Font = new System.Drawing.Font(".VnArial", 9F);
+            this.cl_vat_ddan_tu.DefaultCellStyle = dataGridViewCellStyle45;
+            this.cl_vat_ddan_tu.HeaderText = "Thư mục DBVAT";
+            this.cl_vat_ddan_tu.Name = "cl_vat_ddan_tu";
+            this.cl_vat_ddan_tu.ReadOnly = true;
+            // 
+            // cl_vat_ddan_den
+            // 
+            this.cl_vat_ddan_den.DataPropertyName = "vat_ddan_den";
+            dataGridViewCellStyle46.Font = new System.Drawing.Font(".VnArial", 9F);
+            this.cl_vat_ddan_den.DefaultCellStyle = dataGridViewCellStyle46;
+            this.cl_vat_ddan_den.HeaderText = "Thư mục TMP VAT";
+            this.cl_vat_ddan_den.Name = "cl_vat_ddan_den";
+            this.cl_vat_ddan_den.ReadOnly = true;
+            // 
+            // cl_nhap_ngoai
+            // 
+            this.cl_nhap_ngoai.DataPropertyName = "nhap_ngoai";
+            this.cl_nhap_ngoai.HeaderText = "Thư mục file nhập ngoài";
+            this.cl_nhap_ngoai.Name = "cl_nhap_ngoai";
+            this.cl_nhap_ngoai.ReadOnly = true;
             // 
             // Frm_QLCD
             // 
@@ -1826,6 +1814,9 @@
         private System.Windows.Forms.CheckBox ckb_nhap_ngoai_ps;
         private System.Windows.Forms.CheckBox ckb_nhap_ngoai_ckt;
         private System.Windows.Forms.CheckBox ckb_reset_log;
+        private System.Windows.Forms.CheckBox ckb_check_kychot;
+        private System.Windows.Forms.CheckBox ckb_kt_khoa_so;
+        private System.Windows.Forms.CheckBox ckb_pnn_dmuc;
         private System.Windows.Forms.DataGridViewTextBoxColumn cl_tax_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn cl_short_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn cl_tax_model;
@@ -1834,17 +1825,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cl_prov_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn cl_ky_chot;
         private System.Windows.Forms.DataGridViewTextBoxColumn cl_ky_ps_tu;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cl_ky_ps_den;
         private System.Windows.Forms.DataGridViewTextBoxColumn cl_tax_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn cl_ma_cqt;
         private System.Windows.Forms.DataGridViewTextBoxColumn cl_dblink;
         private System.Windows.Forms.DataGridViewTextBoxColumn cl_qlt_user;
         private System.Windows.Forms.DataGridViewTextBoxColumn cl_qlt_pass;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cl_vat_user;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cl_vat_pass;
         private System.Windows.Forms.DataGridViewTextBoxColumn cl_vat_ddan_tu;
         private System.Windows.Forms.DataGridViewTextBoxColumn cl_vat_ddan_den;
-        private System.Windows.Forms.CheckBox ckb_check_kychot;
-        private System.Windows.Forms.CheckBox ckb_kt_khoa_so;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cl_nhap_ngoai;
     }
 }

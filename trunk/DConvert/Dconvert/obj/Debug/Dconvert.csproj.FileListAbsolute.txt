@@ -632,9 +632,6 @@ D:\TOOL\projpscd\DConvert\Dconvert\bin\Debug\Dconvert.application
 D:\TOOL\projpscd\DConvert\Dconvert\bin\Debug\Dconvert.exe
 D:\TOOL\projpscd\DConvert\Dconvert\bin\Debug\Dconvert.pdb
 D:\TOOL\projpscd\DConvert\Dconvert\bin\Debug\DataGridViewAutoFilter.dll
-D:\TOOL\projpscd\DConvert\Dconvert\bin\Debug\rscp4n.dll
-D:\TOOL\projpscd\DConvert\Dconvert\bin\Debug\sapnco.dll
-D:\TOOL\projpscd\DConvert\Dconvert\bin\Debug\sapnco_utils.dll
 D:\TOOL\projpscd\DConvert\Dconvert\bin\Debug\Interop.ORAOLEDBLib.dll
 D:\TOOL\projpscd\DConvert\Dconvert\obj\Debug\Dconvert.exe.manifest
 D:\TOOL\projpscd\DConvert\Dconvert\obj\Debug\Dconvert.application

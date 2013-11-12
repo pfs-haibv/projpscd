@@ -1,5 +1,5 @@
--- Start of DDL Script for Package QLT_OWNER.EXT_PCK_QLT_CONTROL
--- Generated 19/09/2013 10:05:58 AM from QLT_OWNER@QLT_BRV_VTA
+-- Start of DDL Script for Package Body QLT_OWNER.EXT_PCK_QLT_CONTROL
+-- Generated 01/11/2013 7:24:56 AM from QLT_OWNER@QLT_BRV_VTA
 
 CREATE OR REPLACE 
 PACKAGE ext_pck_qlt_control IS
@@ -24,7 +24,4 @@ PACKAGE ext_pck_qlt_control IS
 
 -- End of DDL Script for Package QLT_OWNER.EXT_PCK_QLT_CONTROL
 
-
-
--- End of DDL Script for Package QLT_OWNER.EXT_PCK_QLT_CONTROL
 

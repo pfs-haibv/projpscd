@@ -10,14 +10,14 @@ namespace DC.Lib
     public static class GlobalVar
     {
         // Khai báo tham số cho truy cập database DPPIT
-        
-        public const string gl_connTKTQ = "provider=OraOLEDB.Oracle;data source=DCNC;user id=TEST;password=TEST;";
-        public const string gl_connTKTQ1 = "data source=DCNC;user id=TEST;password=TEST;";
 
-        public const string gl_connTKTQVATW = "Provider=msdaora;Data Source=DCNC;User Id=TEST;Password=TEST;";
-        public const string gl_connStringDPPIT = "provider=OraOLEDB.Oracle;data source=DCNC;OLE DB Services=-16;user id=QLT_OWNER;password=QLT_OWNER";
+        public const string gl_connTKTQ = "provider=OraOLEDB.Oracle;data source=DPTMS;user id=DPTMS_OWNER;password=DPTMS_OWNER;";
+        //public const string gl_connTKTQ1 = "data source=DPTMS;user id=DPTMS_OWNER;password=DPTMS_OWNER;";
 
-        public const string gl_dirDANHMUCVATW = @"\\10.15.119.215\tmpvat\DM_CHUNG";
+        public const string gl_connTKTQVATW = "Provider=msdaora;Data Source=DPTMS;User Id=DPTMS_OWNER;Password=DPTMS_OWNER;";
+        //public const string gl_connStringDPPIT = "provider=OraOLEDB.Oracle;data source=DCNC;OLE DB Services=-16;user id=QLT_OWNER;password=QLT_OWNER";
+
+        public const string gl_dirDANHMUCVATW = @"\tmpvat\DM_VAT";
 
         public const string gl_dirNhap_Ngoai = @"\\10.15.119.215\NHAP_NGOAI";
 
