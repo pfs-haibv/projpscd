@@ -85,7 +85,7 @@ namespace DC.Lib
                         _query = _query.Replace("&2", "KYCHOT_DC: " + _dt.Rows[0]["KYCHOT_DC"].ToString() + " " +
                                                       "KYKHOASO_CQT: " + _dt.Rows[0]["KYKHOASO_CQT"].ToString() + " " +
                                                       "KYNO_QLT: " + _dt.Rows[0]["KYNO_QLT"].ToString() + " " +
-                                                      "KYNO_QCT(chỉ dành cho QCT): " + _dt.Rows[0]["KYNO_QCT"].ToString());
+                                                      "KYNO_QCT(cho QCT): " + _dt.Rows[0]["KYNO_QCT"].ToString());
                         _ora.TransExecute(_query);
                     }                                                
                 }                
@@ -447,7 +447,7 @@ namespace DC.Lib
             using (CLS_DBASE.ORA _ora = new CLS_DBASE.ORA(GlobalVar.gl_connTKTQ))
             {
                 _ora.TransStart();
-                _query = "call PCK_CDOI_DLIEU_QLT.Prc_Job_Slech_No('" + p_short_name + "')";
+                _query = "call PCK_CDOI_DLIEU_QLT.Prc_Job_qlt_Slech_No('" + p_short_name + "')";
                 _ora.TransExecute(_query);
                 _ora.TransCommit();
             }
@@ -458,7 +458,7 @@ namespace DC.Lib
             using (CLS_DBASE.ORA _ora = new CLS_DBASE.ORA(GlobalVar.gl_connTKTQ))
             {
                 _ora.TransStart();
-                _query = "call PCK_CDOI_DLIEU_QCT.Prc_Job_Slech_No('" + p_short_name + "')";
+                _query = "call PCK_CDOI_DLIEU_QCT.Prc_Job_qct_Slech_No('" + p_short_name + "')";
                 _ora.TransExecute(_query);
                 _ora.TransCommit();
             }
@@ -469,7 +469,7 @@ namespace DC.Lib
             using (CLS_DBASE.ORA _ora = new CLS_DBASE.ORA(GlobalVar.gl_connTKTQ))
             {
                 _ora.TransStart();
-                _query = "call PCK_CDOI_DLIEU_QLT.Prc_Get_Slech_No('" + p_short_name + "')";
+                _query = "call PCK_CDOI_DLIEU_QLT.Prc_qlt_Get_Slech_No('" + p_short_name + "')";
                 _ora.TransExecute(_query);
                 _ora.TransCommit();
             }
@@ -480,7 +480,7 @@ namespace DC.Lib
             using (CLS_DBASE.ORA _ora = new CLS_DBASE.ORA(GlobalVar.gl_connTKTQ))
             {
                 _ora.TransStart();
-                _query = "call PCK_CDOI_DLIEU_QCT.Prc_Get_Slech_No('" + p_short_name + "')";
+                _query = "call PCK_CDOI_DLIEU_QCT.Prc_qct_Get_Slech_No('" + p_short_name + "')";
                 _ora.TransExecute(_query);
                 _ora.TransCommit();
             }
@@ -891,6 +891,18 @@ namespace DC.Lib
             {
                 _ora.TransStart();
                 _query = "call pck_cdoi_dlieu_pnn.prc_pnn_get_02tk_sddpnn('" + p_short_name + "')";
+                _ora.TransExecute(_query);
+                _ora.TransCommit();
+            }
+        }
+
+        public static void Prc_Get_Dmuc(string p_short_name)
+        {
+            string _query = null;
+            using (CLS_DBASE.ORA _ora = new CLS_DBASE.ORA(GlobalVar.gl_connTKTQ))
+            {
+                _ora.TransStart();
+                _query = "call pck_cdoi_dlieu_pnn.prc_pnn_get_dmuc_pnn('" + p_short_name + "')";
                 _ora.TransExecute(_query);
                 _ora.TransCommit();
             }

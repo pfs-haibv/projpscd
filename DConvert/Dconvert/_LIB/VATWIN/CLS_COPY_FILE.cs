@@ -295,21 +295,24 @@ namespace DC.Vatwin
                 return _so_file;
             }
         }
+              
 
-        // Hàm copy file detail CCTT hộ khoán
+        // Hàm copy file detail CCTT hộ khoán        
         public static int Fnc_copy_file_kh(string p_path_source,
-                                       DirectoryInfo p_dir_destination,
-                                       DateTime p_ky_chot,
-                                       string p_tax_name,
-                                       string p_short_name,
-                                       Forms.Frm_QLCD p_frm_qlcd)
+                                     DirectoryInfo p_dir_destination,
+                                     DateTime p_ky_chot,
+                                     string p_tax_name,
+                                     string p_short_name,
+                                     Forms.Frm_QLCD p_frm_qlcd)
         {
             using (CLS_DBASE.ORA _ora = new CLS_DBASE.ORA(GlobalVar.gl_connTKTQ))
             {
                 string _query = "";
 
-                // Biến lưu trữ tên của hàm hoặc thủ tục
+                // Biến lưu trữ trên hàm hoặc thủ tục
                 string v_pck = "FNC_COPY_FILE_KH";
+
+                int _thang = (p_ky_chot.Month - 1) % 3; //Số tháng 
 
                 // Biến lưu trữ số file đã copy về máy
                 int _so_file = 0;
@@ -319,18 +322,21 @@ namespace DC.Vatwin
 
                 _ora.TransStart();
 
-                 // Lấy file CNTK
-                    string _search_pattern = "KH" + p_ky_chot.ToString("MMyyyy") + ".DBF";
-
-                    // Danh sách các file
-                    ArrayList _listFile_tkmb = new ArrayList();
-                    _listFile_tkmb.AddRange(_dir_source.GetFiles(_search_pattern));
-                    foreach (FileInfo _file in _listFile_tkmb)
+                for (int i = 0; i < _thang; i++)
+                {
+                    string _search_pattern = "KH" + p_ky_chot.AddMonths(i * -1).ToString("MMyyyy") + ".DBF";
+                    ArrayList _listFile = new ArrayList();
+                    _listFile.AddRange(_dir_source.GetFiles(_search_pattern));
+                    foreach (FileInfo _file in _listFile)
                     {
                         try
                         {
-                            _file.CopyTo(Path.Combine(p_dir_destination.FullName, _file.Name), true);
-                            _so_file++;
+                            if (_file.Name.Length == 12)
+                            {
+                                _file.CopyTo(Path.Combine(p_dir_destination.FullName, _file.Name));
+                                _so_file++;
+                            }
+
                         }
                         catch (FormatException e)
                         {
@@ -345,14 +351,13 @@ namespace DC.Vatwin
                             p_frm_qlcd.AddToListView(0, "   + " + p_short_name + ": " + e.Message);
                         }
                     }
-                    _listFile_tkmb.Clear();
-                    _listFile_tkmb = null;
-                                   
-               
+                    _listFile.Clear();
+                    _listFile = null;
+                }
+
 
                 return _so_file;
             }
-
         }
 
         // Hàm copy file detail tờ khai 02/GTGT (GTGT dự án đầu tư
@@ -413,6 +418,69 @@ namespace DC.Vatwin
                         _listFile = null;
                     }
                                  
+
+                return _so_file;
+            }
+        }
+
+        // Hàm copy file detail tờ khai 01/GTGT 
+        public static int Fnc_copy_file_kt(string p_path_source,
+                                     DirectoryInfo p_dir_destination,
+                                     DateTime p_ky_chot,
+                                     string p_tax_name,
+                                     string p_short_name,
+                                     Forms.Frm_QLCD p_frm_qlcd)
+        {
+            using (CLS_DBASE.ORA _ora = new CLS_DBASE.ORA(GlobalVar.gl_connTKTQ))
+            {
+                string _query = "";
+
+                // Biến lưu trữ trên hàm hoặc thủ tục
+                string v_pck = "FNC_COPY_FILE_KT";
+
+                int _thang = 12; //Số tháng tính từ kỳ chốt ngược về trước để copy file TK theo từng tháng
+
+                // Biến lưu trữ số file đã copy về máy
+                int _so_file = 0;
+
+                string _path_file = "\\TK_CT";
+                DirectoryInfo _dir_source = new DirectoryInfo(p_path_source + _path_file);
+
+                _ora.TransStart();
+
+                for (int i = 0; i < _thang; i++)
+                {
+                    string _search_pattern = "KT" + p_ky_chot.AddMonths(i * -1).ToString("MMyyyy") + ".DBF";
+                    ArrayList _listFile = new ArrayList();
+                    _listFile.AddRange(_dir_source.GetFiles(_search_pattern));
+                    foreach (FileInfo _file in _listFile)
+                    {
+                        try
+                        {
+                            if (_file.Name.Length == 12)
+                            {
+                                _file.CopyTo(Path.Combine(p_dir_destination.FullName, _file.Name));
+                                _so_file++;
+                            }
+
+                        }
+                        catch (FormatException e)
+                        {
+                            p_frm_qlcd.AddToListView(0, "   + " + p_short_name + ": " + e.Message);
+                        }
+                        catch (IOException e)
+                        {
+                            p_frm_qlcd.AddToListView(0, "   + " + p_short_name + ": " + e.Message);
+                        }
+                        catch (Exception e)
+                        {
+                            p_frm_qlcd.AddToListView(0, "   + " + p_short_name + ": " + e.Message);
+                        }
+                    }
+                    _listFile.Clear();
+                    _listFile = null;
+                }
+
 
                 return _so_file;
             }
@@ -833,7 +901,7 @@ namespace DC.Vatwin
                         {
                             try
                             {
-                                int _temp_year = Int32.Parse(_file.Name.Substring(4, 10));
+                                int _temp_year = Int32.Parse(_file.Name.Substring(4, 4));
                                 DateTime _temp_date = new DateTime(_temp_year, 1, 1);
 
                                 if ((_temp_date.Year == p_ky_chot.Year) || (_temp_date.Year == p_ky_chot.Year-1))
@@ -978,6 +1046,70 @@ namespace DC.Vatwin
                 return _so_file;
             }
 
+        }
+
+        // Hàm copy file master dữ liệu tờ khai TNDN từ chuyển nhuợng bđs
+        public static int Fnc_copy_file_smd(string p_path_source,
+                                      DirectoryInfo p_dir_destination,
+                                      DateTime p_ky_chot,
+                                      string p_tax_name,
+                                      string p_short_name,
+                                      Forms.Frm_QLCD p_frm_qlcd)
+        {
+            using (CLS_DBASE.ORA _ora = new CLS_DBASE.ORA(GlobalVar.gl_connTKTQ))
+            {
+                string _query = "";
+
+                // Biến lưu trữ trên hàm hoặc thủ tục
+                string v_pck = "FNC_COPY_FILE_SMD";
+
+                // Biến lưu trữ số file đã copy về máy
+                int _so_file = 0;
+
+                string _path_file = "\\TK_CT";
+                DirectoryInfo _dir_source = new DirectoryInfo(p_path_source + _path_file);
+
+                _ora.TransStart();
+                
+                // Lấy file 
+                string _search_pattern = "SMD*.DBF";
+                ArrayList _listFile = new ArrayList();
+                _listFile.AddRange(_dir_source.GetFiles(_search_pattern));
+                foreach (FileInfo _file in _listFile)
+                {
+                    if (_file.Name.Length == 12)
+                    {
+                        try
+                        {
+                            int _temp_year = Int32.Parse(_file.Name.Substring(4, 10));
+                            DateTime _temp_date = new DateTime(_temp_year, 1, 1);
+
+                            if ((_temp_date.Year == p_ky_chot.Year) || (_temp_date.Year == p_ky_chot.Year - 1))
+                            {
+                                _file.CopyTo(Path.Combine(p_dir_destination.FullName, _file.Name));
+                                _so_file++;
+                            }
+                        }
+                        catch (FormatException)
+                        {
+                            // Trường hợp này không in lỗi ra
+                            //p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
+                        }
+                        catch (IOException e)
+                        {
+                            p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
+                        }
+                        catch (Exception e)
+                        {
+                            //p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
+                        }
+                    }
+                }
+                _listFile.Clear();
+                _listFile = null;
+                
+                return _so_file;
+            }
         }
 
     }

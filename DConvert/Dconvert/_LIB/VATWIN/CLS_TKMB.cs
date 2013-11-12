@@ -143,7 +143,7 @@ namespace DC.Vatwin
                         #endregion
 
                         #region Không lấy dữ liệu có kỳ lập bộ lớn hơn kỳ chốt
-                        if (Int32.Parse(kylbo.Substring(0, 2)) > Int32.Parse(p_ky_chot.ToString().Trim().Substring(3, 2)))
+                        if (Int32.Parse(kylbo.Substring(0, 2)) > Int32.Parse(p_ky_chot.ToString("MM")))
                         {
                             continue;
                         }
@@ -155,7 +155,7 @@ namespace DC.Vatwin
                         string _ID = _dt_ID.Rows[0]["ID"].ToString().Trim();
                         string _NgNop = ((DateTime)_dr["NgNop"]).ToString("dd/MM/yyyy").Trim();
 
-                        if (Int32.Parse(kylbo.Substring(0, 2)) > Int32.Parse(p_ky_chot.ToString().Trim().Substring(3, 2)))
+                        if (Int32.Parse(kylbo.Substring(0, 2)) > Int32.Parse(p_ky_chot.ToString("MM")))
                         {
                             continue;
                         }

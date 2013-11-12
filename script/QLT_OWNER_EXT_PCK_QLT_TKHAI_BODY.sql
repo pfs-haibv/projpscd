@@ -1,6 +1,3 @@
--- Start of DDL Script for Package Body QLT_OWNER.EXT_PCK_QLT_TKHAI
--- Generated 04/10/2013 2:36:33 PM from QLT_OWNER@QLT_BRV_VTA
-
 CREATE OR REPLACE 
 PACKAGE BODY ext_pck_qlt_tkhai
 IS
@@ -203,12 +200,12 @@ IS
                           OR dk_dtl.ngay_ket_thuc IS NULL);
     BEGIN
         qlt_pck_thop_no_thue.prc_load_dsach_dtnt;
-        --Clear data ext_dkntk_qt
-        DBMS_UTILITY.exec_ddl_statement ('truncate table ext_dkntk_qt');
+        --Clear data ext_qlt_dkntk
+        DBMS_UTILITY.exec_ddl_statement ('truncate table ext_qlt_dkntk');
 
         -- Lay ngay cuoi cung cua thang chua ky chot du lieu
         SELECT   LAST_DAY(ADD_MONTHS (
-                              TRUNC (TO_DATE (p_chot, 'DD/MM/RRRR'), 'Year'),
+                              TRUNC (p_chot, 'Year'),
                               11))
           INTO   v_last_current_year
           FROM   DUAL;
@@ -252,8 +249,7 @@ IS
             ELSE
                 -- lay quarter theo ky_ket_thuc
                 SELECT   TO_NUMBER(TO_CHAR (
-                                       TO_DATE (vloop.ky_ket_thuc,
-                                                'dd.mm.yyyy'),
+                                       vloop.ky_ket_thuc,                                       
                                        'Q'))
                              quarter
                   INTO   v_quarter
@@ -274,7 +270,7 @@ IS
             -- Lay ma to khai TMS
             v_ma_loai_tms := fnc_get_tkhai_tms(vloop.ma_loai, vloop.loai_kkhai);
 
-            INSERT INTO ext_dkntk_qt (id,
+            INSERT INTO ext_qlt_dkntk (id,
                                       tin,
                                       ten_nnt,
                                       mau_tk,
@@ -301,7 +297,7 @@ IS
         END LOOP;
 
         /* cap nhat phong ban can bo */
-        prc_update_pbcb ('ext_dkntk_qt');
+        prc_update_pbcb ('ext_qlt_dkntk');
         COMMIT;
 
         qlt_pck_thop_no_thue.prc_unload_dsach_dtnt;
@@ -324,7 +320,6 @@ IS
         COMMIT;
         prc_create_job('BEGIN
                             EXT_PCK_QLT_TKHAI.Prc_Qlt_Thop_Monbai('''
-
                        || p_chot
                        || ''');
                         END;'
@@ -378,14 +373,14 @@ IS
     BEGIN
         qlt_pck_thop_no_thue.prc_load_dsach_dtnt;
         --Clear Data
-        DBMS_UTILITY.exec_ddl_statement ('truncate table ext_tktmb_hdr');
-        DBMS_UTILITY.exec_ddl_statement ('truncate table ext_tktmb_dtl');
+        DBMS_UTILITY.exec_ddl_statement ('truncate table ext_qlt_tktmb_hdr');
+        DBMS_UTILITY.exec_ddl_statement ('truncate table ext_qlt_tktmb_dtl');
 
         /* day du lieu bang master to khai mon bai */
         FOR vloop IN cloop
         LOOP
-            --Insert table ext_tktmb_hdr
-            INSERT INTO ext_tktmb_hdr (id,
+            --Insert table ext_qlt_tktmb_hdr
+            INSERT INTO ext_qlt_tktmb_hdr (id,
                                        tkh_id,
                                        tin,
                                        ten_nnt,
@@ -425,11 +420,11 @@ IS
                      * vi chi co 1 dong
                      */
                     if v_chi_tieu = 3 then
-                        UPDATE ext_tktmb_hdr a set a.TONG_THUE_PN_NNT = v_dtl.so_nnt,
+                        UPDATE ext_qlt_tktmb_hdr a set a.TONG_THUE_PN_NNT = v_dtl.so_nnt,
                                                    a.TONG_THUE_PN_CQT = v_dtl.so_cqt
                                where a.tkh_id = v_dtl.tkh_id;
                     elsif  v_chi_tieu = 1 then
-                         UPDATE ext_tktmb_hdr a set
+                         UPDATE ext_qlt_tktmb_hdr a set
                                                     a.bmb_nnt = v_dtl.bmb_id_nnt,
                                                     a.bmb_cqt = v_dtl.bmb_id_cqt,
                                                     a.THUE_PN_NNT = v_dtl.so_nnt,
@@ -439,8 +434,8 @@ IS
                                where a.tkh_id = v_dtl.tkh_id;
                     else
 
-                        --Insert table ext_tktmb_dtl
-                        INSERT INTO ext_tktmb_dtl (id,
+                        --Insert table ext_qlt_tktmb_dtl
+                        INSERT INTO ext_qlt_tktmb_dtl (id,
                                                    tkh_id,
                                                    chi_tieu,
                                                    bmb_id_nnt,
@@ -470,37 +465,37 @@ IS
 
              --update thue phat sinh theo tieu muc
 
-                        update ext_tktmb_hdr a set TM_1801 = ( select sum(thue_psinh)
+                        update ext_qlt_tktmb_hdr a set TM_1801 = ( select sum(thue_psinh)
                                                                        FROM   qlt_psinh_tkhai
                                                                WHERE   tkh_id = vloop.tkh_id
                                                                        and tmt_ma_tmuc = '1802' group by tmt_ma_tmuc)
                                where a.tkh_id = vloop.tkh_id;
 
-                        update ext_tktmb_hdr a set TM_1802 = ( select sum(thue_psinh)
+                        update ext_qlt_tktmb_hdr a set TM_1802 = ( select sum(thue_psinh)
                                                                        FROM   qlt_psinh_tkhai
                                                                WHERE   tkh_id = vloop.tkh_id
                                                                        and tmt_ma_tmuc = '1802' group by tmt_ma_tmuc)
                                where a.tkh_id = vloop.tkh_id;
 
-                        update ext_tktmb_hdr a set TM_1803 = ( select sum(thue_psinh)
+                        update ext_qlt_tktmb_hdr a set TM_1803 = ( select sum(thue_psinh)
                                                                        FROM   qlt_psinh_tkhai
                                                                WHERE   tkh_id = vloop.tkh_id
                                                                        and tmt_ma_tmuc = '1802' group by tmt_ma_tmuc)
                                where a.tkh_id = vloop.tkh_id;
 
-                        update ext_tktmb_hdr a set TM_1804 = ( select sum(thue_psinh)
+                        update ext_qlt_tktmb_hdr a set TM_1804 = ( select sum(thue_psinh)
                                                                        FROM   qlt_psinh_tkhai
                                                                WHERE   tkh_id = vloop.tkh_id
                                                                        and tmt_ma_tmuc = '1802' group by tmt_ma_tmuc)
                                where a.tkh_id = vloop.tkh_id;
 
-                        update ext_tktmb_hdr a set TM_1805 = ( select sum(thue_psinh)
+                        update ext_qlt_tktmb_hdr a set TM_1805 = ( select sum(thue_psinh)
                                                                        FROM   qlt_psinh_tkhai
                                                                WHERE   tkh_id = vloop.tkh_id
                                                                        and tmt_ma_tmuc = '1802' group by tmt_ma_tmuc)
                                where a.tkh_id = vloop.tkh_id;
 
-                        update ext_tktmb_hdr a set TM_1806 = ( select sum(thue_psinh)
+                        update ext_qlt_tktmb_hdr a set TM_1806 = ( select sum(thue_psinh)
                                                                        FROM   qlt_psinh_tkhai
                                                                WHERE   tkh_id = vloop.tkh_id
                                                                        and tmt_ma_tmuc = '1802' group by tmt_ma_tmuc)
@@ -511,7 +506,7 @@ IS
         END LOOP;
 
         /* cap nhat phong ban can bo */
-        prc_update_pbcb ('ext_tktmb_hdr');
+        prc_update_pbcb ('ext_qlt_tktmb_hdr');
 
 
 
@@ -576,3 +571,10 @@ IS
     END;
 
 END;
+
+-- End of DDL Script for Package QLT_OWNER.EXT_PCK_QLT_TKHAI
+
+
+
+-- End of DDL Script for Package Body QLT_OWNER.EXT_PCK_QLT_TKHAI
+

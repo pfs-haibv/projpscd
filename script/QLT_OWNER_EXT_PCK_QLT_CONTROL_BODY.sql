@@ -1,6 +1,3 @@
--- Start of DDL Script for Package Body QLT_OWNER.EXT_PCK_QLT_CONTROL
--- Generated 19/09/2013 10:03:35 AM from QLT_OWNER@QLT_BRV_VTA
-
 CREATE OR REPLACE 
 PACKAGE BODY ext_pck_qlt_control
 IS
@@ -26,7 +23,8 @@ IS
         v_kykk_tu_ngay  DATE ;
         v_kykk_den_ngay  DATE ;
         v_ngay_hach_toan DATE ;
-
+        v_tphat_den_ngay DATE;
+        
         CURSOR c_GDich_QD(pc_MA_GDICH  VARCHAR2,pc_Kieu_GDich VARCHAR2)IS
             SELECT *
             FROM  EXT_QLT_DM_GDICH_QDINH DM
@@ -143,10 +141,6 @@ IS
                 CLOSE c_SO_QD;
              END IF;
 
-            IF v_ngay_qd is null THEN
-                 v_ngay_qd := Trunc(vPNOP.kylb_tu_ngay,'Month') ;
-            END IF;
-
             v_DTC_MA := null;
             --Neu la no ngoai te thi khong lay tinh chat no
             if vPNOP.NO_NTE IS NULL then
@@ -170,7 +164,11 @@ IS
             else
                 v_ngay_hach_toan := last_day(p_chot);
             end if;
-
+            v_tphat_den_ngay := null;
+            if (vPNOP.PHAI_NOP > 0 and vPNOP.han_nop <= p_chot) then                
+                v_tphat_den_ngay := p_chot;                
+            end if;
+            
             INSERT INTO EXT_QLT_NO (TIN,
                         tkhoan,
                         ma_chuong,
@@ -189,7 +187,8 @@ IS
                         don_vi_tien,
                         id,
                         MA_GDICH,
-                        KIEU_GDICH                        
+                        KIEU_GDICH,
+                        tphat_den_ngay                         
                         )
             VALUES      (
                         vPNOP.TIN
@@ -211,6 +210,7 @@ IS
                         ,ext_seq.NEXTVAL
                         ,vPNOP.MA_GDICH
                         ,vPNOP.KIEU_GDICH
+                        ,v_tphat_den_ngay
                         );
         END LOOP;
 
@@ -276,15 +276,15 @@ IS
        , HDR.KYKK_TU_NGAY      KYKK_TU_NGAY
        , HDR.KYKK_DEN_NGAY     KYKK_DEN_NGAY
        , DTL.SO_TIEN           SO_TIEN
-       , to_date(NULL)         han_nop
-       , HDR.KYLB_TU_NGAY      KYLB_TU_NGAY
-       , HDR.KYLB_DEN_NGAY     KYLB_DEN_NGAY
+       , DTL.han_nop           han_nop
+       /*, HDR.KYLB_TU_NGAY      KYLB_TU_NGAY
+       , HDR.KYLB_DEN_NGAY     KYLB_DEN_NGAY*/
         FROM  QLT_QD_CNVT_HDR HDR
              ,QLT_XLTK_GDICH  DTL
              ,qlt_nsd_dtnt nnt
              ,QLT_MAP_TMUC_CNVT MAP_TMUC
         WHERE HDR.ID = DTL.HDR_ID
-        AND (nnt.tin=HDR.tin)
+        AND (nnt.tin=dtl.tin)
         AND (MAP_TMUC.TMUC=DTL.TMT_MA_TMUC)
         AND (HDR.kykk_tu_ngay >= v_tu_ky)
         AND (HDR.kylb_tu_ngay <= v_den_ky)
@@ -294,7 +294,8 @@ IS
         UNION ALL
     /* AN DINH TO KHAI */
         SELECT hdr.tin, hdr.dtk_ma, nnt.ma_chuong, nnt.ma_khoan, dtl.tmt_ma_tmuc,
-               hdr.kykk_tu_ngay, hdr.kykk_den_ngay, dtl.so_thue so_tien, to_date(NULL) han_nop
+               hdr.kykk_tu_ngay, hdr.kykk_den_ngay, dtl.so_thue so_tien,
+               hdr.han_nop
         FROM qlt_ds_an_dinh_hdr hdr,
              qlt_ds_an_dinh_dtl dtl,
              qlt_nsd_dtnt nnt
@@ -307,7 +308,8 @@ IS
         UNION ALL
     /* BAI BO AN DINH TO KHAI */
         SELECT hdr.tin, hdr.dtk_ma, nnt.ma_chuong, nnt.ma_khoan, dtl.tmt_ma_tmuc,
-            hdr.kykk_tu_ngay, hdr.kykk_den_ngay, (-1)*dtl.so_thue so_tien, to_date(NULL) han_nop
+            hdr.kykk_tu_ngay, hdr.kykk_den_ngay, (-1)*dtl.so_thue so_tien,
+            hdr.ngay_qd_bbo han_nop
         FROM qlt_qd_bbo_ad_hdr hdr,
             qlt_qd_bbo_ad_dtl dtl,
             qlt_nsd_dtnt nnt
@@ -321,7 +323,7 @@ IS
         CURSOR cADI IS
         SELECT hdr.id, hdr.so_qd_goc, adi.dtk_ma, adi.kykk_tu_ngay, adi.kykk_den_ngay,
                adi.tin, nnt.ma_chuong, nnt.ma_khoan, 'KHIEU_NAI_AN_DINH' trang_thai, adi.KYLB_TU_NGAY,
-               to_date(NULL) han_nop
+               adi.han_nop
         FROM qlt_ds_an_dinh_hdr adi,
                qlt_ds_an_dinh_dtl dtl,
              qlt_qd_xlkn_hdr hdr,
@@ -369,7 +371,7 @@ IS
                                               ky_psinh_den, han_nop)
                     VALUES(ext_seq.NEXTVAL, vADI.tin, vADI.ma_chuong, vADI.ma_khoan,
                            vKHN.tmt_ma_tmuc, vKHN.so_tien,
-                           vADI.dtk_ma, vADI.kykk_tu_ngay, vADI.kykk_den_ngay, null);
+                           vADI.dtk_ma, vADI.kykk_tu_ngay, vADI.kykk_den_ngay, vADI.han_nop);
             END LOOP;
         END LOOP;
 
@@ -391,7 +393,7 @@ IS
     PROCEDURE Prc_Qlt_Thop_Ckt(p_chot DATE) IS
         c_pro_name CONSTANT VARCHAR2(30) := 'PRC_QLT_THOP_CKT';
 
-   v_ky_tu DATE:= trunc(p_chot, 'YEAR');
+    v_ky_tu DATE:= to_date('01/01/2009', 'dd/mm/yyyy');
     v_ky_den DATE:= last_day(p_chot);
 
     CURSOR cLoop IS
@@ -412,6 +414,7 @@ IS
         AND tk_hdr.LTD = 0
         AND tk_hdr.DTK_MA_LOAI_TKHAI = '14'
         AND tk_hdr.KYLB_DEN_NGAY <= v_ky_den
+        AND tk_hdr.KYLB_TU_NGAY >= v_ky_tu
         AND tk_hdr.KYKK_TU_NGAY =( SELECT MAX(KYKK_TU_NGAY)
             from qlt_tkhai_hdr a
             where a.tin =tk_hdr.TIN
@@ -437,6 +440,7 @@ IS
         AND tk_hdr.LTD = 0
         AND tk_hdr.DTK_MA_LOAI_TKHAI = '68'
         AND tk_hdr.KYLB_DEN_NGAY <= v_ky_den
+        AND tk_hdr.KYLB_TU_NGAY >= v_ky_tu
         AND tk_dtl.CTK_ID = '2221'
         AND tk_hdr.KYKK_TU_NGAY =(SELECT MAX(KYKK_TU_NGAY)
             from qlt_tkhai_hdr a
@@ -448,7 +452,7 @@ IS
     BEGIN
         qlt_pck_thop_no_thue.prc_load_dsach_dtnt;
 
-        DBMS_UTILITY.exec_ddl_statement ('ext_qlt_con_kt dtl') ;
+        DBMS_UTILITY.exec_ddl_statement ('truncate table ext_qlt_con_kt') ;
 
         /* day du lieu dang ky nop to khai */
         FOR vLoop IN cLoop LOOP
@@ -459,9 +463,9 @@ IS
                                           han_nop,
                                           SO_TIEN)
                 VALUES(ext_seq.NEXTVAL, vLoop.tin,vLoop.ma_chuong,
-                    vLoop.ma_khoan, vLoop.dtk_ma,
+                    '000' , vLoop.dtk_ma,
                     vLoop.MA_TMUC, vLoop.KYKK_TU_NGAY,
-                    vLoop.KYKK_TU_NGAY, vLoop.han_nop, vLoop.SO_TIEN);
+                    vLoop.KYKK_DEN_NGAY, vLoop.han_nop, vLoop.SO_TIEN);
         END LOOP;
 
         /* cap nhat phong ban can bo */
@@ -597,10 +601,10 @@ IS
     ***************************************************************************/
     PROCEDURE Prc_Update_Pbcb(p_table_name VARCHAR2) IS
     BEGIN
-        EXECUTE IMMEDIATE '
+         EXECUTE IMMEDIATE '
         UPDATE '||p_table_name||' a
-           SET (ma_cbo, ten_cbo, ma_pban, ten_pban)=
-               (SELECT b.ma_canbo,
+           SET (ten_nnt, ma_cbo, ten_cbo, ma_pban, ten_pban)=
+               (SELECT ten_dtnt ten_nnt, b.ma_canbo,
                        (SELECT d.ten FROM qlt_canbo d
                             WHERE d.ngay_hl_den IS NULL
                               AND b.ma_canbo=d.ma_canbo AND rownum=1) ten_canbo,
@@ -614,4 +618,16 @@ END;
 
 
 -- End of DDL Script for Package Body QLT_OWNER.EXT_PCK_QLT_CONTROL
+
+
+-- End of DDL Script for Package Body QLT_OWNER.EXT_PCK_QLT_CONTROL
+
+
+-- End of DDL Script for Package Body QLT_OWNER.EXT_PCK_QLT_CONTROL
+
+
+-- End of DDL Script for Package Body QLT_OWNER.EXT_PCK_QLT_CONTROL
+
+
+-- End of DDL Script for Package QLT_OWNER.EXT_PCK_QLT_CONTROL
 

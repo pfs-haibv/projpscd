@@ -1,6 +1,3 @@
--- Start of DDL Script for Package Body QLT_OWNER.EXT_PCK_QCT_CONTROL
--- Generated 19/09/2013 10:00:06 AM from QLT_OWNER@QLT_BRV_VTA
-
 CREATE OR REPLACE 
 PACKAGE BODY ext_pck_qct_control
 IS
@@ -25,8 +22,9 @@ IS
 
         v_kykk_tu_ngay  DATE ;
         v_kykk_den_ngay  DATE ;
-        v_ngay_hach_toan DATE ;
-
+        v_ngay_hach_toan DATE ;        
+        v_tphat_den_ngay DATE;
+        
         CURSOR c_GDich_QD(pc_MA_GDICH VARCHAR2)IS
             SELECT *
             FROM  EXT_QCT_DM_GDICH_QDINH DM
@@ -134,10 +132,6 @@ IS
                 CLOSE c_SO_QD;
              END IF;
 
-            IF v_ngay_qd is null THEN
-                 v_ngay_qd := Trunc(vPNOP.kylb_tu_ngay,'Month') ;
-            END IF;
-
             v_DTC_MA := null;
             FOR vc_TC_NO IN c_TC_NO (vPNOP.PNOP_ID) LOOP
                 v_DTC_MA    := trim(vc_TC_NO.DTC_MA);
@@ -158,7 +152,12 @@ IS
             else
                 v_ngay_hach_toan := last_day(p_chot);
             end if;
-
+            
+            v_tphat_den_ngay := null;
+            if (vPNOP.PHAI_NOP > 0 and vPNOP.han_nop <= p_chot) then                
+                v_tphat_den_ngay := p_chot;                
+            end if;
+                        
             INSERT INTO EXT_QCT_NO (TIN,
                         tkhoan,
                         ma_chuong,
@@ -175,7 +174,8 @@ IS
                         so_tien,
                         id,
                         MA_GDICH,
-                        KIEU_GDICH  
+                        KIEU_GDICH,
+                        tphat_den_ngay  
                         )
             VALUES      (
                         vPNOP.TIN
@@ -195,6 +195,7 @@ IS
                         ,ext_seq.NEXTVAL
                         ,vPNOP.MA_GDICH
                         ,vPNOP.KIEU_GDICH
+                        ,v_tphat_den_ngay
                         );
         END LOOP;
 
@@ -322,8 +323,8 @@ IS
     BEGIN
         EXECUTE IMMEDIATE '
         UPDATE '||p_table_name||' a
-           SET (ma_cbo, ten_cbo, ma_pban, ten_pban)=
-               (SELECT b.ma_canbo,
+           SET (ten_nnt, ma_cbo, ten_cbo, ma_pban, ten_pban)=
+               (SELECT ten_dtnt ten_nnt, b.ma_canbo,
                        (SELECT d.ten FROM qlt_canbo d
                             WHERE d.ngay_hl_den IS NULL
                               AND b.ma_canbo=d.ma_canbo AND rownum=1) ten_canbo,
@@ -334,6 +335,18 @@ IS
                   FROM qlt_nsd_dtnt b WHERE a.tin=b.tin and rownum=1)';
     END;
 END;
+
+-- End of DDL Script for Package Body QLT_OWNER.EXT_PCK_QCT_CONTROL
+
+
+-- End of DDL Script for Package Body QLT_OWNER.EXT_PCK_QCT_CONTROL
+
+
+-- End of DDL Script for Package Body QLT_OWNER.EXT_PCK_QCT_CONTROL
+
+
+
+-- End of DDL Script for Package Body QLT_OWNER.EXT_PCK_QCT_CONTROL
 
 -- End of DDL Script for Package Body QLT_OWNER.EXT_PCK_QCT_CONTROL
 

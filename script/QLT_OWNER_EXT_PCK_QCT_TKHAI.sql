@@ -1,5 +1,5 @@
--- Start of DDL Script for Package QLT_OWNER.EXT_PCK_QCT_TKHAI
--- Generated 04/10/2013 2:33:08 PM from QLT_OWNER@QLT_BRV_VTA
+-- Start of DDL Script for Package Body QLT_OWNER.EXT_PCK_QCT_TKHAI
+-- Generated 01/11/2013 7:24:00 AM from QLT_OWNER@QLT_BRV_VTA
 
 CREATE OR REPLACE 
 PACKAGE ext_pck_qct_tkhai
@@ -33,3 +33,4 @@ PACKAGE ext_pck_qct_tkhai
                 c_qct_tax_model Constant varchar2(7) := 'QCT-APP';
 
 END;
+

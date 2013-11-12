@@ -164,10 +164,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="_LIB\Forms\DataGridViewAutoFilter.dll" />
-    <Content Include="_LIB\SAP_DotNetConnector3_x86\libicudecnumber.dll" />
-    <Content Include="_LIB\SAP_DotNetConnector3_x86\rscp4n.dll" />
-    <Content Include="_LIB\SAP_DotNetConnector3_x86\sapnco.dll" />
-    <Content Include="_LIB\SAP_DotNetConnector3_x86\sapnco_utils.dll" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">

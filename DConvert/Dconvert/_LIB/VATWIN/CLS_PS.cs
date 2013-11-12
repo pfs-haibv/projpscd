@@ -113,7 +113,9 @@ namespace DC.Vatwin
                                          AND a.MaTKhai IN ('01/TAIN',
                                                        '01/BVMT',
                                                        '01/PHLP',
-                                                       '01/KHAC')                                      
+                                                       '01/KHAC',
+                                                       '04/TNDN',
+                                                       '04Q/TNDN')                                      
                                          AND thuecl <> 0
                                          and Allt(a.madtnt) not in (select Allt(MaDTNT) from {3} where empty(denngay))";
 
@@ -131,13 +133,50 @@ namespace DC.Vatwin
                         #region Xác định kỳ phát sinh của đối tượng nộp thuế
                         DateTime _ky_psinh_tu;
                         DateTime _ky_psinh_den;
+                        int _quy_ky_kkhai;
+                        int _nam_ky_kkhai;
 
-                        
+                        if (_dr["KyKKhai"].ToString().Trim() != @"04Q/TNDN")
+                        {
                             _ky_psinh_tu =
                                 new DateTime(Int32.Parse(_ky_kkhai.Substring(2, 4)), Int32.Parse(_ky_kkhai.Substring(0, 2)), 1);
                             _ky_psinh_den =
                                 new DateTime(Int32.Parse(_ky_kkhai.Substring(2, 4)), Int32.Parse(_ky_kkhai.Substring(0, 2)), 1);
                             _ky_psinh_den = _ky_psinh_den.AddMonths(1).AddDays(-1);
+                        }
+                        else
+                        {
+                            _quy_ky_kkhai = Int32.Parse(_ky_kkhai.Trim().Substring(0, 1));
+                            _nam_ky_kkhai = Int32.Parse(_ky_kkhai.Trim().Substring(1, 4));
+                                                     
+                            if (_quy_ky_kkhai == 1)
+                            {
+                                _ky_psinh_tu = new DateTime(_nam_ky_kkhai, 1, 1);
+                                _ky_psinh_den = new DateTime(_nam_ky_kkhai, 3, 31);
+                            }
+                            else if (_quy_ky_kkhai == 2)
+                            {
+                                _ky_psinh_tu = new DateTime(_nam_ky_kkhai, 4, 1);
+                                _ky_psinh_den = new DateTime(_nam_ky_kkhai, 6, 30);
+                            }
+                            else if (_quy_ky_kkhai == 3)
+                            {
+                                _ky_psinh_tu = new DateTime(_nam_ky_kkhai, 7, 1);
+                                _ky_psinh_den = new DateTime(_nam_ky_kkhai, 9, 30);
+                            }
+                            else if (_quy_ky_kkhai == 4)
+                            {
+                                _ky_psinh_tu = new DateTime(_nam_ky_kkhai, 10, 1);
+                                _ky_psinh_den = new DateTime(_nam_ky_kkhai, 12, 31);
+                            }
+                            else
+                            {
+                                p_frm_qlcd.AddToListView(0, "   + " + p_short_name
+                                        + "/ " + v_pck + ": "
+                                        + new InvalidDataException("Quý không hợp lệ").Message);
+                                continue;
+                            }
+                        }
                     
 
                         // Kiểm tra kỳ phát sinh nằm trong kỳ chốt dữ liệu
@@ -172,7 +211,7 @@ namespace DC.Vatwin
                         _query = _query.Replace("{6}", _dr["machuong"].ToString().Trim());
                         _query = _query.Replace("{7}", "000");
                         _query = _query.Replace("{8}", _dr["ma_tmuc"].ToString().Trim());
-                        _query = _query.Replace("{9}", "TKNS");
+                        _query = _query.Replace("{9}", "TK_NGAN_SACH");
                         _query = _query.Replace("{10}", _ky_psinh_tu.ToString("dd/MM/yyyy").ToString().Trim());
                         _query = _query.Replace("{11}", _ky_psinh_den.ToString("dd/MM/yyyy").ToString().Trim());
                         _query = _query.Replace("{12}", _dr["so_tien"].ToString().Trim());
@@ -197,7 +236,7 @@ namespace DC.Vatwin
             }
         }
 
-        // Hàm đọc dữ liệu phát sinh quý
+        // Hàm đọc dữ liệu phát sinh trên TKDN
         public static int Fnc_doc_file_ps_quy(string p_short_name,
                                             string p_tax_name,
                                             string p_tax_code,
@@ -287,8 +326,8 @@ namespace DC.Vatwin
                         int _quy_ky_kkhai = 1; // Biến lưu trữ quý của kỳ kê khai
                         int _nam_ky_kkhai = 2010; // Biến lưu trữ năm của kỳ kê khai
                        
-                            _quy_ky_kkhai = Int32.Parse(_ky_kkhai.Trim().Substring(0, 1));
-                            _nam_ky_kkhai = Int32.Parse(_ky_kkhai.Trim().Substring(1, 4));
+                        _quy_ky_kkhai = Int32.Parse(_ky_kkhai.Trim().Substring(0, 1));
+                        _nam_ky_kkhai = Int32.Parse(_ky_kkhai.Trim().Substring(1, 4));
                         
 
                         DateTime _ky_kk_tu; // Ngày bắt đầu kỳ kk
@@ -354,7 +393,195 @@ namespace DC.Vatwin
                         _query = _query.Replace("{6}", _dr["machuong"].ToString().Trim());
                         _query = _query.Replace("{7}", "000");
                         _query = _query.Replace("{8}", _ma_tmuc);
-                        _query = _query.Replace("{9}", "TKNS");
+                        _query = _query.Replace("{9}", "TK_NGAN_SACH");
+                        _query = _query.Replace("{10}", _ky_kk_tu.ToString("dd/MM/yyyy").ToString().Trim());
+                        _query = _query.Replace("{11}", _ky_kk_den.ToString("dd/MM/yyyy").ToString().Trim());
+                        _query = _query.Replace("{12}", _dr["so_tien"].ToString().Trim());
+                        _query = _query.Replace("{13}", ((DateTime)_dr["han_nop"]).ToString("dd/MM/yyyy").Trim());
+                        _query = _query.Replace("{14}", p_ky_chot.ToString("dd/MM/yyyy").Trim());
+                        _query = _query.Replace("{15}", "VAT-APP");
+                        _query = _query.Replace("{16}", "");
+                        _query = _query.Replace("{17}", "seq_id_csv.nextval");
+                        _query = _query.Replace("{18}", _dr["mabpql"].ToString().Trim());
+                        _query = _query.Replace("{19}", _dr["macaptren"].ToString().Trim());
+
+                        if (_connOra_cntk.exeUpdate(_query) != 0)
+                            _rowsnum++;
+                    }
+                    _dt.Clear();
+                    _dt = null;
+                    _connFoxPro.close();
+
+                }
+                _listFile.Clear();
+                _listFile = null;
+
+                // Ghi log
+                _connOra_cntk.TransStart();
+                _query = null;
+
+                return _rowsnum;
+            }
+        }
+
+        // Hàm đọc dữ liệu phát sinh trên TK TNDN CNBDS
+        public static int Fnc_doc_file_ps_cnbds(string p_short_name,
+                                            string p_tax_name,
+                                            string p_tax_code,
+                                            DateTime p_ky_chot,
+                                            DateTime p_ky_ps_tu,
+                                            DateTime p_ky_ps_den,
+                                            string p_path,
+                                            DirectoryInfo p_dir_source,
+                                            Forms.Frm_QLCD p_frm_qlcd)
+        {
+            using (CLS_DBASE.ORA _connOra_cntk = new CLS_DBASE.ORA(GlobalVar.gl_connTKTQ))
+            {
+                DateTime _ky_ps_tu = p_ky_ps_tu;
+                DateTime _ky_ps_den = p_ky_ps_den;
+
+                string _query = "";
+
+                //Biến lưu trữ tên của hàm hoặc thủ tục
+                string v_pck = "FNC_DOC_FILE_PS_CNBDS";
+
+                // Biến lưu số bản ghi dữ liệu phát sinh
+                int _rowsnum = 0;
+                string _File_Nghi = "Nghi" + p_ky_chot.ToString("yyyy") + ".DBF";
+
+                // Đọc file TKDNYYYY.DBF
+                string _search_pattern = "SMD*.DBF";
+
+                // Biến lưu mô tả lỗi, ngoại lệ trong quá trình đọc file dữ liệu
+                string _error_message = "";
+
+                // Đối tượng lưu danh sách các file dữ liệu phát sinh quý
+                ArrayList _listFile = new ArrayList();
+                // Lấy danh sách các file dữ liệu phát sinh quý
+                _listFile.AddRange(p_dir_source.GetFiles(_search_pattern));
+
+                foreach (FileInfo _file in _listFile)
+                {
+                    if (_file.Name.Length != 12)
+                        continue;
+
+                    _query = @"SELECT a.madtnt as tin,
+                                          a.matkhai as ma_tkhai,
+                                          a.matm as ma_tmuc,
+                                          a.ngnop as ngay_nop,
+                                          a.hannop as han_nop,
+                                          a.thuecl as so_tien,
+                                          a.qui as KyKkhai,
+                                          a.KyLbo,
+                                          b.mabpql, b.macaptren, b.machuong
+                                       FROM {0} a, DTNT2.DBF b
+                                       WHERE a.matkhai IN ('02/TNDN')                                        
+                                       AND a.thuecl <> 0		                                       
+                                       AND a.madtnt = b.madtnt
+                                       and Allt(a.madtnt) not in (select Allt(MaDTNT) from {3} where empty(denngay))";
+
+                    _query = _query.Replace("{0}", _file.Name.ToString());
+                    _query = _query.Replace("{3}", _File_Nghi);
+
+                    CLS_DBASE.FOX _connFoxPro = new CLS_DBASE.FOX(p_path);
+
+                    DataTable _dt = _connFoxPro.exeQuery(_query);
+
+                    foreach (DataRow _dr in _dt.Rows)
+                    {
+                        #region Kiểm tra kỳ lập bộ
+                        string _temp = "";
+                        _temp = _dr["kylbo"].ToString().Trim();
+                        _temp = _temp.Replace("/", "");
+
+                        // Kỳ lập bộ
+                        DateTime _kylbo =
+                            new DateTime(Int32.Parse(_temp.Substring(2, 4)), // Năm
+                                         Int32.Parse(_temp.Substring(0, 2)), // Tháng
+                                         1);                                 // Ngày
+
+                        if (_kylbo.CompareTo(_ky_ps_den) > 0
+                            || _kylbo.CompareTo(_ky_ps_tu) < 0)
+                            continue;
+
+                        #endregion
+
+                        string _ky_kkhai = _dr["KyKKhai"].ToString().Trim().Replace("/", "");
+                        string _ma_tkhai = _dr["ma_tkhai"].ToString().Trim();
+                        string _ma_tmuc = _dr["ma_tmuc"].ToString().Trim();
+
+                        #region Xác định kỳ phát sinh
+                        int _quy_ky_kkhai = 1; // Biến lưu trữ quý của kỳ kê khai
+                        int _nam_ky_kkhai = 2010; // Biến lưu trữ năm của kỳ kê khai
+
+                        _quy_ky_kkhai = Int32.Parse(_ky_kkhai.Trim().Substring(0, 1));
+                        _nam_ky_kkhai = Int32.Parse(_ky_kkhai.Trim().Substring(1, 4));
+
+
+                        DateTime _ky_kk_tu; // Ngày bắt đầu kỳ kk
+                        DateTime _ky_kk_den; // Ngày kết thúc kỳ kk
+
+                        if (_quy_ky_kkhai == 1)
+                        {
+                            _ky_kk_tu = new DateTime(_nam_ky_kkhai, 1, 1);
+                            _ky_kk_den = new DateTime(_nam_ky_kkhai, 3, 31);
+                        }
+                        else if (_quy_ky_kkhai == 2)
+                        {
+                            _ky_kk_tu = new DateTime(_nam_ky_kkhai, 4, 1);
+                            _ky_kk_den = new DateTime(_nam_ky_kkhai, 6, 30);
+                        }
+                        else if (_quy_ky_kkhai == 3)
+                        {
+                            _ky_kk_tu = new DateTime(_nam_ky_kkhai, 7, 1);
+                            _ky_kk_den = new DateTime(_nam_ky_kkhai, 9, 30);
+                        }
+                        else if (_quy_ky_kkhai == 4)
+                        {
+                            _ky_kk_tu = new DateTime(_nam_ky_kkhai, 10, 1);
+                            _ky_kk_den = new DateTime(_nam_ky_kkhai, 12, 31);
+                        }
+                        else
+                        {
+                            p_frm_qlcd.AddToListView(0, "   + " + p_short_name
+                                    + "/ " + v_pck + ": "
+                                    + new InvalidDataException("Tháng của kỳ phát sinh không hợp lệ").Message);
+                            continue;
+                        }
+
+                        if (_ky_kk_tu.CompareTo(_ky_ps_tu) < 0
+                            || _ky_kk_den.CompareTo(_ky_ps_den) > 0)
+                            continue;
+                        #endregion
+
+                        _query = @"INSERT INTO tb_ps
+                                               (short_name, stt, loai, ma_cqt, tin,
+                                                ma_tkhai, ma_chuong, ma_khoan, ma_tmuc,
+                                                tkhoan, kykk_tu_ngay, kykk_den_ngay,
+                                                so_tien, han_nop, ngay_htoan, 
+                                                tax_model, status, id, ma_cbo, ma_pban)
+                                        VALUES ('{0}', {1}, '{2}', '{3}', '{4}',
+                                                '{5}', '{6}', '{7}', '{8}', '{9}',
+                                                '{10}', '{11}', {12}, '{13}', '{14}', 
+                                                '{15}', '{16}', {17}, '{18}', '{19}')";
+
+                        _query = _query.Replace("{0}", p_short_name);
+                        _query = _query.Replace("{1}", (_rowsnum + 1).ToString());
+                        _query = _query.Replace("{2}", "TK");
+                        _query = _query.Replace("{3}", p_tax_code);
+
+                        string matin = _dr["tin"].ToString().Trim();
+                        if (matin.Length > 10)
+                        {
+                            matin = matin.Insert(10, "-");
+                        }
+
+                        _query = _query.Replace("{4}", matin);
+                        _query = _query.Replace("{5}", _ma_tkhai);
+                        _query = _query.Replace("{6}", _dr["machuong"].ToString().Trim());
+                        _query = _query.Replace("{7}", "000");
+                        _query = _query.Replace("{8}", _ma_tmuc);
+                        _query = _query.Replace("{9}", "TK_NGAN_SACH");
                         _query = _query.Replace("{10}", _ky_kk_tu.ToString("dd/MM/yyyy").ToString().Trim());
                         _query = _query.Replace("{11}", _ky_kk_den.ToString("dd/MM/yyyy").ToString().Trim());
                         _query = _query.Replace("{12}", _dr["so_tien"].ToString().Trim());
@@ -574,7 +801,7 @@ namespace DC.Vatwin
                         _query = _query.Replace("{6}", _dr["machuong"].ToString().Trim());
                         _query = _query.Replace("{7}", "000");
                         _query = _query.Replace("{8}", _dr["ma_tmuc"].ToString().Trim());
-                        _query = _query.Replace("{9}", "TKNS");
+                        _query = _query.Replace("{9}", "TK_NGAN_SACH");
                         _query = _query.Replace("{10}", _ky_psinh_tu.ToString("dd/MM/yyyy").ToString().Trim());
                         _query = _query.Replace("{11}", _ky_psinh_den.ToString("dd/MM/yyyy").ToString().Trim());
                         _query = _query.Replace("{12}", _dr["so_tien"].ToString().Trim());

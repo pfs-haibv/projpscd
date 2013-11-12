@@ -1,6 +1,3 @@
--- Start of DDL Script for Package Body QLT_OWNER.EXT_PCK_QCT_XL_NO
--- Generated 19/09/2013 10:03:02 AM from QLT_OWNER@QLT_BRV_VTA
-
 CREATE OR REPLACE 
 PACKAGE BODY ext_pck_qct_xl_no
 IS
@@ -76,8 +73,10 @@ IS
                                 st.tmt_ma_thue,st.tkhoan,st.han_nop
                     ) PNOP
                     , QLT_NSD_DTNT DTNT
+                    , QCT_DTNT     DANHBA_QCT
             WHERE   PNOP.TIN = DTNT.TIN
                     AND (PNOP.TIN = v_Tin OR v_Tin IS NULL)
+                    AND PNOP.TIN = DANHBA_QCT.TIN
             ORDER BY PNOP.TIN, PNOP.TKHOAN, MA_MUC, MA_TMUC
                     , Decode(PHAI_NOP + Abs(PHAI_NOP),0,-1,1)
                     , HAN_NOP
@@ -370,3 +369,6 @@ IS
         Prc_THop_No_Thue(p_ky_no);
     END;
 END;
+
+-- End of DDL Script for Package Body QLT_OWNER.EXT_PCK_QCT_XL_NO
+

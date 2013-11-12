@@ -45,13 +45,43 @@ namespace DC.Vatwin
                 return _rowsnum_hdr;
             }
         }
-
         public static void Fnc_doc_file_cctt(string p_short_name,
                                                  string p_tax_name,
                                                  string p_tax_code,
                                                  string p_path,
                                                  DirectoryInfo p_dir_source,
                                                  DateTime p_ky_chot,
+                                                 Forms.Frm_QLCD p_frm_qlcd
+                                                 )
+        {             
+            int _thang = ( p_ky_chot.Month -1) % 3 ; //Số tháng 
+            int _rowsnum = 0;
+            DateTime _ky;
+            for (int j = 0; j <= _thang; j++)
+            {
+                _ky = p_ky_chot.AddMonths(j * -1);
+                // Xử lý cho trường hợp lấy dữ liệu từ trước tháng 8 năm 2011 thì bỏ qua vì cấu trúc file đã khác
+                if (_ky < new DateTime(2011, 08, 01))
+                    break;
+                //Gọi hàm đọc dữ liệu từng tháng
+                Fnc_doc_file_thang(p_short_name,
+                                    p_tax_name,
+                                    p_tax_code, 
+                                    p_path,
+                                    p_dir_source,
+                                    p_ky_chot,
+                                    _ky,                                    
+                                    p_frm_qlcd
+                                    );
+            }            
+        }
+        public static void Fnc_doc_file_thang(string p_short_name,
+                                                 string p_tax_name,
+                                                 string p_tax_code,
+                                                 string p_path,
+                                                 DirectoryInfo p_dir_source,
+                                                 DateTime p_ky_chot,
+                                                 DateTime p_ky,
                                                  Forms.Frm_QLCD p_frm_qlcd
                                                  )
         {
@@ -63,12 +93,12 @@ namespace DC.Vatwin
                 string v_pck = "FNC_DOC_FILE_CCTT";
 
                 int _rowsnum = 0;
-                string _File_Nghi = "Nghi" + p_ky_chot.ToString("yyyy") + ".DBF";
+                string _File_Nghi = "Nghi" + p_ky.ToString("yyyy") + ".DBF";
 
                 // Biến lưu mô tả lỗi, ngoại lệ trong quá trình đọc file dữ liệu
                 string _error_message = "";
 
-                string _search_pattern = "TK" + p_ky_chot.ToString("MMyyyy") + ".DBF";
+                string _search_pattern = "TK" + p_ky.ToString("MMyyyy") + ".DBF";
                 // Đối tượng lưu trữ danh sách các file dữ liệu tờ khai môn bài
                 ArrayList _listFile = new ArrayList();
                 // Lấy danh sách các file dữ liệu tờ khai môn bài
@@ -90,7 +120,7 @@ namespace DC.Vatwin
                                              INNER JOIN
                                              DTNT2.DBF as c
                                                 ON a.madtnt = c.madtnt                                              
-                                       WHERE a.TThTK$'1' AND left(allt(a.MaTKHAI),1) = '4'
+                                       WHERE a.TThTK$'1' AND allt(a.MaTKHAI) = '4Q/GTGTKH'
                                              and Allt(a.madtnt) not in (select Allt(MaDTNT) from {3} where empty(denngay))
                                        GROUP BY a.madtnt, a.kykkhai, a.kylbo, a.MaTM";
 
@@ -114,49 +144,45 @@ namespace DC.Vatwin
                         #region Xác định kỳ phát sinh của đối tượng nộp thuế
                         // Biến lưu trữ kỳ kê khai lấy từ file dữ liệu                            
                         string _ky_kkhai = _dr["KyKKhai"].ToString().Replace("/", "").Trim();
-                        if (_ky_kkhai.Length < 6)
-                            _ky_kkhai = p_ky_chot.ToString("MMyyyy");
-
-                        //Nếu kỳ kê khai trước tháng 1/2005 thì chuyển thành 1/2005
-                        try
-                        {
-                            if (Int32.Parse(_ky_kkhai.Substring(2, 4)) < 2005)
-                                _ky_kkhai = "012005";
-                        }
-                        catch (FormatException e)
-                        {
-                            p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
-                            _error_message += e.Message + "(" + _file.Name + ");";
-                            continue;
-                        }
-                        catch (Exception e)
-                        {
-                            p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
-                            _error_message += e.Message + "(" + _file.Name + ");";
-                            continue;
-                        }
+                        if (_ky_kkhai.Length != 5)
+                            _ky_kkhai = (((p_ky_chot.Month - 1) / 3) + 1).ToString("D")
+                                        + p_ky_chot.ToString("yyyy");
 
                         // Ngày bắt đầu kỳ phát sinh
                         DateTime _kykk_tu_ngay;
                         // Ngày kết thúc kỳ phát sinh
                         DateTime _kykk_den_ngay;
-                        try
+                        int _quy_ky_kkhai;
+                        int _nam_ky_kkhai;
+
+                        _quy_ky_kkhai = Int32.Parse(_ky_kkhai.Trim().Substring(0, 1));
+                        _nam_ky_kkhai = Int32.Parse(_ky_kkhai.Trim().Substring(1, 4));
+
+                        if (_quy_ky_kkhai == 1)
                         {
-                            _kykk_tu_ngay = new DateTime(Int32.Parse(_ky_kkhai.Substring(2, 4)), Int32.Parse(_ky_kkhai.Substring(0, 2)), 1);
-                            _kykk_den_ngay =
-                                new DateTime(Int32.Parse(_ky_kkhai.Substring(2, 4)), Int32.Parse(_ky_kkhai.Substring(0, 2)), 1);
-                            _kykk_den_ngay = _kykk_den_ngay.AddMonths(1).AddDays(-1);
+                            _kykk_tu_ngay = new DateTime(_nam_ky_kkhai, 1, 1);
+                            _kykk_den_ngay = new DateTime(_nam_ky_kkhai, 3, 31);
                         }
-                        catch (FormatException e)
+                        else if (_quy_ky_kkhai == 2)
                         {
-                            p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
-                            _error_message += e.Message + "(" + _file.Name + ");";
-                            continue;
+                            _kykk_tu_ngay = new DateTime(_nam_ky_kkhai, 4, 1);
+                            _kykk_den_ngay = new DateTime(_nam_ky_kkhai, 6, 30);
                         }
-                        catch (Exception e)
+                        else if (_quy_ky_kkhai == 3)
                         {
-                            p_frm_qlcd.AddToListView(0, "   + " + p_short_name + "/ " + v_pck + ": " + e.Message);
-                            _error_message += e.Message + "(" + _file.Name + ");";
+                            _kykk_tu_ngay = new DateTime(_nam_ky_kkhai, 7, 1);
+                            _kykk_den_ngay = new DateTime(_nam_ky_kkhai, 9, 30);
+                        }
+                        else if (_quy_ky_kkhai == 4)
+                        {
+                            _kykk_tu_ngay = new DateTime(_nam_ky_kkhai, 10, 1);
+                            _kykk_den_ngay = new DateTime(_nam_ky_kkhai, 12, 31);
+                        }
+                        else
+                        {
+                            p_frm_qlcd.AddToListView(0, "   + " + p_short_name
+                                    + "/ " + v_pck + ": "
+                                    + new InvalidDataException("Quý không hợp lệ").Message);
                             continue;
                         }
                         #endregion
@@ -171,7 +197,7 @@ namespace DC.Vatwin
                         string _HanNop = ((DateTime)_dr["HanNop"]).ToString("dd/MM/yyyy").Trim();
                         string _MaTM = _dr["MaTM"].ToString().Trim();
 
-                        _query = @"INSERT INTO tb_cctt
+                        _query = @"INSERT INTO TB_01_THKH_HDR
                                                (short_name,
                                                 tin, 
                                                 KYTT_TU_NGAY,
@@ -202,7 +228,7 @@ namespace DC.Vatwin
                         if (_connOra_tkmb.exeUpdate(_query) != 0)
                             _rowsnum++;
 
-                        string _File_DTL = "KH" + p_ky_chot.ToString("MMyyyy") + ".DBF";
+                        string _File_DTL = "KH" + p_ky.ToString("MMyyyy") + ".DBF";
 
                         if (p_dir_source.GetFiles(_File_DTL).Count() > 0)
                         {
@@ -231,19 +257,19 @@ namespace DC.Vatwin
                                 string _thue_suat = _dr_details["ThueSuat"].ToString().Trim();
                                 if (_thue_suat == "5")
                                 {
-                                    _query = @"UPDATE tb_cctt a
-                                                        SET a.doanh_thu_ts_5 = {0},
-                                                        a.gtgt_chiu_thue_ts_5 = {1},
-                                                        a.thue_gtgt_ts_5 = {2}
+                                    _query = @"UPDATE TB_01_THKH_HDR a
+                                                        SET a.doanh_thu_quy_ts_5 = {0},
+                                                        a.gtgt_chiu_thue_quy_ts_5 = {1},
+                                                        a.thue_gtgt_quy_ts_5 = {2}
                                                         WHERE a.ID = {3}"
                                         ;
                                 }
                                 else
                                 {
-                                    _query = @"UPDATE tb_cctt a
-                                                        SET a.doanh_thu_ts_10 = {0},
-                                                        a.gtgt_chiu_thue_ts_10 = {1},
-                                                        a.thue_gtgt_ts_10 = {2}
+                                    _query = @"UPDATE TB_01_THKH_HDR a
+                                                        SET a.doanh_thu_quy_ts_10 = {0},
+                                                        a.gtgt_chiu_thue_quy_ts_10 = {1},
+                                                        a.thue_gtgt_quy_ts_10 = {2}
                                                         WHERE a.ID = {3}"
                                         ;
                                 }
@@ -253,6 +279,19 @@ namespace DC.Vatwin
                                 _query = _query.Replace("{2}", _dr_details["Thue_GTGT"].ToString().Trim());
                                 _query = _query.Replace("{3}", _ID);
                                 _connOra_tkmb.exeUpdate(_query);
+
+                                _query = @"UPDATE TB_01_THKH_HDR a
+                                                        SET 
+                                                        a.doanh_thu_ts_5 = a.doanh_thu_quy_ts_5 / 3 ,
+                                                        a.gtgt_chiu_thue_ts_5 = a.gtgt_chiu_thue_quy_ts_5 / 3,
+                                                        a.thue_gtgt_ts_5 = a.thue_gtgt_quy_ts_5 / 3,
+                                                        a.doanh_thu_ts_10 = a.doanh_thu_quy_ts_10 / 3 ,
+                                                        a.gtgt_chiu_thue_ts_10 = a.gtgt_chiu_thue_quy_ts_10 / 3,
+                                                        a.thue_gtgt_ts_10 = a.thue_gtgt_quy_ts_10 /3
+                                                        WHERE a.ID = {3}";
+                                _query = _query.Replace("{3}", _ID);
+                                _connOra_tkmb.exeUpdate(_query);
+
                             }
                             // Xóa nội dung chi tiết tờ khai
                             _dt_details.Clear();

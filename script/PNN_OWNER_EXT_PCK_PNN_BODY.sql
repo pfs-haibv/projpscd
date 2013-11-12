@@ -1,3 +1,6 @@
+-- Start of DDL Script for Package Body PNN_OWNER.EXT_PCK_PNN
+-- Generated 30-Oct-2013 15:06:51 from PNN_OWNER@PNN_BRV_VTA
+
 CREATE OR REPLACE 
 PACKAGE BODY ext_pck_pnn
 IS
@@ -139,6 +142,7 @@ IS
 
     PROCEDURE prc_pnn_thop_no (p_chot DATE, tax_code varchar2)
     IS
+    v_pro_name CONSTANT VARCHAR2(30) := 'prc_pnn_thop_no';
     BEGIN
         --Clear data
         DBMS_UTILITY.exec_ddl_statement ('truncate table ext_pnn_no');
@@ -187,62 +191,48 @@ IS
                      TO_CHAR(LAST_DAY (p_chot), 'DD/MM/YYYY')
              END
              AS ngay_hach_toan,
-         --Neu ky kê khai nho hon 01/2005: dua ve ky kê khai 01/2005
+         --Neu ky k? khai nho hon 01/2005: dua ve ky k? khai 01/2005
          CASE
              WHEN a.ky_kkhai < LAST_DAY (p_chot)
              THEN
                  '01/01/2005'
-             --   Neu ky kê khai tu ngày không phai là ngày dau tháng/ quý/ nam:
-             --   Ky kê khai tu ngày = ngày dau tiên cua tháng chua ky kê khai tu ngày
+             --   Neu ky k? khai tu ng?y kh?ng phai l? ng?y dau th?ng/ qu?/ nam:
+             --   Ky k? khai tu ng?y = ng?y dau ti?n cua th?ng chua ky k? khai tu ng?y
          ELSE
                  '01/' || TO_CHAR (a.ky_kkhai, 'MM/YYYY')
          END
              AS kykk_tu_ngay,
              a.sth_chuyen_ksau so_tien
-  FROM   pnn_so_tdtn a where a.ma_cqt = tax_code;
+    FROM   pnn_so_tdtn a where a.ma_cqt = tax_code;
+    Prc_Finnal(v_pro_name);
+END;
 
-    END;
+    /****************************************************************************
+     Fnc_encode_unicode
+    ****************************************************************************/
+   FUNCTION fnc_encode_unicode (p_instring VARCHAR2)
+      RETURN VARCHAR2 IS
+      v_onechar                     VARCHAR2 (100);
+      v_outputstr                   VARCHAR2 (20000);
+      v_onechar_aacii               NUMBER;
+      i                             NUMBER;
+      v_len                         NUMBER := LENGTH (p_instring);
+   BEGIN
+      IF p_instring IS NULL THEN
+         RETURN NULL;
+      END IF;
 
-    /**
-     * @package: ext_pck_pnn.prc_job_pnn_thop_no
-     * @desc:    Chuyen doi chi tiet to khai 01/TK-SDDPNN
-     * @author:  Administrator
-     * @date:    29/05/2013
-     * @param:   p_chot
-     */
-    PROCEDURE prc_job_pnn_thop_01_tk_sddpnn (p_chot DATE)
-    IS
-    BEGIN
-        dbms_output.put_line('');
-    END;
+      FOR i IN 1 .. v_len LOOP
+         v_onechar := SUBSTR (p_instring, i, 1);
+         v_onechar_aacii := ASCII (v_onechar);
+         v_outputstr := v_outputstr || TO_CHAR (v_onechar_aacii) || ',';
+      END LOOP;
 
-    PROCEDURE prc_pnn_thop_01_tk_sddpnn (p_chot DATE)
-    IS
-    BEGIN
-        dbms_output.put_line('');
-    END;
-
-    /**
-     * @package: ext_pck_pnn.prc_job_pnn_thop_no
-     * @desc:    Chuyen doi chi tiet to khai 02/TK-SDDPNN
-     * @author:  Administrator
-     * @date:    29/05/2013
-     * @param:   p_chot
-     */
-    PROCEDURE prc_job_pnn_thop_02_tk_sddpnn (p_chot DATE)
-    IS
-    BEGIN
-        dbms_output.put_line('');
-    END;
-
-    PROCEDURE prc_pnn_thop_02_tk_sddpnn (p_chot DATE)
-    IS
-    BEGIN
-        dbms_output.put_line('');
-    END;
-
+      v_outputstr := SUBSTR (v_outputstr, 1, LENGTH (v_outputstr) - 1);
+      RETURN v_outputstr;
+   END;
 
 END;
-/
 
+-- End of DDL Script for Package Body PNN_OWNER.EXT_PCK_PNN
 

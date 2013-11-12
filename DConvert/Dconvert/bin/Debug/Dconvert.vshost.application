@@ -11,14 +11,14 @@
     <deploymentProvider codebase="file://10.15.68.60/app/ManhTV3_DConvert/Dconvert.application" />
   </deployment>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="Dconvert.exe.manifest" size="10415">
+    <dependentAssembly dependencyType="install" codebase="Dconvert.exe.manifest" size="8791">
       <assemblyIdentity name="Dconvert.exe" version="1.0.0.3" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>lXz8iYEUFnHeYZf8K8qCnvX8kPg=</dsig:DigestValue>
+        <dsig:DigestValue>sApKHFcWVwm7zMZjXl40stiUaAU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -1,6 +1,3 @@
--- Start of DDL Script for Package Body QLT_OWNER.EXT_PCK_QCT_CHK_STN
--- Generated 04/10/2013 2:28:35 PM from QLT_OWNER@QLT_BRV_VTA
-
 CREATE OR REPLACE 
 PACKAGE BODY ext_pck_qct_chk_stn
 IS
@@ -154,7 +151,7 @@ IS
     BEGIN
         Prc_Del_Log('PRC_QCT_SLECH_NO');
         COMMIT;
-        Prc_Create_Job('BEGIN EXT_PCK_QCT_TKHAI.Prc_Qct_Slech_No; END;');
+        Prc_Create_Job('BEGIN ext_pck_qct_chk_stn.Prc_Qct_Slech_No; END;');
     END;
 
     /**
@@ -335,3 +332,7 @@ IS
     END;
 
 END;
+
+
+-- End of DDL Script for Package Body QLT_OWNER.EXT_PCK_QCT_CHK_STN
+
